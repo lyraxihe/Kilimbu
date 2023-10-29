@@ -38,7 +38,7 @@ public class CombatController : MonoBehaviour
     void Update()
     {
 
-        CardsPosition();
+        //CardsPosition();
 
     }
 
@@ -88,7 +88,7 @@ public class CombatController : MonoBehaviour
 
             clon = Instantiate(Card);                                          // Crea una carta
             clon.GetComponent<CardController>().CombatController = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
-           // clon.GetComponent<CardController>().DragZone = DragZone;           // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
+           // clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
             clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
             CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
             CardList.cont++;                                                   // Aumenta el contador de la lista
@@ -124,7 +124,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[0].transform.position = new Vector3(1, -4, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -5);
+                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, 5);
                 CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[0].GetComponent<CardController>().SetPosition();
 
@@ -133,7 +133,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[1].transform.position = new Vector3(-1, -4, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, 5);
+                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, -5);
                 CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[1].GetComponent<CardController>().SetPosition();
 
@@ -147,7 +147,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[0].transform.position = new Vector3(2, -4.15f, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -10);
+                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, 10);
                 CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[0].GetComponent<CardController>().SetPosition();
 
@@ -165,7 +165,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[2].transform.position = new Vector3(-2, -4.15f, 2);
-                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, 10);
+                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, -10);
                 CardList.cards[2].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[2].GetComponent<CardController>().SetPosition();
 
@@ -179,7 +179,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[0].transform.position = new Vector3(3, -4.35f, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -15);
+                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, 15);
                 CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[0].GetComponent<CardController>().SetPosition();
 
@@ -188,7 +188,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[1].transform.position = new Vector3(1, -4, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, -5);
+                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, 5);
                 CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[1].GetComponent<CardController>().SetPosition();
 
@@ -197,7 +197,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[2].transform.position = new Vector3(-1, -4, 2);
-                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, 5);
+                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, -5);
                 CardList.cards[2].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[2].GetComponent<CardController>().SetPosition();
 
@@ -206,7 +206,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[3].transform.position = new Vector3(-3, -4.35f, 3);
-                CardList.cards[3].transform.eulerAngles = new Vector3(0, 0, 15);
+                CardList.cards[3].transform.eulerAngles = new Vector3(0, 0, -15);
                 CardList.cards[3].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[3].GetComponent<CardController>().SetPosition();
 
@@ -220,7 +220,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[0].transform.position = new Vector3(3.95f, -4.7f, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -20);
+                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, 20);
                 CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[0].GetComponent<CardController>().SetPosition();
 
@@ -229,7 +229,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[1].transform.position = new Vector3(2, -4.15f, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, -10);
+                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, 10);
                 CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[1].GetComponent<CardController>().SetPosition();
 
@@ -247,7 +247,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[3].transform.position = new Vector3(-2, -4.15f, 3);
-                CardList.cards[3].transform.eulerAngles = new Vector3(0, 0, 10);
+                CardList.cards[3].transform.eulerAngles = new Vector3(0, 0, -10);
                 CardList.cards[3].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[3].GetComponent<CardController>().SetPosition();
 
@@ -256,7 +256,7 @@ public class CombatController : MonoBehaviour
             {
 
                 CardList.cards[4].transform.position = new Vector3(-3.95f, -4.7f, 4);
-                CardList.cards[4].transform.eulerAngles = new Vector3(0, 0, 20);
+                CardList.cards[4].transform.eulerAngles = new Vector3(0, 0, -20);
                 CardList.cards[4].transform.localScale = new Vector3(2, 3, 1);
                 CardList.cards[4].GetComponent<CardController>().SetPosition();
 
