@@ -5,22 +5,22 @@ using UnityEngine;
 
 struct ListCards{
 
-    public GameObject[] cards; //Array de cartas
-    public int cont;           //Contador de cartas en la lista
+    [SerializeField] public GameObject[] cards; //Array de cartas
+    [SerializeField] public int cont;           //Contador de cartas en la lista
 
 };
 
 public class CombatController : MonoBehaviour
 {
-    [SerializeField] GameObject Player;   // Prefab del Player
-    [SerializeField] GameObject[] EnemyList; //array con enemigos
-    [SerializeField] GameObject Card;     // Carta de combate
-    [SerializeField] ListCards CardList;  // Lista de cartas en el combate
-    [SerializeField] GameObject DragZone; // Zona en la que se eliminarán las cartas usadas
-    [SerializeField] GameObject HealthBar;
-    [SerializeField] RectTransform canvas;
-    [SerializeField] GameObject _VariablesGlobales;
-    //nos conviene hacer esto en un array con los enemigos guardados así el random solo elige un hueco
+    [SerializeField] GameObject Player;         // Prefab del Player
+    [SerializeField] GameObject[] EnemyList;    // Array con enemigos
+    [SerializeField] GameObject Card;           // Carta de combate
+    [SerializeField] ListCards CardList;        // Lista de cartas en el combate
+    [SerializeField] GameObject DragZone;       // Zona en la que se eliminarán las cartas usadas
+    [SerializeField] GameObject HealthBar;      // Prefab de la barra de vida
+    [SerializeField] RectTransform canvas;      //para tener referencia al canvas y ponerlo como padre (healthbar)
+
+   
 
 
     void Start()
