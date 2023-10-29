@@ -45,12 +45,29 @@ public class CombatController : MonoBehaviour
     /*
     * Crea las barras de vida
     */
-    public void CreateHealthBar(float x, float y, int tipo)
+    public void CreateHealthBar(float x, float y, int tipo, GameObject personaje)
     {
         GameObject clonHealthBar = Instantiate(HealthBar);          //crea el prefab de la barra de vida
         clonHealthBar.transform.SetParent(canvas, false);            //declara el canvas como padre para que sea visible
         clonHealthBar.transform.position = new Vector3(x, y, 0);    //lo coloca arriba del personaje
         clonHealthBar.GetComponent<HealthBar>().Identify = tipo;
+        if (tipo==0) // 0 ira, 1 miedo, 2 tristeza, 3 prota
+        {
+            clonHealthBar.GetComponent<HealthBar>()._ira = personaje;
+        }
+        else if (tipo==1)
+        {
+            clonHealthBar.GetComponent<HealthBar>()._miedo = personaje;
+        }
+        else if (tipo==2)
+        {
+            clonHealthBar.GetComponent<HealthBar>()._tristeza = personaje;
+        }
+        else
+        {
+            clonHealthBar.GetComponent<HealthBar>()._player = personaje;
+        }
+
 
     }
 
@@ -61,7 +78,7 @@ public class CombatController : MonoBehaviour
     {
         
         GameObject clonPlayer = Instantiate(Player); // Crea el clon del Player
-        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, 4); //tipo 4 = player
+        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, 3, clonPlayer); //tipo 3 = player
     }
 
     /*
@@ -81,25 +98,24 @@ public class CombatController : MonoBehaviour
 
             if (i == 0)                          // Si es el primer enemigo
             {
-                // clonEnemy = Instantiate(Enemy1);
                 tipo = Random.Range(0, 3);
                 clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(2.5f, 1, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
             }
            else if (i == 1)                     // Si es el segundo enemigo
             {
                 tipo = Random.Range(0, 3);
                 clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(4.5f, 0, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
             }
             else                                 // Si es el tercer enemigo
             {
                 tipo = Random.Range(0, 3);
                 clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(6.5f, -1, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
             }
 
         }
@@ -120,7 +136,7 @@ public class CombatController : MonoBehaviour
 
             clon = Instantiate(Card);                                          // Crea una carta
             clon.GetComponent<CardController>().CombatController = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
-           // clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
+            clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
             clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
             CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
             CardList.cont++;                                                   // Aumenta el contador de la lista

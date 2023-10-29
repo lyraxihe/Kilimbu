@@ -9,11 +9,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] public TMP_Text HealthLabel;
     [SerializeField] UnityEngine.UI.Slider HealthBarSlider;
     [SerializeField] UnityEngine.UI.Image fill;
-    [SerializeField] public int Identify; // 0 ira, 1 miedo, 2 tristeza, 3 prota,
-    [SerializeField] GameObject _player;
-    [SerializeField] GameObject _ira;
-    [SerializeField] GameObject _miedo;
-    [SerializeField] GameObject _tristeza;
+    [SerializeField] public int Identify; // 0 ira, 1 miedo, 2 tristeza, 3 prota
+    [SerializeField] public GameObject _player;
+    [SerializeField] public GameObject _ira;
+    [SerializeField] public GameObject _miedo;
+    [SerializeField] public GameObject _tristeza;
 
     void Start()
     {
