@@ -101,9 +101,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CombatController: {fileID: 0}
+  DragZone: {fileID: 0}
   CardPosition: {x: 0, y: 0, z: 0}
   CardRotation: {x: 0, y: 0, z: 0}
   CardAnimator: {fileID: 2583204925943761007}
+  AnimacionCarta: 0
   MouseDrag: 0
   MouseOver: 0
   IsInDragZone: 0

@@ -22,11 +22,11 @@ public class CardController : MonoBehaviour
     void Start()
     {
 
-        MouseDrag = false;
-        MouseOver = false;
+        MouseDrag = true;
+        MouseOver = true;
 
         AnimacionCarta = true;
-        CardAnimator.SetInteger("Card ID", Id);
+        CardAnimator.SetInteger("CardID", Id);
 
     }
 
@@ -117,9 +117,23 @@ public class CardController : MonoBehaviour
     {
 
         if(valor == 0)
+        {
+
             AnimacionCarta = false;
+            GetComponent<Animator>().enabled = false;
+            MouseDrag = false;
+            MouseOver = false;
+
+        }
         else
+        {
+
             AnimacionCarta = true;
+            GetComponent<Animator>().enabled = true;
+            MouseDrag = true;
+            MouseOver = true;
+
+        }
 
     }
 

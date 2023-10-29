@@ -623,18 +623,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1556459485827681945, guid: d4bdd1619d9592744a658d0f313125ae, type: 3}
-  EnemyList:
-  - {fileID: 5466387340479591959, guid: 59d178462c504ee418da3a1168f965f9, type: 3}
-  - {fileID: 2744481445238258168, guid: 47131a513d40a4f4b88db7e38e01b99d, type: 3}
-  - {fileID: 3983068481237199692, guid: 92f074ccb9b79824dba06351c4e8a799, type: 3}
   Enemy1: {fileID: 5466387340479591959, guid: 59d178462c504ee418da3a1168f965f9, type: 3}
   Enemy2: {fileID: 2744481445238258168, guid: 47131a513d40a4f4b88db7e38e01b99d, type: 3}
   Enemy3: {fileID: 3983068481237199692, guid: 92f074ccb9b79824dba06351c4e8a799, type: 3}
-  Card: {fileID: 1021191652663024053, guid: b2164b9e9e9830141a5cfbb1e33e01ca, type: 3}
+  Card: {fileID: 2583204925943761004, guid: b2164b9e9e9830141a5cfbb1e33e01ca, type: 3}
   DragZone: {fileID: 1985018192}
-  HealthBar: {fileID: 7872630970208688131, guid: 085f529eafc360a4a80afbeed316ae54, type: 3}
-  canvas: {fileID: 1166800261}
-  _VariablesGlobales: {fileID: 1446145960}
 --- !u!1 &1132729058
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -157, y: -37}
+  m_AnchoredPosition: {x: -157.00003, y: -36.999985}
   m_SizeDelta: {x: -387, y: -237}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520298651

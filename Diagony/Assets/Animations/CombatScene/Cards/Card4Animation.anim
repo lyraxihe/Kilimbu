@@ -375,4 +375,11 @@ AnimationClip:
     script: {fileID: 0}
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.6666667
+    functionName: SetAnimacionCarta
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 1a581e0b5e892f64593077ba009636aa, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
