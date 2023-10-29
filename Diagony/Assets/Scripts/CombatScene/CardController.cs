@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -113,9 +113,13 @@ public class CardController : MonoBehaviour
         }
     }
 
+    /*
+     * Segun termina la animacion de la carta se llama a esta funcion, tiene que ser un int porque Unity es una patata ¯\_(ツ)_/¯
+     */
     public void SetAnimacionCarta(int valor)
     {
 
+        //Ha terminado la animacion por lo que se desactiva el animator e impide que la animacion se repita
         if(valor == 0)
         {
 
@@ -125,7 +129,7 @@ public class CardController : MonoBehaviour
             MouseOver = false;
 
         }
-        else
+        else //Activa el animator permitiendo hacer la animacion de nuevo
         {
 
             AnimacionCarta = true;
