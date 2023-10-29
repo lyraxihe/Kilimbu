@@ -7,7 +7,7 @@ public class CardController : MonoBehaviour
 {
 
     public GameObject CombatController;
-  //  public GameObject DragZone;
+    public GameObject DragZone;
 
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
