@@ -12,6 +12,9 @@ public class CardController : MonoBehaviour
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
 
+    [SerializeField] Animator CardAnimator;
+    [SerializeField] bool AnimacionCarta;
+
     Vector3 MousePositionOffset;
     public bool MouseDrag, MouseOver, IsInDragZone;
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
@@ -19,15 +22,18 @@ public class CardController : MonoBehaviour
     void Start()
     {
 
-        MouseDrag = false;
-        MouseOver = false;  
+        MouseDrag = true;
+        MouseOver = true;
+
+        AnimacionCarta = true;
+        CardAnimator.SetInteger("CardID", Id);
 
     }
 
     void Update()
     {
 
-
+        CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
 
     }
 
@@ -105,6 +111,30 @@ public class CardController : MonoBehaviour
         {
             IsInDragZone = false;
         }
+    }
+
+    public void SetAnimacionCarta(int valor)
+    {
+
+        if(valor == 0)
+        {
+
+            AnimacionCarta = false;
+            GetComponent<Animator>().enabled = false;
+            MouseDrag = false;
+            MouseOver = false;
+
+        }
+        else
+        {
+
+            AnimacionCarta = true;
+            GetComponent<Animator>().enabled = true;
+            MouseDrag = true;
+            MouseOver = true;
+
+        }
+
     }
 
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 struct ListCards{
@@ -13,22 +12,20 @@ struct ListCards{
 public class CombatController : MonoBehaviour
 {
     [SerializeField] GameObject Player;   // Prefab del Player
-    [SerializeField] GameObject[] EnemyList; //array con enemigos
+    [SerializeField] GameObject Enemy1;   // Prefab del Enemigo 1
+    [SerializeField] GameObject Enemy2;   // Prefab del Enemigo 2
+    [SerializeField] GameObject Enemy3;   // Prefab del Enemigo 3
     [SerializeField] GameObject Card;     // Carta de combate
     [SerializeField] ListCards CardList;  // Lista de cartas en el combate
     [SerializeField] GameObject DragZone; // Zona en la que se eliminarán las cartas usadas
-    [SerializeField] GameObject HealthBar;
-    [SerializeField] public TMP_Text HealthLabel;
-    [SerializeField] RectTransform canvas;
-    [SerializeField] GameObject _VariablesGlobales;
+
     //nos conviene hacer esto en un array con los enemigos guardados así el random solo elige un hueco
 
-
+    // Start is called before the first frame update
     void Start()
     {
         CardList.cards = new GameObject[5];
         CardList.cont = 0; // Inicializa el contador de la lista
-
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
@@ -36,10 +33,12 @@ public class CombatController : MonoBehaviour
 
     }
 
-
+    // Update is called once per frame
     void Update()
     {
+
         CardsPosition();
+
     }
 
     /*
@@ -49,7 +48,7 @@ public class CombatController : MonoBehaviour
     {
         
         GameObject clonPlayer = Instantiate(Player); // Crea el clon del Player
-        CreateHealthBar(clonPlayer.transform.position.x,clonPlayer.transform.position.y + 1.5f/*, _VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista, _VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista*/);
+
     }
 
     /*
@@ -59,43 +58,20 @@ public class CombatController : MonoBehaviour
     {
         
         int rand = Random.Range(1, 4);           // Random de 1 a 3
-
-
         GameObject clonEnemy;                    // Declara el clon del prefab
 
         for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
         {
-           
+
             if (i == 0)                          // Si es el primer enemigo
-            {
-               // clonEnemy = Instantiate(Enemy1);
-                clonEnemy = Instantiate(EnemyList[Random.Range(0, 3)]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(2.5f, 1, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f);
-            }
+                clonEnemy = Instantiate(Enemy1); // Crea el clon del prefab Enemigo 1
             else if (i == 1)                     // Si es el segundo enemigo
-            {
-                clonEnemy = Instantiate(EnemyList[Random.Range(0, 3)]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(4.5f, 0, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f);
-            }
-            else                                 // Si es el tercer enemigo
-            {
-                clonEnemy = Instantiate(EnemyList[Random.Range(0, 3)]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(6.5f, -1, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f);
-            }
+                clonEnemy = Instantiate(Enemy2); // Crea el clon del prefab Enemigo 2
+            else                                 // Si es el primer enemigo
+                clonEnemy = Instantiate(Enemy3); // Crea el clon del prefab Enemigo 3
 
         }
 
-    }
-
-    public void CreateHealthBar(float x, float y/*, float Health, float MaxHealth*/)
-    {
-        GameObject clonHealthBar = Instantiate(HealthBar);          //crea el prefab de la barra de vida
-        clonHealthBar.transform.SetParent(canvas,false);            //declara el canvas como padre para que sea visible
-        clonHealthBar.transform.position = new Vector3(x, y, 1);    //lo coloca arriba del personaje
-       // clonHealthBar.GetComponent<HealthBar>().ValueHealthBar(Health, MaxHealth);
     }
 
     /*
@@ -111,7 +87,7 @@ public class CombatController : MonoBehaviour
 
             clon = Instantiate(Card);                                          // Crea una carta
             clon.GetComponent<CardController>().CombatController = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
-            clon.GetComponent<CardController>().DragZone = DragZone;           // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
+           // clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
             clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
             CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
             CardList.cont++;                                                   // Aumenta el contador de la lista
