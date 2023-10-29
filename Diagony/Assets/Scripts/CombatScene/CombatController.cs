@@ -88,7 +88,7 @@ public class CombatController : MonoBehaviour
 
             clon = Instantiate(Card);                                          // Crea una carta
             clon.GetComponent<CardController>().CombatController = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
-            clon.GetComponent<CardController>().DragZone = DragZone;           // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
+           // clon.GetComponent<CardController>().DragZone = DragZone;           // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
             clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
             CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
             CardList.cont++;                                                   // Aumenta el contador de la lista

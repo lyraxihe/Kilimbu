@@ -7,17 +7,15 @@ public class CardController : MonoBehaviour
 {
 
     public GameObject CombatController;
-    public GameObject DragZone;
+  //  public GameObject DragZone;
 
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
 
     Vector3 MousePositionOffset;
-    public bool MouseDrag, MouseOver;
-
+    public bool MouseDrag, MouseOver, IsInDragZone;
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
 
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -26,7 +24,6 @@ public class CardController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -44,26 +41,32 @@ public class CardController : MonoBehaviour
     private void OnMouseOver()
     {
 
-        if(!MouseDrag)
+        if (!MouseDrag)
         {
+           if (IsInDragZone)
+            {
+                CombatController.GetComponent<CombatController>().EliminarCarta(Id);
+                Destroy(gameObject); //destruye la carta al colisionar con la dragzone
+            }
 
             MouseOver = true;
             transform.localScale = new Vector3(3, 4, 0);
             transform.position = new Vector3(transform.position.x, -3, 0);
             transform.eulerAngles = new Vector3(0, 0, 0);
-
         }
 
     }
+
+
 
     private void OnMouseExit()
     {
         MouseOver = false;
     }
 
+   
     private void OnMouseUp()
     {
-
         MouseDrag = false;
         MouseOver = false;
 
@@ -94,12 +97,13 @@ public class CardController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("DragZone"))
+        if (collision.gameObject.CompareTag("DragZone"))
         {
-
-            CombatController.GetComponent<CombatController>().EliminarCarta(Id);
-            Destroy(gameObject);
-
+            IsInDragZone=true;
+        }
+        if(!collision.gameObject.CompareTag("DragZone"))
+        {
+            IsInDragZone = false;
         }
     }
 
