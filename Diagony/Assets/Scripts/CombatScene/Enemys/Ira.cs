@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ira : MonoBehaviour
 {
-    public float Health = 100;
-    public float MaxHealth = 100;
+    public int Health = 100;
+    public int MaxHealth = 100;
     public int Atq = 10;
     void Start()
     {

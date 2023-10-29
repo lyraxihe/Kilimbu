@@ -45,12 +45,13 @@ public class CombatController : MonoBehaviour
     /*
     * Crea las barras de vida
     */
-    public void CreateHealthBar(float x, float y/*, float Health, float MaxHealth*/)
+    public void CreateHealthBar(float x, float y, int tipo)
     {
         GameObject clonHealthBar = Instantiate(HealthBar);          //crea el prefab de la barra de vida
         clonHealthBar.transform.SetParent(canvas, false);            //declara el canvas como padre para que sea visible
         clonHealthBar.transform.position = new Vector3(x, y, 0);    //lo coloca arriba del personaje
-                                                                    // clonHealthBar.GetComponent<HealthBar>().ValueHealthBar(Health, MaxHealth);
+        clonHealthBar.GetComponent<HealthBar>().Identify = tipo;
+
     }
 
     /*
@@ -60,7 +61,7 @@ public class CombatController : MonoBehaviour
     {
         
         GameObject clonPlayer = Instantiate(Player); // Crea el clon del Player
-        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f/*, _VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista, _VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista*/);
+        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, 4); //tipo 4 = player
     }
 
     /*
@@ -73,6 +74,7 @@ public class CombatController : MonoBehaviour
 
 
         GameObject clonEnemy;                    // Declara el clon del prefab
+        int tipo; //0 = ira | 1 = miedo | 2 = tristeza
 
         for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
         {
@@ -80,21 +82,24 @@ public class CombatController : MonoBehaviour
             if (i == 0)                          // Si es el primer enemigo
             {
                 // clonEnemy = Instantiate(Enemy1);
-                clonEnemy = Instantiate(EnemyList[Random.Range(0, 3)]); // Crea el clon del prefab
+                tipo = Random.Range(0, 3);
+                clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(2.5f, 1, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo);
             }
-            else if (i == 1)                     // Si es el segundo enemigo
+           else if (i == 1)                     // Si es el segundo enemigo
             {
-                clonEnemy = Instantiate(EnemyList[Random.Range(0, 3)]); // Crea el clon del prefab
+                tipo = Random.Range(0, 3);
+                clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(4.5f, 0, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo);
             }
             else                                 // Si es el tercer enemigo
             {
-                clonEnemy = Instantiate(EnemyList[Random.Range(0, 3)]); // Crea el clon del prefab
+                tipo = Random.Range(0, 3);
+                clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(6.5f, -1, 1);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo);
             }
 
         }

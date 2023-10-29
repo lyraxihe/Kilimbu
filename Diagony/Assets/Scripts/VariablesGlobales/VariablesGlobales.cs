@@ -5,8 +5,9 @@ using UnityEngine;
 public class VariablesGlobales : MonoBehaviour
 {
     // declaración de variables personajes
-    public float MaxHealthProtagonista = 100;
-    public float HealthProtagonista = 45;
+    public int HealthProtagonista = 45;
+    public int MaxHealthProtagonista = 100;
+
     void Start()
     {
         
