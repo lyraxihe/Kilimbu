@@ -6,26 +6,32 @@ using UnityEngine;
 public class CardController : MonoBehaviour
 {
 
-    public GameObject CombatController;
+    public GameObject CombatScene;
     public GameObject DragZone;
 
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
 
-    [SerializeField] Animator CardAnimator;
-    [SerializeField] bool AnimacionCarta;
+    public Animator CardAnimator;
+    public bool AnimacionCarta;
+    [SerializeField] bool AnimacionEntrar;
+    public bool AnimacionSalir;
 
     Vector3 MousePositionOffset;
     public bool MouseDrag, MouseOver, IsInDragZone;
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
+    [SerializeField] int NumCartas; // Número de cartas en el turno actual
 
     void Start()
     {
 
-        MouseDrag = true;
-        MouseOver = true;
+        //MouseDrag = true;
+        //MouseOver = true;
 
         AnimacionCarta = true;
+        AnimacionEntrar = true;
+        AnimacionSalir = false;
+
         CardAnimator.SetInteger("CardID", Id);
 
     }
@@ -33,7 +39,12 @@ public class CardController : MonoBehaviour
     void Update()
     {
 
+        NumCartas = CombatScene.GetComponent<CombatController>().CardList.cont;
+
         CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
+        CardAnimator.SetBool("AnimacionEntrar", AnimacionEntrar);
+        CardAnimator.SetBool("AnimacionSalir", AnimacionSalir);
+        CardAnimator.SetInteger("NumCartas", CombatScene.GetComponent<CombatController>().CardList.cont);
 
     }
 
@@ -47,12 +58,15 @@ public class CardController : MonoBehaviour
     private void OnMouseOver()
     {
 
-        if (!MouseDrag)
+        if (!MouseDrag && CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
         {
            if (IsInDragZone)
             {
-                CombatController.GetComponent<CombatController>().EliminarCarta(Id);
-                Destroy(gameObject); //destruye la carta al colisionar con la dragzone
+
+                CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
+                CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+                Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
+
             }
 
             MouseOver = true;
@@ -81,15 +95,25 @@ public class CardController : MonoBehaviour
     private void OnMouseDown()
     {
 
-        MousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+        if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
+        {
+
+            MousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+
+        }
 
     }
 
     private void OnMouseDrag()
     {
 
-        MouseDrag = true;
-        transform.position = GetMouseWorldPosition() + MousePositionOffset;
+        if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
+        {
+
+            MouseDrag = true;
+            transform.position = GetMouseWorldPosition() + MousePositionOffset;
+
+        }
 
     }
 
@@ -120,22 +144,23 @@ public class CardController : MonoBehaviour
     {
 
         //Ha terminado la animacion por lo que se desactiva el animator e impide que la animacion se repita
-        if(valor == 0)
+        if(valor == 0) // Ha terminado la animación de Enter
         {
 
             AnimacionCarta = false;
-            GetComponent<Animator>().enabled = false;
+            AnimacionEntrar = false;
+            //CardAnimator.enabled = false;
             MouseDrag = false;
             MouseOver = false;
 
         }
-        else //Activa el animator permitiendo hacer la animacion de nuevo
+        if(valor == 1) // Ha terminado la animación de Exit
         {
 
-            AnimacionCarta = true;
-            GetComponent<Animator>().enabled = true;
-            MouseDrag = true;
-            MouseOver = true;
+            AnimacionCarta = false;
+            AnimacionSalir = false;
+            //CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+            //Destroy(gameObject);                                                   //destruye la carta al colisionar con la dragzone
 
         }
 

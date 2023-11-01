@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2583204925943761004
+--- !u!1 &1791528441941151039
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2583204925943761002}
-  - component: {fileID: 2583204925943761003}
-  - component: {fileID: 2583204925943761000}
-  - component: {fileID: 2583204925943761001}
-  - component: {fileID: 2583204925943761006}
-  - component: {fileID: 2583204925943761007}
+  - component: {fileID: 7292003243901582551}
+  - component: {fileID: 3697663143575068393}
+  - component: {fileID: 5597533591568739074}
+  - component: {fileID: 5281377689009903888}
+  - component: {fileID: 608645351128936655}
+  - component: {fileID: 5487672735390999179}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -21,13 +21,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2583204925943761002
+--- !u!4 &7292003243901582551
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2583204925943761004}
+  m_GameObject: {fileID: 1791528441941151039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.5, y: -3, z: 0}
   m_LocalScale: {x: 2, y: 3, z: 1}
@@ -36,13 +36,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2583204925943761003
+--- !u!212 &3697663143575068393
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2583204925943761004}
+  m_GameObject: {fileID: 1791528441941151039}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -88,35 +88,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2583204925943761000
+--- !u!114 &5597533591568739074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2583204925943761004}
+  m_GameObject: {fileID: 1791528441941151039}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a581e0b5e892f64593077ba009636aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CombatController: {fileID: 0}
+  CombatScene: {fileID: 0}
   DragZone: {fileID: 0}
   CardPosition: {x: 0, y: 0, z: 0}
   CardRotation: {x: 0, y: 0, z: 0}
-  CardAnimator: {fileID: 2583204925943761007}
+  CardAnimator: {fileID: 5487672735390999179}
   AnimacionCarta: 0
+  AnimacionEntrar: 0
+  AnimacionSalir: 0
   MouseDrag: 0
   MouseOver: 0
   IsInDragZone: 0
   Id: 0
---- !u!61 &2583204925943761001
+  NumCartas: 0
+--- !u!61 &5281377689009903888
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2583204925943761004}
+  m_GameObject: {fileID: 1791528441941151039}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -136,14 +139,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &2583204925943761006
+--- !u!50 &608645351128936655
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2583204925943761004}
+  m_GameObject: {fileID: 1791528441941151039}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -157,15 +160,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!95 &2583204925943761007
+--- !u!95 &5487672735390999179
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2583204925943761004}
-  m_Enabled: 1
+  m_GameObject: {fileID: 1791528441941151039}
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9e692ee8df227c3468e3b65b1525217c, type: 2}
   m_CullingMode: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-struct ListCards{
+public struct ListCards{
 
     [SerializeField] public GameObject[] cards; //Array de cartas
     [SerializeField] public int cont;           //Contador de cartas en la lista
@@ -12,21 +12,27 @@ struct ListCards{
 
 public class CombatController : MonoBehaviour
 {
+    public GameObject VariablesGlobales;
+
     [SerializeField] GameObject Player;         // Prefab del Player
     [SerializeField] GameObject[] EnemyList;    // Array con enemigos
     [SerializeField] GameObject Card;           // Carta de combate
-    [SerializeField] ListCards CardList;        // Lista de cartas en el combate
+    public ListCards CardList;        // Lista de cartas en el combate
     [SerializeField] GameObject DragZone;       // Zona en la que se eliminarán las cartas usadas
     [SerializeField] GameObject HealthBar;      // Prefab de la barra de vida
-    [SerializeField] RectTransform canvas;      //para tener referencia al canvas y ponerlo como padre (healthbar)
-
-   
-
+    [SerializeField] RectTransform canvas;      // Para tener referencia al canvas y ponerlo como padre (healthbar)
+    [SerializeField] TMP_Text Mana;             // Texto que controla el Maná actual y máximo durante el combate
+    public int ManaProtagonista;                // Controla el maná actual del jugador en este combate
+    public bool TurnoJugador;                          // Indica si es el turno del jugador (true si lo es, false si es el del enemigo)
 
     void Start()
     {
         CardList.cards = new GameObject[5];
         CardList.cont = 0; // Inicializa el contador de la lista
+
+        TurnoJugador = true;
+
+        ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
@@ -38,7 +44,10 @@ public class CombatController : MonoBehaviour
     void Update()
     {
 
+        Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
+
+        TurnoEnemigo();
 
     }
 
@@ -135,7 +144,7 @@ public class CombatController : MonoBehaviour
         {
 
             clon = Instantiate(Card);                                          // Crea una carta
-            clon.GetComponent<CardController>().CombatController = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
+            clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
             clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
             clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
             CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
@@ -337,6 +346,24 @@ public class CombatController : MonoBehaviour
         // Recoloca el ID de cada carta de la lista
         for (int i = 0; i < CardList.cont; i++)
             CardList.cards[i].GetComponent<CardController>().Id = i;
+
+    }
+
+    /*
+     * Hace la jugada de los enemigos cuando es su turno
+     */
+    public void TurnoEnemigo()
+    {
+
+        if(!TurnoJugador)
+        {
+
+            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador
+            TurnoJugador = true;                                                                        // Cambia de turno
+
+        }
+
+        // Aquí debería hacer más cosas como recorrer el array de enemigos y que cada uno ataque al protagonista
 
     }
 
