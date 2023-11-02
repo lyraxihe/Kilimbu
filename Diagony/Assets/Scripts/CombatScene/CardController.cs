@@ -25,26 +25,27 @@ public class CardController : MonoBehaviour
     void Start()
     {
 
-        //MouseDrag = true;
-        //MouseOver = true;
+        MouseDrag = true;
+        MouseOver = true;
 
         AnimacionCarta = true;
         AnimacionEntrar = true;
         AnimacionSalir = false;
 
-        CardAnimator.SetInteger("CardID", Id);
+        CardAnimator = GetComponent<Animator>();
+        CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
+        CardAnimator.SetBool("AnimacionEntrar", AnimacionEntrar);
+        CardAnimator.SetBool("AnimacionSalir", AnimacionSalir);
 
     }
 
     void Update()
     {
 
-        NumCartas = CombatScene.GetComponent<CombatController>().CardList.cont;
+        NumCartas = CombatScene.GetComponent<CombatController>().CardList.Count;
+        CardAnimator.SetInteger("NumCartas", NumCartas);
+        CardAnimator.SetInteger("CardID", Id);
 
-        CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
-        CardAnimator.SetBool("AnimacionEntrar", AnimacionEntrar);
-        CardAnimator.SetBool("AnimacionSalir", AnimacionSalir);
-        CardAnimator.SetInteger("NumCartas", CombatScene.GetComponent<CombatController>().CardList.cont);
 
     }
 
@@ -149,18 +150,28 @@ public class CardController : MonoBehaviour
 
             AnimacionCarta = false;
             AnimacionEntrar = false;
-            //CardAnimator.enabled = false;
+
+            CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
+            CardAnimator.SetBool("AnimacionEntrar", AnimacionEntrar);
+            //CardAnimator.speed *= 0;
+            
+
+            CardAnimator.enabled = false;
             MouseDrag = false;
             MouseOver = false;
 
         }
-        if(valor == 1) // Ha terminado la animación de Exit
+        if (valor == 1) // Ha terminado la animación de Exit
         {
 
             AnimacionCarta = false;
             AnimacionSalir = false;
-            //CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
-            //Destroy(gameObject);                                                   //destruye la carta al colisionar con la dragzone
+
+            CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
+            CardAnimator.SetBool("AnimacionSalir", AnimacionSalir);
+
+            CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+            Destroy(gameObject);                                                   //destruye la carta al colisionar con la dragzone
 
         }
 

@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public struct ListCards{
+//public struct ListCards{
 
-    [SerializeField] public GameObject[] cards; //Array de cartas
-    [SerializeField] public int cont;           //Contador de cartas en la lista
+//    [SerializeField] public GameObject[] cards; //Array de cartas
+//    [SerializeField] public int cont;           //Contador de cartas en la lista
 
-};
+//};
 
 public class CombatController : MonoBehaviour
 {
+    public List<GameObject> CardList;
     public GameObject VariablesGlobales;
 
     [SerializeField] GameObject Player;         // Prefab del Player
     [SerializeField] GameObject[] EnemyList;    // Array con enemigos
     [SerializeField] GameObject Card;           // Carta de combate
-    public ListCards CardList;        // Lista de cartas en el combate
+    //public ListCards CardList;        // Lista de cartas en el combate
     [SerializeField] GameObject DragZone;       // Zona en la que se eliminarán las cartas usadas
     [SerializeField] GameObject HealthBar;      // Prefab de la barra de vida
     [SerializeField] RectTransform canvas;      // Para tener referencia al canvas y ponerlo como padre (healthbar)
@@ -27,8 +29,8 @@ public class CombatController : MonoBehaviour
 
     void Start()
     {
-        CardList.cards = new GameObject[5];
-        CardList.cont = 0; // Inicializa el contador de la lista
+        //CardList.cards = new GameObject[5];
+        //CardList.cont = 0; // Inicializa el contador de la lista
 
         TurnoJugador = true;
 
@@ -36,7 +38,8 @@ public class CombatController : MonoBehaviour
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
-        CreateCards();   // Crea las cartas
+        StartCoroutine(CreateCards());   // Crea las cartas
+        //CreateCards();
 
     }
 
@@ -47,7 +50,7 @@ public class CombatController : MonoBehaviour
         Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
 
-        TurnoEnemigo();
+        StartCoroutine(TurnoEnemigo());
 
     }
 
@@ -135,24 +138,45 @@ public class CombatController : MonoBehaviour
     /*
      * Coloca las cartas del combate
      */
-    public void CreateCards()
+    public IEnumerator CreateCards()
     {
 
         GameObject clon;
 
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
 
             clon = Instantiate(Card);                                          // Crea una carta
             clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
             clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
             clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-            CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
-            CardList.cont++;                                                   // Aumenta el contador de la lista
-
+            CardList.Add(clon);                                         // Almacena la carta en la lista
+            yield return new WaitForSeconds(0.05f);
+            //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
+            //CardList.cont++;                                                   // Aumenta el contador de la lista
         }
 
     }
+
+    //public void CreateCards()
+    //{
+
+    //    GameObject clon;
+
+    //    for (int i = 0; i < 5; i++)
+    //    {
+
+    //        clon = Instantiate(Card);                                          // Crea una carta
+    //        clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
+    //        clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
+    //        clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
+    //        CardList.Add(clon);                                         // Almacena la carta en la lista
+    //        //yield return new WaitForSeconds(0.05f);
+    //        //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
+    //        //CardList.cont++;                                                   // Aumenta el contador de la lista
+    //    }
+
+    //}
 
     /*
      * Controla la posicion de las cartas en funcion del numero de ellas que haya en pantalla
@@ -160,162 +184,167 @@ public class CombatController : MonoBehaviour
     public void CardsPosition()
     {
 
-        if (CardList.cont == 1)
+        if(TurnoJugador)
         {
 
-            if(!CardList.cards[0].GetComponent<CardController>().MouseDrag && !CardList.cards[0].GetComponent<CardController>().MouseOver)
+            if (CardList.Count == 1)
             {
 
-                CardList.cards[0].transform.position = new Vector3(0, -4, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, 0);
-                CardList.cards[0].GetComponent<CardController>().SetPosition();
-                CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
+                if (!CardList[0].GetComponent<CardController>().MouseDrag && !CardList[0].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[0].transform.position = new Vector3(0, -4, 0);
+                    CardList[0].transform.eulerAngles = new Vector3(0, 0, 0);
+                    CardList[0].GetComponent<CardController>().SetPosition();
+                    CardList[0].transform.localScale = new Vector3(2, 3, 1);
+
+                }
 
             }
-
-        }
-        else if (CardList.cont == 2)
-        {
-
-            if(!CardList.cards[0].GetComponent<CardController>().MouseDrag && !CardList.cards[0].GetComponent<CardController>().MouseOver)
+            else if (CardList.Count == 2)
             {
 
-                CardList.cards[0].transform.position = new Vector3(1, -4, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -5);
-                CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[0].GetComponent<CardController>().SetPosition();
+                if (!CardList[0].GetComponent<CardController>().MouseDrag && !CardList[0].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[0].transform.position = new Vector3(1, -4, 0);
+                    CardList[0].transform.eulerAngles = new Vector3(0, 0, -5);
+                    CardList[0].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[0].GetComponent<CardController>().SetPosition();
+
+                }
+                if (!CardList[1].GetComponent<CardController>().MouseDrag && !CardList[1].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[1].transform.position = new Vector3(-1, -4, 1);
+                    CardList[1].transform.eulerAngles = new Vector3(0, 0, 5);
+                    CardList[1].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[1].GetComponent<CardController>().SetPosition();
+
+                }
 
             }
-            if(!CardList.cards[1].GetComponent<CardController>().MouseDrag && !CardList.cards[1].GetComponent<CardController>().MouseOver)
+            else if (CardList.Count == 3)
             {
 
-                CardList.cards[1].transform.position = new Vector3(-1, -4, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, 5);
-                CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[1].GetComponent<CardController>().SetPosition();
+                if (!CardList[0].GetComponent<CardController>().MouseDrag && !CardList[0].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[0].transform.position = new Vector3(2, -4.15f, 0);
+                    CardList[0].transform.eulerAngles = new Vector3(0, 0, -10);
+                    CardList[0].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[0].GetComponent<CardController>().SetPosition();
+
+                }
+                if (!CardList[1].GetComponent<CardController>().MouseDrag && !CardList[1].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[1].transform.position = new Vector3(0, -4, 1);
+                    CardList[1].transform.eulerAngles = new Vector3(0, 0, 0);
+                    CardList[1].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[1].GetComponent<CardController>().SetPosition();
+
+                }
+                if (!CardList[2].GetComponent<CardController>().MouseDrag && !CardList[2].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[2].transform.position = new Vector3(-2, -4.15f, 2);
+                    CardList[2].transform.eulerAngles = new Vector3(0, 0, 10);
+                    CardList[2].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[2].GetComponent<CardController>().SetPosition();
+
+                }
 
             }
-
-        }
-        else if (CardList.cont == 3)
-        {
-
-            if(!CardList.cards[0].GetComponent<CardController>().MouseDrag && !CardList.cards[0].GetComponent<CardController>().MouseOver)
+            else if (CardList.Count == 4)
             {
 
-                CardList.cards[0].transform.position = new Vector3(2, -4.15f, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -10);
-                CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[0].GetComponent<CardController>().SetPosition();
+                if (!CardList[0].GetComponent<CardController>().MouseDrag && !CardList[0].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[0].transform.position = new Vector3(3, -4.35f, 0);
+                    CardList[0].transform.eulerAngles = new Vector3(0, 0, -15);
+                    CardList[0].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[0].GetComponent<CardController>().SetPosition();
+
+                }
+                if (!CardList[1].GetComponent<CardController>().MouseDrag && !CardList[1].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[1].transform.position = new Vector3(1, -4, 1);
+                    CardList[1].transform.eulerAngles = new Vector3(0, 0, -5);
+                    CardList[1].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[1].GetComponent<CardController>().SetPosition();
+
+                }
+                if (!CardList[2].GetComponent<CardController>().MouseDrag && !CardList[2].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[2].transform.position = new Vector3(-1, -4, 2);
+                    CardList[2].transform.eulerAngles = new Vector3(0, 0, 5);
+                    CardList[2].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[2].GetComponent<CardController>().SetPosition();
+
+                }
+                if (!CardList[3].GetComponent<CardController>().MouseDrag && !CardList[3].GetComponent<CardController>().MouseOver)
+                {
+
+                    CardList[3].transform.position = new Vector3(-3, -4.35f, 3);
+                    CardList[3].transform.eulerAngles = new Vector3(0, 0, 15);
+                    CardList[3].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[3].GetComponent<CardController>().SetPosition();
+
+                }
 
             }
-            if(!CardList.cards[1].GetComponent<CardController>().MouseDrag && !CardList.cards[1].GetComponent<CardController>().MouseOver)
+            else
             {
 
-                CardList.cards[1].transform.position = new Vector3(0, -4, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, 0);
-                CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[1].GetComponent<CardController>().SetPosition();
+                if (!CardList[0].GetComponent<CardController>().MouseDrag && !CardList[0].GetComponent<CardController>().MouseOver)
+                {
 
-            }
-            if(!CardList.cards[2].GetComponent<CardController>().MouseDrag && !CardList.cards[2].GetComponent<CardController>().MouseOver)
-            {
+                    CardList[0].transform.position = new Vector3(3.95f, -4.7f, 0);
+                    CardList[0].transform.eulerAngles = new Vector3(0, 0, -20);
+                    CardList[0].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[0].GetComponent<CardController>().SetPosition();
 
-                CardList.cards[2].transform.position = new Vector3(-2, -4.15f, 2);
-                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, 10);
-                CardList.cards[2].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[2].GetComponent<CardController>().SetPosition();
+                }
+                if (!CardList[1].GetComponent<CardController>().MouseDrag && !CardList[1].GetComponent<CardController>().MouseOver)
+                {
 
-            }
+                    CardList[1].transform.position = new Vector3(2, -4.15f, 1);
+                    CardList[1].transform.eulerAngles = new Vector3(0, 0, -10);
+                    CardList[1].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[1].GetComponent<CardController>().SetPosition();
 
-        }
-        else if (CardList.cont == 4)
-        {
+                }
+                if (!CardList[2].GetComponent<CardController>().MouseDrag && !CardList[2].GetComponent<CardController>().MouseOver)
+                {
 
-            if(!CardList.cards[0].GetComponent<CardController>().MouseDrag && !CardList.cards[0].GetComponent<CardController>().MouseOver)
-            {
+                    CardList[2].transform.position = new Vector3(0, -4, 2);
+                    CardList[2].transform.eulerAngles = new Vector3(0, 0, 0);
+                    CardList[2].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[2].GetComponent<CardController>().SetPosition();
 
-                CardList.cards[0].transform.position = new Vector3(3, -4.35f, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -15);
-                CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[0].GetComponent<CardController>().SetPosition();
+                }
+                if (!CardList[3].GetComponent<CardController>().MouseDrag && !CardList[3].GetComponent<CardController>().MouseOver)
+                {
 
-            }
-            if(!CardList.cards[1].GetComponent<CardController>().MouseDrag && !CardList.cards[1].GetComponent<CardController>().MouseOver)
-            {
+                    CardList[3].transform.position = new Vector3(-2, -4.15f, 3);
+                    CardList[3].transform.eulerAngles = new Vector3(0, 0, 10);
+                    CardList[3].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[3].GetComponent<CardController>().SetPosition();
 
-                CardList.cards[1].transform.position = new Vector3(1, -4, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, -5);
-                CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[1].GetComponent<CardController>().SetPosition();
+                }
+                if (!CardList[4].GetComponent<CardController>().MouseDrag && !CardList[4].GetComponent<CardController>().MouseOver)
+                {
 
-            }
-            if(!CardList.cards[2].GetComponent<CardController>().MouseDrag && !CardList.cards[2].GetComponent<CardController>().MouseOver)
-            {
+                    CardList[4].transform.position = new Vector3(-3.95f, -4.7f, 4);
+                    CardList[4].transform.eulerAngles = new Vector3(0, 0, 20);
+                    CardList[4].transform.localScale = new Vector3(2, 3, 1);
+                    CardList[4].GetComponent<CardController>().SetPosition();
 
-                CardList.cards[2].transform.position = new Vector3(-1, -4, 2);
-                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, 5);
-                CardList.cards[2].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[2].GetComponent<CardController>().SetPosition();
-
-            }
-            if(!CardList.cards[3].GetComponent<CardController>().MouseDrag && !CardList.cards[3].GetComponent<CardController>().MouseOver)
-            {
-
-                CardList.cards[3].transform.position = new Vector3(-3, -4.35f, 3);
-                CardList.cards[3].transform.eulerAngles = new Vector3(0, 0, 15);
-                CardList.cards[3].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[3].GetComponent<CardController>().SetPosition();
-
-            }
-
-        }
-        else
-        {
-
-            if(!CardList.cards[0].GetComponent<CardController>().MouseDrag && !CardList.cards[0].GetComponent<CardController>().MouseOver)
-            {
-
-                CardList.cards[0].transform.position = new Vector3(3.95f, -4.7f, 0);
-                CardList.cards[0].transform.eulerAngles = new Vector3(0, 0, -20);
-                CardList.cards[0].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[0].GetComponent<CardController>().SetPosition();
-
-            }
-            if(!CardList.cards[1].GetComponent<CardController>().MouseDrag && !CardList.cards[1].GetComponent<CardController>().MouseOver)
-            {
-
-                CardList.cards[1].transform.position = new Vector3(2, -4.15f, 1);
-                CardList.cards[1].transform.eulerAngles = new Vector3(0, 0, -10);
-                CardList.cards[1].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[1].GetComponent<CardController>().SetPosition();
-
-            }
-            if(!CardList.cards[2].GetComponent<CardController>().MouseDrag && !CardList.cards[2].GetComponent<CardController>().MouseOver)
-            {
-
-                CardList.cards[2].transform.position = new Vector3(0, -4, 2);
-                CardList.cards[2].transform.eulerAngles = new Vector3(0, 0, 0);
-                CardList.cards[2].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[2].GetComponent<CardController>().SetPosition();
-
-            }
-            if(!CardList.cards[3].GetComponent<CardController>().MouseDrag && !CardList.cards[3].GetComponent<CardController>().MouseOver)
-            {
-
-                CardList.cards[3].transform.position = new Vector3(-2, -4.15f, 3);
-                CardList.cards[3].transform.eulerAngles = new Vector3(0, 0, 10);
-                CardList.cards[3].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[3].GetComponent<CardController>().SetPosition();
-
-            }
-            if(!CardList.cards[4].GetComponent<CardController>().MouseDrag && !CardList.cards[4].GetComponent<CardController>().MouseOver)
-            {
-
-                CardList.cards[4].transform.position = new Vector3(-3.95f, -4.7f, 4);
-                CardList.cards[4].transform.eulerAngles = new Vector3(0, 0, 20);
-                CardList.cards[4].transform.localScale = new Vector3(2, 3, 1);
-                CardList.cards[4].GetComponent<CardController>().SetPosition();
+                }
 
             }
 
@@ -330,36 +359,25 @@ public class CombatController : MonoBehaviour
     {
 
         // Elimina la carta
-        CardList.cards[id] = CardList.cards[id + 1];
-
-        // Recoloca los siguientes elementos rellenando el hueco dejado
-        for (int i = id + 1; i < CardList.cont - 1; i++ )
-        {
-
-            CardList.cards[i] = CardList.cards[i + 1];
-
-        }
-
-        CardList.cards[CardList.cont - 1] = null; // Elimina el último elemento ya que este ha pasado a la penúltima posición
-        CardList.cont--;                          // Reduce el contado de la lista de cartas
-
-        // Recoloca el ID de cada carta de la lista
-        for (int i = 0; i < CardList.cont; i++)
-            CardList.cards[i].GetComponent<CardController>().Id = i;
+        CardList.RemoveAt(id);
+        for (int i = 0; i < CardList.Count; i++)
+            CardList[i].GetComponent<CardController>().Id = i;
 
     }
 
     /*
      * Hace la jugada de los enemigos cuando es su turno
      */
-    public void TurnoEnemigo()
+    public IEnumerator TurnoEnemigo()
     {
 
-        if(!TurnoJugador)
+        if (!TurnoJugador)
         {
 
-            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador
-            TurnoJugador = true;                                                                        // Cambia de turno
+            yield return new WaitForSeconds(3);
+
+            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador                                                                      // Cambia de turno
+            TurnoJugador = true;
 
         }
 
