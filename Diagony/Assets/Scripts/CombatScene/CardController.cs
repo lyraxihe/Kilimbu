@@ -16,8 +16,8 @@ public class CardController : MonoBehaviour
     public Animator CardAnimator;
     [SerializeField] bool AnimacionEntrar;
     public bool AnimacionSalir;
-    private float desireDuration;
-    private float elapsedTime;
+    //private float desireDuration;
+    //private float elapsedTime;
 
     Vector3 MousePositionOffset;
     public bool MouseDrag, MouseOver, IsInDragZone;
@@ -31,7 +31,7 @@ public class CardController : MonoBehaviour
 
         //AnimacionCarta();
 
-        desireDuration = 5f;
+        //desireDuration = 5f;
         //AnimacionCarta = true;
         AnimacionEntrar = true;
         AnimacionSalir = false;

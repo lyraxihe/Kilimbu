@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 141427453951490449}
   - component: {fileID: 2314047238593352240}
-  - component: {fileID: 1147722875853316390}
+  - component: {fileID: 5948965547855322045}
   m_Layer: 0
   m_Name: tristeza
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1147722875853316390
+--- !u!114 &5948965547855322045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3983068481237199692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567747ee323773c4e813846735ba1d5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e1d82970d2e7eb49b385a6c5c1280bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 77
-  MaxHealth: 100
-  Atq: 5
+  VariablesGlobales: {fileID: 0}
+  Tipo: 0
+  HealthEnemigo: 0
+  MaxHealthEnemigo: 0

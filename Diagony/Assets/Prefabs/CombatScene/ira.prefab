@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3669863879581995329}
   - component: {fileID: 1973785623794600996}
-  - component: {fileID: 8286752945299063049}
+  - component: {fileID: 5365200391923865638}
   m_Layer: 0
   m_Name: ira
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8286752945299063049
+--- !u!114 &5365200391923865638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5466387340479591959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e532bba0e1a314795f0f8ff676f4c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e1d82970d2e7eb49b385a6c5c1280bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 41
-  MaxHealth: 100
-  Atq: 10
+  VariablesGlobales: {fileID: 0}
+  Tipo: 0
+  HealthEnemigo: 0
+  MaxHealthEnemigo: 0

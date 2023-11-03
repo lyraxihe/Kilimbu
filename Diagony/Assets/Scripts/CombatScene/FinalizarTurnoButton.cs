@@ -42,6 +42,8 @@ public class FinalizarTurnoButton : MonoBehaviour
             CombatScene.GetComponent<CombatController>().CartasCreadas = false;
             CombatScene.GetComponent<CombatController>().TurnoJugador = false;
 
+            StartCoroutine(CombatScene.GetComponent<CombatController>().TurnoEnemigo());
+
         }
 
     }

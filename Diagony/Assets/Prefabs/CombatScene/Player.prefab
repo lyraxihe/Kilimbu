@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1556459485827681943}
   - component: {fileID: 1556459485827681942}
-  - component: {fileID: -162837170194216944}
+  - component: {fileID: 6646386589481383094}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-162837170194216944
+--- !u!114 &6646386589481383094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556459485827681945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d8050062d3925d42aa1c768ac39115b, type: 3}
+  m_Script: {fileID: 11500000, guid: 59ffbfa95d064bb48b388d8c89538375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthProtagonista: 90
-  MaxHealthProtagonista: 100
+  VariablesGlobales: {fileID: 0}
+  MaxHealthProtagonista: 0
+  HealthProtagonista: 0

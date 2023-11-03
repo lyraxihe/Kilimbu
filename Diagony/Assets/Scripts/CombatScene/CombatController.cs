@@ -17,7 +17,8 @@ public class CombatController : MonoBehaviour
     public GameObject VariablesGlobales;
 
     [SerializeField] GameObject Player;         // Prefab del Player
-    [SerializeField] GameObject[] EnemyList;    // Array con enemigos
+    [SerializeField] GameObject[] PrefabEnemyList;    // Array con enemigos
+    [SerializeField] List<GameObject> EnemyList;
     [SerializeField] GameObject Card;           // Carta de combate
     //public ListCards CardList;        // Lista de cartas en el combate
     [SerializeField] GameObject DragZone;       // Zona en la que se eliminarán las cartas usadas
@@ -52,8 +53,6 @@ public class CombatController : MonoBehaviour
 
         Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
-
-        StartCoroutine(TurnoEnemigo());
 
     }
 
@@ -94,6 +93,7 @@ public class CombatController : MonoBehaviour
         
         GameObject clonPlayer = Instantiate(Player); // Crea el clon del Player
         CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, 3, clonPlayer); //tipo 3 = player
+        clonPlayer.GetComponent<PlayerController>().VariablesGlobales = VariablesGlobales;
     }
 
     /*
@@ -114,22 +114,37 @@ public class CombatController : MonoBehaviour
             if (i == 0)                          // Si es el primer enemigo
             {
                 tipo = Random.Range(0, 3);
-                clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
+                clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(2.5f, 1, 1);
+                clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+                clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+                clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+                clonEnemy.GetComponent<EnemyController>().Id = i;
+                EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
             }
            else if (i == 1)                     // Si es el segundo enemigo
             {
                 tipo = Random.Range(0, 3);
-                clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
+                clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(4.5f, 0, 1);
+                clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+                clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+                clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+                clonEnemy.GetComponent<EnemyController>().Id = i;
+                EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
             }
             else                                 // Si es el tercer enemigo
             {
                 tipo = Random.Range(0, 3);
-                clonEnemy = Instantiate(EnemyList[tipo]); // Crea el clon del prefab
+                clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(6.5f, -1, 1);
+                clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+                clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+                clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+                clonEnemy.GetComponent<EnemyController>().Id = i;
+                EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
             }
 
@@ -375,6 +390,18 @@ public class CombatController : MonoBehaviour
     }
 
     /*
+     * Elimina un enemigo de la lista de enemigos si este es derrotado
+     */
+    public void EliminarEnemig0(int id)
+    {
+
+        EnemyList.RemoveAt(id);
+        for (int i = 0; i < EnemyList.Count; i++)
+            EnemyList[i].GetComponent<EnemyController>().Id = i;
+
+    }
+
+    /*
      * Hace la jugada de los enemigos cuando es su turno
      */
     public IEnumerator TurnoEnemigo()
@@ -383,6 +410,14 @@ public class CombatController : MonoBehaviour
         if (!TurnoJugador)
         {
 
+            for (int i = 0; i < EnemyList.Count; i++)
+            {
+
+                yield return new WaitForSeconds(3);
+                EnemyList[i].GetComponent<EnemyController>().Atacar();
+
+            }
+            
             yield return new WaitForSeconds(3);
 
             ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador                                                                      // Cambia de turno
@@ -390,8 +425,6 @@ public class CombatController : MonoBehaviour
             StartCoroutine(CreateCards());
 
         }
-
-        // Aquí debería hacer más cosas como recorrer el array de enemigos y que cada uno ataque al protagonista
 
     }
 
