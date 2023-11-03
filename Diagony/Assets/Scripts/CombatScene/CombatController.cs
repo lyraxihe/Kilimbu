@@ -26,11 +26,14 @@ public class CombatController : MonoBehaviour
     [SerializeField] TMP_Text Mana;             // Texto que controla el Maná actual y máximo durante el combate
     public int ManaProtagonista;                // Controla el maná actual del jugador en este combate
     public bool TurnoJugador;                          // Indica si es el turno del jugador (true si lo es, false si es el del enemigo)
+    public bool CartasCreadas;
 
     void Start()
     {
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
+
+        CartasCreadas = false;
 
         TurnoJugador = true;
 
@@ -141,19 +144,25 @@ public class CombatController : MonoBehaviour
     public IEnumerator CreateCards()
     {
 
-        GameObject clon;
-
-        for (int i = 0; i < 5; i++)
+        if(!CartasCreadas)
         {
 
-            clon = Instantiate(Card);                                          // Crea una carta
-            clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
-            clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
-            clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-            CardList.Add(clon);                                         // Almacena la carta en la lista
-            yield return new WaitForSeconds(0.05f);
-            //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
-            //CardList.cont++;                                                   // Aumenta el contador de la lista
+            CartasCreadas = true;
+            GameObject clon;
+
+            for (int i = 0; i < 5; i++)
+            {
+
+                clon = Instantiate(Card);                                          // Crea una carta
+                clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
+                clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
+                clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
+                CardList.Add(clon);                                         // Almacena la carta en la lista
+                yield return new WaitForSeconds(0.05f);
+                //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
+                //CardList.cont++;                                                   // Aumenta el contador de la lista
+            }
+
         }
 
     }
@@ -378,6 +387,7 @@ public class CombatController : MonoBehaviour
 
             ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador                                                                      // Cambia de turno
             TurnoJugador = true;
+            StartCoroutine(CreateCards());
 
         }
 
