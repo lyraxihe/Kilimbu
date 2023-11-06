@@ -28,6 +28,7 @@ public class CombatController : MonoBehaviour
     public int ManaProtagonista;                // Controla el maná actual del jugador en este combate
     public bool TurnoJugador;                          // Indica si es el turno del jugador (true si lo es, false si es el del enemigo)
     public bool CartasCreadas;
+    [SerializeField] public UnityEngine.UI.Button botonTurno;
 
     void Start()
     {
@@ -53,6 +54,14 @@ public class CombatController : MonoBehaviour
 
         Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
+        if (!TurnoJugador)
+        {
+            botonTurno.interactable = false;
+        }
+        else
+        {
+            botonTurno.interactable = true;
+        }
 
     }
 

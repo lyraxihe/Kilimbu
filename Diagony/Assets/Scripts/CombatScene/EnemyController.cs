@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public int HealthEnemigo;
     public int MaxHealthEnemigo;
     private int AtackEnemigo;
+   
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class EnemyController : MonoBehaviour
 
         SetHealthEnemigo();
         SetAtackEnenmigo();
-
+       
     }
 
     // Update is called once per frame
@@ -35,11 +37,11 @@ public class EnemyController : MonoBehaviour
     {
 
         if (Tipo == 0)         // Ira
-            MaxHealthEnemigo = 5;
+            MaxHealthEnemigo = 50;
         else if (Tipo == 1)    // Miedo
-            MaxHealthEnemigo = 5;
+            MaxHealthEnemigo = 50;
         else                   // Tristeza
-            MaxHealthEnemigo = 5;
+            MaxHealthEnemigo = 50;
 
         HealthEnemigo = MaxHealthEnemigo;
 
@@ -76,9 +78,7 @@ public class EnemyController : MonoBehaviour
 
     public void Atacar()
     {
-
         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= AtackEnemigo;
-
     }
 
 }
