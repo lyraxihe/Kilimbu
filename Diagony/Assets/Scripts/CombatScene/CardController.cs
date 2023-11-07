@@ -41,6 +41,7 @@ public class CardController : MonoBehaviour
         //CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
         CardAnimator.SetBool("AnimacionEntrar", AnimacionEntrar);
         CardAnimator.SetBool("AnimacionSalir", AnimacionSalir);
+        setColor();
 
     }
 
@@ -184,7 +185,21 @@ public class CardController : MonoBehaviour
         }
 
     }
-
+    public void setColor()
+    {
+        if (Tipo == 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+        }
+        else if (Tipo == 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        }
+    }
     //public void AnimacionCarta()
     //{
 

@@ -26,12 +26,17 @@ public class CombatController : MonoBehaviour
     [SerializeField] RectTransform canvas;      // Para tener referencia al canvas y ponerlo como padre (healthbar)
     [SerializeField] TMP_Text Mana;             // Texto que controla el Maná actual y máximo durante el combate
     public int ManaProtagonista;                // Controla el maná actual del jugador en este combate
-    public bool TurnoJugador;                          // Indica si es el turno del jugador (true si lo es, false si es el del enemigo)
+    public bool TurnoJugador;                         // Indica si es el turno del jugador (true si lo es, false si es el del enemigo)
     public bool CartasCreadas;
     [SerializeField] public UnityEngine.UI.Button botonTurno;
-
+    [SerializeField] GameObject VictoriaDerrotaPanel;
+    [SerializeField] TMP_Text VictoriaDerrotaText;
+    
     void Start()
     {
+
+       
+
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
 
@@ -44,7 +49,8 @@ public class CombatController : MonoBehaviour
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
         StartCoroutine(CreateCards());   // Crea las cartas
-        //CreateCards();
+                                         //CreateCards();
+       
 
     }
 
@@ -62,6 +68,8 @@ public class CombatController : MonoBehaviour
         {
             botonTurno.interactable = true;
         }
+
+        victoriaDerrota();
 
     }
 
@@ -176,7 +184,8 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
                 clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-               
+                clon.GetComponent<CardController>().Tipo = Random.Range(0, 4); //hace que la carta sea de alguna de las del tipo
+                
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.05f);
                 //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
@@ -437,15 +446,67 @@ public class CombatController : MonoBehaviour
     {
         if (tipo == 0)
         {
+            //hace 5 de daño
+            for (int i = 0; i < EnemyList.Count; i++)
+            {
+
+                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo-=5;
+
+            }
 
         }
         else if (tipo == 1)
         {
+            //hace 10 de daño
+            for (int i = 0; i < EnemyList.Count; i++)
+            {
+
+                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= 10;
+
+            }
+        }
+        else
+        {
+            //cura 10 al personaje
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
+
+
+        }
+    }
+
+    public void victoriaDerrota()
+    {
+        int enemigosVivos = EnemyList.Count;
+        for (int i = 0; i < EnemyList.Count; i++)
+        {
+            if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo==0)
+            {
+                enemigosVivos--;
+            }
+
+        }
+
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
+        {
+           
+            VictoriaDerrotaPanel.SetActive(true);
+            VictoriaDerrotaText.text = "DERROTA";
+            Time.timeScale = 0f;
+
+        }
+        else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
+        {
+           
+            VictoriaDerrotaPanel.SetActive(true);
+            VictoriaDerrotaText.text = "VICTORIA";
+            Time.timeScale = 0f;
 
         }
         else
         {
 
+            Time.timeScale = 1f;
+            VictoriaDerrotaPanel.SetActive(false);
         }
     }
 

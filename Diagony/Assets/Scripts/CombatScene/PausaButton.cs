@@ -8,7 +8,6 @@ public class PausaButton : MonoBehaviour
 {
     [SerializeField] GameObject PanelPausa;
     [SerializeField] GameObject VariablesGlobales_;
-
     void Start()
     {
 
@@ -43,7 +42,7 @@ public class PausaButton : MonoBehaviour
 
     public void Escapar()
     {
-
+      
         SceneManager.LoadScene("MainMenu");
 
     }
