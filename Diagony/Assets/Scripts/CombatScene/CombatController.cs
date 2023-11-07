@@ -68,28 +68,22 @@ public class CombatController : MonoBehaviour
     /*
     * Crea las barras de vida
     */
-    public void CreateHealthBar(float x, float y, int tipo, GameObject personaje)
+    public void CreateHealthBar(float x, float y, bool EsPlayer, GameObject personaje)
     {
         GameObject clonHealthBar = Instantiate(HealthBar);          //crea el prefab de la barra de vida
         clonHealthBar.transform.SetParent(canvas, false);            //declara el canvas como padre para que sea visible
-        clonHealthBar.transform.position = new Vector3(x, y, 0);    //lo coloca arriba del personaje
-        clonHealthBar.GetComponent<HealthBar>().Identify = tipo;
-        if (tipo==0) // 0 ira, 1 miedo, 2 tristeza, 3 prota
-        {
-            clonHealthBar.GetComponent<HealthBar>()._ira = personaje;
-        }
-        else if (tipo==1)
-        {
-            clonHealthBar.GetComponent<HealthBar>()._miedo = personaje;
-        }
-        else if (tipo==2)
-        {
-            clonHealthBar.GetComponent<HealthBar>()._tristeza = personaje;
-        }
-        else
-        {
-            clonHealthBar.GetComponent<HealthBar>()._player = personaje;
-        }
+        clonHealthBar.transform.position = new Vector2(x, y);    //lo coloca arriba del personaje
+        clonHealthBar.GetComponent<HealthBar>().EsPlayer = EsPlayer;
+      
+        //luego cambiar identify a un bool donde true sea player y false sea enemigo
+            if (EsPlayer)// 0 ira, 1 miedo, 2 tristeza, 3 prota
+            {
+                clonHealthBar.GetComponent<HealthBar>()._player = personaje;
+            }
+            else
+            {
+                clonHealthBar.GetComponent<HealthBar>()._enemy = personaje;
+            }
 
 
     }
@@ -101,7 +95,8 @@ public class CombatController : MonoBehaviour
     {
         
         GameObject clonPlayer = Instantiate(Player); // Crea el clon del Player
-        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, 3, clonPlayer); //tipo 3 = player
+        clonPlayer.transform.position = new Vector2(-4, -0.8f);
+        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer); //tipo 3 = player
         clonPlayer.GetComponent<PlayerController>().VariablesGlobales = VariablesGlobales;
     }
 
@@ -124,37 +119,37 @@ public class CombatController : MonoBehaviour
             {
                 tipo = Random.Range(0, 3);
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(2.5f, 1, 1);
+                clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 1);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
                 clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 EnemyList.Add(clonEnemy);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
             }
            else if (i == 1)                     // Si es el segundo enemigo
             {
                 tipo = Random.Range(0, 3);
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(4.5f, 0, 1);
+                clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 1);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
                 clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 EnemyList.Add(clonEnemy);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
             }
             else                                 // Si es el tercer enemigo
             {
                 tipo = Random.Range(0, 3);
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(6.5f, -1, 1);
+                clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 1);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
                 clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 EnemyList.Add(clonEnemy);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, tipo, clonEnemy);
+                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
             }
 
         }
@@ -181,6 +176,7 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
                 clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
+               
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.05f);
                 //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
@@ -418,7 +414,7 @@ public class CombatController : MonoBehaviour
 
         if (!TurnoJugador)
         {
-
+        
             for (int i = 0; i < EnemyList.Count; i++)
             {
 
@@ -435,6 +431,22 @@ public class CombatController : MonoBehaviour
 
         }
 
+    }
+
+    public void UsarCarta(int tipo)
+    {
+        if (tipo == 0)
+        {
+
+        }
+        else if (tipo == 1)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
 }

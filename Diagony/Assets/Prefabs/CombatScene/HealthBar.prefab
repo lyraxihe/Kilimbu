@@ -89,7 +89,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -108,11 +108,9 @@ MonoBehaviour:
   HealthLabel: {fileID: 7872630971472184622}
   HealthBarSlider: {fileID: 7872630970208688129}
   fill: {fileID: 7872630971910928422}
-  Identify: 0
+  EsPlayer: 0
   _player: {fileID: 1556459485827681945, guid: d4bdd1619d9592744a658d0f313125ae, type: 3}
-  _ira: {fileID: 5466387340479591959, guid: 59d178462c504ee418da3a1168f965f9, type: 3}
-  _miedo: {fileID: 2744481445238258168, guid: 47131a513d40a4f4b88db7e38e01b99d, type: 3}
-  _tristeza: {fileID: 3983068481237199692, guid: 92f074ccb9b79824dba06351c4e8a799, type: 3}
+  _enemy: {fileID: 5466387340479591959, guid: 59d178462c504ee418da3a1168f965f9, type: 3}
 --- !u!1 &7872630970318204099
 GameObject:
   m_ObjectHideFlags: 0

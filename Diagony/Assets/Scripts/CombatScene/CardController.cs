@@ -20,14 +20,15 @@ public class CardController : MonoBehaviour
     //private float elapsedTime;
 
     Vector3 MousePositionOffset;
-    public bool MouseDrag, MouseOver, IsInDragZone;
+    public bool MouseDrag, MouseOver, IsInDragZone, SePuede;
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
-
+    public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
     void Start()
     {
         MouseDrag = true;
         MouseOver = true;
+
 
         //AnimacionCarta();
 
@@ -71,6 +72,8 @@ public class CardController : MonoBehaviour
 
                 CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
                 CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+                CombatScene.GetComponent<CombatController>().UsarCarta(Tipo);
+                
                 Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
 
             }

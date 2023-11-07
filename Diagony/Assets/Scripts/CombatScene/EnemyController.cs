@@ -68,9 +68,9 @@ public class EnemyController : MonoBehaviour
     {
 
         if (Tipo == 0)         // Ira
-            AtackEnemigo = 10;
+            AtackEnemigo = 20;
         else if (Tipo == 1)    // Miedo
-            AtackEnemigo = 10;
+            AtackEnemigo = 15;
         else                   // Tristeza
             AtackEnemigo = 10;
 
@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
 
     public void Atacar()
     {
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= AtackEnemigo;
+        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Random.Range(AtackEnemigo - 5, AtackEnemigo + 1); //hace un golpe entre atq-5 y atq
     }
 
 }
