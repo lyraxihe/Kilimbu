@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FinalizarTurnoButton : MonoBehaviour
 {
+    [SerializeField] GameObject VariablesGlobales;
     [SerializeField] GameObject CombatScene;
     
     // Start is called before the first frame update
@@ -15,7 +16,7 @@ public class FinalizarTurnoButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnClick()

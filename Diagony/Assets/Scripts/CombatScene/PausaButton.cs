@@ -8,6 +8,7 @@ public class PausaButton : MonoBehaviour
 {
     [SerializeField] GameObject PanelPausa;
     [SerializeField] GameObject VariablesGlobales_;
+    [SerializeField] GameObject CombatScene;
     void Start()
     {
 
@@ -27,6 +28,7 @@ public class PausaButton : MonoBehaviour
             PanelPausa.SetActive(true);
             Time.timeScale = 0f;
             VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+            CombatScene.GetComponent<CombatController>().botonTurno.enabled = false;
 
         }
         else
@@ -35,6 +37,7 @@ public class PausaButton : MonoBehaviour
             PanelPausa.SetActive(false);
             Time.timeScale = 1f;
             VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+            CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
 
         }
 
@@ -42,7 +45,9 @@ public class PausaButton : MonoBehaviour
 
     public void Escapar()
     {
-      
+
+        VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+        CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
         SceneManager.LoadScene("MainMenu");
 
     }

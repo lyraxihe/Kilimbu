@@ -38,8 +38,6 @@ public class CombatController : MonoBehaviour
     void Start()
     {
 
-       
-
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
 
@@ -53,7 +51,6 @@ public class CombatController : MonoBehaviour
         CreateEnemies(); // Crea los enemigos
         StartCoroutine(CreateCards());   // Crea las cartas
                                          //CreateCards();
-       
 
     }
 
@@ -235,7 +232,8 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
                 clon.GetComponent<CardController>().Tipo = Random.Range(0, 4); //hace que la carta sea de alguna de las del tipo
-                
+                clon.GetComponent<CardController>().VariablesGlobales = VariablesGlobales; // Almacena las variables globales en la carta
+
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.05f);
                 //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
@@ -529,7 +527,7 @@ public class CombatController : MonoBehaviour
         int enemigosVivos = EnemyList.Count;
         for (int i = 0; i < EnemyList.Count; i++)
         {
-            if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo==0)
+            if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo == 0)
             {
                 enemigosVivos--;
             }
@@ -542,6 +540,8 @@ public class CombatController : MonoBehaviour
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "DERROTA";
             Time.timeScale = 0f;
+            VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+            botonTurno.enabled = false;
 
         }
         else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
@@ -550,6 +550,8 @@ public class CombatController : MonoBehaviour
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
             Time.timeScale = 0f;
+            VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+            botonTurno.enabled = false;
 
         }
         else

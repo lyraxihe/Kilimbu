@@ -8,6 +8,7 @@ using UnityEngine;
 public class CardController : MonoBehaviour
 {
 
+    public GameObject VariablesGlobales;
     public GameObject CombatScene;
     public GameObject DragZone;
 
@@ -75,7 +76,7 @@ public class CardController : MonoBehaviour
     private void OnMouseOver()
     {
 
-        if (!MouseDrag && CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
+        if (!MouseDrag && CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
            if (IsInDragZone)
             {
@@ -126,7 +127,7 @@ public class CardController : MonoBehaviour
     private void OnMouseDrag()
     {
 
-        if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
+        if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
 
             MouseDrag = true;
@@ -177,6 +178,14 @@ public class CardController : MonoBehaviour
             CardAnimator.enabled = false;
             MouseDrag = false;
             MouseOver = false;
+            
+            if(Id == 1)
+            {
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+                CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
+
+            }
 
             if(Id == 4)
                 CombatScene.GetComponent<CombatController>().botonTurno.interactable = true;
@@ -199,7 +208,7 @@ public class CardController : MonoBehaviour
     }
     public void setColor_text()
     {
-        Color colorPersonalizado;
+        //Color colorPersonalizado;
 
         if (Tipo == 0)
         {

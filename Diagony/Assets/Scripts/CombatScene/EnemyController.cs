@@ -78,7 +78,9 @@ public class EnemyController : MonoBehaviour
 
     public void Atacar()
     {
+        
         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Random.Range(AtackEnemigo - 5, AtackEnemigo + 1); //hace un golpe entre atq-5 y atq
+
     }
 
 }
