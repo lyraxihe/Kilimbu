@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CardController : MonoBehaviour
@@ -24,6 +25,8 @@ public class CardController : MonoBehaviour
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
     public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
+ 
+
     void Start()
     {
         MouseDrag = true;
@@ -41,7 +44,9 @@ public class CardController : MonoBehaviour
         //CardAnimator.SetBool("AnimacionCarta", AnimacionCarta);
         CardAnimator.SetBool("AnimacionEntrar", AnimacionEntrar);
         CardAnimator.SetBool("AnimacionSalir", AnimacionSalir);
-        setColor();
+       
+        setColor_text();
+
 
     }
 
@@ -185,19 +190,31 @@ public class CardController : MonoBehaviour
         }
 
     }
-    public void setColor()
+    public void setColor_text()
     {
+        Color colorPersonalizado;
+
         if (Tipo == 0)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            colorPersonalizado = new Color(0.55f, 0.61f, 0.69f, 1.0f);
+            gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
+            TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
+            textCharacter.text = "5 ATQ";
+           
         }
         else if (Tipo == 1)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            colorPersonalizado = new Color(0.27f, 0.36f, 0.44f, 1.0f);
+            gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
+            TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
+            textCharacter.text = "10 ATQ";
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            colorPersonalizado = new Color(0.83f, 0.75f, 0.86f, 1.0f);
+            gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
+            TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
+            textCharacter.text = "+10 HP";
         }
     }
     //public void AnimacionCarta()

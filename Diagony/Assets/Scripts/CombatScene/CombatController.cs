@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 //public struct ListCards{
 
@@ -31,7 +32,9 @@ public class CombatController : MonoBehaviour
     [SerializeField] public UnityEngine.UI.Button botonTurno;
     [SerializeField] GameObject VictoriaDerrotaPanel;
     [SerializeField] TMP_Text VictoriaDerrotaText;
-    
+    [SerializeField] GameObject GameObject_Character_text;
+    [SerializeField] TMP_Text Character_text;
+
     void Start()
     {
 
@@ -82,18 +85,31 @@ public class CombatController : MonoBehaviour
         clonHealthBar.transform.SetParent(canvas, false);            //declara el canvas como padre para que sea visible
         clonHealthBar.transform.position = new Vector2(x, y);    //lo coloca arriba del personaje
         clonHealthBar.GetComponent<HealthBar>().EsPlayer = EsPlayer;
+       
+
+        
+
       
-        //luego cambiar identify a un bool donde true sea player y false sea enemigo
-            if (EsPlayer)// 0 ira, 1 miedo, 2 tristeza, 3 prota
-            {
+             if (EsPlayer)
+             {
                 clonHealthBar.GetComponent<HealthBar>()._player = personaje;
-            }
-            else
-            {
+             }
+             else
+             {
                 clonHealthBar.GetComponent<HealthBar>()._enemy = personaje;
-            }
+             }
 
 
+    }
+
+    public void CreateCharacterText(float x, float y, string nombre)
+    {
+        GameObject clonCharacterText = Instantiate(GameObject_Character_text);
+        clonCharacterText.transform.SetParent(canvas, false);
+        clonCharacterText.transform.position = new Vector2(x, y - 1.5f);
+       // Character_text.text = nombre;
+        TextMeshProUGUI textCharacter = clonCharacterText.GetComponent<TextMeshProUGUI>();
+        textCharacter.text = nombre;
     }
 
     /*
@@ -106,6 +122,7 @@ public class CombatController : MonoBehaviour
         clonPlayer.transform.position = new Vector2(-4, -0.8f);
         CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer); //tipo 3 = player
         clonPlayer.GetComponent<PlayerController>().VariablesGlobales = VariablesGlobales;
+        CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "PLAYER");
     }
 
     /*
@@ -119,6 +136,7 @@ public class CombatController : MonoBehaviour
 
         GameObject clonEnemy;                    // Declara el clon del prefab
         int tipo; //0 = ira | 1 = miedo | 2 = tristeza
+        string EnemyName;
 
         for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
         {
@@ -126,6 +144,18 @@ public class CombatController : MonoBehaviour
             if (i == 0)                          // Si es el primer enemigo
             {
                 tipo = Random.Range(0, 3);
+                if (tipo == 0)
+                {
+                    EnemyName = "IRA";
+                }
+                else if (tipo == 1)
+                {
+                    EnemyName = "MIEDO";
+                }
+                else
+                {
+                    EnemyName = "TRISTEZA";
+                }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 1);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
@@ -134,10 +164,24 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
+                CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
             }
            else if (i == 1)                     // Si es el segundo enemigo
             {
+
                 tipo = Random.Range(0, 3);
+                if (tipo == 0)
+                {
+                    EnemyName = "IRA";
+                }
+                else if (tipo == 1)
+                {
+                    EnemyName = "MIEDO";
+                }
+                else
+                {
+                    EnemyName = "TRISTEZA";
+                }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 1);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
@@ -146,10 +190,23 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
+                CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
             }
             else                                 // Si es el tercer enemigo
             {
                 tipo = Random.Range(0, 3);
+                if (tipo == 0)
+                {
+                    EnemyName = "IRA";
+                }
+                else if (tipo == 1)
+                {
+                    EnemyName = "MIEDO";
+                }
+                else
+                {
+                    EnemyName = "TRISTEZA";
+                }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 1);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
@@ -158,6 +215,7 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
+                CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
             }
 
         }
