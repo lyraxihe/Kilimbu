@@ -14,6 +14,10 @@ public class CardController : MonoBehaviour
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
 
+    [SerializeField] Sprite danyo5;
+    [SerializeField] Sprite danyo10;
+    [SerializeField] Sprite curar10;
+
     public Animator CardAnimator;
     [SerializeField] bool AnimacionEntrar;
     public bool AnimacionSalir;
@@ -174,6 +178,9 @@ public class CardController : MonoBehaviour
             MouseDrag = false;
             MouseOver = false;
 
+            if(Id == 4)
+                CombatScene.GetComponent<CombatController>().botonTurno.interactable = true;
+
         }
         if (valor == 1) // Ha terminado la animación de Exit
         {
@@ -196,25 +203,28 @@ public class CardController : MonoBehaviour
 
         if (Tipo == 0)
         {
-            colorPersonalizado = new Color(0.55f, 0.61f, 0.69f, 1.0f);
-            gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
-            TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
-            textCharacter.text = "5 ATQ";
-           
+            //colorPersonalizado = new Color(0.55f, 0.61f, 0.69f, 1.0f);
+            //gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
+            //TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
+            //textCharacter.text = "5 ATQ";
+            gameObject.GetComponent<SpriteRenderer>().sprite = danyo5;
+
         }
         else if (Tipo == 1)
         {
-            colorPersonalizado = new Color(0.27f, 0.36f, 0.44f, 1.0f);
-            gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
-            TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
-            textCharacter.text = "10 ATQ";
+            //colorPersonalizado = new Color(0.27f, 0.36f, 0.44f, 1.0f);
+            //gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
+            //TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
+            //textCharacter.text = "10 ATQ";
+            gameObject.GetComponent<SpriteRenderer>().sprite = danyo10;
         }
         else
         {
-            colorPersonalizado = new Color(0.83f, 0.75f, 0.86f, 1.0f);
-            gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
-            TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
-            textCharacter.text = "+10 HP";
+            //colorPersonalizado = new Color(0.83f, 0.75f, 0.86f, 1.0f);
+            //gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
+            //TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
+            //textCharacter.text = "+10 HP";
+            gameObject.GetComponent<SpriteRenderer>().sprite = curar10;
         }
     }
     //public void AnimacionCarta()

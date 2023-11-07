@@ -63,14 +63,6 @@ public class CombatController : MonoBehaviour
 
         Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
-        if (!TurnoJugador)
-        {
-            botonTurno.interactable = false;
-        }
-        else
-        {
-            botonTurno.interactable = true;
-        }
 
         victoriaDerrota();
 
