@@ -41,6 +41,7 @@ public class CombatController : MonoBehaviour
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
 
+        Time.timeScale = 1f;
         CartasCreadas = false;
 
         TurnoJugador = true;
@@ -62,7 +63,7 @@ public class CombatController : MonoBehaviour
         CardsPosition();
 
         victoriaDerrota();
-
+        
     }
 
     /*
@@ -96,9 +97,9 @@ public class CombatController : MonoBehaviour
         GameObject clonCharacterText = Instantiate(GameObject_Character_text);
         clonCharacterText.transform.SetParent(canvas, false);
         clonCharacterText.transform.position = new Vector2(x, y - 1.5f);
-       // Character_text.text = nombre;
         TextMeshProUGUI textCharacter = clonCharacterText.GetComponent<TextMeshProUGUI>();
         textCharacter.text = nombre;
+        
     }
 
     /*
@@ -231,7 +232,7 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
                 clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-                clon.GetComponent<CardController>().Tipo = Random.Range(0, 4); //hace que la carta sea de alguna de las del tipo
+                clon.GetComponent<CardController>().Tipo = Random.Range(0, 3); //hace que la carta sea de alguna de las del tipo
                 clon.GetComponent<CardController>().VariablesGlobales = VariablesGlobales; // Almacena las variables globales en la carta
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
@@ -557,8 +558,11 @@ public class CombatController : MonoBehaviour
         else
         {
 
-            Time.timeScale = 1f;
             VictoriaDerrotaPanel.SetActive(false);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa == false)
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 
