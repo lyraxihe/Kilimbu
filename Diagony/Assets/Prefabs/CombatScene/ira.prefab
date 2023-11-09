@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3669863879581995329}
   - component: {fileID: 1973785623794600996}
   - component: {fileID: 5365200391923865638}
+  - component: {fileID: -2642054829071052742}
   m_Layer: 0
   m_Name: ira
   m_TagString: Untagged
@@ -103,3 +104,24 @@ MonoBehaviour:
   Id: 0
   HealthEnemigo: 0
   MaxHealthEnemigo: 0
+--- !u!95 &-2642054829071052742
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5466387340479591959}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3041e4863ac76c94ba234ef4faaf4db2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
 
     public int MaxHealthProtagonista;
     public int HealthProtagonista;
+    public Animator PlayerAnimator;
+    [SerializeField] bool animation_damage;
 
-    // Start is called before the first frame update
     void Start()
     {
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 141427453951490449}
   - component: {fileID: 2314047238593352240}
   - component: {fileID: 5948965547855322045}
+  - component: {fileID: 2229788715833834911}
   m_Layer: 0
   m_Name: tristeza
   m_TagString: Untagged
@@ -103,3 +104,24 @@ MonoBehaviour:
   Id: 0
   HealthEnemigo: 0
   MaxHealthEnemigo: 0
+--- !u!95 &2229788715833834911
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983068481237199692}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3041e4863ac76c94ba234ef4faaf4db2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

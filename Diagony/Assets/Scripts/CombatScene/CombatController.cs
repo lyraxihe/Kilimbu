@@ -35,6 +35,8 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
 
+   
+
     void Start()
     {
 

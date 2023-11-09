@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public int HealthEnemigo;
     public int MaxHealthEnemigo;
     private int AtackEnemigo;
+    public Animator EnemyAnimator;
+    [SerializeField] bool animation_damage;
    
 
 
@@ -22,7 +24,9 @@ public class EnemyController : MonoBehaviour
 
         SetHealthEnemigo();
         SetAtackEnenmigo();
-       
+        EnemyAnimator.SetInteger("enemy_id", Id);
+        EnemyAnimator.SetBool("atacar", animation_damage);
+
     }
 
     // Update is called once per frame
