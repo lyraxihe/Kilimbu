@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,10 @@ public class CombatController : MonoBehaviour
     public List<GameObject> CardList;
     public GameObject VariablesGlobales;
 
-    [SerializeField] GameObject Player;         // Prefab del Player
+    [SerializeField] GameObject PrefabPlayer;         // Prefab del Player
+    public GameObject Player;                         // Player
     [SerializeField] GameObject[] PrefabEnemyList;    // Array con enemigos
-    [SerializeField] List<GameObject> EnemyList;
+    public List<GameObject> EnemyList;
     [SerializeField] GameObject Card;           // Carta de combate
     //public ListCards CardList;        // Lista de cartas en el combate
     [SerializeField] GameObject DragZone;       // Zona en la que se eliminarán las cartas usadas
@@ -35,7 +37,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
 
-   
+    public bool EnemigosRecibirDanyo; // Para controlar que al usar la carta de curarse los enemigos no hagan la animacion de recibir daño
 
     void Start()
     {
@@ -49,6 +51,8 @@ public class CombatController : MonoBehaviour
         TurnoJugador = true;
 
         ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
+
+        EnemigosRecibirDanyo = false;
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
@@ -110,11 +114,13 @@ public class CombatController : MonoBehaviour
     public void CreatePlayer()
     {
         
-        GameObject clonPlayer = Instantiate(Player); // Crea el clon del Player
+        GameObject clonPlayer = Instantiate(PrefabPlayer); // Crea el clon del Player
         clonPlayer.transform.position = new Vector2(-4, -0.8f);
         CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer); //tipo 3 = player
         clonPlayer.GetComponent<PlayerController>().VariablesGlobales = VariablesGlobales;
+        clonPlayer.GetComponent<PlayerController>().CombatScene = gameObject;
         CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "PLAYER");
+        Player = clonPlayer;
     }
 
     /*
@@ -495,6 +501,7 @@ public class CombatController : MonoBehaviour
 
     public void UsarCarta(int tipo)
     {
+        
         if (tipo == 0)
         {
             //hace 5 de daño
@@ -502,6 +509,8 @@ public class CombatController : MonoBehaviour
             {
 
                 EnemyList[i].GetComponent<EnemyController>().HealthEnemigo-=5;
+                EnemigosRecibirDanyo = true;
+                Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
             }
 
@@ -513,6 +522,8 @@ public class CombatController : MonoBehaviour
             {
 
                 EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= 10;
+                EnemigosRecibirDanyo = true;
+                Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
             }
         }
@@ -520,6 +531,8 @@ public class CombatController : MonoBehaviour
         {
             //cura 10 al personaje
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
+
+            Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
 
         }

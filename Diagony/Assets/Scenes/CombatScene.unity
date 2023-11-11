@@ -294,7 +294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -385.1901, y: -137.00008}
+  m_AnchoredPosition: {x: -385.19006, y: -137.00006}
   m_SizeDelta: {x: -829.24, y: -422.39993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &120131205
@@ -1498,11 +1498,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardList: []
   VariablesGlobales: {fileID: 1446145960}
-  Player: {fileID: 1556459485827681945, guid: d4bdd1619d9592744a658d0f313125ae, type: 3}
+  PrefabPlayer: {fileID: 7925897737404392131, guid: d4bdd1619d9592744a658d0f313125ae, type: 3}
+  Player: {fileID: 0}
   PrefabEnemyList:
-  - {fileID: 5466387340479591959, guid: 59d178462c504ee418da3a1168f965f9, type: 3}
-  - {fileID: 2744481445238258168, guid: 47131a513d40a4f4b88db7e38e01b99d, type: 3}
-  - {fileID: 3983068481237199692, guid: 92f074ccb9b79824dba06351c4e8a799, type: 3}
+  - {fileID: 3876057405380472938, guid: 59d178462c504ee418da3a1168f965f9, type: 3}
+  - {fileID: 2304407585934579340, guid: 47131a513d40a4f4b88db7e38e01b99d, type: 3}
+  - {fileID: 8781106933528914529, guid: 92f074ccb9b79824dba06351c4e8a799, type: 3}
   EnemyList: []
   Card: {fileID: 1791528441941151039, guid: b2164b9e9e9830141a5cfbb1e33e01ca, type: 3}
   DragZone: {fileID: 1985018192}
@@ -1517,6 +1518,7 @@ MonoBehaviour:
   VictoriaDerrotaText: {fileID: 1504359102}
   GameObject_Character_text: {fileID: 4342161509642164465, guid: 286e18d38a612a542baf2558ebb1ba2d, type: 3}
   Character_text: {fileID: 4342161509642164467, guid: 286e18d38a612a542baf2558ebb1ba2d, type: 3}
+  EnemigosRecibirDanyo: 0
 --- !u!1 &1063670667
 GameObject:
   m_ObjectHideFlags: 0

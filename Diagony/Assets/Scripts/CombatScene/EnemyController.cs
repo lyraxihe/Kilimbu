@@ -82,8 +82,25 @@ public class EnemyController : MonoBehaviour
 
     public void Atacar()
     {
-        
+
+        EnemyAnimator.SetBool("atacar", true);
         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Random.Range(AtackEnemigo - 5, AtackEnemigo + 1); //hace un golpe entre atq-5 y atq
+
+    }
+
+    public void ControlEnemyAnimation(int valor)
+    {
+
+        if (valor == 0) // Si la animacion de atacar ha terminado
+        {
+
+            EnemyAnimator.SetBool("atacar", false);
+            CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("danyo", true);
+
+        }
+
+        if (valor == 1) // Si la animacion de recibir daño ha terminado
+            EnemyAnimator.SetBool("danyo", false);
 
     }
 
