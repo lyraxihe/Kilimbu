@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
     }
 
     // Update is called once per frame

@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class PausaButton : MonoBehaviour
 {
     [SerializeField] GameObject PanelPausa;
-    [SerializeField] GameObject VariablesGlobales_;
+    [SerializeField] GameObject VariablesGlobales;
     [SerializeField] GameObject CombatScene;
     void Start()
     {
-
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
     }
 
     // Update is called once per frame
@@ -22,12 +22,12 @@ public class PausaButton : MonoBehaviour
     public void OnClick()
     {
 
-        if (!VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa)
+        if (!VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
 
             PanelPausa.SetActive(true);
             Time.timeScale = 0f;
-            VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+            VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             CombatScene.GetComponent<CombatController>().botonTurno.enabled = false;
 
         }
@@ -36,7 +36,7 @@ public class PausaButton : MonoBehaviour
 
             PanelPausa.SetActive(false);
             Time.timeScale = 1f;
-            VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+            VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
             CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
 
         }
@@ -46,7 +46,7 @@ public class PausaButton : MonoBehaviour
     public void Escapar()
     {
 
-        VariablesGlobales_.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+        VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
         CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
         SceneManager.LoadScene("MainMenu");
 

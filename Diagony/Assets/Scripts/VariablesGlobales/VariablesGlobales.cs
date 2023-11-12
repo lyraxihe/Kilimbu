@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VariablesGlobales : MonoBehaviour
 {
@@ -12,6 +13,22 @@ public class VariablesGlobales : MonoBehaviour
 
     public bool EstaEnPausa = false;
 
+    public static VariablesGlobales instance;
+    private void Awake() //sigleton
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     void Start()
     {
 
@@ -20,7 +37,8 @@ public class VariablesGlobales : MonoBehaviour
         HealthProtagonista = 100;
         MaxManaProtagonista = 3;     // Maná máximo del jugador con el que podrá usar las cartas (se resetea en cada turno)
 
-}
+    }
+
 
    
     void Update()

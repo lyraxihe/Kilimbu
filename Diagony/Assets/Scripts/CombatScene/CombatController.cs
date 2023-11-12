@@ -41,9 +41,14 @@ public class CombatController : MonoBehaviour
 
     void Start()
     {
-
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
+
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
+        {
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista;
+        }
 
         Time.timeScale = 1f;
         CartasCreadas = false;
@@ -556,7 +561,7 @@ public class CombatController : MonoBehaviour
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "DERROTA";
             Time.timeScale = 0f;
-            VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+           // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
 
         }
@@ -566,7 +571,7 @@ public class CombatController : MonoBehaviour
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
             Time.timeScale = 0f;
-            VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+           // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
 
         }

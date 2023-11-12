@@ -10,7 +10,7 @@ public class FinalizarTurnoButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
     }
 
     // Update is called once per frame

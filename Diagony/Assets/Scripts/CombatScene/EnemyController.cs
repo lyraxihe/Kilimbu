@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
 
         SetHealthEnemigo();
         SetAtackEnenmigo();
