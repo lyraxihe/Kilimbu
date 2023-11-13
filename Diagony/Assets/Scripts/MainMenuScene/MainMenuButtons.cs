@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonController : MonoBehaviour
+public class MainMenuButtons : MonoBehaviour
 {
-
     [SerializeField] GameObject MainMenu;
     [SerializeField] GameObject Levels;
 
@@ -17,11 +16,17 @@ public class ButtonController : MonoBehaviour
 
     }
 
+    public void Exit()
+    {
+
+        Application.Quit();
+
+    }
+
     public void Level1()
     {
 
         SceneManager.LoadScene("MapScene");
 
     }
-
 }
