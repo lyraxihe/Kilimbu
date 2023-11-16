@@ -134,7 +134,7 @@ public class CombatController : MonoBehaviour
     public void CreateEnemies()
     {
 
-        int rand = Random.Range(1, 4);           // Random de 1 a 3
+        int rand = Random.Range(2, 4);           // Random de 2 a 3
 
 
         GameObject clonEnemy;                    // Declara el clon del prefab

@@ -44,7 +44,7 @@ public class VariablesGlobales : MonoBehaviour
     void Update()
     {
 
-        ControlMaxManaProtagonista();
+       // ControlMaxManaProtagonista();
         ControlHealthProtagonista();
 
     }
