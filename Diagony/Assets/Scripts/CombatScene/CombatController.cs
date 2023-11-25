@@ -174,7 +174,7 @@ public class CombatController : MonoBehaviour
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
             }
-            else if (i == 1)                     // Si es el segundo enemigo
+           else if (i == 1)                     // Si es el segundo enemigo
             {
 
                 tipo = Random.Range(0, 3);
@@ -254,7 +254,7 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
                 clon.GetComponent<CardController>().Tipo = Random.Range(0, 3); //hace que la carta sea de alguna de las del tipo
                 clon.GetComponent<CardController>().VariablesGlobales = VariablesGlobales; // Almacena las variables globales en la carta
-                clon.GetComponent <CardController>().ArrowEmitter = ArrowEmitter;
+                clon.GetComponent<CardController>().ArrowEmitter = ArrowEmitter;
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.05f);
@@ -497,12 +497,12 @@ public class CombatController : MonoBehaviour
             for (int i = 0; i < EnemyList.Count; i++)
             {
 
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(1);
                 EnemyList[i].GetComponent<EnemyController>().Atacar();
 
             }
             
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
 
             ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador                                                                      // Cambia de turno
             TurnoJugador = true;

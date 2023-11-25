@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Estructura de coordinadas
@@ -22,7 +23,27 @@ public class MapController : MonoBehaviour
     Coordinadas BossCoord = new Coordinadas();         // Coordenadas del boss de la mazmorra
     Coordinadas[,] RoomsCoord = new Coordinadas[3, 4]; // Coordenadas del resto de salas
     bool[,] Occupied_Rooms = new bool[3, 4];           // Indicador de si la sala está ocupada
-   
+    [SerializeField] GameObject[,] RoomsGameobjects = new GameObject[3, 4]; // Guarda los clones de las salas
+
+    int ContSalas;
+
+    public static MapController instance;
+
+    private void Awake() //sigleton
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +57,35 @@ public class MapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (MapScene_active())
+        {
+            Debug.Log("pasa");
+           // Canvas = GameObject.Find("Canvas");
+            Canvas.SetActive(true);
+        }
+        else
+        {
+            Canvas.SetActive(false);
+        }
+  
     }
 
     /*
      * Inicializa las coordenadas de las distintas salas, incluidas la Entrada y el Boss
      */
+
+    public bool MapScene_active()
+    {
+        if (SceneManager.GetActiveScene().name == "MapScene")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void InicializarCoords()
     {
 
@@ -172,7 +216,13 @@ public class MapController : MonoBehaviour
                 } while (!correcto);
 
                 clon = Instantiate(RoomButton);
+                clon.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
+                clon.GetComponent<RoomButton>().x = posicionSala;
+                clon.GetComponent<RoomButton>().y = j;
+                clon.GetComponent<RoomButton>().id = ContSalas;
+                ContSalas++;
                 clon.transform.SetParent(Canvas.transform);
+                RoomsGameobjects[posicionSala,j] = clon;
                 clon.transform.position = new Vector2(RoomsCoord[posicionSala, j].x, RoomsCoord[posicionSala, j].y); // Coloca la sala en sus coordenadas adecuadas
                 clon.GetComponent<Button>().interactable = false;
 

@@ -31,11 +31,13 @@ public class CardController : MonoBehaviour
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
     public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
+ 
 
     void Start()
     {
         MouseDrag = true;
         MouseOver = true;
+
 
         //AnimacionCarta();
 
@@ -128,12 +130,12 @@ public class CardController : MonoBehaviour
     private void OnMouseDrag()
     {
 
-        if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
+        if (CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
 
             MouseDrag = true;
 
-            if(Tipo == 0)
+            if (Tipo == 0)
             {
 
                 if (transform.position.y > -3)
