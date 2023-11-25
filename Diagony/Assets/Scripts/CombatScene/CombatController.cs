@@ -18,6 +18,9 @@ public class CombatController : MonoBehaviour
     public List<GameObject> CardList;
     public GameObject VariablesGlobales;
 
+    public GameObject ArrowEmitter;
+    public bool MovingArrow;
+
     [SerializeField] GameObject PrefabPlayer;         // Prefab del Player
     public GameObject Player;                         // Player
     [SerializeField] GameObject[] PrefabEnemyList;    // Array con enemigos
@@ -58,6 +61,8 @@ public class CombatController : MonoBehaviour
         ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
 
         EnemigosRecibirDanyo = false;
+
+        MovingArrow = false;
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
@@ -169,7 +174,7 @@ public class CombatController : MonoBehaviour
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
             }
-           else if (i == 1)                     // Si es el segundo enemigo
+            else if (i == 1)                     // Si es el segundo enemigo
             {
 
                 tipo = Random.Range(0, 3);
@@ -221,6 +226,8 @@ public class CombatController : MonoBehaviour
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
             }
 
+            ArrowEmitter.GetComponent<ArrowEmitter>().Enemies.Add(clonEnemy);
+
         }
 
     }
@@ -247,6 +254,7 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
                 clon.GetComponent<CardController>().Tipo = Random.Range(0, 3); //hace que la carta sea de alguna de las del tipo
                 clon.GetComponent<CardController>().VariablesGlobales = VariablesGlobales; // Almacena las variables globales en la carta
+                clon.GetComponent <CardController>().ArrowEmitter = ArrowEmitter;
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.05f);

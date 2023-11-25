@@ -11,6 +11,7 @@ public class CardController : MonoBehaviour
     public GameObject VariablesGlobales;
     public GameObject CombatScene;
     public GameObject DragZone;
+    public GameObject ArrowEmitter;
 
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
@@ -30,13 +31,11 @@ public class CardController : MonoBehaviour
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
     public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
- 
 
     void Start()
     {
         MouseDrag = true;
         MouseOver = true;
-
 
         //AnimacionCarta();
 
@@ -76,7 +75,7 @@ public class CardController : MonoBehaviour
     private void OnMouseOver()
     {
 
-        if (!MouseDrag && CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
+        if (!MouseDrag && CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa && !CombatScene.GetComponent<CombatController>().MovingArrow)
         {
            if (IsInDragZone)
             {
@@ -109,6 +108,8 @@ public class CardController : MonoBehaviour
     {
         MouseDrag = false;
         MouseOver = false;
+        ArrowEmitter.SetActive(false);
+        CombatScene.GetComponent<CombatController>().MovingArrow = false;
 
     }
 
@@ -131,7 +132,24 @@ public class CardController : MonoBehaviour
         {
 
             MouseDrag = true;
-            transform.position = GetMouseWorldPosition() + MousePositionOffset;
+
+            if(Tipo == 0)
+            {
+
+                if (transform.position.y > -3)
+                {
+
+                    ArrowEmitter.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
+                    ArrowEmitter.SetActive(true);
+                    CombatScene.GetComponent<CombatController>().MovingArrow = true;
+
+                }
+                else
+                    transform.position = GetMouseWorldPosition() + MousePositionOffset;
+
+            }
+            else
+                transform.position = GetMouseWorldPosition() + MousePositionOffset;
 
         }
 
