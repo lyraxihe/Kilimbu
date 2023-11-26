@@ -7,7 +7,8 @@ public class EnemyController : MonoBehaviour
 
     public GameObject VariablesGlobales;
     public GameObject CombatScene;
-
+    public GameObject Player;
+    
     public GameObject ArrowEmitter;
 
     public int Tipo; // 0 = Ira | 1 = Miedo | 2 = Tristeza
@@ -127,8 +128,9 @@ public class EnemyController : MonoBehaviour
     {
 
         EnemyAnimator.SetBool("atacar", true);
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Random.Range(AtackEnemigo - 5, AtackEnemigo + 1); //hace un golpe entre atq-5 y atq
-
+        int damageAmount = Random.Range(AtackEnemigo - 5, AtackEnemigo + 1);
+        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount; //hace un golpe entre atq-5 y atq
+        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
     }
 
     public void ControlEnemyAnimation(int valor)
