@@ -111,6 +111,16 @@ public class CardController : MonoBehaviour
         MouseDrag = false;
         MouseOver = false;
         //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
+        //if(ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy)
+        //{
+
+        //    CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
+        //    CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+        //    CombatScene.GetComponent<CombatController>().UsarCarta(Tipo);
+
+        //    Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
+
+        //}
         ArrowEmitter.SetActive(false);
         CombatScene.GetComponent<CombatController>().MovingArrow = false;
         Cursor.visible = true;

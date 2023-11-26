@@ -521,14 +521,9 @@ public class CombatController : MonoBehaviour
         if (tipo == 0)
         {
             //hace 5 de daño
-            for (int i = 0; i < EnemyList.Count; i++)
-            {
-
-                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo-=5;
-                EnemigosRecibirDanyo = true;
-                Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
-
-            }
+            EnemyList[0].GetComponent<EnemyController>().HealthEnemigo -= 5;
+            EnemigosRecibirDanyo = true;
+            Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
         }
         else if (tipo == 1)

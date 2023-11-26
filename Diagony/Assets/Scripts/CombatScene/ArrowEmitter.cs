@@ -12,7 +12,7 @@ public class ArrowEmitter : MonoBehaviour
     public int ArrowNodeNum;           // The number of arrow nodes
     public float scaleFactor = 1f;     // The scale multiplier for arrow nodes
     public List<GameObject> Enemies;
-    //public bool OverEnemy = false;
+    public bool OverEnemy = false;
 
     // Private Atribures
     //private RectTransform origin;                                                                                                 // The position of P0 (The arrows emitter point)
@@ -123,6 +123,7 @@ public class ArrowEmitter : MonoBehaviour
             {
 
                 this.arrowNodes[j].GetComponent<Image>().color = Color.red;
+                OverEnemy = true;
 
             }
 
@@ -134,6 +135,7 @@ public class ArrowEmitter : MonoBehaviour
             {
 
                 this.arrowNodes[j].GetComponent<Image>().color = Color.grey;
+                OverEnemy = false;
 
             }
 
