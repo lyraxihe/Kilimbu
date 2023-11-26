@@ -12,13 +12,14 @@ public class ArrowEmitter : MonoBehaviour
     public int ArrowNodeNum;           // The number of arrow nodes
     public float scaleFactor = 1f;     // The scale multiplier for arrow nodes
     public List<GameObject> Enemies;
+    //public bool OverEnemy = false;
 
     // Private Atribures
     //private RectTransform origin;                                                                                                 // The position of P0 (The arrows emitter point)
     private Transform origin;
     //private List<RectTransform> arrowNodes = new List<RectTransform>();                                                           // The list of arrow node's transform
     private List<Transform> arrowNodes = new List<Transform>();
-    public List<GameObject> arrowNodesObject = new List<GameObject>();
+    //public List<GameObject> arrowNodesObject = new List<GameObject>();
     private List<Vector2> controlPoints = new List<Vector2>();                                                                    // The list of control points
     private readonly List<Vector2> controlPointFactors = new List<Vector2> { new Vector2(-0.3f, 0.8f), new Vector2(0.1f, 1.4f) }; // The factors to determine the position of control point P1, P2
 
@@ -26,7 +27,7 @@ public class ArrowEmitter : MonoBehaviour
     // Executes when the gameObject instantiates
     private void Awake()
     {
-
+        
         // Gets position of the arrows emitter point
         //this.origin = this.GetComponent<RectTransform>();
         this.origin = this.GetComponent<Transform>();
@@ -42,10 +43,10 @@ public class ArrowEmitter : MonoBehaviour
 
         this.arrowNodes.Add(Instantiate(this.ArrowHeadPrefab, this.transform).GetComponent<Transform>());
 
-        for (int i = 0; i < this.ArrowNodeNum; i++)
-            this.arrowNodesObject.Add(Instantiate(this.ArrowNodePrefab));
+        //for (int i = 0; i < this.ArrowNodeNum; i++)
+        //    this.arrowNodesObject.Add(Instantiate(this.ArrowNodePrefab, this.transform));
 
-        this.arrowNodesObject.Add(Instantiate(this.ArrowHeadPrefab));
+        //this.arrowNodesObject.Add(Instantiate(this.ArrowHeadPrefab, this.transform));
 
         // Hides the arrow nodes
         //this.arrowNodes.ForEach(a => a.GetComponent<RectTransform>().position = new Vector2(-1000, -1000));
@@ -55,14 +56,16 @@ public class ArrowEmitter : MonoBehaviour
         for (int i = 0; i < 4; i++)
             this.controlPoints.Add(Vector2.zero);
 
-        for (int i = 0; i < this.ArrowNodeNum; i++)
-            this.arrowNodesObject[i].transform.position = new Vector2(-1000, -1000);
+        //for (int i = 0; i < this.ArrowNodeNum; i++)
+        //    this.arrowNodesObject[i].transform.position = new Vector2(-1000, -1000);
 
     }
 
     // Executes every frame
     private void Update()
     {
+
+        ControlColor();
 
         // P0 is at the arrow emitter point
         this.controlPoints[0] = new Vector2(this.origin.position.x, this.origin.position.y);
@@ -110,16 +113,16 @@ public class ArrowEmitter : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ControlColor()
     {
-        
-        if( collision.tag == "Enemy")
+
+        if (/*!OverEnemy*/ Vector2.Distance(this.arrowNodes[arrowNodes.Count - 1].transform.position, Enemies[0].transform.position) <= 0.5)
         {
 
-            for (int i = 0; i < this.arrowNodes.Count; i++)
+            for (int j = 0; j < this.arrowNodes.Count; j++)
             {
 
-                this.arrowNodesObject[i].GetComponent<Image>().color = Color.red;
+                this.arrowNodes[j].GetComponent<Image>().color = Color.red;
 
             }
 
@@ -127,15 +130,14 @@ public class ArrowEmitter : MonoBehaviour
         else
         {
 
-            for (int i = 0; i < this.arrowNodes.Count; i++)
+            for (int j = 0; j < this.arrowNodes.Count; j++)
             {
 
-                this.arrowNodesObject[i].GetComponent<Image>().color = Color.grey;
+                this.arrowNodes[j].GetComponent<Image>().color = Color.grey;
 
             }
 
         }
-
 
     }
 

@@ -165,11 +165,12 @@ public class CombatController : MonoBehaviour
                     EnemyName = "TRISTEZA";
                 }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 1);
+                clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
                 clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
+                clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
@@ -191,11 +192,12 @@ public class CombatController : MonoBehaviour
                     EnemyName = "TRISTEZA";
                 }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 1);
+                clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 0);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
                 clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
+                clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
@@ -216,11 +218,12 @@ public class CombatController : MonoBehaviour
                     EnemyName = "TRISTEZA";
                 }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 1);
+                clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 0);
                 clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
                 clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
+                clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);

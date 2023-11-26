@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public GameObject VariablesGlobales;
     public GameObject CombatScene;
 
+    public GameObject ArrowEmitter;
+
     public int Tipo; // 0 = Ira | 1 = Miedo | 2 = Tristeza
     public int Id; // ID que tiene en la lista de enemigos
     public int HealthEnemigo;
@@ -37,6 +39,46 @@ public class EnemyController : MonoBehaviour
         ControlHealthEnemigo();
 
     }
+
+    //public void OnMouseOver()
+    //{
+    //    Debug.Log("Pasando por encima.");
+    //    if (CombatScene.GetComponent<CombatController>().MovingArrow)
+    //    {
+
+    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
+
+    //    }
+
+    //}
+
+    //public void OnMouseExit()
+    //{
+    //    Debug.Log("Saliendo de encima.");
+    //    if (CombatScene.GetComponent<CombatController>().MovingArrow)
+    //    {
+
+    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
+
+    //    }
+
+    //}
+
+    //public void OnTriggerEnter2D(Collider2D collision)
+    //{
+
+    //    if(collision.tag == "Arrow")
+    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
+
+    //}
+
+    //public void OnTriggerExit2D(Collider2D collision)
+    //{
+
+    //    if(collision.tag == "Arrow")
+    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
+
+    //}
 
     public void SetHealthEnemigo()
     {

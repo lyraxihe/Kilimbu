@@ -110,8 +110,10 @@ public class CardController : MonoBehaviour
     {
         MouseDrag = false;
         MouseOver = false;
+        //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
         ArrowEmitter.SetActive(false);
         CombatScene.GetComponent<CombatController>().MovingArrow = false;
+        Cursor.visible = true;
 
     }
 
@@ -144,6 +146,7 @@ public class CardController : MonoBehaviour
                     ArrowEmitter.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
                     ArrowEmitter.SetActive(true);
                     CombatScene.GetComponent<CombatController>().MovingArrow = true;
+                    Cursor.visible = false;
 
                 }
                 else
