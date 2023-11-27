@@ -389,7 +389,9 @@ MonoBehaviour:
   ArrowNodeNum: 9
   scaleFactor: 0.3
   Enemies: []
-  OverEnemy: 0
+  IdCarta: 0
+  Carta: {fileID: 0}
+  arrowNodes: []
 --- !u!1 &415861923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,6 +1692,7 @@ MonoBehaviour:
   VariablesGlobales: {fileID: 1446145960}
   ArrowEmitter: {fileID: 289995008}
   MovingArrow: 0
+  AuraEnemigoPrefab: {fileID: 4539765081883468422, guid: 7b949a85518a7d9449db6194446f7a17, type: 3}
   PrefabPlayer: {fileID: 7925897737404392131, guid: d4bdd1619d9592744a658d0f313125ae, type: 3}
   Player: {fileID: 0}
   PrefabEnemyList:
@@ -1710,7 +1713,6 @@ MonoBehaviour:
   VictoriaDerrotaText: {fileID: 1504359102}
   GameObject_Character_text: {fileID: 4342161509642164465, guid: 286e18d38a612a542baf2558ebb1ba2d, type: 3}
   Character_text: {fileID: 4342161509642164467, guid: 286e18d38a612a542baf2558ebb1ba2d, type: 3}
-  EnemigosRecibirDanyo: 0
   GameObject_Dmg_text: {fileID: 1377292726397514771, guid: 76fa258461c46d2458ef6ece015626f1, type: 3}
 --- !u!1 &1063670667
 GameObject:

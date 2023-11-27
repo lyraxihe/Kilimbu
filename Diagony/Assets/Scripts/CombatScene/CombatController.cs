@@ -21,6 +21,8 @@ public class CombatController : MonoBehaviour
     public GameObject ArrowEmitter;
     public bool MovingArrow;
 
+    public GameObject AuraEnemigoPrefab;
+
     [SerializeField] GameObject PrefabPlayer;         // Prefab del Player
     public GameObject Player;                         // Player
     [SerializeField] GameObject[] PrefabEnemyList;    // Array con enemigos
@@ -172,6 +174,8 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
                 clonEnemy.GetComponent<EnemyController>().Player = Player;
+                clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+                clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(2.5f, 0.5f, 0);
 
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
@@ -201,6 +205,8 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
                 clonEnemy.GetComponent<EnemyController>().Player = Player;
+                clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+                clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(4.5f, -0.5f, 0);
 
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
@@ -229,6 +235,8 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
                 clonEnemy.GetComponent<EnemyController>().Player = Player;
+                clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+                clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(6.5f, -1.5f, 0);
 
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);

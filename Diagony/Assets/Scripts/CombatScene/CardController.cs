@@ -145,6 +145,7 @@ public class CardController : MonoBehaviour
             ArrowEmitter.SetActive(false);
             CombatScene.GetComponent<CombatController>().MovingArrow = false;
             Cursor.visible = true;
+            CombatScene.GetComponent<CombatController>().EnemyList[EnemigoSeleccionado].GetComponent<EnemyController>().AuraEnemigo.SetActive(false);
 
             // Realiza el efecto de la carta
             CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1

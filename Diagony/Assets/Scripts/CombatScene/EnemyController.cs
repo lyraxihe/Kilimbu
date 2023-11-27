@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     public GameObject VariablesGlobales;
     public GameObject CombatScene;
     public GameObject Player;
+    public GameObject AuraEnemigo;
     
     public GameObject ArrowEmitter;
     public bool OverEnemy;
@@ -171,6 +172,7 @@ public class EnemyController : MonoBehaviour
             //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
             OverEnemy = true;
             ArrowEmitter.GetComponent<ArrowEmitter>().Carta.GetComponent<CardController>().EnemigoSeleccionado = Id;
+            AuraEnemigo.SetActive(true);
 
         }
 
@@ -190,6 +192,7 @@ public class EnemyController : MonoBehaviour
 
             //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
             OverEnemy = false;
+            AuraEnemigo.SetActive(false);
 
         }
     }
