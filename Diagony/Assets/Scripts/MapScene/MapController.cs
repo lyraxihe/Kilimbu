@@ -16,6 +16,7 @@ public class MapController : MonoBehaviour
 {
     
     [SerializeField] GameObject Canvas;
+    [SerializeField] GameObject Content;
     [SerializeField] GameObject RoomButton;
 
     Coordinadas StartCoord = new Coordinadas();        // Coordenadas del inicio de la mazmorra
@@ -162,20 +163,20 @@ public class MapController : MonoBehaviour
 
         // Crea la Entrada
         GameObject clon = Instantiate(RoomButton);
-        clon.transform.SetParent(Canvas.transform);
+        clon.transform.SetParent(Content.transform);
         clon.transform.position = new Vector2(StartCoord.x, StartCoord.y);
         clon.GetComponent<Button>().image.color = Color.cyan;
 
         // Crea la Sala de Descanso
         clon = Instantiate(RoomButton);
-        clon.transform.SetParent(Canvas.transform);
+        clon.transform.SetParent(Content.transform);
         clon.transform.position = new Vector2(RestCoord.x, RestCoord.y);
         clon.GetComponent<Button>().interactable = false;
         clon.GetComponent<Button>().image.color = Color.green;
 
         // Crea el Boss
         clon = Instantiate(RoomButton);
-        clon.transform.SetParent(Canvas.transform);
+        clon.transform.SetParent(Content.transform);
         clon.transform.position = new Vector2(BossCoord.x, BossCoord.y);
         clon.GetComponent<Button>().interactable = false;
         clon.GetComponent<Button>().image.color = Color.blue;
@@ -221,7 +222,7 @@ public class MapController : MonoBehaviour
                 clon.GetComponent<RoomButton>().y = j;
                 clon.GetComponent<RoomButton>().id = ContSalas;
                 ContSalas++;
-                clon.transform.SetParent(Canvas.transform);
+                clon.transform.SetParent(Content.transform);
                 RoomsGameobjects[posicionSala,j] = clon;
                 clon.transform.position = new Vector2(RoomsCoord[posicionSala, j].x, RoomsCoord[posicionSala, j].y); // Coloca la sala en sus coordenadas adecuadas
                 clon.GetComponent<Button>().interactable = false;
