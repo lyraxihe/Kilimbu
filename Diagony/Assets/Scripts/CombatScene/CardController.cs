@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class CardController : MonoBehaviour
     public GameObject CombatScene;
     public GameObject DragZone;
     public GameObject ArrowEmitter;
+    public int EnemigoSeleccionado; // -1; Ninguno | 0: EnemyList[0] | 1: EnemyList[1] | 2: EnemyList[2]
 
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
@@ -38,6 +40,7 @@ public class CardController : MonoBehaviour
         MouseDrag = true;
         MouseOver = true;
 
+        EnemigoSeleccionado = -1;
 
         //AnimacionCarta();
 
@@ -84,7 +87,7 @@ public class CardController : MonoBehaviour
 
                 CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
                 CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
-                CombatScene.GetComponent<CombatController>().UsarCarta(Tipo);
+                CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, 4);
                 
                 Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
 
@@ -105,7 +108,7 @@ public class CardController : MonoBehaviour
         MouseOver = false;
     }
 
-   
+
     private void OnMouseUp()
     {
         MouseDrag = false;
@@ -124,6 +127,34 @@ public class CardController : MonoBehaviour
         ArrowEmitter.SetActive(false);
         CombatScene.GetComponent<CombatController>().MovingArrow = false;
         Cursor.visible = true;
+
+        if (EnemigoSeleccionado != -1)
+        {
+
+            // Deshabilita la flecha
+            //OverEnemy = false;
+
+            for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
+            {
+
+                ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
+
+
+            }
+
+            ArrowEmitter.SetActive(false);
+            CombatScene.GetComponent<CombatController>().MovingArrow = false;
+            Cursor.visible = true;
+
+            // Realiza el efecto de la carta
+            CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
+            CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+            CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, EnemigoSeleccionado);
+            EnemigoSeleccionado = -1;
+
+            Destroy(gameObject);
+
+        }
 
     }
 
@@ -153,6 +184,8 @@ public class CardController : MonoBehaviour
                 if (transform.position.y > -3)
                 {
 
+                    ArrowEmitter.GetComponent<ArrowEmitter>().IdCarta = Id;
+                    ArrowEmitter.GetComponent<ArrowEmitter>().Carta = gameObject;
                     ArrowEmitter.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
                     ArrowEmitter.SetActive(true);
                     CombatScene.GetComponent<CombatController>().MovingArrow = true;

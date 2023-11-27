@@ -12,13 +12,15 @@ public class ArrowEmitter : MonoBehaviour
     public int ArrowNodeNum;           // The number of arrow nodes
     public float scaleFactor = 1f;     // The scale multiplier for arrow nodes
     public List<GameObject> Enemies;
-    public bool OverEnemy = false;
+    //public bool OverEnemy = false;
+    public int IdCarta;                // ID de la carta que ha activado la flecha
+    public GameObject Carta;
 
     // Private Atribures
     //private RectTransform origin;                                                                                                 // The position of P0 (The arrows emitter point)
     private Transform origin;
     //private List<RectTransform> arrowNodes = new List<RectTransform>();                                                           // The list of arrow node's transform
-    private List<Transform> arrowNodes = new List<Transform>();
+    public List<Transform> arrowNodes = new List<Transform>();
     //public List<GameObject> arrowNodesObject = new List<GameObject>();
     private List<Vector2> controlPoints = new List<Vector2>();                                                                    // The list of control points
     private readonly List<Vector2> controlPointFactors = new List<Vector2> { new Vector2(-0.3f, 0.8f), new Vector2(0.1f, 1.4f) }; // The factors to determine the position of control point P1, P2
@@ -65,7 +67,7 @@ public class ArrowEmitter : MonoBehaviour
     private void Update()
     {
 
-        ControlColor();
+        //ControlColor();
 
         // P0 is at the arrow emitter point
         this.controlPoints[0] = new Vector2(this.origin.position.x, this.origin.position.y);
@@ -113,34 +115,34 @@ public class ArrowEmitter : MonoBehaviour
 
     }
 
-    public void ControlColor()
-    {
+    //public void ControlColor()
+    //{
 
-        if (/*!OverEnemy*/ Vector2.Distance(this.arrowNodes[arrowNodes.Count - 1].transform.position, Enemies[0].transform.position) <= 0.5)
-        {
+    //    if (/*!OverEnemy*/ Vector2.Distance(this.arrowNodes[arrowNodes.Count - 1].transform.position, Enemies[0].transform.position) <= 0.5)
+    //    {
 
-            for (int j = 0; j < this.arrowNodes.Count; j++)
-            {
+    //        for (int j = 0; j < this.arrowNodes.Count; j++)
+    //        {
 
-                this.arrowNodes[j].GetComponent<Image>().color = Color.red;
-                OverEnemy = true;
+    //            this.arrowNodes[j].GetComponent<Image>().color = Color.red;
+    //            OverEnemy = true;
 
-            }
+    //        }
 
-        }
-        else
-        {
+    //    }
+    //    else
+    //    {
 
-            for (int j = 0; j < this.arrowNodes.Count; j++)
-            {
+    //        for (int j = 0; j < this.arrowNodes.Count; j++)
+    //        {
 
-                this.arrowNodes[j].GetComponent<Image>().color = Color.grey;
-                OverEnemy = false;
+    //            this.arrowNodes[j].GetComponent<Image>().color = Color.grey;
+    //            OverEnemy = false;
 
-            }
+    //        }
 
-        }
+    //    }
 
-    }
+    //}
 
 }

@@ -40,7 +40,9 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
 
-    public bool EnemigosRecibirDanyo; // Para controlar que al usar la carta de curarse los enemigos no hagan la animacion de recibir daño
+    [SerializeField] GameObject GameObject_Dmg_text;
+   // [SerializeField] TMP_Text Dmg_text;
+   
 
     void Start()
     {
@@ -59,8 +61,6 @@ public class CombatController : MonoBehaviour
         TurnoJugador = true;
 
         ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
-
-        EnemigosRecibirDanyo = false;
 
         MovingArrow = false;
 
@@ -171,6 +171,8 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+                clonEnemy.GetComponent<EnemyController>().Player = Player;
+
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
@@ -198,6 +200,8 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+                clonEnemy.GetComponent<EnemyController>().Player = Player;
+
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
@@ -224,6 +228,8 @@ public class CombatController : MonoBehaviour
                 clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
                 clonEnemy.GetComponent<EnemyController>().Id = i;
                 clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+                clonEnemy.GetComponent<EnemyController>().Player = Player;
+
                 EnemyList.Add(clonEnemy);
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy);
                 CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName);
@@ -515,14 +521,29 @@ public class CombatController : MonoBehaviour
 
     }
 
-    public void UsarCarta(int tipo)
+    //crea el popUp de texto con la cantidad de daño o de heal
+    public void CreateDmgHealText(bool IsHeal, int Amount, GameObject Character)
+    {
+        GameObject DmgText = Instantiate(GameObject_Dmg_text);
+        DmgText.transform.SetParent(canvas, false);
+        DmgText.GetComponent<DmgText>().IsHeal = IsHeal;
+        DmgText.GetComponent<DmgText>().Amount = Amount;
+        DmgText.transform.position = new Vector2(Character.transform.position.x + 2, Character.transform.position.y + 1);
+    }
+
+    public void UsarCarta(int tipo, int enemigo) // enemigo -> 0: EnemyList[0] | 1: EnemyList[1] | 2: EnemyList[2] | 3: Jugador | 4: TODOS los enemigos (casi no se usa)
     {
         
         if (tipo == 0)
         {
             //hace 5 de daño
-            EnemyList[0].GetComponent<EnemyController>().HealthEnemigo -= 5;
-            EnemigosRecibirDanyo = true;
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= 5;
+
+            // en esta fución como ultimo parametro debería pasarse el gameobject del enemigo al que ataca la flecha
+            //le puse "EnemyList[0]" porque es el que marca arriba para restarle la vida
+            CreateDmgHealText(false, 5, EnemyList[enemigo]);
+
+            EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
         }
@@ -533,19 +554,20 @@ public class CombatController : MonoBehaviour
             {
 
                 EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= 10;
-                EnemigosRecibirDanyo = true;
-                Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+                EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
+                CreateDmgHealText(false, 10, EnemyList[i]);
 
             }
+
+            Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
         }
         else
         {
             //cura 10 al personaje
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
-
+            CreateDmgHealText(true, 10, Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
-
-
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -34,14 +35,19 @@ public class PlayerController : MonoBehaviour
         {
 
             PlayerAnimator.SetBool("atacar", false);
-            if(CombatScene.GetComponent<CombatController>().EnemigosRecibirDanyo)
+            
+            for (int i = 0; i < CombatScene.GetComponent<CombatController>().EnemyList.Count(); i++)
             {
 
-                for (int i = 0; i < CombatScene.GetComponent<CombatController>().EnemyList.Count; i++)
+                if (CombatScene.GetComponent<CombatController>().EnemyList[i].GetComponent<EnemyController>().RecibirDanyo)
+                {
+
                     CombatScene.GetComponent<CombatController>().EnemyList[i].GetComponent<EnemyController>().EnemyAnimator.SetBool("danyo", true);
 
 
-                CombatScene.GetComponent<CombatController>().EnemigosRecibirDanyo = false;
+                    CombatScene.GetComponent<CombatController>().EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = false;
+                }
+
             }
 
         }

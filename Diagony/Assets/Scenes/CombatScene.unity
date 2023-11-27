@@ -389,6 +389,7 @@ MonoBehaviour:
   ArrowNodeNum: 9
   scaleFactor: 0.3
   Enemies: []
+  OverEnemy: 0
 --- !u!1 &415861923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,6 +1711,7 @@ MonoBehaviour:
   GameObject_Character_text: {fileID: 4342161509642164465, guid: 286e18d38a612a542baf2558ebb1ba2d, type: 3}
   Character_text: {fileID: 4342161509642164467, guid: 286e18d38a612a542baf2558ebb1ba2d, type: 3}
   EnemigosRecibirDanyo: 0
+  GameObject_Dmg_text: {fileID: 1377292726397514771, guid: 76fa258461c46d2458ef6ece015626f1, type: 3}
 --- !u!1 &1063670667
 GameObject:
   m_ObjectHideFlags: 0
