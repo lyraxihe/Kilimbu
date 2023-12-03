@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -19,12 +21,14 @@ public class EnemyController : MonoBehaviour
     public int Id;   // ID que tiene en la lista de enemigos
     public int HealthEnemigo;
     public int MaxHealthEnemigo;
-    private int AtackEnemigo;
+    [SerializeField] private int AttackEnemigo;
     public Animator EnemyAnimator;
     [SerializeField] bool animation_damage;
 
     public bool RecibirDanyo; // Indica que el enemigo debe realizar la animación de recibir danyo
 
+    [SerializeField] int TurnosEfecto = 0;
+    [SerializeField] bool EfectoListo = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +38,8 @@ public class EnemyController : MonoBehaviour
         RecibirDanyo = false;
 
         SetHealthEnemigo();
-        SetAtackEnenmigo();
+        //SetAtackEnenmigo();
+        AttackEnemigo = 1;
         EnemyAnimator.SetInteger("enemy_id", Id);
         EnemyAnimator.SetBool("atacar", animation_damage);
 
@@ -45,7 +50,7 @@ public class EnemyController : MonoBehaviour
     {
 
         ControlHealthEnemigo();
-
+    
     }
 
     //public void OnMouseOver()
@@ -119,25 +124,89 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void SetAtackEnenmigo()
-    {
+    //public void SetAtackEnenmigo()
+    //{
 
-        if (Tipo == 0)         // Ira
-            AtackEnemigo = 20;
-        else if (Tipo == 1)    // Miedo
-            AtackEnemigo = 15;
-        else                   // Tristeza
-            AtackEnemigo = 10;
+    //    if (Tipo == 0)         // Ira
+    //        AttackEnemigo = 20;
+    //    else if (Tipo == 1)    // Miedo
+    //        AttackEnemigo = 15;
+    //    else                   // Tristeza
+    //        AttackEnemigo = 10;
 
-    }
+    //}
 
     public void Atacar()
     {
 
         EnemyAnimator.SetBool("atacar", true);
-        int damageAmount = Random.Range(AtackEnemigo - 5, AtackEnemigo + 1);
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount; //hace un golpe entre atq-5 y atq
-        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+        float AttackType = Random.Range(0f, 11f);
+        int damageAmount = 0;
+
+        if (Tipo == 0)         // Ira
+        {
+
+            if (AttackType >= 5f) // && CombatScene.GetComponent<CombatController>().ContadorDeTurnos == (TurnosEfecto + 4))
+            {
+                Debug.Log("aumenta el daño");
+                AttackEnemigo += 3;
+              // TurnosEfecto = CombatScene.GetComponent<CombatController>().ContadorDeTurnos;
+            }
+            else
+            {
+                damageAmount = Random.Range(5, 8) + AttackEnemigo;
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount; 
+                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            }
+        }
+          
+
+        else if (Tipo == 1)    // Miedo
+        {
+            if (AttackType >= 8 && HealthEnemigo < 35)
+            {
+                damageAmount = 10;
+                Debug.Log("se cura miedo");
+                HealthEnemigo += damageAmount;
+          
+                CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
+            }
+            else 
+            {
+                damageAmount = Random.Range(6, 8) + AttackEnemigo;
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            }
+
+        }
+        
+
+        else                   // Tristeza
+        {
+            if (AttackType <= 3.3f)
+            {
+                Debug.Log("envenenado");
+                CombatScene.GetComponent<CombatController>().Envenenado = true;
+            }
+            else if (AttackType > 3.3f && AttackType <= 6.6)
+            {
+                Debug.Log("debilitado");
+                CombatScene.GetComponent<CombatController>().Debilitado = true;
+            }
+            else
+            {
+                Debug.Log("lo de la carta que quiere felipe kjsdf");
+                damageAmount = Random.Range(1, 5) + AttackEnemigo;
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                //sustituye una carta pero ni idea como hacerlo
+            }
+        }
+            
+
+
+        
+       
     }
 
     public void ControlEnemyAnimation(int valor)
@@ -173,6 +242,7 @@ public class EnemyController : MonoBehaviour
             OverEnemy = true;
             ArrowEmitter.GetComponent<ArrowEmitter>().Carta.GetComponent<CardController>().EnemigoSeleccionado = Id;
             AuraEnemigo.SetActive(true);
+            
 
         }
 
@@ -193,6 +263,7 @@ public class EnemyController : MonoBehaviour
             //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
             OverEnemy = false;
             AuraEnemigo.SetActive(false);
+            ArrowEmitter.GetComponent<ArrowEmitter>().Carta.GetComponent<CardController>().EnemigoSeleccionado = -1;
 
         }
     }

@@ -18,9 +18,13 @@ public class CardController : MonoBehaviour
     [SerializeField] Vector3 CardPosition;
     [SerializeField] Vector3 CardRotation;
 
-    [SerializeField] Sprite danyo5;
-    [SerializeField] Sprite danyo10;
-    [SerializeField] Sprite curar10;
+    public TMP_Text TextTitle;
+    public TMP_Text TextDescription;
+
+    // Sprites de las cartas
+    //[SerializeField] Sprite danyo5;
+    //[SerializeField] Sprite danyo10;
+    //[SerializeField] Sprite curar10;
 
     public Animator CardAnimator;
     [SerializeField] bool AnimacionEntrar;
@@ -33,7 +37,8 @@ public class CardController : MonoBehaviour
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
     public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
- 
+    public int CosteMana;
+
 
     void Start()
     {
@@ -56,11 +61,18 @@ public class CardController : MonoBehaviour
        
         setColor_text();
 
+        //TextTitle.GetComponent<MeshRenderer>().enabled = true;
+        //TextDescription.GetComponent<MeshRenderer>().enabled = true;
 
     }
 
     void Update()
     {
+
+        //TextTitle.transform.position = transform.position;
+        //TextTitle.transform.eulerAngles = transform.eulerAngles;
+        //TextDescription.transform.position = transform.position;
+        //TextDescription.transform.eulerAngles = transform.eulerAngles;
 
         NumCartas = CombatScene.GetComponent<CombatController>().CardList.Count;
         CardAnimator.SetInteger("NumCartas", NumCartas);
@@ -80,16 +92,21 @@ public class CardController : MonoBehaviour
     private void OnMouseOver()
     {
 
-        if (!MouseDrag && CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa && !CombatScene.GetComponent<CombatController>().MovingArrow)
+        if (!MouseDrag && /*CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 &&*/ !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa && !CombatScene.GetComponent<CombatController>().MovingArrow)
         {
            if (IsInDragZone)
             {
 
-                CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
-                CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
-                CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, 4);
-                
-                Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
+                if(CombatScene.GetComponent<CombatController>().ManaProtagonista - CosteMana >= 0)
+                {
+
+                    CombatScene.GetComponent<CombatController>().ManaProtagonista -= CosteMana;  // Reduce el maná del jugador
+                    CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+                    CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, 4);
+
+                    Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
+
+                }
 
             }
 
@@ -124,62 +141,70 @@ public class CardController : MonoBehaviour
         //    Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
 
         //}
-        ArrowEmitter.SetActive(false);
-        CombatScene.GetComponent<CombatController>().MovingArrow = false;
-        Cursor.visible = true;
 
         if (EnemigoSeleccionado != -1)
         {
 
-            // Deshabilita la flecha
-            //OverEnemy = false;
-
-            for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
+            if (CombatScene.GetComponent<CombatController>().ManaProtagonista - CosteMana >= 0)
             {
 
-                ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
+                // Deshabilita la flecha
+                //OverEnemy = false;
 
+                for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
+                {
+
+                    ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
+
+
+                }
+
+                //ArrowEmitter.SetActive(false);
+                //CombatScene.GetComponent<CombatController>().MovingArrow = false;
+                //Cursor.visible = true;
+                CombatScene.GetComponent<CombatController>().EnemyList[EnemigoSeleccionado].GetComponent<EnemyController>().AuraEnemigo.SetActive(false);
+
+                // Realiza el efecto de la carta
+                CombatScene.GetComponent<CombatController>().ManaProtagonista -= CosteMana;  // Reduce el maná del jugador
+                CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+                CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, EnemigoSeleccionado);
+                EnemigoSeleccionado = -1;
+
+                Destroy(gameObject);
 
             }
 
-            ArrowEmitter.SetActive(false);
-            CombatScene.GetComponent<CombatController>().MovingArrow = false;
-            Cursor.visible = true;
-            CombatScene.GetComponent<CombatController>().EnemyList[EnemigoSeleccionado].GetComponent<EnemyController>().AuraEnemigo.SetActive(false);
-
-            // Realiza el efecto de la carta
-            CombatScene.GetComponent<CombatController>().ManaProtagonista--;  // Reduce el maná del jugador en 1
-            CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
-            CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, EnemigoSeleccionado);
-            EnemigoSeleccionado = -1;
-
-            Destroy(gameObject);
-
         }
+
+        ArrowEmitter.SetActive(false);
+        CombatScene.GetComponent<CombatController>().MovingArrow = false;
+        Cursor.visible = true;
 
     }
 
     private void OnMouseDown()
     {
 
-        if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
-        {
+        //if(CombatScene.GetComponent<CombatController>().ManaProtagonista > 0)
+        //{
 
-            MousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
+        //    MousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
 
-        }
+        //}
+
+        MousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();
 
     }
 
     private void OnMouseDrag()
     {
 
-        if (CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
+        if (/*CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 &&*/ !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
 
             MouseDrag = true;
 
-            if (Tipo == 0)
+            if (Tipo == 0 || Tipo == 1 || Tipo == 3 || Tipo == 4 || Tipo == 5 || Tipo == 9 || Tipo == 10)
             {
 
                 if (transform.position.y > -3)
@@ -212,16 +237,40 @@ public class CardController : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    //public void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (Id == 0)
+    //        Debug.Log("Colision con " + collision.gameObject.tag);
+    //    if (collision.gameObject.CompareTag("DragZone"))
+    //    {
+    //        IsInDragZone=true;
+    //    }
+    //    if(!collision.gameObject.CompareTag("DragZone"))
+    //    {
+    //        IsInDragZone = false;
+    //    }
+    //}
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
+
+        //if (Id == 0)
+        //    Debug.Log("Colision con " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("DragZone"))
         {
-            IsInDragZone=true;
+            IsInDragZone = true;
         }
-        if(!collision.gameObject.CompareTag("DragZone"))
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("DragZone"))
         {
             IsInDragZone = false;
         }
+
     }
 
     /*
@@ -283,7 +332,7 @@ public class CardController : MonoBehaviour
             //gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
             //TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
             //textCharacter.text = "5 ATQ";
-            gameObject.GetComponent<SpriteRenderer>().sprite = danyo5;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = danyo5;
 
         }
         else if (Tipo == 1)
@@ -292,7 +341,7 @@ public class CardController : MonoBehaviour
             //gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
             //TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
             //textCharacter.text = "10 ATQ";
-            gameObject.GetComponent<SpriteRenderer>().sprite = danyo10;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = danyo10;
         }
         else
         {
@@ -300,7 +349,7 @@ public class CardController : MonoBehaviour
             //gameObject.GetComponent<SpriteRenderer>().color = colorPersonalizado;
             //TextMeshProUGUI textCharacter = gameObject.GetComponent<TextMeshProUGUI>();
             //textCharacter.text = "+10 HP";
-            gameObject.GetComponent<SpriteRenderer>().sprite = curar10;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = curar10;
         }
     }
     //public void AnimacionCarta()

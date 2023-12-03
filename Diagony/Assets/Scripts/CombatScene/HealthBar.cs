@@ -13,10 +13,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] public bool EsPlayer;
     [SerializeField] public GameObject _player;
     [SerializeField] public GameObject _enemy;
+    [SerializeField] public GameObject TextCharacter;
 
     void Start()
     {
-        
+     
     }
 
     
@@ -59,10 +60,13 @@ public class HealthBar : MonoBehaviour
             if (EsPlayer)
             {
                 Destroy(_player);
+                Destroy(TextCharacter);
+
             }
             else
             {
                 Destroy(_enemy);
+                Destroy(TextCharacter);
             }
 
             Destroy(gameObject);
