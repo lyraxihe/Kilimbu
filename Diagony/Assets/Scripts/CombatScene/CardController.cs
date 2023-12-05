@@ -204,7 +204,7 @@ public class CardController : MonoBehaviour
 
             MouseDrag = true;
 
-            if (Tipo == 0 || Tipo == 1 || Tipo == 3 || Tipo == 4 || Tipo == 5 || Tipo == 9 || Tipo == 10)
+            if (Tipo == 0 || Tipo == 1 || Tipo == 3 || Tipo == 4 || Tipo == 5 || Tipo == 9 || Tipo == 10 || Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 20 || Tipo == 21)
             {
 
                 if (transform.position.y > -3)

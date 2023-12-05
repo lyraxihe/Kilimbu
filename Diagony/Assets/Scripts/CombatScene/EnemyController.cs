@@ -29,6 +29,19 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] int TurnosEfecto = 0;
     [SerializeField] bool EfectoListo = true;
+
+    public bool Bloqueado; // Indica si el jugador a bloqueado a este enemigo
+    
+    public bool Debilitado;
+    public int Debilidad;
+    public int ContadorDeTurnosDebilitado;
+    public int ContadorDebilitados;
+
+    public bool Envenenado;
+    public int Veneno;
+    public int ContadorDeTurnosEnvenenado;
+    public int ContadorEnvenenados;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +56,18 @@ public class EnemyController : MonoBehaviour
         EnemyAnimator.SetInteger("enemy_id", Id);
         EnemyAnimator.SetBool("atacar", animation_damage);
 
+        Bloqueado = false;
+
+        Debilitado = false;
+        Debilidad = 0;
+        ContadorDeTurnosDebilitado = 0;
+        ContadorDebilitados = 0;
+
+        Envenenado = false;
+        Veneno = 0;
+        ContadorDeTurnosEnvenenado = 0;
+        ContadorEnvenenados = 0;
+
     }
 
     // Update is called once per frame
@@ -50,6 +75,7 @@ public class EnemyController : MonoBehaviour
     {
 
         ControlHealthEnemigo();
+        ControlStatus();
     
     }
 
@@ -138,75 +164,218 @@ public class EnemyController : MonoBehaviour
 
     public void Atacar()
     {
-
-        EnemyAnimator.SetBool("atacar", true);
-        float AttackType = Random.Range(0f, 11f);
-        int damageAmount = 0;
-
-        if (Tipo == 0)         // Ira
-        {
-
-            if (AttackType >= 5f) // && CombatScene.GetComponent<CombatController>().ContadorDeTurnos == (TurnosEfecto + 4))
-            {
-                Debug.Log("aumenta el daño");
-                AttackEnemigo += 3;
-              // TurnosEfecto = CombatScene.GetComponent<CombatController>().ContadorDeTurnos;
-            }
-            else
-            {
-                damageAmount = Random.Range(5, 8) + AttackEnemigo;
-                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount; 
-                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
-            }
-        }
-          
-
-        else if (Tipo == 1)    // Miedo
-        {
-            if (AttackType >= 8 && HealthEnemigo < 35)
-            {
-                damageAmount = 10;
-                Debug.Log("se cura miedo");
-                HealthEnemigo += damageAmount;
-          
-                CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
-            }
-            else 
-            {
-                damageAmount = Random.Range(6, 8) + AttackEnemigo;
-                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
-            }
-
-        }
         
-
-        else                   // Tristeza
+        if(!Bloqueado)
         {
-            if (AttackType <= 3.3f)
+
+            EnemyAnimator.SetBool("atacar", true);
+            float AttackType = Random.Range(0f, 11f);
+            int damageAmount = 0;
+
+            if (Tipo == 0)         // Ira
             {
-                Debug.Log("envenenado");
-                CombatScene.GetComponent<CombatController>().Envenenado = true;
+
+                if (AttackType >= 5f) // && CombatScene.GetComponent<CombatController>().ContadorDeTurnos == (TurnosEfecto + 4))
+                {
+                    
+                    Debug.Log("aumenta el daño");
+                    AttackEnemigo += 3;
+                    // TurnosEfecto = CombatScene.GetComponent<CombatController>().ContadorDeTurnos;
+
+                }
+                else
+                {
+                    
+                    damageAmount = Random.Range(5, 8) + AttackEnemigo + Debilidad;
+                    if(damageAmount < 0)
+                        damageAmount = 0;
+                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                    {
+
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+
+                    }
+                    else
+                    {
+
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+
+                    }
+
+                }
             }
-            else if (AttackType > 3.3f && AttackType <= 6.6)
+
+
+            else if (Tipo == 1)    // Miedo
             {
-                Debug.Log("debilitado");
-                CombatScene.GetComponent<CombatController>().Debilitado = true;
+                if (AttackType >= 8 && HealthEnemigo < 35)
+                {
+                    
+                    damageAmount = 10;
+                    Debug.Log("se cura miedo");
+                    HealthEnemigo += damageAmount;
+
+                    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
+
+                }
+                else
+                {
+                    
+                    damageAmount = Random.Range(6, 8) + AttackEnemigo + Debilidad;
+                    if (damageAmount < 0)
+                        damageAmount = 0;
+                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                    {
+
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+
+                    }
+                    else
+                    {
+
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+
+                    }
+
+                }
+
             }
-            else
+
+
+            else                   // Tristeza
             {
-                Debug.Log("lo de la carta que quiere felipe kjsdf");
-                damageAmount = Random.Range(1, 5) + AttackEnemigo;
-                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
-                //sustituye una carta pero ni idea como hacerlo
+                if (AttackType <= 3.3f)
+                {
+                    
+                    Debug.Log("Jugador Envenenado");
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
+
+                }
+                else if (AttackType > 3.3f && AttackType <= 6.6)
+                {
+                    
+                    Debug.Log("Jugador Debilitado");
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
+
+                }
+                else
+                {
+                    
+                    Debug.Log("lo de la carta que quiere felipe kjsdf");
+                    damageAmount = Random.Range(1, 5) + AttackEnemigo + Debilidad;
+
+                    if (damageAmount < 0)
+                        damageAmount = 0;
+
+                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                    {
+
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+
+                    }
+                    else
+                    {
+
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+
+                    }
+                    //sustituye una carta pero ni idea como hacerlo
+
+                }
             }
+
         }
-            
+        else
+        {
 
+            Debug.Log("El Enemigo está Bloqueado");
+            Bloqueado = false;
 
+        }
+
+        if (Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+        {
+
+            HealthEnemigo -= Veneno;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject);
         
-       
+        }
+
+        // Debil (Enemigo)
+        if (ContadorDeTurnosDebilitado > 0)
+        {
+
+            ContadorDeTurnosDebilitado--;
+            ContadorDebilitados++;
+
+            if (ContadorDebilitados == 3)
+            {
+
+                Debilidad += 3;
+                ContadorDebilitados = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+            }
+
+            if (ContadorDeTurnosDebilitado == 0)
+                Debilitado = false;
+
+        }
+
+        // Envenenado (Enemigo)
+        if (ContadorDeTurnosEnvenenado > 0)
+        {
+
+            ContadorDeTurnosEnvenenado--;
+            ContadorEnvenenados++;
+
+            if (ContadorEnvenenados == 3)
+            {
+
+                Veneno -= 3;
+                ContadorEnvenenados = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+            }
+
+            if (ContadorDeTurnosEnvenenado == 0)
+                Envenenado = false;
+
+        }
+
+    }
+
+    public void ControlStatus()
+    {
+
+        //if (Debilitado)
+        //{
+        //    debilidad = -3;
+        //}
+        //else
+        //{
+        //    debilidad = 0;
+        //}
+
+        if (ContadorDeTurnosDebilitado < 0)
+            ContadorDeTurnosDebilitado = 0;
+
+        //if (Envenenado)
+        //{
+        //    veneno = 3;
+        //}
+        //else
+        //{
+        //    veneno = 0;
+        //}
+
+        if (ContadorDeTurnosEnvenenado < 0)
+            ContadorDeTurnosEnvenenado = 0;
+
     }
 
     public void ControlEnemyAnimation(int valor)
