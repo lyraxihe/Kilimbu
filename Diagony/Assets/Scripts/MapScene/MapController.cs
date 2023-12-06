@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,8 +36,14 @@ public class MapController : MonoBehaviour
 
     public static MapController instance;
 
+    public GameObject VariablesGlobales;
+    [SerializeField] TMP_Text Dinero_text;
+
     private void Awake() //sigleton
     {
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
+        VariablesGlobales.GetComponent<VariablesGlobales>().Dinero_text = Dinero_text;
+
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -65,7 +72,6 @@ public class MapController : MonoBehaviour
     {
         if (MapScene_active())
         {
-            Debug.Log("pasa");
             // Canvas = GameObject.Find("Canvas");
             Canvas.SetActive(true);
         }

@@ -14,15 +14,19 @@ public class PlayerController : MonoBehaviour
     public Animator PlayerAnimator;
     [SerializeField] bool animation_damage;
 
+    public int ContadorDeTurnos;
+
     // Débil
     public bool Debilitado;
     public int Debilidad;
+    public int ContadorDeTurnosDebilitado;
+    public int ContadorDebilitado;
 
     // Envenenado
     public bool Envenenado;
     public int Veneno;
-
-    public int ContadorDeTurnos;
+    public int ContadorDeTurnosEnvenenado;
+    public int ContadorEnvenenado;
 
     // Fuerte
     public bool Fuerte;
@@ -44,15 +48,20 @@ public class PlayerController : MonoBehaviour
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
 
+        ContadorDeTurnos = 0;
+
+
         // Débil
         Debilitado = false;
         Debilidad = 0;
+        ContadorDeTurnosDebilitado = 0;
+        ContadorDebilitado = 0;
 
         // Envenenado
         Envenenado = false;
         Veneno = 0;
-
-        ContadorDeTurnos = 0;
+        ContadorDeTurnosEnvenenado = 0;
+        ContadorEnvenenado = 0;
 
         // Fuerte
         Fuerte = false;
@@ -115,21 +124,14 @@ public class PlayerController : MonoBehaviour
     public void ControlStatus()
     {
 
-        if (Debilitado)
+        if (ContadorDeTurnosDebilitado < 0)
         {
-            Debilidad = -3;
+            ContadorDeTurnosDebilitado = 0;
         }
-        else
+
+        if (ContadorDeTurnosEnvenenado < 0)
         {
-            Debilidad = 0;
-        }
-        if (Envenenado)
-        {
-            Veneno = 3;
-        }
-        else
-        {
-            Veneno = 0;
+            ContadorDeTurnosEnvenenado = 0;
         }
 
         if (ContadorDeTurnosFuerte < 0)

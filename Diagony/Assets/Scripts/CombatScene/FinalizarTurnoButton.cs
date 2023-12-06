@@ -80,6 +80,46 @@ public class FinalizarTurnoButton : MonoBehaviour
 
             }
 
+            // Control del estado envenenado en el Player
+            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado > 0)
+            {
+
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado--;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenado++;
+
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenado == 4)
+                {
+
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenado = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+                }
+
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado == 0)
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = false;
+
+            }
+
+            // Control del estado debilitado en el Player
+            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado > 0)
+            {
+
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado--;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitado++;
+
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitado == 4)
+                {
+
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitado = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+                }
+
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado == 0)
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = false;
+
+            }
+
             CombatScene.GetComponent<CombatController>().CartasCreadas = false;
             CombatScene.GetComponent<CombatController>().TurnoJugador = false;
 

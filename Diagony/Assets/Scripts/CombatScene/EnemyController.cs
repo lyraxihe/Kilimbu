@@ -27,8 +27,6 @@ public class EnemyController : MonoBehaviour
 
     public bool RecibirDanyo; // Indica que el enemigo debe realizar la animación de recibir danyo
 
-    [SerializeField] int TurnosEfecto = 0;
-    [SerializeField] bool EfectoListo = true;
 
     public bool Bloqueado; // Indica si el jugador a bloqueado a este enemigo
     
@@ -41,6 +39,12 @@ public class EnemyController : MonoBehaviour
     public int Veneno;
     public int ContadorDeTurnosEnvenenado;
     public int ContadorEnvenenados;
+
+
+    public bool Fuerte;
+    public int Fuerza;
+    public int ContadorDeTurnosFuerte;
+    public int ContadorFuerte;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +72,11 @@ public class EnemyController : MonoBehaviour
         ContadorDeTurnosEnvenenado = 0;
         ContadorEnvenenados = 0;
 
-    }
+        Fuerte = false;
+        Fuerza = 0;
+        ContadorDeTurnosFuerte = 0;
+        ContadorFuerte = 0;
+}
 
     // Update is called once per frame
     void Update()
@@ -174,31 +182,50 @@ public class EnemyController : MonoBehaviour
 
             if (Tipo == 0)         // Ira
             {
+                if (ContadorDeTurnosFuerte > 0)
+                {
 
-                if (AttackType >= 5f) // && CombatScene.GetComponent<CombatController>().ContadorDeTurnos == (TurnosEfecto + 4))
+                    ContadorDeTurnosFuerte--;
+                    ContadorFuerte++;
+
+                    if (ContadorFuerte == 4)
+                    {
+
+                        Fuerza += 3;
+                        ContadorFuerte = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+                    }
+
+                    if (ContadorDeTurnosFuerte == 0)
+                        Fuerte = false;
+                }
+
+                if (AttackType >= 5f)
                 {
                     
-                    Debug.Log("aumenta el daño");
-                    AttackEnemigo += 3;
-                    // TurnosEfecto = CombatScene.GetComponent<CombatController>().ContadorDeTurnos;
+                    Debug.Log("aumenta la fuerza");
+
+                    Fuerte = true;
+                    Fuerza += 3;
+                    ContadorDeTurnosFuerte += 3;
 
                 }
                 else
                 {
                     
-                    damageAmount = Random.Range(5, 8) + AttackEnemigo + Debilidad;
+                    damageAmount = Random.Range(5, 8) + Fuerza + Debilidad;
                     if(damageAmount < 0)
                         damageAmount = 0;
                     if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
                     {
-
+                        Debug.Log("ataque que cura al player");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                         CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
 
                     }
                     else
                     {
-
+                        Debug.Log("atq normal");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                         CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
@@ -228,14 +255,14 @@ public class EnemyController : MonoBehaviour
                         damageAmount = 0;
                     if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
                     {
-
+                        Debug.Log("ataque que cura al player");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                         CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
 
                     }
                     else
                     {
-
+                        Debug.Log("atq normal");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                         CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
@@ -253,6 +280,8 @@ public class EnemyController : MonoBehaviour
                     
                     Debug.Log("Jugador Envenenado");
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 3;
 
                 }
                 else if (AttackType > 3.3f && AttackType <= 6.6)
@@ -260,7 +289,8 @@ public class EnemyController : MonoBehaviour
                     
                     Debug.Log("Jugador Debilitado");
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
-
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=3;
                 }
                 else
                 {
@@ -273,14 +303,14 @@ public class EnemyController : MonoBehaviour
 
                     if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
                     {
-
+                        Debug.Log("ataque que cura al player");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                         CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
 
                     }
                     else
                     {
-
+                        Debug.Log("atq normal");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                         CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
@@ -347,6 +377,26 @@ public class EnemyController : MonoBehaviour
 
         }
 
+        // Fuerza (Enemigo ira)
+        if (ContadorDeTurnosFuerte > 0)
+        {
+
+            ContadorDeTurnosFuerte--;
+            ContadorFuerte++;
+
+            if (ContadorFuerte == 3)
+            {
+
+                Fuerza += 3;
+                ContadorFuerte = 0; // Se resetea cada vez que se termina un efecto de fuerza
+
+            }
+
+            if (ContadorDeTurnosFuerte == 0)
+                Fuerte = false;
+
+        }
+
     }
 
     public void ControlStatus()
@@ -375,6 +425,9 @@ public class EnemyController : MonoBehaviour
 
         if (ContadorDeTurnosEnvenenado < 0)
             ContadorDeTurnosEnvenenado = 0;
+
+        if (ContadorDeTurnosFuerte < 0)
+            ContadorDeTurnosFuerte = 0;
 
     }
 

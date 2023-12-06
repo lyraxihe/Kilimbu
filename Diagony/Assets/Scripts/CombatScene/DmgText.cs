@@ -20,8 +20,9 @@ public class DmgText : MonoBehaviour
     }
     private void Start()
     {
-       
-       // DmgHeal_text.color = textColor;
+
+        // DmgHeal_text.color = textColor;
+
        
 
         disappearTimer = 1f;

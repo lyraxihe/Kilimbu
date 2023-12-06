@@ -44,14 +44,26 @@ public class CombatController : MonoBehaviour
     [SerializeField] TMP_Text VictoriaDerrotaText;
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
+    [SerializeField] bool RecompensaVictoria;
+    [SerializeField] TMP_Text Dinero_text;
+    [SerializeField] int victoria_etc;
+
+    public int RecompensaDinero;
 
     [SerializeField] GameObject GameObject_Dmg_text;
     // [SerializeField] TMP_Text Dmg_text;
 
+    private void Awake()
+    {
+        victoria_etc = 0;
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
+        VariablesGlobales.GetComponent<VariablesGlobales>().Dinero_text = Dinero_text;
+    }
     void Start()
     {
-
-        VariablesGlobales = GameObject.Find("VariablesGlobales");
+       
+        RecompensaVictoria = false;
+        
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
 
@@ -73,7 +85,7 @@ public class CombatController : MonoBehaviour
         CreateEnemies(); // Crea los enemigos
         StartCoroutine(CreateCards());   // Crea las cartas
                                          //CreateCards();
-
+       
     }
 
 
@@ -84,7 +96,8 @@ public class CombatController : MonoBehaviour
         CardsPosition();
 
         victoriaDerrota();
-        
+       
+
     }
 
 
@@ -152,7 +165,14 @@ public class CombatController : MonoBehaviour
     {
 
         int rand = Random.Range(2, 4);           // Random de 2 a 3
-
+        if (rand==2)
+        {
+            RecompensaDinero = Random.Range(20, 40);
+        }
+        else
+        {
+            RecompensaDinero = Random.Range(40, 81);
+        }
 
         GameObject clonEnemy;                    // Declara el clon del prefab
         int tipo; //0 = ira | 1 = miedo | 2 = tristeza
@@ -958,9 +978,18 @@ public class CombatController : MonoBehaviour
         }
         else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
         {
-           
+            Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
+             RecompensaVictoria = true;
+            if (victoria_etc == 0 && RecompensaVictoria == true)
+            {
+                Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
+                VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += RecompensaDinero;
+                RecompensaVictoria = false;
+                victoria_etc += 1;
+            }
+
             Time.timeScale = 0f;
            // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;

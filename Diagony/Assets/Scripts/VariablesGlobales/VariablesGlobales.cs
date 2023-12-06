@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +11,15 @@ public class VariablesGlobales : MonoBehaviour
     public int HealthProtagonista;
     public int MaxHealthProtagonista;
     public int MaxManaProtagonista;     // Maná máximo del jugador con el que podrá usar las cartas (se resetea en cada turno)
+    public int DineroAmount;
+    public TMP_Text Dinero_text;
 
     public bool EstaEnPausa = false;
 
     public static VariablesGlobales instance;
     private void Awake() //sigleton
     {
+        DineroAmount = 0;
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -31,7 +35,7 @@ public class VariablesGlobales : MonoBehaviour
     }
     void Start()
     {
-
+       
         VidasProtagonista = 3;
         MaxHealthProtagonista = 100;
         HealthProtagonista = 100;
@@ -43,8 +47,8 @@ public class VariablesGlobales : MonoBehaviour
    
     void Update()
     {
-
-       // ControlMaxManaProtagonista();
+        Dinero_text.text = "Dinero: " + DineroAmount;
+        // ControlMaxManaProtagonista();
         ControlHealthProtagonista();
 
     }
