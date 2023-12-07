@@ -1064,6 +1064,8 @@ public class CombatController : MonoBehaviour
 
     public IEnumerator DoubleAttack(int enemigo, int danyo, float tiempo)
     {
+        if (danyo <0)
+            danyo = 0;
 
         int danyoTotal = danyo + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
 

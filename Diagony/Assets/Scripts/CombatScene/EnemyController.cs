@@ -28,23 +28,26 @@ public class EnemyController : MonoBehaviour
     public bool RecibirDanyo; // Indica que el enemigo debe realizar la animación de recibir danyo
 
 
-    public bool Bloqueado; // Indica si el jugador a bloqueado a este enemigo
-    
-    public bool Debilitado;
+    [SerializeField] public bool Bloqueado; // Indica si el jugador a bloqueado a este enemigo
+
+    [SerializeField] public bool Debilitado;
     public int Debilidad;
     public int ContadorDeTurnosDebilitado;
     public int ContadorDebilitados;
 
-    public bool Envenenado;
+    [SerializeField] public bool Envenenado;
     public int Veneno;
     public int ContadorDeTurnosEnvenenado;
     public int ContadorEnvenenados;
 
 
-    public bool Fuerte;
+    [SerializeField] public bool Fuerte;
     public int Fuerza;
     public int ContadorDeTurnosFuerte;
     public int ContadorFuerte;
+
+    public int ContadorDeTurnosHeal;
+    [SerializeField] public bool EsperandoHeal;
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +79,11 @@ public class EnemyController : MonoBehaviour
         Fuerza = 0;
         ContadorDeTurnosFuerte = 0;
         ContadorFuerte = 0;
-}
+
+        ContadorDeTurnosHeal = 0;
+        EsperandoHeal = false;
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -192,7 +199,7 @@ public class EnemyController : MonoBehaviour
                     {
 
                         Fuerza += 3;
-                        ContadorFuerte = 0; // Se resetea cada vez que se termina un efecto de Débil
+                        ContadorFuerte = 0; // Se resetea cada vez que se termina un efecto de Fuerza
 
                     }
 
@@ -200,7 +207,7 @@ public class EnemyController : MonoBehaviour
                         Fuerte = false;
                 }
 
-                if (AttackType >= 5f)
+                if (AttackType >= 5f && ContadorDeTurnosFuerte <= 0)
                 {
                     
                     Debug.Log("aumenta la fuerza");
@@ -237,9 +244,21 @@ public class EnemyController : MonoBehaviour
 
             else if (Tipo == 1)    // Miedo
             {
-                if (AttackType >= 8 && HealthEnemigo < 35)
+                if (EsperandoHeal)
                 {
-                    
+                    ContadorDeTurnosHeal--;
+                    if (ContadorDeTurnosHeal <= 0)
+                    {
+                        ContadorDeTurnosHeal = 0;
+                        EsperandoHeal = false;
+                    }
+                }
+
+                if (AttackType >= 8 && HealthEnemigo < 35 && !EsperandoHeal)
+                {
+                    ContadorDeTurnosHeal = 2;
+                    EsperandoHeal = true;
+
                     damageAmount = 10;
                     Debug.Log("se cura miedo");
                     HealthEnemigo += damageAmount;
@@ -263,8 +282,9 @@ public class EnemyController : MonoBehaviour
                     else
                     {
                         Debug.Log("atq normal");
-                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                        StartCoroutine(DoubleAttack(damageAmount, 0.5f));
+                        //VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                        //CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
                     }
 
@@ -275,22 +295,22 @@ public class EnemyController : MonoBehaviour
 
             else                   // Tristeza
             {
-                if (AttackType <= 3.3f)
+                if (AttackType <= 3.3f && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado <=0)
                 {
                     
                     Debug.Log("Jugador Envenenado");
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
 
                 }
-                else if (AttackType > 3.3f && AttackType <= 6.6)
+                else if (AttackType > 3.3f && AttackType <= 6.6 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado <=0)
                 {
                     
                     Debug.Log("Jugador Debilitado");
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=2;
                 }
                 else
                 {
@@ -368,7 +388,7 @@ public class EnemyController : MonoBehaviour
             {
 
                 Veneno -= 3;
-                ContadorEnvenenados = 0; // Se resetea cada vez que se termina un efecto de Débil
+                ContadorEnvenenados = 0; // Se resetea cada vez que se termina un efecto de Envenenado
 
             }
 
@@ -489,41 +509,16 @@ public class EnemyController : MonoBehaviour
 
         }
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Debug.Log("detecta col");
-    //    if (collision.gameObject.tag == "Arrow")
-    //    {
-    //        Debug.Log("toca la felcha idkdkdk");
-    //    }
-    //}
+    public IEnumerator DoubleAttack(int damageAmount, float tiempo)
+    {
 
-    //private void OnMouseUp()
-    //{
-        
-    //    if(OverEnemy)
-    //    {
-    //        Debug.Log("OnMouseUp");
-    //        // Deshabilita la flecha
-    //        OverEnemy = false;
+        Debug.Log("pasa por el coso de segundos !!!!!");
+        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
-    //        for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
-    //        {
+        yield return new WaitForSeconds(tiempo);
 
-    //            ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
-
-
-    //        }
-
-    //        ArrowEmitter.SetActive(false);
-    //        CombatScene.GetComponent<CombatController>().MovingArrow = false;
-    //        Cursor.visible = true;
-
-    //        // Realiza el efecto de la carta
-    //        CombatScene.GetComponent<CombatController>().UsarCarta(ArrowEmitter.GetComponent<ArrowEmitter>().IdCarta, Id);
-
-    //    }
-
-    //}
-
+        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+    }
 }
