@@ -15,8 +15,10 @@ public class VariablesGlobales : MonoBehaviour
     public TMP_Text Dinero_text;
 
     public bool EstaEnPausa = false;
+    public int SpellNumber = 5;
 
     public static VariablesGlobales instance;
+
     private void Awake() //sigleton
     {
         DineroAmount = 0;

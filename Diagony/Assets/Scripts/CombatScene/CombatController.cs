@@ -53,6 +53,9 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject GameObject_Dmg_text;
     // [SerializeField] TMP_Text Dmg_text;
 
+    [SerializeField] public GameObject[] PrefabSpell;
+   
+
     private void Awake()
     {
         victoria_etc = 0;
@@ -581,7 +584,17 @@ public class CombatController : MonoBehaviour
         DmgText.transform.SetParent(canvas, false);
         DmgText.GetComponent<DmgText>().IsHeal = IsHeal;
         DmgText.GetComponent<DmgText>().Amount = Amount;
+        DmgText.GetComponent<DmgText>().IsSpell = false;
         DmgText.transform.position = new Vector2(Character.transform.position.x + 2, Character.transform.position.y + 1);
+    }
+
+    public void CreateSpellText(string Spell, GameObject Character)
+    {
+        GameObject SpellText = Instantiate(GameObject_Dmg_text);
+        SpellText.transform.SetParent(canvas, false);
+        SpellText.GetComponent<DmgText>().Spell = Spell;
+        SpellText.GetComponent<DmgText>().IsSpell = true;
+        SpellText.transform.position = new Vector2(Character.transform.position.x + 2, Character.transform.position.y + 1);
     }
 
     public void UsarCarta(int tipo, int enemigo) // enemigo -> 0: EnemyList[0] | 1: EnemyList[1] | 2: EnemyList[2] | 3: Jugador | 4: TODOS los enemigos (casi no se usa)
@@ -771,6 +784,7 @@ public class CombatController : MonoBehaviour
             // El Jugador bloquea a un enemigo
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
+            CreateSpellText("BLOQUEADO", EnemyList[enemigo]);
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -781,7 +795,7 @@ public class CombatController : MonoBehaviour
             // El Jugador bloquea a un enemigo pero le cura 10
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-
+            CreateSpellText("BLOQUEADO", EnemyList[enemigo]);
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 10;
             CreateDmgHealText(true, 10, EnemyList[enemigo]);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -795,7 +809,7 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 3;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-
+            CreateSpellText("Debilitado", EnemyList[enemigo]);
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -811,7 +825,7 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().Debilidad -= 3;
                 EnemyList[i].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
-
+                CreateSpellText("Debilitado", EnemyList[i]);
             }
 
             Debug.Log("Todos los Enemigos Debilitados");
@@ -825,7 +839,7 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Fuerte = true;
             Player.GetComponent<PlayerController>().Fuerza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte += 4;
-
+            CreateSpellText("Fuerte", Player);
 
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -838,6 +852,7 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Fuerte = true;
             Player.GetComponent<PlayerController>().Fuerza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte += 4;
+            CreateSpellText("Fuerte", Player);
 
             for (int i = 0; i < EnemyList.Count; i++)
             {
@@ -857,7 +872,7 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Esperanzado = true;
             Player.GetComponent<PlayerController>().Esperanza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado += 4;
-
+            CreateSpellText("Esperanzado", Player);
             Debug.Log("El Jugador obtiene Esperanza");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -870,6 +885,7 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().Veneno += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosEnvenenado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
+            CreateSpellText("Envenenado", EnemyList[enemigo]);
 
             Debug.Log("Enemigo Envenenado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -886,6 +902,7 @@ public class CombatController : MonoBehaviour
 
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 15;
             CreateDmgHealText(true, 15, EnemyList[enemigo]);
+            CreateSpellText("Debilitado", EnemyList[enemigo]);
 
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -897,7 +914,7 @@ public class CombatController : MonoBehaviour
             // Durante un turno, todos los ataques al Jugador le curan en vez de hacerle daño
             Player.GetComponent<PlayerController>().Transformacion = true;
             Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion += 1;
-
+            CreateSpellText("Transformado", Player);
             Debug.Log("Jugador Transformado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -906,11 +923,27 @@ public class CombatController : MonoBehaviour
         {
 
             // Se eliminan todos los efectos del Jugador (tanto buenos como malos) en este momento
-            if(Player.GetComponent<PlayerController>().Debilitado)      // Débil
+            if (Player.GetComponent<PlayerController>().Debilitado)      // Débil
+            {
                 Player.GetComponent<PlayerController>().Debilitado = false;
+                Player.GetComponent<PlayerController>().Debilidad = 0;
+                Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado = 0;
+                Player.GetComponent<PlayerController>().ContadorDebilitado = 0;
+                Player.GetComponent<PlayerController>().debilidad_icon = 0;
+                Player.GetComponent<PlayerController>().EliminarSpell(1);
+            }
+               
 
-            if(Player.GetComponent<PlayerController>().Envenenado)      // Envenenado
+            if (Player.GetComponent<PlayerController>().Envenenado)      // Envenenado
+            {
                 Player.GetComponent<PlayerController>().Envenenado = false;
+                Player.GetComponent<PlayerController>().Veneno = 0;
+                Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado = 0;
+                Player.GetComponent<PlayerController>().ContadorEnvenenado = 0;
+                Player.GetComponent<PlayerController>().veneno_icon = 0;
+                Player.GetComponent<PlayerController>().EliminarSpell(0);
+            }
+               
 
             if (Player.GetComponent<PlayerController>().Fuerte)         // Fuerte
             {
@@ -919,6 +952,8 @@ public class CombatController : MonoBehaviour
                 Player.GetComponent<PlayerController>().Fuerza = 0;
                 Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte = 0;
                 Player.GetComponent<PlayerController>().ContadorFuertes = 0;
+                Player.GetComponent<PlayerController>().fuerte_icon = 0;
+                Player.GetComponent<PlayerController>().EliminarSpell(2);
 
             }
 
@@ -929,6 +964,8 @@ public class CombatController : MonoBehaviour
                 Player.GetComponent<PlayerController>().Esperanza = 0;
                 Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado = 0;
                 Player.GetComponent<PlayerController>().ContadorEsperanzas = 0;
+                Player.GetComponent<PlayerController>().esperanza_icon = 0;
+                Player.GetComponent<PlayerController>().EliminarSpell(3);
 
             }
 
@@ -937,9 +974,12 @@ public class CombatController : MonoBehaviour
 
                 Player.GetComponent<PlayerController>().Transformacion = false;
                 Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion = 0;
+                Player.GetComponent<PlayerController>().esperanza_icon = 0;
+                Player.GetComponent<PlayerController>().EliminarSpell(4);
 
             }
 
+            CreateSpellText("Efectos Eliminados", Player);
             Debug.Log("Efectos del Jugador eliminados");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 

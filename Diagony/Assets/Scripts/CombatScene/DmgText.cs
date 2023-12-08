@@ -12,7 +12,8 @@ public class DmgText : MonoBehaviour
     private Color textColor;
     public bool IsHeal;
     public int Amount;
-    //[SerializeField] public TMP_Text DmgHeal_text;
+    public string Spell;
+    public bool IsSpell;
 
     private void Awake()
     {
@@ -20,22 +21,27 @@ public class DmgText : MonoBehaviour
     }
     private void Start()
     {
-
-        // DmgHeal_text.color = textColor;
-
-       
-
         disappearTimer = 1f;
-        if (IsHeal)
+
+        if (IsSpell)
         {
-            textMesh.text = "+" + (Amount.ToString());
-            textMesh.color = Color.green;
+            textMesh.text = Spell.ToString();
+            textMesh.color = Color.magenta;
         }
         else
         {
-            textMesh.text = "-" + (Amount.ToString());
-            textMesh.color = Color.red;
+            if (IsHeal)
+            {
+                textMesh.text = "+" + (Amount.ToString());
+                textMesh.color = Color.green;
+            }
+            else
+            {
+                textMesh.text = "-" + (Amount.ToString());
+                textMesh.color = Color.red;
+            }
         }
+       
 
         textColor = textMesh.color;
 

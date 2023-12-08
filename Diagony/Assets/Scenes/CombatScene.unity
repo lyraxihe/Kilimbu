@@ -2785,6 +2785,12 @@ MonoBehaviour:
   victoria_etc: 0
   RecompensaDinero: 0
   GameObject_Dmg_text: {fileID: 1377292726397514771, guid: 76fa258461c46d2458ef6ece015626f1, type: 3}
+  PrefabSpell:
+  - {fileID: 2362553635666029483, guid: 3f5c03765bb2d3847ac31da97c38d609, type: 3}
+  - {fileID: 3140112512869390187, guid: 7904ce3f68513c1499bd2c6538c0fd53, type: 3}
+  - {fileID: 6704492445183802402, guid: cc439b4b98ceb884195ade692a57e629, type: 3}
+  - {fileID: 6607433316577655036, guid: ae69e4bbdc5818d4c90489df29e1a25d, type: 3}
+  - {fileID: 6269455740821257269, guid: 75b3680566c52be449f1e7e00f8b4627, type: 3}
 --- !u!1 &997867313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,6 +3834,7 @@ MonoBehaviour:
   DineroAmount: 0
   Dinero_text: {fileID: 2009732183}
   EstaEnPausa: 0
+  SpellNumber: 5
 --- !u!1 &1504359100
 GameObject:
   m_ObjectHideFlags: 0

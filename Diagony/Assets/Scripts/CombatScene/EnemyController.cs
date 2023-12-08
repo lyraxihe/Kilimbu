@@ -49,9 +49,21 @@ public class EnemyController : MonoBehaviour
     public int ContadorDeTurnosHeal;
     [SerializeField] public bool EsperandoHeal;
 
-    // Start is called before the first frame update
+    bool[] ActiveSpellGap = new bool [5];
+    [SerializeField] int ActiveSpell;
+    Vector2[] SpellCoords = new Vector2 [5];
+    GameObject[] ActiveSpellGameobject = new GameObject[5];
+    float x_inicial_spell;
+    float y_inicial_spell;
+
+    int debilidad_icon;
+    int veneno_icon;
+    int fuerte_icon;
+
     void Start()
     {
+        
+
         VariablesGlobales = GameObject.Find("VariablesGlobales");
 
         OverEnemy = false;
@@ -62,6 +74,50 @@ public class EnemyController : MonoBehaviour
         AttackEnemigo = 1;
         EnemyAnimator.SetInteger("enemy_id", Id);
         EnemyAnimator.SetBool("atacar", animation_damage);
+
+
+        //inicializo los hechizos
+        debilidad_icon = 0;
+        veneno_icon = 0;
+        fuerte_icon = 0;
+
+        ActiveSpell = 0;
+        if (Id == 0)
+        {
+            //sumarle a la x 0.4f
+            x_inicial_spell = 0.9f;
+            y_inicial_spell = 2.5f;
+        }
+        else if (Id == 1)
+        {
+            x_inicial_spell = 2.9f;
+            y_inicial_spell = 1.5f;
+        }
+        else
+        {
+            x_inicial_spell = 4.9f;
+            y_inicial_spell = 0.5f;
+        }
+
+        for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)
+        {
+            ActiveSpellGap[i] = false;
+            SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
+           
+        }
+
+        //                                              PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA !!!!!!!!!!!!!!!
+
+                //for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)
+                //{
+                //    GameObject ClonSpell;
+                //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[i]); // Crea el clon del prefab
+                //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
+                //    ActiveSpellGap[ActiveSpell] = true;
+                //    ActiveSpell++;
+                //}
+        //                                              PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA !!!!!!!!!!!!!!!
+
 
         Bloqueado = false;
 
@@ -195,6 +251,7 @@ public class EnemyController : MonoBehaviour
                     ContadorDeTurnosFuerte--;
                     ContadorFuerte++;
 
+
                     if (ContadorFuerte == 4)
                     {
 
@@ -204,7 +261,14 @@ public class EnemyController : MonoBehaviour
                     }
 
                     if (ContadorDeTurnosFuerte == 0)
+                    {
                         Fuerte = false;
+                        Fuerza = 0;
+                        ContadorDeTurnosFuerte = 0;
+                        fuerte_icon = 0;
+                       
+                    }
+                        
                 }
 
                 if (AttackType >= 5f && ContadorDeTurnosFuerte <= 0)
@@ -215,6 +279,7 @@ public class EnemyController : MonoBehaviour
                     Fuerte = true;
                     Fuerza += 3;
                     ContadorDeTurnosFuerte += 3;
+                    CombatScene.GetComponent<CombatController>().CreateSpellText("Fuerte", gameObject);
 
                 }
                 else
@@ -299,6 +364,7 @@ public class EnemyController : MonoBehaviour
                 {
                     
                     Debug.Log("Jugador Envenenado");
+                    CombatScene.GetComponent<CombatController>().CreateSpellText("Envenenado", Player);
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
@@ -308,6 +374,7 @@ public class EnemyController : MonoBehaviour
                 {
                     
                     Debug.Log("Jugador Debilitado");
+                    CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=2;
@@ -345,6 +412,7 @@ public class EnemyController : MonoBehaviour
         {
 
             Debug.Log("El Enemigo está Bloqueado");
+            CombatScene.GetComponent<CombatController>().CreateSpellText("BLOQUEADO", gameObject);
             Bloqueado = false;
 
         }
@@ -373,7 +441,20 @@ public class EnemyController : MonoBehaviour
             }
 
             if (ContadorDeTurnosDebilitado == 0)
+            {
+                Debilidad = 0;
                 Debilitado = false;
+                debilidad_icon = 0;
+                for (int i = 0; i < ActiveSpell; i++)
+                {
+                    if (ActiveSpellGameobject[i].tag == "Debilitado")
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+                }
+            }
+                
 
         }
 
@@ -393,7 +474,20 @@ public class EnemyController : MonoBehaviour
             }
 
             if (ContadorDeTurnosEnvenenado == 0)
+            {
+                Veneno = 0;
                 Envenenado = false;
+                veneno_icon = 0;
+                for (int i = 0; i < ActiveSpell; i++)
+                {
+                    if (ActiveSpellGameobject[i].tag == "Envenenado")
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+                }
+            }
+               
 
         }
 
@@ -413,7 +507,20 @@ public class EnemyController : MonoBehaviour
             }
 
             if (ContadorDeTurnosFuerte == 0)
+            {
+                Fuerza = 0;
                 Fuerte = false;
+                fuerte_icon = 0;
+                for (int i = 0; i < ActiveSpell; i++)
+                {
+                    if (ActiveSpellGameobject[i].tag == "Fuerza")
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+                }
+            }
+              
 
         }
 
@@ -421,33 +528,84 @@ public class EnemyController : MonoBehaviour
 
     public void ControlStatus()
     {
+        if (Envenenado && veneno_icon == 0)
+        {
+            GameObject ClonSpell;
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[0]); // Crea el clon del prefab de veneno ([0])
+            ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+            ActiveSpellGap[ActiveSpell] = true;
+            ActiveSpell++;
+            veneno_icon++;
+        }
+        if (Debilitado && debilidad_icon == 0)
+        {
+            GameObject ClonSpell;
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[1]); // Crea el clon del prefab de debilidad ([1])
+            ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+            ActiveSpellGap[ActiveSpell] = true;
+            ActiveSpell++;
+            debilidad_icon++;
+        }
+        if (Fuerte && fuerte_icon == 0)
+        {
+            GameObject ClonSpell;
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[2]); // Crea el clon del prefab de fuerza ([2])
+            ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+            ActiveSpellGap[ActiveSpell] = true;
+            ActiveSpell++;
+            fuerte_icon++;
+        }
 
-        //if (Debilitado)
-        //{
-        //    debilidad = -3;
-        //}
-        //else
-        //{
-        //    debilidad = 0;
-        //}
-
-        if (ContadorDeTurnosDebilitado < 0)
-            ContadorDeTurnosDebilitado = 0;
-
-        //if (Envenenado)
-        //{
-        //    veneno = 3;
-        //}
-        //else
-        //{
-        //    veneno = 0;
-        //}
 
         if (ContadorDeTurnosEnvenenado < 0)
+        {
             ContadorDeTurnosEnvenenado = 0;
+            Veneno = 0;
+            Envenenado = false;
+            veneno_icon = 0;
+            for (int i = 0; i<ActiveSpell; i++)
+            {
+                if (ActiveSpellGameobject[i].tag == "Envenenado")
+                {
+                    ReestructuraIcons(i);
+                    break;
+                }
+            }
 
+        }
+        if (ContadorDeTurnosDebilitado < 0)
+        {
+            ContadorDeTurnosDebilitado = 0;
+            Debilidad = 0;
+            Debilitado = false;
+            debilidad_icon = 0;
+            for (int i = 0; i < ActiveSpell; i++)
+            {
+                if (ActiveSpellGameobject[i].tag == "Debilitado")
+                {
+                    ReestructuraIcons(i);
+                    break;
+                }
+            }
+        }
         if (ContadorDeTurnosFuerte < 0)
+        {
             ContadorDeTurnosFuerte = 0;
+            Fuerza = 0;
+            Fuerte = false;
+            fuerte_icon = 0;
+            for (int i = 0; i < ActiveSpell; i++)
+            {
+                if (ActiveSpellGameobject[i].tag == "Fuerza")
+                {
+                    ReestructuraIcons(i);
+                    break;
+                }
+            }
+        }
 
     }
 
@@ -520,5 +678,35 @@ public class EnemyController : MonoBehaviour
 
         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
         CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+    }
+
+    public void ReestructuraIcons(int IconEliminar)
+    {
+        //ActiveSpellGap[ActiveSpell] = false;
+        //ActiveSpell--;
+        //for (int i = IconEliminar; i < ActiveSpell; i++)
+        //{
+        //    ActiveSpellGameobject[i] = ActiveSpellGameobject[i + 1];
+        //    ActiveSpellGameobject[i].transform.position = SpellCoords[i];
+        //}
+
+
+        // Elimina el icono en la posición IconEliminar
+        Destroy(ActiveSpellGameobject[IconEliminar]);
+        ActiveSpellGap[ActiveSpell] = false;
+
+        // Reorganiza las posiciones y actualiza el array
+        for (int i = IconEliminar; i < ActiveSpell - 1; i++)
+        {
+            ActiveSpellGameobject[i] = ActiveSpellGameobject[i + 1];
+            ActiveSpellGameobject[i].transform.position = SpellCoords[i];
+        }
+
+        // Marca el último elemento del array como nulo
+        ActiveSpellGameobject[ActiveSpell - 1] = null;
+
+        // Decrementa la cantidad de hechizos activos
+        ActiveSpell--;
+
     }
 }
