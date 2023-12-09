@@ -99,7 +99,7 @@ public class CombatController : MonoBehaviour
         Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
 
-        victoriaDerrota();
+        //victoriaDerrota();
        
 
     }
@@ -573,8 +573,17 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador                                                                      // Cambia de turno
-            TurnoJugador = true;
+            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador
+
+            if (Player.GetComponent<PlayerController>().ReducirMana)
+            {
+
+                ManaProtagonista -= 1;
+                Player.GetComponent<PlayerController>().ReducirMana = false;
+
+            }
+
+            TurnoJugador = true;                                                                        // Cambia de turno
             StartCoroutine(CreateCards());
 
         }
@@ -1002,16 +1011,15 @@ public class CombatController : MonoBehaviour
 
     public void victoriaDerrota()
     {
-        int enemigosVivos = EnemyList.Count;
-        for (int i = 0; i < EnemyList.Count; i++)
-        {
-            if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo == 0)
-            {
-                enemigosVivos--;
-            }
+        //int enemigosVivos = EnemyList.Count;
+        //for (int i = 0; i < EnemyList.Count; i++)
+        //{
+        //    if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo == 0)
+        //    {
+        //        enemigosVivos--;
+        //    }
 
-        }
-
+        //}
         if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
         {
           
@@ -1023,12 +1031,13 @@ public class CombatController : MonoBehaviour
            
 
         }
-        else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
+        //else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
+        else if(EnemyList.Count == 0)
         {
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
-             RecompensaVictoria = true;
+            RecompensaVictoria = true;
             if (victoria_etc == 0 && RecompensaVictoria == true)
             {
                 Debug.Log("ganas $" + RecompensaDinero + " de recompensa");

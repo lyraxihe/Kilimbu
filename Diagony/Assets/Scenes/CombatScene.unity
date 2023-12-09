@@ -2783,6 +2783,7 @@ MonoBehaviour:
   RecompensaVictoria: 0
   Dinero_text: {fileID: 2009732183}
   victoria_etc: 0
+  numTristeza: 0
   RecompensaDinero: 0
   GameObject_Dmg_text: {fileID: 1377292726397514771, guid: 76fa258461c46d2458ef6ece015626f1, type: 3}
   PrefabSpell:
@@ -3523,7 +3524,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1203960907}
         m_TargetAssemblyTypeName: PausaButton, Assembly-CSharp
-        m_MethodName: Escapar
+        m_MethodName: VictoriaDerrota
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4722,7 +4723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2009732183
 MonoBehaviour:
   m_ObjectHideFlags: 0

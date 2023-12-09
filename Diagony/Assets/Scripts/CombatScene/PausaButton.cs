@@ -52,4 +52,11 @@ public class PausaButton : MonoBehaviour
 
     }
 
+    public void VictoriaDerrota()
+    {
+
+        SceneManager.LoadScene("MapScene");
+
+    }
+
 }

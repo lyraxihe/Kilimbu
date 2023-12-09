@@ -40,9 +40,12 @@ public class PlayerController : MonoBehaviour
     public int ContadorDeTurnosEsperanzado;
     public int ContadorEsperanzas;
 
-    //Transformacion (Los ataques al Jugador le curan en vez de hacerle daño)
+    // Transformacion (Los ataques al Jugador le curan en vez de hacerle daño)
     public bool Transformacion;
     public int ContadorDeTurnosTransformacion;
+
+    // Reducir Mana (ataque de Tristeza)
+    public bool ReducirMana;
 
 
     bool[] ActiveSpellGap = new bool[5];
@@ -114,6 +117,9 @@ public class PlayerController : MonoBehaviour
         // Transformacion
         Transformacion = false;
         ContadorDeTurnosTransformacion = 0;
+
+        // Reducir Mana
+        ReducirMana = false;
 
     }
 
