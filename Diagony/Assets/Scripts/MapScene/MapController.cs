@@ -32,12 +32,16 @@ public class MapController : MonoBehaviour
     bool[,] Occupied_Rooms = new bool[x_coord, y_coord];           // Indicador de si la sala está ocupada
     [SerializeField] GameObject[,] RoomsGameobjects = new GameObject[x_coord, y_coord]; // Guarda los clones de las salas
 
-    int ContSalas;
+    public int ContSalas;
 
     public static MapController instance;
 
     public GameObject VariablesGlobales;
     [SerializeField] TMP_Text Dinero_text;
+    GameObject clonEntrada;
+    GameObject clon;
+    GameObject clonDescanso;
+    GameObject clonBoss;
 
     private void Awake() //sigleton
     {
@@ -64,7 +68,7 @@ public class MapController : MonoBehaviour
 
         InicializarCoords(); // Inicializa las coordenadas de las salas
         CrearSalas();        // Crea las salas del mapa
-
+        GuardarValores();
     }
 
     // Update is called once per frame
@@ -102,9 +106,11 @@ public class MapController : MonoBehaviour
     {
 
         // Inicialización de las coordenadas de la Entrada
-        StartCoord.x = -400;
+        //StartCoord.x = -400;
+        StartCoord.x = -350;
         StartCoord.y = 0;
         NextXCoord = StartCoord.x;
+
 
 
         //StartCoord.x = -360 + Canvas.transform.position.x;
@@ -178,11 +184,14 @@ public class MapController : MonoBehaviour
         bool correcto;
 
         // Crea la Entrada
-        GameObject clon = Instantiate(RoomButton);
-        clon.transform.SetParent(Content.transform);
-        clon.transform.position = new Vector2(StartCoord.x + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y);
-        clon.GetComponent<Button>().image.color = Color.cyan;
+        clonEntrada = Instantiate(RoomButton);
+        clonEntrada.transform.position = new Vector3(StartCoord.x, StartCoord.y, 0);
+        clonEntrada.transform.SetParent(Content.transform, false);
+        clonEntrada.GetComponent<Button>().image.color = Color.cyan;
+        clonEntrada.GetComponent<RoomButton>().id = ContSalas;
+        ContSalas++;
 
+       
         // Crea el resto de salas
         for (int j = 0; j < Occupied_Rooms.GetLength(1); j++) // Crea un bucle que recorre el array con su respectiva medida
         {
@@ -200,7 +209,7 @@ public class MapController : MonoBehaviour
                 nSalasEnColumna = 4;
             }
             // nSalasEnColumna = Random.Range(1, Occupied_Rooms.GetLength(0)); // Establece aleatoriamente el número de salas en esa columna desde 1 a medida con el array
-
+            NextXCoord += 100;
             for (int i = 0; i < nSalasEnColumna; i++)
             {
 
@@ -224,36 +233,56 @@ public class MapController : MonoBehaviour
                 clon.GetComponent<RoomButton>().y = j;
                 clon.GetComponent<RoomButton>().id = ContSalas;
                 ContSalas++;
-                clon.transform.SetParent(Content.transform);
+
                 RoomsGameobjects[posicionSala, j] = clon;
-                NextXCoord += 200;
+               
                 switch (posicionSala)
                 {
                     case 0:
-                        clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y + 200 + Canvas.transform.position.y); // Coloca la sala en sus coordenadas
-                        break;
+                        {
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 120, 0); // Coloca la sala en sus coordenadas
+
+                            break;
+                        }
+
 
                     case 1:
-                        clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y + 100 + Canvas.transform.position.y); // Coloca la sala en sus coordenadas
-                        break;
+                        {
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 60, 0); // Coloca la sala en sus coordenadas
+
+                            break;
+                        }
+
 
                     case 2:
-                        clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y); // Coloca la sala en sus coordenadas
-                        break;
+                        {
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y, 0); // Coloca la sala en sus coordenadas
+
+                            break;
+                        }
+
 
                     case 3:
-                        clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y - 100 + Canvas.transform.position.y); // Coloca la sala en sus coordenadas
-                        break;
+                        {
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 60, 0); // Coloca la sala en sus coordenadas
+
+                            break;
+                        }
+
 
                     case 4:
-                        clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y - 200 + Canvas.transform.position.y); // Coloca la sala en sus coordenadas
-                        break;
+                        {
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 120, 0); // Coloca la sala en sus coordenadas
+
+                            break;
+                        }
+
 
 
                 }
 
 
-
+                clon.transform.SetParent(Content.transform, false);
                 // clon.transform.position = new Vector2(RoomsCoord[posicionSala, j].x, RoomsCoord[posicionSala, j].y); // Coloca la sala en sus coordenadas adecuadas
                 clon.GetComponent<Button>().interactable = false;
 
@@ -266,26 +295,70 @@ public class MapController : MonoBehaviour
                 //}
                 //clon.GetComponent<Button>().image.color = Color.blue;
             }
-            NextXCoord += 200;
-            // Crea la Sala de Descanso
-            clon = Instantiate(RoomButton);
-            clon.transform.SetParent(Content.transform);
-            clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y);
-            clon.GetComponent<Button>().interactable = false;
-            clon.GetComponent<Button>().image.color = Color.green;
-
-            NextXCoord += 200;
-            // Crea el Boss
-            clon = Instantiate(RoomButton);
-            clon.transform.SetParent(Content.transform);
-            clon.transform.position = new Vector2(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y);
-            clon.GetComponent<Button>().interactable = false;
-            clon.GetComponent<Button>().image.color = Color.blue;
-
-
-
-
         }
+            NextXCoord += 100;
+            // Crea la Sala de Descanso
+            clonDescanso = Instantiate(RoomButton);
+            clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
+            clonDescanso.GetComponent<Button>().interactable = false;
+            clonDescanso.transform.SetParent(Content.transform, false);
+            clonDescanso.GetComponent<Button>().image.color = Color.green;
+            clonDescanso.GetComponent<RoomButton>().id = ContSalas;
+            ContSalas++;
 
+        NextXCoord += 100;
+            // Crea el Boss
+            clonBoss = Instantiate(RoomButton);
+            clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
+            clonBoss.GetComponent<Button>().interactable = false;
+            clonBoss.transform.SetParent(Content.transform, false);
+            clonBoss.GetComponent<Button>().image.color = Color.blue;
+            clonBoss.GetComponent<RoomButton>().id = ContSalas;
+            ContSalas++;
+
+
+    }
+
+    void GuardarValores()
+    {
+        clonEntrada.GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
+        clonEntrada.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
+        clonEntrada.GetComponent<RoomButton>().clonDescanso = clonDescanso;
+        clonEntrada.GetComponent<RoomButton>().clonBoss = clonBoss;
+        clonEntrada.GetComponent<RoomButton>().MapController = gameObject;
+        clonEntrada.GetComponent<RoomButton>().ContSalas = ContSalas;
+
+        clonDescanso.GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
+        clonDescanso.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
+        clonDescanso.GetComponent<RoomButton>().clonDescanso = clonDescanso;
+        clonDescanso.GetComponent<RoomButton>().clonBoss = clonBoss;
+        clonDescanso.GetComponent<RoomButton>().MapController = gameObject;
+        clonDescanso.GetComponent<RoomButton>().ContSalas = ContSalas;
+
+        clonBoss.GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
+        clonBoss.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
+        clonBoss.GetComponent<RoomButton>().clonDescanso = clonDescanso;
+        clonBoss.GetComponent<RoomButton>().clonBoss = clonBoss;
+        clonBoss.GetComponent<RoomButton>().MapController = gameObject;
+        clonBoss.GetComponent<RoomButton>().ContSalas = ContSalas;
+
+        for (int i = 0; i < y_coord; i++)
+        {
+            for(int j = 0; j < x_coord; j++)
+            {
+                if (Occupied_Rooms[j, i])
+                {
+                    RoomsGameobjects[j, i].GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
+                    RoomsGameobjects[j, i].GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
+                    RoomsGameobjects[j, i].GetComponent<RoomButton>().clonDescanso = clonDescanso;
+                    RoomsGameobjects[j, i].GetComponent<RoomButton>().clonBoss = clonBoss;
+                    RoomsGameobjects[j, i].GetComponent<RoomButton>().MapController = gameObject;
+                    RoomsGameobjects[j, i].GetComponent<RoomButton>().ContSalas = ContSalas;
+
+                }
+            }
+        }
+        
+        
     }
 }
