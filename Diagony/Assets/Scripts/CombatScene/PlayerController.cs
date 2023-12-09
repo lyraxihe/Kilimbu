@@ -46,9 +46,9 @@ public class PlayerController : MonoBehaviour
 
 
     bool[] ActiveSpellGap = new bool[5];
-    [SerializeField] int ActiveSpell;
+    [SerializeField] public int ActiveSpell;
     Vector2[] SpellCoords = new Vector2[5];
-    GameObject[] ActiveSpellGameobject = new GameObject[5];
+    public GameObject[] ActiveSpellGameobject = new GameObject[5];
     float x_inicial_spell;
     float y_inicial_spell;
 

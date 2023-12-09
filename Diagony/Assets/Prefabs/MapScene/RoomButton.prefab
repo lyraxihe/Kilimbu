@@ -149,8 +149,11 @@ MonoBehaviour:
   x: 0
   y: 0
   id: 0
-  conection1: {fileID: 0}
-  conection2: {fileID: 0}
-  conection3: {fileID: 0}
-  conection4: {fileID: 0}
+  conections:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   numContections: 0
+  SetInteractuable: {fileID: 4153963543493444941}

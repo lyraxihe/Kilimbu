@@ -47,6 +47,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] bool RecompensaVictoria;
     [SerializeField] TMP_Text Dinero_text;
     [SerializeField] int victoria_etc;
+    public int numTristeza;
 
     public int RecompensaDinero;
 
@@ -198,6 +199,7 @@ public class CombatController : MonoBehaviour
                 else
                 {
                     EnemyName = "TRISTEZA";
+                    numTristeza++;
                 }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
@@ -229,6 +231,7 @@ public class CombatController : MonoBehaviour
                 else
                 {
                     EnemyName = "TRISTEZA";
+                    numTristeza++;
                 }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 0);
@@ -259,6 +262,7 @@ public class CombatController : MonoBehaviour
                 else
                 {
                     EnemyName = "TRISTEZA";
+                    numTristeza++;
                 }
                 clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                 clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 0);
@@ -275,10 +279,12 @@ public class CombatController : MonoBehaviour
                 CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
                
             }
+           
 
             ArrowEmitter.GetComponent<ArrowEmitter>().Enemies.Add(clonEnemy);
 
         }
+        
 
     }
 
@@ -1008,12 +1014,13 @@ public class CombatController : MonoBehaviour
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
         {
-           
+          
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "DERROTA";
             Time.timeScale = 0f;
            // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
+           
 
         }
         else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)

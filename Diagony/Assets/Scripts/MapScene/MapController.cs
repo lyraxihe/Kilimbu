@@ -68,7 +68,7 @@ public class MapController : MonoBehaviour
 
         InicializarCoords(); // Inicializa las coordenadas de las salas
         CrearSalas();        // Crea las salas del mapa
-        GuardarValores();
+        Conections();        // crea las conexiones de las salas
     }
 
     // Update is called once per frame
@@ -188,14 +188,14 @@ public class MapController : MonoBehaviour
         clonEntrada.transform.position = new Vector3(StartCoord.x, StartCoord.y, 0);
         clonEntrada.transform.SetParent(Content.transform, false);
         clonEntrada.GetComponent<Button>().image.color = Color.cyan;
-        clonEntrada.GetComponent<RoomButton>().id = ContSalas;
-        ContSalas++;
+        clonEntrada.GetComponent<RoomButton>().SetInteractuable.interactable = true;
+
 
        
         // Crea el resto de salas
         for (int j = 0; j < Occupied_Rooms.GetLength(1); j++) // Crea un bucle que recorre el array con su respectiva medida
         {
-            rand = Random.Range(1, 11);
+            rand = Random.Range(1, 11); // Establece aleatoriamente el número de salas en esa columna desde 1 a medida con el array
             if (rand <= 4)
             {
                 nSalasEnColumna = 2;
@@ -208,7 +208,7 @@ public class MapController : MonoBehaviour
             {
                 nSalasEnColumna = 4;
             }
-            // nSalasEnColumna = Random.Range(1, Occupied_Rooms.GetLength(0)); // Establece aleatoriamente el número de salas en esa columna desde 1 a medida con el array
+          
             NextXCoord += 100;
             for (int i = 0; i < nSalasEnColumna; i++)
             {
@@ -228,11 +228,10 @@ public class MapController : MonoBehaviour
                 } while (!correcto);
 
                 clon = Instantiate(RoomButton);
-                clon.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
                 clon.GetComponent<RoomButton>().x = posicionSala;
                 clon.GetComponent<RoomButton>().y = j;
-                clon.GetComponent<RoomButton>().id = ContSalas;
-                ContSalas++;
+                clon.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+
 
                 RoomsGameobjects[posicionSala, j] = clon;
                
@@ -284,7 +283,7 @@ public class MapController : MonoBehaviour
 
                 clon.transform.SetParent(Content.transform, false);
                 // clon.transform.position = new Vector2(RoomsCoord[posicionSala, j].x, RoomsCoord[posicionSala, j].y); // Coloca la sala en sus coordenadas adecuadas
-                clon.GetComponent<Button>().interactable = false;
+               
 
                 // rand = Random.Range(1, 11);
 
@@ -300,65 +299,59 @@ public class MapController : MonoBehaviour
             // Crea la Sala de Descanso
             clonDescanso = Instantiate(RoomButton);
             clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
-            clonDescanso.GetComponent<Button>().interactable = false;
             clonDescanso.transform.SetParent(Content.transform, false);
             clonDescanso.GetComponent<Button>().image.color = Color.green;
-            clonDescanso.GetComponent<RoomButton>().id = ContSalas;
-            ContSalas++;
+            clonDescanso.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+
 
         NextXCoord += 100;
             // Crea el Boss
             clonBoss = Instantiate(RoomButton);
             clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
-            clonBoss.GetComponent<Button>().interactable = false;
             clonBoss.transform.SetParent(Content.transform, false);
             clonBoss.GetComponent<Button>().image.color = Color.blue;
-            clonBoss.GetComponent<RoomButton>().id = ContSalas;
-            ContSalas++;
+            clonBoss.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+
 
 
     }
 
-    void GuardarValores()
+ 
+
+    void Conections()
     {
-        clonEntrada.GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
-        clonEntrada.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
-        clonEntrada.GetComponent<RoomButton>().clonDescanso = clonDescanso;
-        clonEntrada.GetComponent<RoomButton>().clonBoss = clonBoss;
-        clonEntrada.GetComponent<RoomButton>().MapController = gameObject;
-        clonEntrada.GetComponent<RoomButton>().ContSalas = ContSalas;
+        
+            for (int i = 0; i < x_coord; i++)
+            {
+                if (Occupied_Rooms[i, 0])
+                {
+                clonEntrada.GetComponent<RoomButton>().conections[clonEntrada.GetComponent<RoomButton>().numContections] = RoomsGameobjects[i, 0];
+                clonEntrada.GetComponent<RoomButton>().numContections++;
+                }
+            }
 
-        clonDescanso.GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
-        clonDescanso.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
-        clonDescanso.GetComponent<RoomButton>().clonDescanso = clonDescanso;
-        clonDescanso.GetComponent<RoomButton>().clonBoss = clonBoss;
-        clonDescanso.GetComponent<RoomButton>().MapController = gameObject;
-        clonDescanso.GetComponent<RoomButton>().ContSalas = ContSalas;
-
-        clonBoss.GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
-        clonBoss.GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
-        clonBoss.GetComponent<RoomButton>().clonDescanso = clonDescanso;
-        clonBoss.GetComponent<RoomButton>().clonBoss = clonBoss;
-        clonBoss.GetComponent<RoomButton>().MapController = gameObject;
-        clonBoss.GetComponent<RoomButton>().ContSalas = ContSalas;
+           
 
         for (int i = 0; i < y_coord; i++)
         {
-            for(int j = 0; j < x_coord; j++)
+            for (int j = 0; j < x_coord; j++)
             {
                 if (Occupied_Rooms[j, i])
                 {
-                    RoomsGameobjects[j, i].GetComponent<RoomButton>().RoomsGameobjects = RoomsGameobjects;
-                    RoomsGameobjects[j, i].GetComponent<RoomButton>().Occupied_Rooms = Occupied_Rooms;
-                    RoomsGameobjects[j, i].GetComponent<RoomButton>().clonDescanso = clonDescanso;
-                    RoomsGameobjects[j, i].GetComponent<RoomButton>().clonBoss = clonBoss;
-                    RoomsGameobjects[j, i].GetComponent<RoomButton>().MapController = gameObject;
-                    RoomsGameobjects[j, i].GetComponent<RoomButton>().ContSalas = ContSalas;
+                    if (i != (y_coord-1))
+                    {
 
+                    }
+                    else
+                    {
+                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = clonDescanso;
+                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                    }
                 }
             }
         }
-        
-        
+        clonDescanso.GetComponent<RoomButton>().conections[clonDescanso.GetComponent<RoomButton>().numContections] = clonBoss;
+        clonDescanso.GetComponent<RoomButton>().numContections++;
+
     }
 }

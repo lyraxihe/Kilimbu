@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
@@ -59,10 +61,11 @@ public class EnemyController : MonoBehaviour
     int debilidad_icon;
     int veneno_icon;
     int fuerte_icon;
+    public bool SoloTristeza;
 
     void Start()
     {
-        
+        SoloTristeza = false;
 
         VariablesGlobales = GameObject.Find("VariablesGlobales");
 
@@ -147,7 +150,14 @@ public class EnemyController : MonoBehaviour
 
         ControlHealthEnemigo();
         ControlStatus();
-    
+
+        //esto no se debería hacer en el update pero no sé
+        if (CombatScene.GetComponent<CombatController>().numTristeza == CombatScene.GetComponent<CombatController>().EnemyList.Count)
+        {
+            SoloTristeza = true;
+        }
+
+
     }
 
     //public void OnMouseOver()
@@ -212,6 +222,10 @@ public class EnemyController : MonoBehaviour
 
             HealthEnemigo = 0;
             CombatScene.GetComponent<CombatController>().EliminarEnemig0(Id);
+            for (int i = 0; i < ActiveSpell; i++)
+            {
+                Destroy(ActiveSpellGameobject[i]);
+            }
             Destroy(gameObject);
 
         }
@@ -334,7 +348,7 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     
-                    damageAmount = Random.Range(6, 8) + AttackEnemigo + Debilidad;
+                    damageAmount = Random.Range(3, 5) + AttackEnemigo + Debilidad;
                     if (damageAmount < 0)
                         damageAmount = 0;
                     if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
@@ -348,8 +362,7 @@ public class EnemyController : MonoBehaviour
                     {
                         Debug.Log("atq normal");
                         StartCoroutine(DoubleAttack(damageAmount, 0.5f));
-                        //VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        //CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                        
 
                     }
 
@@ -360,7 +373,14 @@ public class EnemyController : MonoBehaviour
 
             else                   // Tristeza
             {
-                if (AttackType <= 3.3f && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado <=0)
+                if (SoloTristeza)
+                {
+                    damageAmount = 2;
+                    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                    CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                }
+
+                else if (AttackType <= 3.3f && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado <=0)
                 {
                     
                     Debug.Log("Jugador Envenenado");
@@ -682,15 +702,7 @@ public class EnemyController : MonoBehaviour
 
     public void ReestructuraIcons(int IconEliminar)
     {
-        //ActiveSpellGap[ActiveSpell] = false;
-        //ActiveSpell--;
-        //for (int i = IconEliminar; i < ActiveSpell; i++)
-        //{
-        //    ActiveSpellGameobject[i] = ActiveSpellGameobject[i + 1];
-        //    ActiveSpellGameobject[i].transform.position = SpellCoords[i];
-        //}
-
-
+      
         // Elimina el icono en la posición IconEliminar
         Destroy(ActiveSpellGameobject[IconEliminar]);
         ActiveSpellGap[ActiveSpell] = false;
