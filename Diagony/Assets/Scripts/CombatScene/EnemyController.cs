@@ -254,7 +254,6 @@ public class EnemyController : MonoBehaviour
         if(!Bloqueado)
         {
 
-            EnemyAnimator.SetBool("atacar", true);
             float AttackType = Random.Range(0f, 11f);
             int damageAmount = 0;
 
@@ -319,6 +318,8 @@ public class EnemyController : MonoBehaviour
                     }
 
                 }
+
+                EnemyAnimator.SetBool("atacar", true);
             }
 
 
@@ -344,6 +345,8 @@ public class EnemyController : MonoBehaviour
                     HealthEnemigo += damageAmount;
 
                     CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
+
+                    EnemyAnimator.SetBool("atacar", true);
 
                 }
                 else
@@ -428,6 +431,9 @@ public class EnemyController : MonoBehaviour
                     Player.GetComponent<PlayerController>().ReducirMana = true;
 
                 }
+
+                EnemyAnimator.SetBool("atacar", true);
+
             }
 
         }
@@ -435,7 +441,7 @@ public class EnemyController : MonoBehaviour
         {
 
             Debug.Log("El Enemigo está Bloqueado");
-            CombatScene.GetComponent<CombatController>().CreateSpellText("BLOQUEADO", gameObject);
+            CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", gameObject);
             Bloqueado = false;
 
         }
@@ -696,13 +702,36 @@ public class EnemyController : MonoBehaviour
     {
 
         Debug.Log("pasa por el coso de segundos !!!!!");
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
-        yield return new WaitForSeconds(tiempo);
+        if(Player.GetComponent<PlayerController>().Transformacion)
+        {
 
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+            yield return new WaitForSeconds(tiempo);
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else
+        {
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+            yield return new WaitForSeconds(tiempo);
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+        }
+
     }
 
     public void ReestructuraIcons(int IconEliminar)

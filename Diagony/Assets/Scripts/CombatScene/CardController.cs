@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -100,11 +101,18 @@ public class CardController : MonoBehaviour
                 if(CombatScene.GetComponent<CombatController>().ManaProtagonista - CosteMana >= 0)
                 {
 
-                    CombatScene.GetComponent<CombatController>().ManaProtagonista -= CosteMana;  // Reduce el maná del jugador
-                    CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
-                    CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, 4);
+                    if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Bloqueado)
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", CombatScene.GetComponent<CombatController>().Player);
+                    else
+                    {
 
-                    Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
+                        CombatScene.GetComponent<CombatController>().ManaProtagonista -= CosteMana;  // Reduce el maná del jugador
+                        CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+                        CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, 4);
+
+                        Destroy(gameObject);                                              //destruye la carta al colisionar con la dragzone
+
+                    }
 
                 }
 
@@ -165,12 +173,19 @@ public class CardController : MonoBehaviour
                 CombatScene.GetComponent<CombatController>().EnemyList[EnemigoSeleccionado].GetComponent<EnemyController>().AuraEnemigo.SetActive(false);
 
                 // Realiza el efecto de la carta
-                CombatScene.GetComponent<CombatController>().ManaProtagonista -= CosteMana;  // Reduce el maná del jugador
-                CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
-                CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, EnemigoSeleccionado);
-                EnemigoSeleccionado = -1;
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Bloqueado)
+                    CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", CombatScene.GetComponent<CombatController>().Player);
+                else
+                {
 
-                Destroy(gameObject);
+                    CombatScene.GetComponent<CombatController>().ManaProtagonista -= CosteMana;  // Reduce el maná del jugador
+                    CombatScene.GetComponent<CombatController>().EliminarCarta(Id);
+                    CombatScene.GetComponent<CombatController>().UsarCarta(Tipo, EnemigoSeleccionado);
+                    EnemigoSeleccionado = -1;
+
+                    Destroy(gameObject);
+
+                }
 
             }
 
