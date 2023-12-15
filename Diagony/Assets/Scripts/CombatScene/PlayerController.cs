@@ -16,17 +16,24 @@ public class PlayerController : MonoBehaviour
 
     public int ContadorDeTurnos;
 
+    // Bloqueado
+    public bool Bloqueado;
+
     // Débil
     public bool Debilitado;
     public int Debilidad;
     public int ContadorDeTurnosDebilitado;
     public int ContadorDebilitado;
+    public int ContadorDeTurnosDebilitadoDevolverIra;
+    public int ContadorDebilitadoDevolverIra;
 
     // Envenenado
     public bool Envenenado;
     public int Veneno;
     public int ContadorDeTurnosEnvenenado;
     public int ContadorEnvenenado;
+    public int ContadorDeTurnosEnvenenadoDevolverIra;
+    public int ContadorEnvenenadoDevolverIra;
 
     // Fuerte
     public bool Fuerte;
@@ -40,9 +47,12 @@ public class PlayerController : MonoBehaviour
     public int ContadorDeTurnosEsperanzado;
     public int ContadorEsperanzas;
 
-    //Transformacion (Los ataques al Jugador le curan en vez de hacerle daño)
+    // Transformacion (Los ataques al Jugador le curan en vez de hacerle daño)
     public bool Transformacion;
     public int ContadorDeTurnosTransformacion;
+
+    // Reducir Mana (ataque de Tristeza)
+    public bool ReducirMana;
 
 
     bool[] ActiveSpellGap = new bool[5];
@@ -85,19 +95,24 @@ public class PlayerController : MonoBehaviour
 
         }
 
-      
+        // Bloqueado
+        Bloqueado = false;
 
         // Débil
         Debilitado = false;
         Debilidad = 0;
         ContadorDeTurnosDebilitado = 0;
         ContadorDebilitado = 0;
+        ContadorDeTurnosDebilitadoDevolverIra = 0;
+        ContadorDebilitadoDevolverIra = 0;
 
         // Envenenado
         Envenenado = false;
         Veneno = 0;
         ContadorDeTurnosEnvenenado = 0;
         ContadorEnvenenado = 0;
+        ContadorDeTurnosEnvenenadoDevolverIra = 0;
+        ContadorEnvenenadoDevolverIra = 0;
 
         // Fuerte
         Fuerte = false;
@@ -114,6 +129,9 @@ public class PlayerController : MonoBehaviour
         // Transformacion
         Transformacion = false;
         ContadorDeTurnosTransformacion = 0;
+
+        // Reducir Mana
+        ReducirMana = false;
 
     }
 

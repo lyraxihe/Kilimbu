@@ -226,6 +226,7 @@ public class EnemyController : MonoBehaviour
             {
                 Destroy(ActiveSpellGameobject[i]);
             }
+            CombatScene.GetComponent<CombatController>().victoriaDerrota();
             Destroy(gameObject);
 
         }
@@ -253,7 +254,6 @@ public class EnemyController : MonoBehaviour
         if(!Bloqueado)
         {
 
-            EnemyAnimator.SetBool("atacar", true);
             float AttackType = Random.Range(0f, 11f);
             int damageAmount = 0;
 
@@ -318,6 +318,8 @@ public class EnemyController : MonoBehaviour
                     }
 
                 }
+
+                EnemyAnimator.SetBool("atacar", true);
             }
 
 
@@ -343,6 +345,8 @@ public class EnemyController : MonoBehaviour
                     HealthEnemigo += damageAmount;
 
                     CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
+
+                    EnemyAnimator.SetBool("atacar", true);
 
                 }
                 else
@@ -402,29 +406,34 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     
-                    Debug.Log("lo de la carta que quiere felipe kjsdf");
-                    damageAmount = Random.Range(1, 5) + AttackEnemigo + Debilidad;
+                    Debug.Log("Reducir 1 de mana");
+                    //damageAmount = Random.Range(1, 5) + AttackEnemigo + Debilidad;
 
-                    if (damageAmount < 0)
-                        damageAmount = 0;
+                    //if (damageAmount < 0)
+                    //    damageAmount = 0;
 
-                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
-                    {
-                        Debug.Log("ataque que cura al player");
-                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+                    //if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                    //{
+                    //    Debug.Log("ataque que cura al player");
+                    //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                    //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
 
-                    }
-                    else
-                    {
-                        Debug.Log("atq normal");
-                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log("atq normal");
+                    //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                    //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
-                    }
-                    //sustituye una carta pero ni idea como hacerlo
+                    //}
+
+                    CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
+                    Player.GetComponent<PlayerController>().ReducirMana = true;
 
                 }
+
+                EnemyAnimator.SetBool("atacar", true);
+
             }
 
         }
@@ -432,7 +441,7 @@ public class EnemyController : MonoBehaviour
         {
 
             Debug.Log("El Enemigo está Bloqueado");
-            CombatScene.GetComponent<CombatController>().CreateSpellText("BLOQUEADO", gameObject);
+            CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", gameObject);
             Bloqueado = false;
 
         }
@@ -543,6 +552,8 @@ public class EnemyController : MonoBehaviour
               
 
         }
+
+        CombatScene.GetComponent<CombatController>().victoriaDerrota();
 
     }
 
@@ -691,13 +702,36 @@ public class EnemyController : MonoBehaviour
     {
 
         Debug.Log("pasa por el coso de segundos !!!!!");
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
 
-        yield return new WaitForSeconds(tiempo);
+        if(Player.GetComponent<PlayerController>().Transformacion)
+        {
 
-        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+            yield return new WaitForSeconds(tiempo);
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else
+        {
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+            yield return new WaitForSeconds(tiempo);
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            EnemyAnimator.SetBool("atacar", true);
+
+        }
+
     }
 
     public void ReestructuraIcons(int IconEliminar)

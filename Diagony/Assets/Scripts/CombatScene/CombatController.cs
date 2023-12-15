@@ -42,6 +42,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] public UnityEngine.UI.Button botonTurno;
     [SerializeField] GameObject VictoriaDerrotaPanel;
     [SerializeField] TMP_Text VictoriaDerrotaText;
+    [SerializeField] TMP_Text RecompensaText;
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
     [SerializeField] bool RecompensaVictoria;
@@ -55,17 +56,23 @@ public class CombatController : MonoBehaviour
     // [SerializeField] TMP_Text Dmg_text;
 
     [SerializeField] public GameObject[] PrefabSpell;
+
+    float PorcentajeDevolverIra;
    
 
     private void Awake()
     {
+        
         victoria_etc = 0;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         VariablesGlobales.GetComponent<VariablesGlobales>().Dinero_text = Dinero_text;
+
     }
     void Start()
     {
-       
+
+        PorcentajeDevolverIra = 11f;
+
         RecompensaVictoria = false;
         
         //CardList.cards = new GameObject[5];
@@ -99,7 +106,7 @@ public class CombatController : MonoBehaviour
         Mana.text = ManaProtagonista + " / " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Actualiza el texto que indica el maná del jugador
         CardsPosition();
 
-        victoriaDerrota();
+        //victoriaDerrota();
        
 
     }
@@ -573,8 +580,17 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador                                                                      // Cambia de turno
-            TurnoJugador = true;
+            ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador
+
+            if (Player.GetComponent<PlayerController>().ReducirMana)
+            {
+
+                ManaProtagonista -= 1;
+                Player.GetComponent<PlayerController>().ReducirMana = false;
+
+            }
+
+            TurnoJugador = true;                                                                        // Cambia de turno
             StartCoroutine(CreateCards());
 
         }
@@ -586,6 +602,9 @@ public class CombatController : MonoBehaviour
     //crea el popUp de texto con la cantidad de daño o de heal
     public void CreateDmgHealText(bool IsHeal, int Amount, GameObject Character)
     {
+        if(Amount < 0)
+            Amount = 0;
+        
         GameObject DmgText = Instantiate(GameObject_Dmg_text);
         DmgText.transform.SetParent(canvas, false);
         DmgText.GetComponent<DmgText>().IsHeal = IsHeal;
@@ -605,7 +624,6 @@ public class CombatController : MonoBehaviour
 
     public void UsarCarta(int tipo, int enemigo) // enemigo -> 0: EnemyList[0] | 1: EnemyList[1] | 2: EnemyList[2] | 3: Jugador | 4: TODOS los enemigos (casi no se usa)
     {
-        
 
         if (tipo == 0)
         {
@@ -622,13 +640,21 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
 
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+            }
 
         }
         else if (tipo == 1)
         {
             //Ataque 3 x 2 de daño después de 0,5 seg
-            StartCoroutine(DoubleAttack(enemigo, 3, 0.5f));
+            StartCoroutine(DoubleAttack(enemigo, 3, 0.5f, 1));
 
         }
         else if (tipo == 2)
@@ -641,6 +667,16 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
                 CreateDmgHealText(false, danyo, EnemyList[i]);
+
+                // Ira devolver ataque
+                if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+                {
+                    float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                    if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                        StartCoroutine(IraDevolverAtaque(danyo, tipo, i));
+
+                }
 
             }
 
@@ -661,6 +697,16 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+            }
+
         }
         else if (tipo == 4)
         {
@@ -675,12 +721,22 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+            }
+
         }
         else if (tipo == 5)
         {
 
             //Ataque 10 x 2 de daño después de 0,5 seg
-            StartCoroutine(DoubleAttack(enemigo, 10, 0.5f));
+            StartCoroutine(DoubleAttack(enemigo, 10, 0.5f, 5));
 
         }
         else if (tipo == 6)
@@ -723,6 +779,16 @@ public class CombatController : MonoBehaviour
             CreateDmgHealText(true, danyo, Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+            }
+
         }
 
         else if (tipo == 10)
@@ -739,6 +805,16 @@ public class CombatController : MonoBehaviour
             CreateDmgHealText(true, danyo, Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+            }
+
         }
         else if (tipo == 11)
         {
@@ -753,6 +829,16 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
                 CreateDmgHealText(false, danyo, EnemyList[i]);
+
+                // Ira devolver ataque
+                if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+                {
+                    float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                    if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                        StartCoroutine(IraDevolverAtaque(danyo, tipo, i));
+
+                }
 
             }
 
@@ -776,6 +862,16 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
                 CreateDmgHealText(false, danyo, EnemyList[i]);
 
+                // Ira devolver ataque
+                if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+                {
+                    float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                    if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                        StartCoroutine(IraDevolverAtaque(danyo, tipo, i));
+
+                }
+
             }
 
             ControlEsperanzado();
@@ -790,9 +886,19 @@ public class CombatController : MonoBehaviour
             // El Jugador bloquea a un enemigo
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-            CreateSpellText("BLOQUEADO", EnemyList[enemigo]);
+            CreateSpellText("Bloqueado", EnemyList[enemigo]);
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(-1, tipo, enemigo));
+
+            }
 
         }
         else if (tipo == 14)
@@ -801,10 +907,20 @@ public class CombatController : MonoBehaviour
             // El Jugador bloquea a un enemigo pero le cura 10
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-            CreateSpellText("BLOQUEADO", EnemyList[enemigo]);
+            CreateSpellText("Bloqueado", EnemyList[enemigo]);
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 10;
             CreateDmgHealText(true, 10, EnemyList[enemigo]);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(-1, tipo, enemigo));
+
+            }
 
         }
         else if (tipo == 15)
@@ -819,6 +935,16 @@ public class CombatController : MonoBehaviour
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(-1, tipo, enemigo));
+
+            }
+
         }
         else if (tipo == 16)
         {
@@ -832,6 +958,17 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
                 CreateSpellText("Debilitado", EnemyList[i]);
+
+                // Ira devolver ataque
+                if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+                {
+                    float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                    if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                        StartCoroutine(IraDevolverAtaque(-1, tipo, i));
+
+                }
+
             }
 
             Debug.Log("Todos los Enemigos Debilitados");
@@ -896,6 +1033,16 @@ public class CombatController : MonoBehaviour
             Debug.Log("Enemigo Envenenado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(-1, tipo, enemigo));
+
+            }
+
         }
         else if (tipo == 21)
         {
@@ -912,6 +1059,16 @@ public class CombatController : MonoBehaviour
 
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(-1, tipo, enemigo));
+
+            }
 
         }
         else if (tipo == 22)
@@ -997,38 +1154,40 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
             CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player);
         }
-       
+
     }
 
     public void victoriaDerrota()
     {
-        int enemigosVivos = EnemyList.Count;
-        for (int i = 0; i < EnemyList.Count; i++)
-        {
-            if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo == 0)
-            {
-                enemigosVivos--;
-            }
+        //int enemigosVivos = EnemyList.Count;
+        //for (int i = 0; i < EnemyList.Count; i++)
+        //{
+        //    if (EnemyList[i].GetComponent<EnemyController>().HealthEnemigo == 0)
+        //    {
+        //        enemigosVivos--;
+        //    }
 
-        }
-
+        //}
         if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
         {
           
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "DERROTA";
+            RecompensaText.text = "Has sido derrotado!";
             Time.timeScale = 0f;
            // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
            
 
         }
-        else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
+        //else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
+        else if(EnemyList.Count == 0)
         {
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
-             RecompensaVictoria = true;
+            RecompensaText.text = "Recompensa " + RecompensaDinero + " de oro";
+            RecompensaVictoria = true;
             if (victoria_etc == 0 && RecompensaVictoria == true)
             {
                 Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
@@ -1109,7 +1268,7 @@ public class CombatController : MonoBehaviour
 
     }
 
-    public IEnumerator DoubleAttack(int enemigo, int danyo, float tiempo)
+    public IEnumerator DoubleAttack(int enemigo, int danyo, float tiempo, int tipo)
     {
         if (danyo <0)
             danyo = 0;
@@ -1130,6 +1289,16 @@ public class CombatController : MonoBehaviour
         EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
         Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+        // Ira devolver ataque
+        if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+        {
+            float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+            if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+        }
+
     }
 
     public void ControlEsperanzado()
@@ -1142,6 +1311,130 @@ public class CombatController : MonoBehaviour
             CreateDmgHealText(true, Player.GetComponent<PlayerController>().Esperanza, Player);
 
         }
+
+    }
+
+    public IEnumerator IraDevolverAtaque(int danyo, int tipo, int enemigo)
+    {
+
+        yield return new WaitForSeconds(0.5f);
+
+        Debug.Log("Ira devuelve el ataque");
+
+        CreateSpellText("Devolver Ataque", EnemyList[enemigo]);
+
+        if (tipo == 0 || tipo == 2 || tipo == 3 || tipo == 4)
+        {
+
+            if (Player.GetComponent<PlayerController>().Transformacion)
+            {
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
+                CreateDmgHealText(true, danyo, Player);
+
+            }
+            else
+            {
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= danyo;
+                CreateDmgHealText(false, danyo, Player);
+
+            }
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else if (tipo == 1 || tipo == 5)
+        {
+
+            StartCoroutine(EnemyList[enemigo].GetComponent<EnemyController>().DoubleAttack(danyo, 0.5f));
+
+        }
+        else if (tipo == 9 || tipo == 10 || tipo == 11 || tipo == 12)
+        {
+
+            if(Player.GetComponent<PlayerController>().Transformacion)
+            {
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
+                CreateDmgHealText(true, danyo, Player);
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 0;
+                CreateDmgHealText(true, 0, EnemyList[enemigo]);
+
+            }
+            else
+            {
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= danyo;
+                CreateDmgHealText(false, danyo, Player);
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                CreateDmgHealText(true, danyo, EnemyList[enemigo]);
+
+            }
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else if (tipo == 13)
+        {
+
+            Player.GetComponent<PlayerController>().Bloqueado = true;
+            CreateSpellText("Bloqueado", Player);
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else if (tipo == 14)
+        {
+
+            Player.GetComponent<PlayerController>().Bloqueado = true;
+            CreateSpellText("Bloqueado", Player);
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
+            CreateDmgHealText(true, 10, Player);
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else if (tipo == 15 || tipo == 16)
+        {
+
+            CreateSpellText("Debilitado", Player);
+            Player.GetComponent<PlayerController>().Debilitado = true;
+            Player.GetComponent<PlayerController>().Debilidad -= 3;
+            Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra += 3;
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else if (tipo == 20)
+        {
+
+            CreateSpellText("Envenenado", Player);
+            Player.GetComponent<PlayerController>().Envenenado = true;
+            Player.GetComponent<PlayerController>().Veneno += 3;
+            Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+        else if (tipo == 21)
+        {
+
+            CreateSpellText("Envenenado", Player);
+            Player.GetComponent<PlayerController>().Envenenado = true;
+            Player.GetComponent<PlayerController>().Veneno += 3;
+            Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 15;
+            CreateDmgHealText(true, 15, Player);
+
+            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+
+        }
+
 
     }
 

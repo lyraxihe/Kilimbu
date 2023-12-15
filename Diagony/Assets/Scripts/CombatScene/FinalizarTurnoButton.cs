@@ -40,6 +40,10 @@ public class FinalizarTurnoButton : MonoBehaviour
 
             }
 
+            // Control del estado Bloqueado en el Player
+            if(CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Bloqueado)
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Bloqueado = false;
+
             // Control del estado Fuerte en el Player
             if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte > 0)
             {
@@ -104,17 +108,32 @@ public class FinalizarTurnoButton : MonoBehaviour
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno -= 3;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenado = 0; // Se resetea cada vez que se termina un efecto de Débil
 
-                }
+                }  
 
-                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado == 0)
+            }
+
+            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra > 0)
+            {
+
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra--;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenadoDevolverIra++;
+
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenadoDevolverIra == 3)
                 {
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = false;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno = 0;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().veneno_icon = 0;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(0);
-                }
-                   
 
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEnvenenadoDevolverIra = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+                }
+
+            }
+
+            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado == 0 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra == 0)
+            {
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = false;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno = 0;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().veneno_icon = 0;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(0);
             }
 
             // Control del estado debilitado en el Player
@@ -130,17 +149,32 @@ public class FinalizarTurnoButton : MonoBehaviour
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitado = 0; // Se resetea cada vez que se termina un efecto de Débil
 
-                }
+                }   
 
-                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado == 0)
+            }
+
+            if(CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra > 0)
+            {
+
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra--;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitadoDevolverIra++;
+
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitadoDevolverIra == 3)
                 {
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = false;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad = 0;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().debilidad_icon = 0;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(1);
-                }
-                    
 
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitadoDevolverIra = 0; // Se resetea cada vez que se termina un efecto de Débil
+
+                }
+
+            }
+
+            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado == 0 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra == 0)
+            {
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = false;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad = 0;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().debilidad_icon = 0;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(1);
             }
 
             CombatScene.GetComponent<CombatController>().CartasCreadas = false;
