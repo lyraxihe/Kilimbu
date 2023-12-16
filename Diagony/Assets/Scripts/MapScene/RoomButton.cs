@@ -32,6 +32,7 @@ public class RoomButton : MonoBehaviour
 
     public void OnClick()
     {
+        SetInteractuable.interactable = false;
         for (int i = 0; i < numContections; i++)
         {
             conections[i].GetComponent<Button>().interactable = true;
