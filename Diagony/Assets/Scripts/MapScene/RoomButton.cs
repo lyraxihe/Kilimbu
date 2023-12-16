@@ -27,7 +27,7 @@ public class RoomButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        ComprobarConexionesActivas();
     }
 
     public void OnClick()
@@ -39,5 +39,16 @@ public class RoomButton : MonoBehaviour
         }
         SceneManager.LoadScene("CombatScene");
 
+    }
+
+    public void ComprobarConexionesActivas()
+    {
+        for (int i = 0; i < numContections; i++)
+        {
+            if (conections[i].GetComponent<Button>().interactable)
+            {
+                SetInteractuable.interactable = false;
+            }
+        }
     }
 }

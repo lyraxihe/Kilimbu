@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,14 +10,19 @@ public class PausaButton : MonoBehaviour
     [SerializeField] GameObject PanelPausa;
     [SerializeField] GameObject VariablesGlobales;
     [SerializeField] GameObject CombatScene;
+    public bool victoria;
+    TMP_Text textButton;
     void Start()
     {
+        victoria = false;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+        textButton = gameObject.GetComponentInChildren<TextMeshPro>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+
     }
 
     public void OnClick()
@@ -45,6 +51,7 @@ public class PausaButton : MonoBehaviour
 
     public void Escapar()
     {
+        
 
         VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
         CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
@@ -54,8 +61,18 @@ public class PausaButton : MonoBehaviour
 
     public void VictoriaDerrota()
     {
+        victoria = CombatScene.GetComponent<CombatController>().RecompensaVictoria;
 
-        SceneManager.LoadScene("MapScene");
+        if (victoria)
+        {
+            Debug.Log("victoria boton pausa");
+            SceneManager.LoadScene("MapScene");
+        }
+        else
+        {
+            Debug.Log("derrota boton pausa");
+            SceneManager.LoadScene("MainMenu");
+        }
 
     }
 

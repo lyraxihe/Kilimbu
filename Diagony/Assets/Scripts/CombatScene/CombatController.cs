@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
@@ -45,7 +46,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] TMP_Text RecompensaText;
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
-    [SerializeField] bool RecompensaVictoria;
+    [SerializeField] public bool RecompensaVictoria;
     [SerializeField] int victoria_etc;
     public int numTristeza;
 
@@ -1171,7 +1172,7 @@ public class CombatController : MonoBehaviour
           
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "DERROTA";
-            RecompensaText.text = "Has sido derrotado!";
+            RecompensaText.text = "¡Te han derrotado!";
             Time.timeScale = 0f;
            // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
@@ -1181,16 +1182,16 @@ public class CombatController : MonoBehaviour
         //else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
         else if(EnemyList.Count == 0)
         {
+            RecompensaVictoria = true;
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
             RecompensaText.text = "Recompensa " + RecompensaDinero + " de oro";
-            RecompensaVictoria = true;
+           
             if (victoria_etc == 0 && RecompensaVictoria == true)
             {
                 Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += RecompensaDinero;
-                RecompensaVictoria = false;
                 victoria_etc += 1;
             }
 
