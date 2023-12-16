@@ -14,7 +14,7 @@ public class RoomButton : MonoBehaviour
     [SerializeField] public float id; // id
     [SerializeField] public GameObject[] conections = new GameObject[4];
     [SerializeField] public int numContections;
-    [SerializeField] public Button SetInteractuable;
+    [SerializeField] public GameObject MapController_;
 
     void Start()
     {
@@ -24,31 +24,33 @@ public class RoomButton : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        ComprobarConexionesActivas();
+       // ComprobarConexionesActivas();
     }
 
     public void OnClick()
     {
-        SetInteractuable.interactable = false;
+      
+        gameObject.GetComponent<Button>().interactable = false;
         for (int i = 0; i < numContections; i++)
         {
             conections[i].GetComponent<Button>().interactable = true;
         }
+        MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
         SceneManager.LoadScene("CombatScene");
 
     }
 
-    public void ComprobarConexionesActivas()
-    {
-        for (int i = 0; i < numContections; i++)
-        {
-            if (conections[i].GetComponent<Button>().interactable)
-            {
-                SetInteractuable.interactable = false;
-            }
-        }
-    }
+    //public void ComprobarConexionesActivas()
+    //{
+    //    for (int i = 0; i < numContections; i++)
+    //    {
+    //        if (conections[i].GetComponent<Button>().interactable)
+    //        {
+    //            SetInteractuable.interactable = false;
+    //        }
+    //    }
+    //}
 }

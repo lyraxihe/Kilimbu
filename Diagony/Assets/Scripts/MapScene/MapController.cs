@@ -144,7 +144,8 @@ public class MapController : MonoBehaviour
         clonEntrada.transform.position = new Vector3(StartCoord.x, StartCoord.y, 0);
         clonEntrada.transform.SetParent(Content.transform, false);
         clonEntrada.GetComponent<Button>().image.color = Color.cyan;
-        clonEntrada.GetComponent<RoomButton>().SetInteractuable.interactable = true;
+        clonEntrada.GetComponent<Button>().interactable = true;
+        clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
 
 
 
@@ -186,7 +187,8 @@ public class MapController : MonoBehaviour
                 clon = Instantiate(RoomButton);
                 clon.GetComponent<RoomButton>().x = posicionSala;
                 clon.GetComponent<RoomButton>().y = j;
-                clon.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+                clon.GetComponent<Button>().interactable = false;
+                clon.GetComponent<RoomButton>().MapController_ = gameObject;
 
 
                 RoomsGameobjects[posicionSala, j] = clon;
@@ -257,7 +259,8 @@ public class MapController : MonoBehaviour
         clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
         clonDescanso.transform.SetParent(Content.transform, false);
         clonDescanso.GetComponent<Button>().image.color = Color.green;
-        clonDescanso.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+        clonDescanso.GetComponent<Button>().interactable = false;
+        clonDescanso.GetComponent<RoomButton>().MapController_ = gameObject;
 
 
         NextXCoord += 100;
@@ -266,8 +269,8 @@ public class MapController : MonoBehaviour
         clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
         clonBoss.transform.SetParent(Content.transform, false);
         clonBoss.GetComponent<Button>().image.color = Color.blue;
-        clonBoss.GetComponent<RoomButton>().SetInteractuable.interactable = false;
-
+        clonBoss.GetComponent<Button>().interactable = false;
+        clonBoss.GetComponent<RoomButton>().MapController_ = gameObject;
 
 
     }
@@ -582,37 +585,6 @@ public class MapController : MonoBehaviour
                     }
 
 
-                        //if (RoomsGameobjects[j, i].GetComponent<RoomButton>().x == 0)
-                        //{
-                        //    if ((actual_salas_por_fila == 2 && siguiente_salas_por_fila == 2) || (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 2 || siguiente_salas_por_fila == 3) || (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 2) || (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 4))
-                        //        {
-                        //            for (int k = 0; k < x_coord; k++)
-                        //            {
-                        //                if (Occupied_Rooms[k, i + 1])
-                        //                {
-                        //                    Debug.Log("0- una con");
-                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
-                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
-                        //                    break;
-                        //                }
-                        //            }
-                        //        }
-
-                        //        else if ((actual_salas_por_fila == 2 && siguiente_salas_por_fila == 3 || siguiente_salas_por_fila == 4)|| (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 4) || (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 3))
-                        //        {
-                        //            for (int k = 0; k < x_coord && RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections < 3; k++)
-                        //            {
-                        //                if (Occupied_Rooms[k, i + 1])
-                        //                {
-                        //                    Debug.Log("0- dos con");
-                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
-                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
-                        //                }
-                        //            }
-                        //        }
-                        //}
-
-
                 }
                     else if (Occupied_Rooms[j, i])
                     {
@@ -624,6 +596,40 @@ public class MapController : MonoBehaviour
         }
         clonDescanso.GetComponent<RoomButton>().conections[clonDescanso.GetComponent<RoomButton>().numContections] = clonBoss;
         clonDescanso.GetComponent<RoomButton>().numContections++;
+
+    }
+
+    public void ComprobarInactivos()
+    {
+        bool desactivar = false;
+        for (int i = 0; i < y_coord-1; i++) //recorre el array con todas las salas en el mapa
+        {
+            
+            for (int j = 0; j < x_coord; j++)
+            {
+                if (j == 0) //si está e el 0 de la columna
+                {
+                    desactivar = false;
+                    for (int k = 0; k < x_coord; k++) //recorre la columna entera
+                    {
+                        if (Occupied_Rooms[k, i+1]) //solo en las salas ocupadas de la siguiente columna
+                        {
+                            if ((RoomsGameobjects[k, i + 1].GetComponent<Button>().interactable)) //comprueba si está el botón interactuable 
+                            {
+                                desactivar = true; //pone en true el booleano así luego desactiva las salas de la columna actual
+                                break;
+                            }
+                           
+                        }
+                    }
+                }
+                if (Occupied_Rooms[j, i] && desactivar) //en caso de que sea positivo y la sala esté ocupada
+                {
+                    Debug.Log("Desactivar salas en la siguiente columna.");
+                    RoomsGameobjects[j, i].GetComponent<Button>().interactable = false; //pone para que no se pueda interactuar con esos botones
+                }
+            }
+        }
 
     }
 }
