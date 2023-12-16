@@ -12,7 +12,7 @@ public class RoomButton : MonoBehaviour
 
 
     [SerializeField] public float id; // id
-    [SerializeField] public GameObject[] conections = new GameObject[5];
+    [SerializeField] public GameObject[] conections = new GameObject[4];
     [SerializeField] public int numContections;
     [SerializeField] public Button SetInteractuable;
 

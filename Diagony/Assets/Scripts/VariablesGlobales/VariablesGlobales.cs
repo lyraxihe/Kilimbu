@@ -12,8 +12,6 @@ public class VariablesGlobales : MonoBehaviour
     public int MaxHealthProtagonista;
     public int MaxManaProtagonista;     // Maná máximo del jugador con el que podrá usar las cartas (se resetea en cada turno)
     public int DineroAmount;
-    public TMP_Text Dinero_text;
-
     public bool EstaEnPausa = false;
     public int SpellNumber = 5;
 
@@ -49,7 +47,7 @@ public class VariablesGlobales : MonoBehaviour
    
     void Update()
     {
-        Dinero_text.text = "Dinero: " + DineroAmount;
+       
         // ControlMaxManaProtagonista();
         ControlHealthProtagonista();
 

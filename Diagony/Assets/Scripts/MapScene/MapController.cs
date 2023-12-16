@@ -46,7 +46,6 @@ public class MapController : MonoBehaviour
     private void Awake() //sigleton
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
-        VariablesGlobales.GetComponent<VariablesGlobales>().Dinero_text = Dinero_text;
 
         if (instance == null)
         {
@@ -62,7 +61,7 @@ public class MapController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+
     void Start()
     {
 
@@ -71,7 +70,7 @@ public class MapController : MonoBehaviour
         Conections();        // crea las conexiones de las salas
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (MapScene_active())
@@ -83,6 +82,14 @@ public class MapController : MonoBehaviour
         {
             Canvas.SetActive(false);
         }
+
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            Destroy(Canvas);
+            Destroy(VariablesGlobales);
+            Destroy(gameObject);
+        }
+        Dinero_text.text = "Dinero: " + VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount;
 
     }
 
@@ -106,60 +113,9 @@ public class MapController : MonoBehaviour
     {
 
         // Inicialización de las coordenadas de la Entrada
-        //StartCoord.x = -400;
         StartCoord.x = -350;
         StartCoord.y = 0;
         NextXCoord = StartCoord.x;
-
-
-
-        //StartCoord.x = -360 + Canvas.transform.position.x;
-        //StartCoord.y = 0 + Canvas.transform.position.y;
-
-        //// Inicialización de las coordenadas de la Sala de Descanso
-        //RestCoord.x = 230 + Canvas.transform.position.x;
-        //RestCoord.y = 0 + Canvas.transform.position.y; ;
-
-        //// Inicialización de las coordenadas del Boss
-        //BossCoord.x = 360 + Canvas.transform.position.x;
-        //BossCoord.y = 0 + Canvas.transform.position.y; ;
-
-        //// Inicialización del resto de Salas
-        //RoomsCoord[0, 0].x = -200 + Canvas.transform.position.x;
-        //RoomsCoord[0, 0].y = 140 + Canvas.transform.position.y;
-
-        //RoomsCoord[0, 1].x = -100 + Canvas.transform.position.x;
-        //RoomsCoord[0, 1].y = 140 + Canvas.transform.position.y;
-
-        //RoomsCoord[0, 2].x = 0 + Canvas.transform.position.x;
-        //RoomsCoord[0, 2].y = 140 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[0, 3].x = 100 + Canvas.transform.position.x;
-        //RoomsCoord[0, 3].y = 140 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[1, 0].x = -200 + Canvas.transform.position.x;
-        //RoomsCoord[1, 0].y = 0 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[1, 1].x = -100 + Canvas.transform.position.x;
-        //RoomsCoord[1, 1].y = 0 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[1, 2].x = 0 + Canvas.transform.position.x;
-        //RoomsCoord[1, 2].y = 0 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[1, 3].x = 100 + Canvas.transform.position.x;
-        //RoomsCoord[1, 3].y = 0 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[2, 0].x = -200 + Canvas.transform.position.x;
-        //RoomsCoord[2, 0].y = -140 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[2, 1].x = -100 + Canvas.transform.position.x;
-        //RoomsCoord[2, 1].y = -140 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[2, 2].x = 0 + Canvas.transform.position.x;
-        //RoomsCoord[2, 2].y = -140 + Canvas.transform.position.y; ;
-
-        //RoomsCoord[2, 3].x = 100 + Canvas.transform.position.x;
-        //RoomsCoord[2, 3].y = -140 + Canvas.transform.position.y; ;
 
     }
 
@@ -191,7 +147,7 @@ public class MapController : MonoBehaviour
         clonEntrada.GetComponent<RoomButton>().SetInteractuable.interactable = true;
 
 
-       
+
         // Crea el resto de salas
         for (int j = 0; j < Occupied_Rooms.GetLength(1); j++) // Crea un bucle que recorre el array con su respectiva medida
         {
@@ -208,7 +164,7 @@ public class MapController : MonoBehaviour
             {
                 nSalasEnColumna = 4;
             }
-          
+
             NextXCoord += 100;
             for (int i = 0; i < nSalasEnColumna; i++)
             {
@@ -234,7 +190,7 @@ public class MapController : MonoBehaviour
 
 
                 RoomsGameobjects[posicionSala, j] = clon;
-               
+
                 switch (posicionSala)
                 {
                     case 0:
@@ -283,7 +239,7 @@ public class MapController : MonoBehaviour
 
                 clon.transform.SetParent(Content.transform, false);
                 // clon.transform.position = new Vector2(RoomsCoord[posicionSala, j].x, RoomsCoord[posicionSala, j].y); // Coloca la sala en sus coordenadas adecuadas
-               
+
 
                 // rand = Random.Range(1, 11);
 
@@ -295,59 +251,375 @@ public class MapController : MonoBehaviour
                 //clon.GetComponent<Button>().image.color = Color.blue;
             }
         }
-            NextXCoord += 100;
-            // Crea la Sala de Descanso
-            clonDescanso = Instantiate(RoomButton);
-            clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
-            clonDescanso.transform.SetParent(Content.transform, false);
-            clonDescanso.GetComponent<Button>().image.color = Color.green;
-            clonDescanso.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+        NextXCoord += 100;
+        // Crea la Sala de Descanso
+        clonDescanso = Instantiate(RoomButton);
+        clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
+        clonDescanso.transform.SetParent(Content.transform, false);
+        clonDescanso.GetComponent<Button>().image.color = Color.green;
+        clonDescanso.GetComponent<RoomButton>().SetInteractuable.interactable = false;
 
 
         NextXCoord += 100;
-            // Crea el Boss
-            clonBoss = Instantiate(RoomButton);
-            clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
-            clonBoss.transform.SetParent(Content.transform, false);
-            clonBoss.GetComponent<Button>().image.color = Color.blue;
-            clonBoss.GetComponent<RoomButton>().SetInteractuable.interactable = false;
+        // Crea el Boss
+        clonBoss = Instantiate(RoomButton);
+        clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
+        clonBoss.transform.SetParent(Content.transform, false);
+        clonBoss.GetComponent<Button>().image.color = Color.blue;
+        clonBoss.GetComponent<RoomButton>().SetInteractuable.interactable = false;
 
 
 
     }
 
- 
+
 
     void Conections()
     {
-        
-            for (int i = 0; i < x_coord; i++)
+
+        for (int i = 0; i < x_coord; i++)
+        {
+            if (Occupied_Rooms[i, 0])
             {
-                if (Occupied_Rooms[i, 0])
-                {
                 clonEntrada.GetComponent<RoomButton>().conections[clonEntrada.GetComponent<RoomButton>().numContections] = RoomsGameobjects[i, 0];
                 clonEntrada.GetComponent<RoomButton>().numContections++;
-                }
             }
+        }
 
-           
+
+        int siguiente_salas_por_fila = 0;
+        int actual_salas_por_fila = 0;
 
         for (int i = 0; i < y_coord; i++)
         {
+            int actual_sala_ocupada = 0;
+            int ultima_sala_ocupada = 0; //sirve para retomar el bucle for desde la anterior sala conectada
+            int CantidadConections = 0;
+
             for (int j = 0; j < x_coord; j++)
             {
-                if (Occupied_Rooms[j, i])
+               
+                if (i != (y_coord - 1))
                 {
-                    if (i != (y_coord-1))
+
+                    if (j == 0)
                     {
+                        siguiente_salas_por_fila = 0;
+                        actual_salas_por_fila = 0;
+
+                        for (int k = 0; k < x_coord; k++)
+                        {
+                            if (Occupied_Rooms[k, i])
+                            {
+                                actual_salas_por_fila += 1;
+                            }
+                            if (Occupied_Rooms[k, i + 1])
+                            {
+                                siguiente_salas_por_fila += 1;
+                            }
+                        }
+                    }
+                   
+                    if (Occupied_Rooms[j, i])
+                    {
+                        actual_sala_ocupada++;
+                        if (actual_salas_por_fila == 2 && siguiente_salas_por_fila == 2) // 2-2
+                        {
+                            if (actual_sala_ocupada == 2)
+                            {
+                                ultima_sala_ocupada++;
+                            }
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+
+                                    // Debug.Log("22 con");
+                                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                    ultima_sala_ocupada = k;
+                                    break;
+
+                                }
+
+                            }
+                        }
+
+                        else if (actual_salas_por_fila == 2 && siguiente_salas_por_fila == 3) // 2-3
+                        {
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+                                    if (actual_sala_ocupada == 1 && CantidadConections < 2)
+                                    {
+                                        //  Debug.Log("23 primera con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        CantidadConections++;
+                                    }
+                                    else if (actual_sala_ocupada == 2)
+                                    {
+                                        //  Debug.Log("23 segunda con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+
+                                    }
+                                }
+
+                            }
+                        }
+
+                        else if (actual_salas_por_fila == 2 && siguiente_salas_por_fila == 4) // 2-4
+                        {
+                            if (actual_sala_ocupada == 2)
+                            {
+                                ultima_sala_ocupada++;
+                            }
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+                                    if (actual_sala_ocupada == 1 && CantidadConections < 2)
+                                    {
+                                        //  Debug.Log("24 primera con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        CantidadConections++;
+                                    }
+                                    else if (actual_sala_ocupada == 2)
+                                    {
+                                        //  Debug.Log("24 segunda con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+
+                                    }
+                                }
+
+                            }
+                        }
+
+
+                        else if (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 2) // 3-2
+                        {
+
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+                                    if (actual_sala_ocupada == 1)
+                                    {
+                                        // Debug.Log("32 primera con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        break;
+                                    }
+
+                                    else if (CantidadConections < 2)
+                                    {
+                                        // Debug.Log("32 seg con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        CantidadConections++;
+
+                                    }
+                                    else
+                                    {
+                                        // Debug.Log("32 ter con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                    }
+
+
+                                }
+
+                            }
+                        }
+
+                        else if (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 3) // 3-3
+                        {
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+                                    if (actual_sala_ocupada == 1 && CantidadConections < 2)
+                                    {
+                                        // Debug.Log("33 prim con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        CantidadConections++;
+
+                                    }
+                                    else if (actual_sala_ocupada == 2)
+                                    {
+                                        //  Debug.Log("33 seg con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        break;
+                                    }
+                                    else if (actual_sala_ocupada == 3 && CantidadConections < 4)
+                                    {
+                                        // Debug.Log("33 ter con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        CantidadConections++;
+                                    }
+                                }
+
+                            }
+
+                        }
+                        else if (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 4) // 3-4
+                        {
+                            if (actual_sala_ocupada != 1)
+                            {
+                                ultima_sala_ocupada++;
+                            }
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+
+                                    if (actual_sala_ocupada == 1 || actual_sala_ocupada == 3)
+                                    {
+                                      //  Debug.Log("34 prim/ter con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        break;
+                                    }
+                                    else if (CantidadConections < 2)
+                                    {
+                                       // Debug.Log("34 seg con");
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                        RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                        ultima_sala_ocupada = k;
+                                        CantidadConections++;
+
+                                    }
+
+
+                                }
+                            }
+                        }
+
+                        else if (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 2) // 4-2
+                        {
+                            if (actual_sala_ocupada == 3)
+                            {
+                                ultima_sala_ocupada++;
+                            }
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+
+                                   // Debug.Log("42 con");
+                                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                    ultima_sala_ocupada = k;
+                                    break;
+
+                                }
+                            }
+                        }
+
+                        else if (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 3) // 4-3
+                        {
+                            if (actual_sala_ocupada == 2 || actual_sala_ocupada == 4)
+                            {
+                                ultima_sala_ocupada++;
+                            }
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+                                  // Debug.Log("43 con");
+                                   RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                   RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                   ultima_sala_ocupada = k;
+                                   break;
+                                }
+                            }
+                        }
+
+
+                        else if (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 4) // 4-4
+                        {
+                            if (actual_sala_ocupada != 1)
+                            {
+                                ultima_sala_ocupada++;
+                            }
+
+                            for (int k = ultima_sala_ocupada; k < x_coord; k++)
+                            {
+                                if (Occupied_Rooms[k, i + 1])
+                                {
+                                   // Debug.Log("44 con");
+                                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                                    ultima_sala_ocupada = k;
+                                    break;
+                                }
+                            }
+                        }
+
+
 
                     }
-                    else
+
+
+                        //if (RoomsGameobjects[j, i].GetComponent<RoomButton>().x == 0)
+                        //{
+                        //    if ((actual_salas_por_fila == 2 && siguiente_salas_por_fila == 2) || (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 2 || siguiente_salas_por_fila == 3) || (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 2) || (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 4))
+                        //        {
+                        //            for (int k = 0; k < x_coord; k++)
+                        //            {
+                        //                if (Occupied_Rooms[k, i + 1])
+                        //                {
+                        //                    Debug.Log("0- una con");
+                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                        //                    break;
+                        //                }
+                        //            }
+                        //        }
+
+                        //        else if ((actual_salas_por_fila == 2 && siguiente_salas_por_fila == 3 || siguiente_salas_por_fila == 4)|| (actual_salas_por_fila == 3 && siguiente_salas_por_fila == 4) || (actual_salas_por_fila == 4 && siguiente_salas_por_fila == 3))
+                        //        {
+                        //            for (int k = 0; k < x_coord && RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections < 3; k++)
+                        //            {
+                        //                if (Occupied_Rooms[k, i + 1])
+                        //                {
+                        //                    Debug.Log("0- dos con");
+                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = RoomsGameobjects[k, i + 1];
+                        //                    RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
+                        //                }
+                        //            }
+                        //        }
+                        //}
+
+
+                }
+                    else if (Occupied_Rooms[j, i])
                     {
                         RoomsGameobjects[j, i].GetComponent<RoomButton>().conections[RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections] = clonDescanso;
                         RoomsGameobjects[j, i].GetComponent<RoomButton>().numContections++;
                     }
-                }
+                
             }
         }
         clonDescanso.GetComponent<RoomButton>().conections[clonDescanso.GetComponent<RoomButton>().numContections] = clonBoss;

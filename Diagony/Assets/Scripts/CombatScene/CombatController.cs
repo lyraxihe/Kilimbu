@@ -46,7 +46,6 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject GameObject_Character_text;
     [SerializeField] TMP_Text Character_text;
     [SerializeField] bool RecompensaVictoria;
-    [SerializeField] TMP_Text Dinero_text;
     [SerializeField] int victoria_etc;
     public int numTristeza;
 
@@ -65,7 +64,6 @@ public class CombatController : MonoBehaviour
         
         victoria_etc = 0;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
-        VariablesGlobales.GetComponent<VariablesGlobales>().Dinero_text = Dinero_text;
 
     }
     void Start()
