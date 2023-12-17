@@ -11,8 +11,10 @@ public class MainMenuButtons : MonoBehaviour
     public void Play()
     {
 
-        MainMenu.SetActive(false);
-        Levels.SetActive(true);
+        //MainMenu.SetActive(false);
+        //Levels.SetActive(true);
+
+        SceneManager.LoadScene("MapScene");
 
     }
 
@@ -23,10 +25,10 @@ public class MainMenuButtons : MonoBehaviour
 
     }
 
-    public void Level1()
-    {
+    //public void Level1()
+    //{
 
-        SceneManager.LoadScene("MapScene");
+    //    SceneManager.LoadScene("MapScene");
 
-    }
+    //}
 }

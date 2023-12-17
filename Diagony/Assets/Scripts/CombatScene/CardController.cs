@@ -40,7 +40,6 @@ public class CardController : MonoBehaviour
     public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
     public int CosteMana;
 
-
     void Start()
     {
         MouseDrag = true;
@@ -119,8 +118,8 @@ public class CardController : MonoBehaviour
             }
 
             MouseOver = true;
-            transform.localScale = new Vector3(3, 4, 0);
-            transform.position = new Vector3(transform.position.x, -3, 0);
+            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            transform.position = new Vector3(transform.position.x, -3.33f, 0);
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
