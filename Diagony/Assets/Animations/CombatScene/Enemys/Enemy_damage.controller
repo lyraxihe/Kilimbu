@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy2_idle
+  m_Name: Miedo_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -37,7 +37,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
+    m_ConditionEvent: enemy_type
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8856798393875282725}
@@ -60,7 +60,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy2_danyo
+  m_Name: Miedo_danyo
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -89,7 +89,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
+    m_ConditionEvent: enemy_type
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2939690608700039947}
@@ -116,9 +116,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: danyo
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
-    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7895050784483986588}
   m_Solo: 0
@@ -128,7 +125,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -162,7 +159,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy2_damage
+  m_Name: Miedo_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -193,9 +190,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: danyo
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6661993040458320955}
   m_Solo: 0
@@ -205,7 +199,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -243,9 +237,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: atacar
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -976268930403075992}
   m_Solo: 0
@@ -255,7 +246,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -289,7 +280,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy3_idle
+  m_Name: Tristeza_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -317,7 +308,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy1_damage
+  m_Name: Ira_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -348,9 +339,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: atacar
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
-    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8069353637146461736}
   m_Solo: 0
@@ -360,7 +348,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -408,19 +396,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: danyo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: enemy_id
+    m_Controller: {fileID: 0}
+  - m_Name: enemy_type
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -514,7 +502,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
+    m_ConditionEvent: enemy_type
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5428260375745243536}
@@ -537,7 +525,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy3_danyo
+  m_Name: Tristeza_danyo
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -568,9 +556,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: danyo
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
-    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4583217746308094993}
   m_Solo: 0
@@ -580,7 +565,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -592,7 +577,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy1_idle
+  m_Name: Ira_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -642,7 +627,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy1_danyo
+  m_Name: Ira_danyo
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -691,7 +676,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy3_damage
+  m_Name: Tristeza_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -722,9 +707,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: atacar
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: enemy_id
-    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5766800951527090817}
   m_Solo: 0
@@ -734,7 +716,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

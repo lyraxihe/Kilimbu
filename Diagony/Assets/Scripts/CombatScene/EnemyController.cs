@@ -75,7 +75,7 @@ public class EnemyController : MonoBehaviour
         SetHealthEnemigo();
         //SetAtackEnenmigo();
         AttackEnemigo = 1;
-        EnemyAnimator.SetInteger("enemy_id", Id);
+        EnemyAnimator.SetInteger("enemy_type", Tipo);
         EnemyAnimator.SetBool("atacar", animation_damage);
 
 
