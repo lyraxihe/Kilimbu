@@ -381,9 +381,22 @@ public class EnemyController : MonoBehaviour
             {
                 if (SoloTristeza)
                 {
-                    damageAmount = 2;
-                    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                    CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                    {
+                        
+                        damageAmount = 2;
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+
+                    }
+                    else
+                    {
+                        damageAmount = 2;
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+
+                    }
+
                 }
 
                 else if (AttackType <= 3.3f && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado <=0)
