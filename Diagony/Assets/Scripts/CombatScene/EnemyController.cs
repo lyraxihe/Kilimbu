@@ -355,20 +355,22 @@ public class EnemyController : MonoBehaviour
                     damageAmount = Random.Range(3, 5) + AttackEnemigo + Debilidad;
                     if (damageAmount < 0)
                         damageAmount = 0;
-                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
-                    {
-                        Debug.Log("ataque que cura al player");
-                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+                    //if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                    //{
+                    //    Debug.Log("ataque que cura al player");
+                    //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                    //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
 
-                    }
-                    else
-                    {
-                        Debug.Log("atq normal");
-                        StartCoroutine(DoubleAttack(damageAmount, 0.5f));
-                        
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log("atq normal");
+                    //    StartCoroutine(DoubleAttack(damageAmount, 0.5f));
 
-                    }
+
+                    //}
+                    Debug.Log("atq normal");
+                    StartCoroutine(DoubleAttack(damageAmount, 0.5f));
 
                 }
 
