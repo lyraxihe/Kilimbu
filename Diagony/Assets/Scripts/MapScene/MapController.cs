@@ -30,7 +30,7 @@ public class MapController : MonoBehaviour
     //Coordinadas BossCoord = new Coordinadas();         // Coordenadas del boss de la mazmorra
     //Coordinadas[,] RoomsCoord = new Coordinadas[x_coord, y_coord]; // Coordenadas del resto de salas
     bool[,] Occupied_Rooms = new bool[x_coord, y_coord];           // Indicador de si la sala está ocupada
-    [SerializeField] GameObject[,] RoomsGameobjects = new GameObject[x_coord, y_coord]; // Guarda los clones de las salas
+    public GameObject[,] RoomsGameobjects = new GameObject[x_coord, y_coord]; // Guarda los clones de las salas
 
     public int ContSalas;
 

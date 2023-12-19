@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class RoomButton : MonoBehaviour
 {
 
+    [SerializeField] GameObject VariablesGlobales;
+
     [SerializeField] public float x; // Coordinada X
     [SerializeField] public float y; // Coordinada Y
 
@@ -19,8 +21,7 @@ public class RoomButton : MonoBehaviour
     void Start()
     {
 
-        
-
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
 
     }
 
@@ -28,11 +29,17 @@ public class RoomButton : MonoBehaviour
     void Update()
     {
        // ComprobarConexionesActivas();
+
+        if(VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
+            GetComponent<Button>().enabled = false;
+        else
+            GetComponent<Button>().enabled = true;
+
     }
 
     public void OnClick()
     {
-      
+
         gameObject.GetComponent<Button>().interactable = false;
         for (int i = 0; i < numContections; i++)
         {
