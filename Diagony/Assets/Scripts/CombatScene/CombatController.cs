@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -645,7 +642,12 @@ public class CombatController : MonoBehaviour
 
                 Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion--;
                 if (Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion == 0)
+                {
                     Player.GetComponent<PlayerController>().Transformacion = false;
+                    Player.GetComponent<PlayerController>().debilidad_icon = 0;
+                    Player.GetComponent<PlayerController>().EliminarSpell(4);
+                }
+                   
 
             }
 

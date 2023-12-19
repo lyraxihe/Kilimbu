@@ -1,9 +1,5 @@
-﻿using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using TMPro;
-using UnityEditor.SceneTemplate;
 using UnityEngine;
 using UnityEngine.UI;
 
