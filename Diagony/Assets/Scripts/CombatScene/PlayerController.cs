@@ -202,6 +202,7 @@ public class PlayerController : MonoBehaviour
         {
             ContadorDeTurnosEsperanzado = 0;
         }
+        
 
         if (Envenenado && veneno_icon == 0)
         {
