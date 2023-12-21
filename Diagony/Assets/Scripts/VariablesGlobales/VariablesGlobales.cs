@@ -17,6 +17,8 @@ public class VariablesGlobales : MonoBehaviour
 
     public static VariablesGlobales instance;
 
+    public List<int> AmountCards = new List<int>() {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // Lista con las cantidades de cada carta (posición = ID carta en el excel)
+
     private void Awake() //sigleton
     {
         DineroAmount = 0;

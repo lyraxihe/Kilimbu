@@ -78,6 +78,9 @@ public class CombatController : MonoBehaviour
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "" };
 
+    [SerializeField] List<int> TotalCards = new List<int>(); // Lista con el número de cartas del Jugador para el combate (Se rellena con las cantidades especificadas en Variables Globales)
+    [SerializeField] List<int> HandCardsAmount = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Cantidad de cartas de cada tipo en la mano durante el turno del Jugador
+
     private void Awake()
     {
         
@@ -98,6 +101,15 @@ public class CombatController : MonoBehaviour
         if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista;
+        }
+
+        // Inicializa la lista con la cantidad de cartas del Jugadro en el combate
+        for(int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards.Count; i++)
+        {
+
+            for(int j = 0; j < VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[i]; j++)
+                TotalCards.Add(i);
+
         }
 
         Time.timeScale = 1f;
@@ -326,16 +338,27 @@ public class CombatController : MonoBehaviour
             GameObject clon;
             TMP_Text[] newText;
             int cardType;
+            bool canCreate;
 
             for (int i = 0; i < 5; i++)
             {
 
-                cardType = Random.Range(0, 24);
+                do
+                {
+                    canCreate = true;
+                    cardType = Random.Range(0, TotalCards.Count); // Aleatorio entre las cartas totales del Jugador para el combate
+                    if (HandCardsAmount[TotalCards[cardType]] + 1 > VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[TotalCards[cardType]])
+                        canCreate = false;
+
+                } while (!canCreate);
+
+                HandCardsAmount[TotalCards[cardType]]++;
+
                 clon = Instantiate(Card);                                          // Crea una carta
                 clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
                 clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-                clon.GetComponent<CardController>().Tipo = cardType; //hace que la carta sea de alguna de las del tipo
+                clon.GetComponent<CardController>().Tipo = TotalCards[cardType]; //hace que la carta sea de alguna de las del tipo
                 clon.GetComponent<CardController>().VariablesGlobales = VariablesGlobales; // Almacena las variables globales en la carta
                 clon.GetComponent<CardController>().ArrowEmitter = ArrowEmitter;
                 clon.GetComponent<CardController>().CosteMana = CardManaCost(clon.GetComponent<CardController>().Tipo);
@@ -344,19 +367,19 @@ public class CombatController : MonoBehaviour
                 //clon.GetComponent<CardController>().TextDescription = CardDescriptions[i];
 
                 // Implementa los sprites
-                if (cardType <= 5)
+                if (TotalCards[cardType] <= 5)
                     clon.GetComponent<Image>().sprite = CardSprites[0];
-                else if (cardType <= 12)
+                else if (TotalCards[cardType] <= 12)
                     clon.GetComponent<Image>().sprite = CardSprites[1];
                 else
                     clon.GetComponent <Image>().sprite = CardSprites[2];
 
                 // Actualiza los textos
                 newText = clon.GetComponentsInChildren<TMP_Text>();
-                newText[0].text = CardTitles[cardType];
-                newText[1].text = CardDescriptions[cardType];
-                newText[2].text = CardCost[cardType];
-                newText[3].text = CardDuration[cardType];
+                newText[0].text = CardTitles[TotalCards[cardType]];
+                newText[1].text = CardDescriptions[TotalCards[cardType]];
+                newText[2].text = CardCost[TotalCards[cardType]];
+                newText[3].text = CardDuration[TotalCards[cardType]];
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.1f);
@@ -597,6 +620,9 @@ public class CombatController : MonoBehaviour
      */
     public void EliminarCarta(int id)
     {
+
+        // Reduce la cantidad de cartas en la mano del Jugador en el combate
+        HandCardsAmount[CardList[id].GetComponent<CardController>().Tipo]--;
 
         // Elimina la carta
         CardList.RemoveAt(id);
