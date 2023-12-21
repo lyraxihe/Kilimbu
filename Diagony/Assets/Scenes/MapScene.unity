@@ -993,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8.73999, y: -22.599976}
+  m_AnchoredPosition: {x: 8.73999, y: -22.599983}
   m_SizeDelta: {x: -129.43, y: -111.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &879856730
@@ -1290,7 +1290,6 @@ GameObject:
   - component: {fileID: 1302619614}
   - component: {fileID: 1302619617}
   - component: {fileID: 1302619618}
-  - component: {fileID: 1302619619}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1360,18 +1359,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &1302619619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302619611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ace9e87e6548a7b4ebc2b15b0481b7c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1362449721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,6 +2021,7 @@ MonoBehaviour:
   DineroAmount: 0
   EstaEnPausa: 0
   SpellNumber: 5
+  AmountCards: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
 --- !u!4 &1999000636
 Transform:
   m_ObjectHideFlags: 0

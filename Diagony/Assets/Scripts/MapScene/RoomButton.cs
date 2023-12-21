@@ -41,18 +41,21 @@ public class RoomButton : MonoBehaviour
 
     public void OnClick()
     {
-
         gameObject.GetComponent<Button>().interactable = false;
+        MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
+
         for (int i = 0; i < numContections; i++)
         {
             conections[i].GetComponent<Button>().interactable = true;
         }
-        MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
+       
         
-        if(RoomType == 0)
+        if (RoomType == 0)
             SceneManager.LoadScene("CombatScene");
-        else if(RoomType == 1)
+        else if (RoomType == 1)
             SceneManager.LoadScene("ChestScene");
+        else if (RoomType == 2)
+            SceneManager.LoadScene("ShopScene");
 
     }
 

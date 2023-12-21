@@ -145,6 +145,7 @@ public class MapController : MonoBehaviour
         clonEntrada.GetComponent<Button>().image.color = Color.cyan;
         clonEntrada.GetComponent<Button>().interactable = true;
         clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
+        clonEntrada.GetComponent<RoomButton>().RoomType = 1;
 
 
 
@@ -188,7 +189,15 @@ public class MapController : MonoBehaviour
                 clon.GetComponent<RoomButton>().y = j;
                 clon.GetComponent<Button>().interactable = false;
                 clon.GetComponent<RoomButton>().MapController_ = gameObject;
-                clon.GetComponent<RoomButton>().RoomType = 0;
+                if (j == 0)
+                {
+                    clon.GetComponent<RoomButton>().RoomType = 2;
+                }
+                else
+                {
+                    clon.GetComponent<RoomButton>().RoomType = 0;
+                }
+               
 
                 RoomsGameobjects[posicionSala, j] = clon;
 
