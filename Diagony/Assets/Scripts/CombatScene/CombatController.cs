@@ -76,7 +76,7 @@ public class CombatController : MonoBehaviour
 
     List<string> CardCost = new List<string>() { "1", "1", "2", "2", "3", "3", "0", "1", "2", "2", "3", "3", "5", "1", "0", "1", "2", "1", "0", "2", "1", "0", "4", "3" };
 
-    List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "" };
+    List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
 
     [SerializeField] List<int> TotalCards = new List<int>(); // Lista con el número de cartas del Jugador para el combate (Se rellena con las cantidades especificadas en Variables Globales)
     [SerializeField] List<int> HandCardsAmount = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Cantidad de cartas de cada tipo en la mano durante el turno del Jugador

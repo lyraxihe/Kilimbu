@@ -188,7 +188,7 @@ public class MapController : MonoBehaviour
                 clon.GetComponent<RoomButton>().y = j;
                 clon.GetComponent<Button>().interactable = false;
                 clon.GetComponent<RoomButton>().MapController_ = gameObject;
-
+                clon.GetComponent<RoomButton>().RoomType = 0;
 
                 RoomsGameobjects[posicionSala, j] = clon;
 

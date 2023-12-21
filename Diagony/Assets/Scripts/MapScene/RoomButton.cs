@@ -18,6 +18,8 @@ public class RoomButton : MonoBehaviour
     [SerializeField] public int numContections;
     [SerializeField] public GameObject MapController_;
 
+    public int RoomType; // 0: Combate - 1: Cofre
+
     void Start()
     {
 
@@ -46,7 +48,11 @@ public class RoomButton : MonoBehaviour
             conections[i].GetComponent<Button>().interactable = true;
         }
         MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
-        SceneManager.LoadScene("CombatScene");
+        
+        if(RoomType == 0)
+            SceneManager.LoadScene("CombatScene");
+        else if(RoomType == 1)
+            SceneManager.LoadScene("ChestScene");
 
     }
 
