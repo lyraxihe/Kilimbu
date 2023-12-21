@@ -69,7 +69,12 @@ public class ChestController : MonoBehaviour
     {
 
         if(!CartasCreadas)
+        {
+
+            CartasCreadas = true;
             StartCoroutine(CreateCards());
+
+        }
 
     }
 
@@ -121,8 +126,6 @@ public class ChestController : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
 
         }
-
-        CartasCreadas = true;
 
     }
 
