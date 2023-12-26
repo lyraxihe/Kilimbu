@@ -17,12 +17,14 @@ public class RoomButton : MonoBehaviour
     [SerializeField] public GameObject[] conections = new GameObject[4];
     [SerializeField] public int numContections;
     [SerializeField] public GameObject MapController_;
+    [SerializeField] GameObject CanvasSingleton;
+
 
     public int RoomType; // 0: Combate - 1: Cofre
 
     void Start()
     {
-
+        CanvasSingleton = GameObject.Find("CanvasSingleton");
         VariablesGlobales = GameObject.Find("VariablesGlobales");
 
     }
@@ -41,15 +43,18 @@ public class RoomButton : MonoBehaviour
 
     public void OnClick()
     {
+        
+        CanvasSingleton.GetComponent<CanvasSingleton>().VerMapa = false;
         gameObject.GetComponent<Button>().interactable = false;
-        MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
 
         for (int i = 0; i < numContections; i++)
         {
             conections[i].GetComponent<Button>().interactable = true;
         }
-       
-        
+
+        MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
+
+
         if (RoomType == 0)
             SceneManager.LoadScene("CombatScene");
         else if (RoomType == 1)

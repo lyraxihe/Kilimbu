@@ -11,6 +11,8 @@ public class CanvasSingleton : MonoBehaviour
     [SerializeField] GameObject Content;
     [SerializeField] GameObject ScrollAreaCompendio;
     [SerializeField] GameObject Compendio;
+    [SerializeField] GameObject Map;
+    public bool VerMapa;
 
     private void Awake() //sigleton
     {
@@ -31,13 +33,16 @@ public class CanvasSingleton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        VerMapa = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (SceneManager.GetActiveScene().name == "ShopScene")
+        {
+            gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
+        }
         // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
         if (Content.GetComponent<RectTransform>().anchoredPosition.x > 300)
         {
@@ -74,5 +79,32 @@ public class CanvasSingleton : MonoBehaviour
         else
             ScrollAreaCompendio.GetComponent<ScrollRect>().enabled = true;
 
+
+        if (MapScene_active() || VerMapa)
+        {
+            Map.SetActive(true);
+        }
+        else if (!MapScene_active()/* && !VerMapa*/)
+        {
+            Map.SetActive(false);
+        }
+    }
+
+    public bool MapScene_active()
+    {
+        if (SceneManager.GetActiveScene().name == "MapScene")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void MapaVisible(bool visibilidad)
+    {
+        Map.SetActive(visibilidad);
+        VerMapa = visibilidad;
     }
 }

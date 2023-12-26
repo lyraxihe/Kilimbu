@@ -72,15 +72,15 @@ public class MapController : MonoBehaviour
 
     void Update()
     {
-        if (MapScene_active())
-        {
-            // Canvas = GameObject.Find("Canvas");
-            Canvas.SetActive(true);
-        }
-        else
-        {
-            Canvas.SetActive(false);
-        }
+        //if (MapScene_active())
+        //{
+        //    // Canvas = GameObject.Find("Canvas");
+        //    Canvas.SetActive(true);
+        //}
+        //else
+        //{
+        //    Canvas.SetActive(false);
+        //}
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
