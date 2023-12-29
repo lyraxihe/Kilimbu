@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class CardController : MonoBehaviour
 
     public GameObject VariablesGlobales;
     public GameObject CombatScene;
+    public GameObject Player;
     public GameObject DragZone;
     public GameObject ArrowEmitter;
     public int EnemigoSeleccionado; // -1; Ninguno | 0: EnemyList[0] | 1: EnemyList[1] | 2: EnemyList[2]
@@ -36,6 +38,25 @@ public class CardController : MonoBehaviour
     public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
     public int CosteMana;
 
+    List<string> CardTitles = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Hablo de lo que me pasa", "Puedo decir que no", "Reconozco lo que siento",
+                                                   "Aprendo de lo que siento", "Me divierto con amigos", "Salgo a tomar el sol", "Un paseo por la naturaleza", "Cantar",
+                                                   "Cuento hasta diez", "Me ordeno por dentro y por fuera", "Me cuido", "Ahora no, luego sí", "No me pasa nada", "Estoy así ahora",
+                                                   "No pasa nada si sale mal", "Hablo de lo que me pasa", "Hablo todo el tiempo de lo que me pasa", "Estoy en ello",
+                                                   "Nada es para siempre", "No sé que hacer", "Todo se transforma", "Soy consciente de como me afecta lo que hago"};
+
+    List<string> CardDescriptions = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
+                                                         "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos", "Roba 10 de vida a todos", "<b>Bloqueado</b> a un enemigo",
+                                                         "<b>Bloqueado</b> a un enemigo pero le cura 10", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
+                                                         "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero cura 5 a los enemigos", "<b>Esperanza</b> al jugador",
+                                                         "<b>Envenenado</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 15", "Los enemigos curan en vez de dañar",
+                                                         "Se eliminan todos los efectos del jugador" };
+
+    List<string> CardCost = new List<string>() { "1", "1", "2", "2", "3", "3", "0", "1", "2", "2", "3", "3", "5", "1", "0", "1", "2", "1", "0", "2", "1", "0", "4", "3" };
+
+    List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
+
+    TMP_Text[] newText;
+
     void Start()
     {
         MouseDrag = true;
@@ -60,6 +81,8 @@ public class CardController : MonoBehaviour
         //TextTitle.GetComponent<MeshRenderer>().enabled = true;
         //TextDescription.GetComponent<MeshRenderer>().enabled = true;
 
+        newText = GetComponentsInChildren<TMP_Text>();
+
     }
 
     void Update()
@@ -75,6 +98,8 @@ public class CardController : MonoBehaviour
         CardAnimator.SetInteger("CardID", Id);
 
         //AnimacionCarta();
+
+        SetText();
 
     }
 
@@ -332,6 +357,163 @@ public class CardController : MonoBehaviour
         }
 
     }
+
+    private void SetText()
+    {
+
+        int danyo;
+
+        // Actualiza los textos
+        newText[0].text = CardTitles[Tipo];
+
+        if(Tipo == 0)
+        {
+
+            danyo = (5 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if(danyo < 5)
+                newText[1].text = "Ataque <color=red>" + danyo + "</color>";
+            else if (danyo > 5)
+                newText[1].text = "Ataque <color=green>" + danyo + "</color>";
+            else
+                newText[1].text = "Ataque " + danyo;
+
+        }
+        else if (Tipo == 1)
+        {
+
+            danyo = (3 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 3)
+                newText[1].text = "Ataque <color=red>" + danyo + "</color>x2";
+            else if (danyo > 3)
+                newText[1].text = "Ataque <color=green>" + danyo + "</color>x2";
+            else
+                newText[1].text = "Ataque " + danyo + "x2";
+
+        }
+        else if(Tipo == 2)
+        {
+
+            danyo = (5 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 5)
+                newText[1].text = "Ataque <color=red>" + danyo + "</color> a todos";
+            else if (danyo > 5)
+                newText[1].text = "Ataque <color=green>" + danyo + "</color> a todos";
+            else
+                newText[1].text = "Ataque " + danyo + "a todos";
+
+        }
+        else if(Tipo == 3)
+        {
+
+            danyo = (10 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 10)
+                newText[1].text = "Ataque <color=red>" + danyo + "</color>";
+            else if (danyo > 10)
+                newText[1].text = "Ataque <color=green>" + danyo + "</color>";
+            else
+                newText[1].text = "Ataque " + danyo;
+
+        }
+        else if (Tipo == 4)
+        {
+            
+            danyo = (20 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 20)
+                newText[1].text = "Ataque <color=red>" + danyo + "</color>";
+            else if (danyo > 20)
+                newText[1].text = "Ataque <color=green>" + danyo + "</color>";
+            else
+                newText[1].text = "Ataque " + danyo;
+
+        }
+        else if (Tipo == 5)
+        {
+
+            danyo = (10 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 10)
+                newText[1].text = "Ataque <color=red>" + danyo + "</color>x2";
+            else if (danyo > 10)
+                newText[1].text = "Ataque <color=green>" + danyo + "</color>x2";
+            else
+                newText[1].text = "Ataque " + danyo + "x2";
+
+        }
+        else if (Tipo == 9)
+        {
+
+            danyo = (5 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 5)
+                newText[1].text = "Roba <color=red>" + danyo + "</color> de vida";
+            else if (danyo > 5)
+                newText[1].text = "Roba <color=green>" + danyo + "</color> de vida";
+            else
+                newText[1].text = "Roba " + danyo + " de vida";
+
+        }
+        else if (Tipo == 10)
+        {
+
+            danyo = (10 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 10)
+                newText[1].text = "Roba <color=red>" + danyo + "</color> de vida";
+            else if (danyo > 10)
+                newText[1].text = "Roba <color=green>" + danyo + "</color> de vida";
+            else
+                newText[1].text = "Roba " + danyo + " de vida";
+
+        }
+        else if (Tipo == 11)
+        {
+
+            danyo = (5 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 5)
+                newText[1].text = "Roba <color=red>" + danyo + "</color> de vida a todos";
+            else if (danyo > 5)
+                newText[1].text = "Roba <color=green>" + danyo + "</color> de vida a todos";
+            else
+                newText[1].text = "Roba " + danyo + " de vida a todos";
+
+        }
+        else if (Tipo == 12)
+        {
+
+            danyo = (10 + Player.GetComponent<PlayerController>().Fuerza + Player.GetComponent<PlayerController>().Debilidad);
+            if (danyo < 0)
+                danyo = 0;
+            if (danyo < 10)
+                newText[1].text = "Roba <color=red>" + danyo + "</color> de vida a todos";
+            else if (danyo > 10)
+                newText[1].text = "Roba <color=green>" + danyo + "</color> de vida a todos";
+            else
+                newText[1].text = "Roba " + danyo + " de vida a todos";
+
+        }
+        else
+            newText[1].text = CardDescriptions[Tipo];
+
+        newText[2].text = CardCost[Tipo];
+        newText[3].text = CardDuration[Tipo];
+
+    }
+
     public void setColor_text()
     {
         //Color colorPersonalizado;

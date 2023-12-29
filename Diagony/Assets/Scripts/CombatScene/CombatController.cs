@@ -60,23 +60,6 @@ public class CombatController : MonoBehaviour
 
     // Cartas
     public List<Sprite> CardSprites;
-    
-    List<string> CardTitles = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Hablo de lo que me pasa", "Puedo decir que no", "Reconozco lo que siento",
-                                                   "Aprendo de lo que siento", "Me divierto con amigos", "Salgo a tomar el sol", "Un paseo por la naturaleza", "Cantar",
-                                                   "Cuento hasta diez", "Me ordeno por dentro y por fuera", "Me cuido", "Ahora no, luego sí", "No me pasa nada", "Estoy así ahora",
-                                                   "No pasa nada si sale mal", "Hablo de lo que me pasa", "Hablo todo el tiempo de lo que me pasa", "Estoy en ello",
-                                                   "Nada es para siempre", "No sé que hacer", "Todo se transforma", "Soy consciente de como me afecta lo que hago"};
-
-    List<string> CardDescriptions = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
-                                                         "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos", "Roba 10 de vida a todos", "<b>Bloqueado</b> a un enemigo",
-                                                         "<b>Bloqueado</b> a un enemigo pero le cura 10", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
-                                                         "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero cura 5 a los enemigos", "<b>Esperanza</b> al jugador",
-                                                         "<b>Envenenado</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 15", "Los enemigos curan en vez de dañar",
-                                                         "Se eliminan todos los efectos del jugador" };
-
-    List<string> CardCost = new List<string>() { "1", "1", "2", "2", "3", "3", "0", "1", "2", "2", "3", "3", "5", "1", "0", "1", "2", "1", "0", "2", "1", "0", "4", "3" };
-
-    List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
 
     [SerializeField] List<int> TotalCards = new List<int>(); // Lista con el número de cartas del Jugador para el combate (Se rellena con las cantidades especificadas en Variables Globales)
     [SerializeField] List<int> HandCardsAmount = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Cantidad de cartas de cada tipo en la mano durante el turno del Jugador
@@ -336,7 +319,6 @@ public class CombatController : MonoBehaviour
 
             CartasCreadas = true;
             GameObject clon;
-            TMP_Text[] newText;
             int cardType;
             bool canCreate;
 
@@ -361,6 +343,7 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().Tipo = TotalCards[cardType]; //hace que la carta sea de alguna de las del tipo
                 clon.GetComponent<CardController>().VariablesGlobales = VariablesGlobales; // Almacena las variables globales en la carta
                 clon.GetComponent<CardController>().ArrowEmitter = ArrowEmitter;
+                clon.GetComponent<CardController>().Player = Player;
                 clon.GetComponent<CardController>().CosteMana = CardManaCost(clon.GetComponent<CardController>().Tipo);
                 clon.transform.SetParent(CanvasCartas, false);
                 //clon.GetComponent<CardController>().TextTitle = CardTitles[i];
@@ -373,13 +356,6 @@ public class CombatController : MonoBehaviour
                     clon.GetComponent<Image>().sprite = CardSprites[1];
                 else
                     clon.GetComponent <Image>().sprite = CardSprites[2];
-
-                // Actualiza los textos
-                newText = clon.GetComponentsInChildren<TMP_Text>();
-                newText[0].text = CardTitles[TotalCards[cardType]];
-                newText[1].text = CardDescriptions[TotalCards[cardType]];
-                newText[2].text = CardCost[TotalCards[cardType]];
-                newText[3].text = CardDuration[TotalCards[cardType]];
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.1f);
