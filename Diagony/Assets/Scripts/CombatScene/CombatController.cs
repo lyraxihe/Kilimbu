@@ -187,118 +187,146 @@ public class CombatController : MonoBehaviour
     public void CreateEnemies()
     {
 
-        int rand = Random.Range(2, 4);           // Random de 2 a 3
-        if (rand==2)
+        GameObject clonEnemy;                    // Declara el clon del prefab
+        int tipo; //0 = ira | 1 = miedo | 2 = tristeza | 3 = Boss
+        string EnemyName;
+
+        if (!VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
         {
-            RecompensaDinero = Random.Range(20, 40);
+
+            int rand = Random.Range(2, 4);           // Random de 2 a 3
+            if (rand == 2)
+            {
+                RecompensaDinero = Random.Range(20, 40);
+            }
+            else
+            {
+                RecompensaDinero = Random.Range(40, 81);
+            }
+
+            for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
+            {
+
+                if (i == 0)                          // Si es el primer enemigo
+                {
+                    tipo = Random.Range(0, 3);
+                    if (tipo == 0)
+                    {
+                        EnemyName = "IRA";
+                    }
+                    else if (tipo == 1)
+                    {
+                        EnemyName = "MIEDO";
+                    }
+                    else
+                    {
+                        EnemyName = "TRISTEZA";
+                        numTristeza++;
+                    }
+                    clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
+                    clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
+                    clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+                    clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+                    clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+                    clonEnemy.GetComponent<EnemyController>().Id = i;
+                    clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+                    clonEnemy.GetComponent<EnemyController>().Player = Player;
+                    clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+                    clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(2.5f, 0.5f, 1);
+
+                    EnemyList.Add(clonEnemy);
+                    CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
+
+                }
+                else if (i == 1)                     // Si es el segundo enemigo
+                {
+
+                    tipo = Random.Range(0, 3);
+                    if (tipo == 0)
+                    {
+                        EnemyName = "IRA";
+                    }
+                    else if (tipo == 1)
+                    {
+                        EnemyName = "MIEDO";
+                    }
+                    else
+                    {
+                        EnemyName = "TRISTEZA";
+                        numTristeza++;
+                    }
+                    clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
+                    clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 0);
+                    clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+                    clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+                    clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+                    clonEnemy.GetComponent<EnemyController>().Id = i;
+                    clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+                    clonEnemy.GetComponent<EnemyController>().Player = Player;
+                    clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+                    clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(4.5f, -0.5f, 1);
+
+                    EnemyList.Add(clonEnemy);
+                    CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
+
+                }
+                else                                 // Si es el tercer enemigo
+                {
+                    tipo = Random.Range(0, 3);
+                    if (tipo == 0)
+                    {
+                        EnemyName = "IRA";
+                    }
+                    else if (tipo == 1)
+                    {
+                        EnemyName = "MIEDO";
+                    }
+                    else
+                    {
+                        EnemyName = "TRISTEZA";
+                        numTristeza++;
+                    }
+                    clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
+                    clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 0);
+                    clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+                    clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+                    clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+                    clonEnemy.GetComponent<EnemyController>().Id = i;
+                    clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+                    clonEnemy.GetComponent<EnemyController>().Player = Player;
+                    clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+                    clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(6.5f, -1.5f, 1);
+
+                    EnemyList.Add(clonEnemy);
+                    CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
+
+                }
+
+
+                ArrowEmitter.GetComponent<ArrowEmitter>().Enemies.Add(clonEnemy);
+
+            }
+
         }
         else
         {
-            RecompensaDinero = Random.Range(40, 81);
-        }
 
-        GameObject clonEnemy;                    // Declara el clon del prefab
-        int tipo; //0 = ira | 1 = miedo | 2 = tristeza
-        string EnemyName;
+            tipo = 3; // Boss
+            EnemyName = "BOSS";
+            clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
+            clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
+            clonEnemy.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
+            clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
+            clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
+            clonEnemy.GetComponent<EnemyController>().Id = 0;
+            clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
+            clonEnemy.GetComponent<EnemyController>().Player = Player;
+            clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
+            clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(2.5f, 0.5f, 1);
 
-        for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
-        {
-
-            if (i == 0)                          // Si es el primer enemigo
-            {
-                tipo = Random.Range(0, 3);
-                if (tipo == 0)
-                {
-                    EnemyName = "IRA";
-                }
-                else if (tipo == 1)
-                {
-                    EnemyName = "MIEDO";
-                }
-                else
-                {
-                    EnemyName = "TRISTEZA";
-                    numTristeza++;
-                }
-                clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
-                clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
-                clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
-                clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
-                clonEnemy.GetComponent<EnemyController>().Id = i;
-                clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
-                clonEnemy.GetComponent<EnemyController>().Player = Player;
-                clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
-                clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(2.5f, 0.5f, 1);
-
-                EnemyList.Add(clonEnemy);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
-                
-            }
-           else if (i == 1)                     // Si es el segundo enemigo
-            {
-
-                tipo = Random.Range(0, 3);
-                if (tipo == 0)
-                {
-                    EnemyName = "IRA";
-                }
-                else if (tipo == 1)
-                {
-                    EnemyName = "MIEDO";
-                }
-                else
-                {
-                    EnemyName = "TRISTEZA";
-                    numTristeza++;
-                }
-                clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 0);
-                clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
-                clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
-                clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
-                clonEnemy.GetComponent<EnemyController>().Id = i;
-                clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
-                clonEnemy.GetComponent<EnemyController>().Player = Player;
-                clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
-                clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(4.5f, -0.5f, 1);
-
-                EnemyList.Add(clonEnemy);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
-                
-            }
-            else                                 // Si es el tercer enemigo
-            {
-                tipo = Random.Range(0, 3);
-                if (tipo == 0)
-                {
-                    EnemyName = "IRA";
-                }
-                else if (tipo == 1)
-                {
-                    EnemyName = "MIEDO";
-                }
-                else
-                {
-                    EnemyName = "TRISTEZA";
-                    numTristeza++;
-                }
-                clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
-                clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 0);
-                clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
-                clonEnemy.GetComponent<EnemyController>().VariablesGlobales = VariablesGlobales;
-                clonEnemy.GetComponent<EnemyController>().CombatScene = gameObject;
-                clonEnemy.GetComponent<EnemyController>().Id = i;
-                clonEnemy.GetComponent<EnemyController>().ArrowEmitter = ArrowEmitter;
-                clonEnemy.GetComponent<EnemyController>().Player = Player;
-                clonEnemy.GetComponent<EnemyController>().AuraEnemigo = Instantiate(AuraEnemigoPrefab);
-                clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(6.5f, -1.5f, 1);
-
-                EnemyList.Add(clonEnemy);
-                CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
-               
-            }
-           
+            EnemyList.Add(clonEnemy);
+            CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
 
             ArrowEmitter.GetComponent<ArrowEmitter>().Enemies.Add(clonEnemy);
 
@@ -1259,7 +1287,7 @@ public class CombatController : MonoBehaviour
 
         }
         //else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
-        else if(EnemyList.Count == 0)
+        else if(EnemyList.Count == 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
         {
             RecompensaVictoria = true;
             Debug.Log("victoria lol");
@@ -1273,6 +1301,27 @@ public class CombatController : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += RecompensaDinero;
                 victoria_etc += 1;
             }
+
+            Time.timeScale = 0f;
+           // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+            botonTurno.enabled = false;
+
+        }
+        else if (EnemyList.Count == 0 && VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+        {
+
+            RecompensaVictoria = true;
+            Debug.Log("victoria lol");
+            VictoriaDerrotaPanel.SetActive(true);
+            VictoriaDerrotaText.text = "VICTORIA";
+            RecompensaText.text = "Enhorabuena, has derrotado al boss y completado la mazmorra";
+           
+            //if (victoria_etc == 0 && RecompensaVictoria == true)
+            //{
+            //    Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
+            //    VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += RecompensaDinero;
+            //    victoria_etc += 1;
+            //}
 
             Time.timeScale = 0f;
            // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;

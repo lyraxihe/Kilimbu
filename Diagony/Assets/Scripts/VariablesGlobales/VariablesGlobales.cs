@@ -19,6 +19,9 @@ public class VariablesGlobales : MonoBehaviour
 
     public List<int> AmountCards = new List<int>() {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // Lista con las cantidades de cada carta (posición = ID carta en el excel)
 
+    // Boss
+    public bool Boss; // Si es true significa que el combate será contra el Boss, si es false es un combate normal
+
     private void Awake() //sigleton
     {
         DineroAmount = 0;
@@ -37,7 +40,8 @@ public class VariablesGlobales : MonoBehaviour
     }
     void Start()
     {
-       
+
+        Boss = false;
         VidasProtagonista = 3;
         MaxHealthProtagonista = 100;
         HealthProtagonista = 100;

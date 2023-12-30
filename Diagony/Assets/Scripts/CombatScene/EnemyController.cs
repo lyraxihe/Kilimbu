@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     public GameObject ArrowEmitter;
     public bool OverEnemy;
 
-    public int Tipo; // 0 = Ira | 1 = Miedo | 2 = Tristeza
+    public int Tipo; // 0 = Ira | 1 = Miedo | 2 = Tristeza | 3 = Boss
     public int Id;   // ID que tiene en la lista de enemigos
     public int HealthEnemigo;
     public int MaxHealthEnemigo;
@@ -207,8 +207,10 @@ public class EnemyController : MonoBehaviour
             MaxHealthEnemigo = 50;
         else if (Tipo == 1)    // Miedo
             MaxHealthEnemigo = 50;
-        else                   // Tristeza
+        else if (Tipo == 2)    // Tristeza
             MaxHealthEnemigo = 50;
+        else
+            MaxHealthEnemigo = 200;
 
         HealthEnemigo = MaxHealthEnemigo;
 
@@ -257,7 +259,7 @@ public class EnemyController : MonoBehaviour
             float AttackType = Random.Range(0f, 11f);
             int damageAmount = 0;
 
-            if (Tipo == 0)         // Ira
+            if (Tipo == 0 || Tipo == 3)         // Ira o Boss (de momento)
             {
                 if (ContadorDeTurnosFuerte > 0)
                 {
@@ -375,8 +377,6 @@ public class EnemyController : MonoBehaviour
                 }
 
             }
-
-
             else                   // Tristeza
             {
                 if (SoloTristeza)

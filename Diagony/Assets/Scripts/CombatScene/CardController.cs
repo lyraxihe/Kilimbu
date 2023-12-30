@@ -405,7 +405,7 @@ public class CardController : MonoBehaviour
             else if (danyo > 5)
                 newText[1].text = "Ataque <color=green>" + danyo + "</color> a todos";
             else
-                newText[1].text = "Ataque " + danyo + "a todos";
+                newText[1].text = "Ataque " + danyo + " a todos";
 
         }
         else if(Tipo == 3)

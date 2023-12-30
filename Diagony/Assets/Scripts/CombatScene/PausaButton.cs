@@ -63,7 +63,7 @@ public class PausaButton : MonoBehaviour
     {
         victoria = CombatScene.GetComponent<CombatController>().RecompensaVictoria;
 
-        if (victoria)
+        if (victoria && !VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
         {
             Debug.Log("victoria boton pausa");
             SceneManager.LoadScene("MapScene");
