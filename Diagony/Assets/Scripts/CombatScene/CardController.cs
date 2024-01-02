@@ -51,8 +51,6 @@ public class CardController : MonoBehaviour
                                                          "<b>Envenenado</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 15", "Los enemigos curan en vez de dañar",
                                                          "Se eliminan todos los efectos del jugador" };
 
-    List<string> CardCost = new List<string>() { "1", "1", "2", "2", "3", "3", "0", "1", "2", "2", "3", "3", "5", "1", "0", "1", "2", "1", "0", "2", "1", "0", "4", "3" };
-
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
 
     TMP_Text[] newText;
@@ -97,6 +95,7 @@ public class CardController : MonoBehaviour
         CardAnimator.SetInteger("NumCartas", NumCartas);
         CardAnimator.SetInteger("CardID", Id);
 
+        CosteMana = VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
         //AnimacionCarta();
 
         SetText();
@@ -509,7 +508,12 @@ public class CardController : MonoBehaviour
         else
             newText[1].text = CardDescriptions[Tipo];
 
-        newText[2].text = CardCost[Tipo];
+        if(VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
+            newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
+        else if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] < VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
+            newText[2].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
+        else
+            newText[2].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
         newText[3].text = CardDuration[Tipo];
 
     }

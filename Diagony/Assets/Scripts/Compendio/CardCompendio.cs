@@ -24,6 +24,8 @@ public class CardCompendio : MonoBehaviour
 
     [SerializeField] int Fila; // Posición en el compendio | 0 - arriba | 1 - abajo 
 
+    TMP_Text[] newText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,14 @@ public class CardCompendio : MonoBehaviour
             Image.color = MidTransparency;
         else
             Image.color = FullTransparency;
+
+        newText = GetComponentsInChildren<TMP_Text>();
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
+            newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
+        else if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] < VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
+            newText[2].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
+        else
+            newText[2].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
 
     }
 

@@ -1293,13 +1293,26 @@ public class CombatController : MonoBehaviour
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
-            RecompensaText.text = "Recompensa " + RecompensaDinero + " de oro";
-           
+
+            if(VariablesGlobales.GetComponent<VariablesGlobales>().PasivaCurarseCombate)
+            {
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += VariablesGlobales.GetComponent<VariablesGlobales>().PasivaCuracionCombate;
+                CreateDmgHealText(true, VariablesGlobales.GetComponent<VariablesGlobales>().PasivaCuracionCombate, Player);
+
+            }
+
+            if(!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
+                RecompensaText.text = "Recompensa " + RecompensaDinero + " de oro";
+            else
+                RecompensaText.text = "Recompensa " + RecompensaDinero + " + (Pasiva: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " de oro";
+
             if (victoria_etc == 0 && RecompensaVictoria == true)
             {
                 Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
-                VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += RecompensaDinero;
+                VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += (RecompensaDinero + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero);
                 victoria_etc += 1;
+
             }
 
             Time.timeScale = 0f;

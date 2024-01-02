@@ -18,9 +18,17 @@ public class VariablesGlobales : MonoBehaviour
     public static VariablesGlobales instance;
 
     public List<int> AmountCards = new List<int>() {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // Lista con las cantidades de cada carta (posición = ID carta en el excel)
+    public List<int> CardCostOriginal = new List<int>() { 1, 1, 2, 2, 3, 3, 0, 1, 2, 2, 3, 3, 5, 1, 0, 1, 2, 1, 0, 2, 1, 0, 4, 3 };
+    public List<int> CardCost = new List<int>() { 1, 1, 2, 2, 3, 3, 0, 1, 2, 2, 3, 3, 5, 1, 0, 1, 2, 1, 0, 2, 1, 0, 4, 3 };
 
     // Boss
     public bool Boss; // Si es true significa que el combate será contra el Boss, si es false es un combate normal
+
+    // Pasivas
+    public bool PasivaGanarDinero;
+    public int PasivaDinero;
+    public bool PasivaCurarseCombate;
+    public int PasivaCuracionCombate;
 
     private void Awake() //sigleton
     {
@@ -46,6 +54,12 @@ public class VariablesGlobales : MonoBehaviour
         MaxHealthProtagonista = 100;
         HealthProtagonista = 100;
         MaxManaProtagonista = 5;     // Maná máximo del jugador con el que podrá usar las cartas (se resetea en cada turno)
+
+        // Pasivas
+        PasivaGanarDinero = false;
+        PasivaDinero = 0;
+        PasivaCurarseCombate = false;
+        PasivaCuracionCombate = 0;
 
     }
 
