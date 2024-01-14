@@ -49,13 +49,13 @@ public class FinalizarTurnoButton : MonoBehaviour
             {
 
                 CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte--;
-                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorFuertes++;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorFuerza++;
 
-                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorFuertes == 4)
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorFuerza == 4)
                 {
 
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Fuerza -= 3;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorFuertes = 0; // Se resetea cada vez que se termina un efecto de Débil
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorFuerza = 0; // Se resetea cada vez que se termina un efecto de Débil
 
                 }
 
@@ -74,13 +74,13 @@ public class FinalizarTurnoButton : MonoBehaviour
             {
 
                 CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado--;
-                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEsperanzas++;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEsperanza++;
 
-                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEsperanzas == 4)
+                if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEsperanza == 4)
                 {
 
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Esperanza -= 3;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEsperanzas = 0; // Se resetea cada vez que se termina un efecto de Débil
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorEsperanza = 0; // Se resetea cada vez que se termina un efecto de Débil
 
                 }
 
@@ -175,6 +175,39 @@ public class FinalizarTurnoButton : MonoBehaviour
                 CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad = 0;
                 CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().debilidad_icon = 0;
                 CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(1);
+            }
+
+            // Control Transformado en los enemigos
+            List<GameObject> enemies = CombatScene.GetComponent<CombatController>().EnemyList;
+            for(int i = 0; i < enemies.Count; i++)
+            {
+
+                if (enemies[i].GetComponent<EnemyController>().Transformacion)
+                {
+
+                    enemies[i].GetComponent<EnemyController>().ContadorDeTurnosTransformacion--;
+
+                    if (enemies[i].GetComponent<EnemyController>().ContadorDeTurnosTransformacion == 0)
+                        enemies[i].GetComponent<EnemyController>().Transformacion = false;
+
+                }
+
+            }
+
+            // Control Curaciones en los enemigos
+            for (int i = 0; i < enemies.Count; i++)
+            {
+
+                if (enemies[i].GetComponent<EnemyController>().EsperandoHeal)
+                {
+
+                    enemies[i].GetComponent<EnemyController>().ContadorDeTurnosHeal--;
+
+                    if (enemies[i].GetComponent<EnemyController>().ContadorDeTurnosHeal == 0)
+                        enemies[i].GetComponent<EnemyController>().EsperandoHeal = false;
+
+                }
+
             }
 
             CombatScene.GetComponent<CombatController>().CartasCreadas = false;

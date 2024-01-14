@@ -729,13 +729,28 @@ public class CombatController : MonoBehaviour
         if (tipo == 0)
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[0]++;
+            int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza; ;
             //Ataque 5 de daño
-            int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+            {
 
-            // en esta fución como ultimo parametro debería pasarse el gameobject del enemigo al que ataca la flecha
-            //le puse "EnemyList[0]" porque es el que marca arriba para restarle la vida
-            CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                CreateDmgHealText(true, danyo, EnemyList[enemigo]);
+
+            }
+            else
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                // en esta fución como ultimo parametro debería pasarse el gameobject del enemigo al que ataca la flecha
+                //le puse "EnemyList[0]" porque es el que marca arriba para restarle la vida
+                CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+                if(VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                    EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+            }
+
             ControlEsperanzado();
 
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
@@ -767,9 +782,25 @@ public class CombatController : MonoBehaviour
             for (int i = 0; i < EnemyList.Count; i++)
             {
 
-                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                if (EnemyList[i].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+                {
+
+                    EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                    CreateDmgHealText(true, danyo, EnemyList[i]);
+
+                }
+                else
+                {
+
+                    EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                    CreateDmgHealText(false, danyo, EnemyList[i]);
+
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                        EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+                }
+
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
-                CreateDmgHealText(false, danyo, EnemyList[i]);
 
                 // Ira devolver ataque
                 if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -793,9 +824,25 @@ public class CombatController : MonoBehaviour
 
             //Ataque 10 de daño
             int danyo = 10 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
 
-            CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                CreateDmgHealText(true, danyo, EnemyList[enemigo]);
+
+            }
+            else
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                    EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+            }
+
             ControlEsperanzado();
 
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
@@ -818,9 +865,25 @@ public class CombatController : MonoBehaviour
 
             //Ataque 20 de daño
             int danyo = 20 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
 
-            CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                CreateDmgHealText(true, danyo, EnemyList[enemigo]);
+
+            }
+            else
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                    EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+            }
+
             ControlEsperanzado();
 
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
@@ -878,15 +941,36 @@ public class CombatController : MonoBehaviour
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[9]++;
 
-            // El roba 5 de vida a un enemigo
+            // El Jugador roba 5 de vida a un enemigo
             int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
-            CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                CreateDmgHealText(true, danyo, EnemyList[enemigo]);
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 0;
+                CreateDmgHealText(true, 0, Player);
+
+            }
+            else
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
+                CreateDmgHealText(true, danyo, Player);
+
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                    EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+            }
+
             ControlEsperanzado();
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
-            CreateDmgHealText(true, danyo, Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
             // Ira devolver ataque
@@ -907,13 +991,34 @@ public class CombatController : MonoBehaviour
 
             // El Jugador roba 10 de vida a un enemigo
             int danyo = 10 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
-            CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                CreateDmgHealText(true, danyo, EnemyList[enemigo]);
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 0;
+                CreateDmgHealText(true, 0, Player);
+
+            }
+            else
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                CreateDmgHealText(false, danyo, EnemyList[enemigo]);
+
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
+                CreateDmgHealText(true, danyo, Player);
+
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                    EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+            }
+
             ControlEsperanzado();
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
-            CreateDmgHealText(true, danyo, Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
             // Ira devolver ataque
@@ -934,13 +1039,32 @@ public class CombatController : MonoBehaviour
             // El Jugador roba 5 de vida a todos los enemigos
             int i;
             int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
+            int contTransformados = 0;
 
             for ( i = 0; i < EnemyList.Count; i++)
             {
 
-                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                if (EnemyList[i].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+                {
+
+                    EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                    CreateDmgHealText(true, danyo, EnemyList[i]);
+
+                    contTransformados++;
+
+                }
+                else
+                {
+
+                    EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                    CreateDmgHealText(false, danyo, EnemyList[i]);
+
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                        EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+                }
+
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
-                CreateDmgHealText(false, danyo, EnemyList[i]);
 
                 // Ira devolver ataque
                 if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -955,8 +1079,8 @@ public class CombatController : MonoBehaviour
             }
 
             ControlEsperanzado();
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * i);
-            CreateDmgHealText(true, (danyo * i), Player);
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i + contTransformados));
+            CreateDmgHealText(true, (danyo * (i + contTransformados)), Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
         }
@@ -967,13 +1091,32 @@ public class CombatController : MonoBehaviour
             // El Jugador roba 10 de vida a todos los enemigos
             int i;
             int danyo = 10 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
+            int contTransformados = 0;
 
             for (i = 0; i < EnemyList.Count; i++)
             {
 
-                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                if (EnemyList[i].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+                {
+
+                    EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
+                    CreateDmgHealText(true, danyo, EnemyList[i]);
+
+                    contTransformados++;
+
+                }
+                else
+                {
+
+                    EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
+                    CreateDmgHealText(false, danyo, EnemyList[i]);
+
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                        EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
+
+                }
+
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
-                CreateDmgHealText(false, danyo, EnemyList[i]);
 
                 // Ira devolver ataque
                 if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -988,8 +1131,8 @@ public class CombatController : MonoBehaviour
             }
 
             ControlEsperanzado();
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * i);
-            CreateDmgHealText(true, (danyo * i), Player);
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i - contTransformados));
+            CreateDmgHealText(true, (danyo * (i - contTransformados)), Player);
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
         }
@@ -1061,6 +1204,8 @@ public class CombatController : MonoBehaviour
 
             }
 
+            EnemyList[enemigo].GetComponent<EnemyController>().playerSeBufa = true;
+
         }
         else if (tipo == 16)
         {
@@ -1086,6 +1231,8 @@ public class CombatController : MonoBehaviour
 
                 }
 
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
+
             }
 
             Debug.Log("Todos los Enemigos Debilitados");
@@ -1105,6 +1252,9 @@ public class CombatController : MonoBehaviour
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
+            for (int i = 0; i < EnemyList.Count; i++)
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
+
         }
         else if (tipo == 18)
         {
@@ -1122,6 +1272,8 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += 5;
                 CreateDmgHealText(true, 5, EnemyList[i]);
 
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
+
             }
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1137,6 +1289,9 @@ public class CombatController : MonoBehaviour
             CreateSpellText("Esperanzado", Player);
             Debug.Log("El Jugador obtiene Esperanza");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            for (int i = 0; i < EnemyList.Count; i++)
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
 
         }
         else if (tipo == 20)
@@ -1162,6 +1317,9 @@ public class CombatController : MonoBehaviour
                     StartCoroutine(IraDevolverAtaque(-1, tipo, enemigo));
 
             }
+
+            for (int i = 0; i < EnemyList.Count; i++)
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
 
         }
         else if (tipo == 21)
@@ -1191,6 +1349,9 @@ public class CombatController : MonoBehaviour
 
             }
 
+            for (int i = 0; i < EnemyList.Count; i++)
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
+
         }
         else if (tipo == 22)
         {
@@ -1202,6 +1363,9 @@ public class CombatController : MonoBehaviour
             CreateSpellText("Transformado", Player);
             Debug.Log("Jugador Transformado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            for (int i = 0; i < EnemyList.Count; i++)
+                EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
 
         }
         else if (tipo == 23)
@@ -1237,7 +1401,7 @@ public class CombatController : MonoBehaviour
                 Player.GetComponent<PlayerController>().Fuerte = false;
                 Player.GetComponent<PlayerController>().Fuerza = 0;
                 Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte = 0;
-                Player.GetComponent<PlayerController>().ContadorFuertes = 0;
+                Player.GetComponent<PlayerController>().ContadorFuerza = 0;
                 Player.GetComponent<PlayerController>().fuerte_icon = 0;
                 Player.GetComponent<PlayerController>().EliminarSpell(2);
 
@@ -1249,7 +1413,7 @@ public class CombatController : MonoBehaviour
                 Player.GetComponent<PlayerController>().Esperanzado = false;
                 Player.GetComponent<PlayerController>().Esperanza = 0;
                 Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado = 0;
-                Player.GetComponent<PlayerController>().ContadorEsperanzas = 0;
+                Player.GetComponent<PlayerController>().ContadorEsperanza = 0;
                 Player.GetComponent<PlayerController>().esperanza_icon = 0;
                 Player.GetComponent<PlayerController>().EliminarSpell(3);
 
@@ -1282,6 +1446,11 @@ public class CombatController : MonoBehaviour
             }
 
         }
+
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+            if (EnemyList[0].GetComponent<EnemyController>().contAcumulacionDanyoBoss > 20)
+                //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
+                EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss();
 
     }
 
@@ -1437,8 +1606,24 @@ public class CombatController : MonoBehaviour
 
         int danyoTotal = danyo + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
 
-        EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
-        CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
+        if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+        {
+
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
+            CreateDmgHealText(true, danyoTotal, EnemyList[enemigo]);
+
+        }
+        else
+        {
+
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
+            CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
+
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
+
+        }
+
         ControlEsperanzado();
         EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
         Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1452,8 +1637,24 @@ public class CombatController : MonoBehaviour
 
         yield return new WaitForSeconds(tiempo);
 
-        EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
-        CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
+        if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+        {
+
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
+            CreateDmgHealText(true, danyoTotal, EnemyList[enemigo]);
+
+        }
+        else
+        {
+
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
+            CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
+
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
+
+        }
+
         ControlEsperanzado();
         EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
         Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);

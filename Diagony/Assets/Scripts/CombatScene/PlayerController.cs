@@ -39,13 +39,13 @@ public class PlayerController : MonoBehaviour
     public bool Fuerte;
     public int Fuerza;
     public int ContadorDeTurnosFuerte;
-    public int ContadorFuertes;
+    public int ContadorFuerza;
 
     // Esperanza
     public bool Esperanzado;
     public int Esperanza;
     public int ContadorDeTurnosEsperanzado;
-    public int ContadorEsperanzas;
+    public int ContadorEsperanza;
 
     // Transformacion (Los ataques al Jugador le curan en vez de hacerle daño)
     public bool Transformacion;
@@ -118,13 +118,13 @@ public class PlayerController : MonoBehaviour
         Fuerte = false;
         Fuerza = 0;
         ContadorDeTurnosFuerte = 0;
-        ContadorFuertes = 0;
+        ContadorFuerza = 0;
 
         // Esperanza
         Esperanzado = false;
         Esperanza = 0;
         ContadorDeTurnosEsperanzado = 0;
-        ContadorEsperanzas = 0;
+        ContadorEsperanza = 0;
 
         // Transformacion
         Transformacion = false;
