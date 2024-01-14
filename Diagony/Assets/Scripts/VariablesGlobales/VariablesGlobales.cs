@@ -30,6 +30,9 @@ public class VariablesGlobales : MonoBehaviour
     public bool PasivaCurarseCombate;
     public int PasivaCuracionCombate;
 
+    // Array con numero de usos en cada carta, están acomodadas según su id y aumentan en (+1) cada vez que se usa una en combate
+    public List<int> CardUses = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
     private void Awake() //sigleton
     {
         DineroAmount = 0;

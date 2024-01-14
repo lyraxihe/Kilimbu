@@ -728,7 +728,7 @@ public class CombatController : MonoBehaviour
 
         if (tipo == 0)
         {
-
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[0]++;
             //Ataque 5 de daño
             int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
@@ -754,12 +754,14 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 1)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[1]++;
             //Ataque 3 x 2 de daño después de 0,5 seg
             StartCoroutine(DoubleAttack(enemigo, 3, 0.5f, 1));
 
         }
         else if (tipo == 2)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[2]++;
             //Ataque 5 de daño a todos
             int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
             for (int i = 0; i < EnemyList.Count; i++)
@@ -787,6 +789,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 3)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[3]++;
 
             //Ataque 10 de daño
             int danyo = 10 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
@@ -811,6 +814,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 4)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[4]++;
 
             //Ataque 20 de daño
             int danyo = 20 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
@@ -835,6 +839,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 5)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[5]++;
 
             //Ataque 10 x 2 de daño después de 0,5 seg
             StartCoroutine(DoubleAttack(enemigo, 10, 0.5f, 5));
@@ -842,6 +847,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 6)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[6]++;
 
             // El Jugador gana 2 de maná
             ManaProtagonista += 2;
@@ -850,6 +856,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 7)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[7]++;
 
             // El Jugador se cura 5
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 5;
@@ -859,6 +866,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 8)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[8]++;
 
             // El Jugador se cura 10
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
@@ -868,6 +876,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 9)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[9]++;
 
             // El roba 5 de vida a un enemigo
             int danyo = 5 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
@@ -894,6 +903,7 @@ public class CombatController : MonoBehaviour
 
         else if (tipo == 10)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[10]++;
 
             // El Jugador roba 10 de vida a un enemigo
             int danyo = 10 + Player.GetComponent<PlayerController>().Debilidad + Player.GetComponent<PlayerController>().Fuerza;
@@ -919,6 +929,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 11)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[11]++;
 
             // El Jugador roba 5 de vida a todos los enemigos
             int i;
@@ -951,6 +962,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 12)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[12]++;
 
             // El Jugador roba 10 de vida a todos los enemigos
             int i;
@@ -983,6 +995,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 13)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[13]++;
 
             // El Jugador bloquea a un enemigo
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
@@ -1004,6 +1017,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 14)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[14]++;
 
             // El Jugador bloquea a un enemigo pero le cura 10
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
@@ -1026,6 +1040,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 15)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[15]++;
 
             // El Jugador aplica Débil a un enemigo durante 3 turnos (efecto acumulativo)
             EnemyList[enemigo].GetComponent<EnemyController>().Debilitado = true;
@@ -1049,6 +1064,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 16)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[16]++;
 
             // El Jugador aplica Débil a todos los enemigos durante 3 turnos (efecto acumulativo)
             for (int i = 0; i < EnemyList.Count; i++)
@@ -1078,6 +1094,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 17)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[17]++;
 
             // El Jugador se aplica Fuerte 4 turnos (efecto acumulativo)
             Player.GetComponent<PlayerController>().Fuerte = true;
@@ -1091,6 +1108,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 18)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[18]++;
 
             // El Jugador se aplica Fuerte 4 turnos (efecto acumulativo) pero cura 5 a todos los enemigos
             Player.GetComponent<PlayerController>().Fuerte = true;
@@ -1111,7 +1129,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 19)
         {
-
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[19]++;
             // El Jugador se aplica Esperanza durante 4 turnos
             Player.GetComponent<PlayerController>().Esperanzado = true;
             Player.GetComponent<PlayerController>().Esperanza += 3;
@@ -1123,6 +1141,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 20)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[20]++;
 
             // El Jugador aplica Envenenado a un Enemigo durante 3 turnos (efecto acumulativo)
             EnemyList[enemigo].GetComponent<EnemyController>().Envenenado = true;
@@ -1147,6 +1166,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 21)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[21]++;
 
             // El Jugador aplica Débil a un enemigo pero le cura 15
             EnemyList[enemigo].GetComponent<EnemyController>().Debilitado = true;
@@ -1174,6 +1194,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 22)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[22]++;
 
             // Durante un turno, todos los ataques al Jugador le curan en vez de hacerle daño
             Player.GetComponent<PlayerController>().Transformacion = true;
@@ -1185,6 +1206,7 @@ public class CombatController : MonoBehaviour
         }
         else if (tipo == 23)
         {
+            VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[23]++;
 
             // Se eliminan todos los efectos del Jugador (tanto buenos como malos) en este momento
             if (Player.GetComponent<PlayerController>().Debilitado)      // Débil
