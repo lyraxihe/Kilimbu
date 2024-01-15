@@ -8,7 +8,9 @@ public class DeckButton : MonoBehaviour
 {
 
     [SerializeField] GameObject ScrollAreaCompendio;
-    [SerializeField] TMP_Text ButtonText;
+    [SerializeField] Sprite VolverIcon;
+    [SerializeField] Sprite CartasIcon;
+    //[SerializeField] TMP_Text ButtonText;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +27,16 @@ public class DeckButton : MonoBehaviour
     public void OnClick()
     {
 
-        if(!ScrollAreaCompendio.activeSelf)
-            ButtonText.text = "Volver";
+        if (!ScrollAreaCompendio.activeSelf)
+        {
+            //ButtonText.text = "Volver";
+            gameObject.GetComponent<Image>().sprite = VolverIcon;
+        }
         else
-            ButtonText.text = "Mis Cartas";
+        {
+            //ButtonText.text = "Mis Cartas";
+            gameObject.GetComponent<Image>().sprite = CartasIcon;
+        }
 
         ScrollAreaCompendio.SetActive(!ScrollAreaCompendio.activeSelf);
 

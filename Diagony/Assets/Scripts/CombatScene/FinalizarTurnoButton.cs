@@ -22,6 +22,7 @@ public class FinalizarTurnoButton : MonoBehaviour
     public void OnClick()
     {
         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnos++;
+        CombatScene.GetComponent<CombatController>().ContadorTurnos++;
         int numCartas = CombatScene.GetComponent<CombatController>().CardList.Count;
 
         if(CombatScene.GetComponent<CombatController>().TurnoJugador)
@@ -29,7 +30,6 @@ public class FinalizarTurnoButton : MonoBehaviour
 
             for (int i = 0; i < numCartas; i++)
             {
-
 
                 CombatScene.GetComponent<CombatController>().CardList[i].GetComponent<CardController>().CardAnimator.enabled = true;
                 //CombatScene.GetComponent<CombatController>().CardList[i].GetComponent<CardController>().AnimacionCarta = true;

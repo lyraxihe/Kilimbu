@@ -48,6 +48,7 @@ public class CombatController : MonoBehaviour
     public int numTristeza;
 
     public int RecompensaDinero;
+    public int ContadorTurnos;
 
     [SerializeField] GameObject GameObject_Dmg_text;
     // [SerializeField] TMP_Text Dmg_text;
@@ -77,6 +78,8 @@ public class CombatController : MonoBehaviour
         PorcentajeDevolverIra = 1f;
 
         RecompensaVictoria = false;
+        RecompensaDinero = 0;
+        ContadorTurnos = 0;
         
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
@@ -195,14 +198,6 @@ public class CombatController : MonoBehaviour
         {
 
             int rand = Random.Range(2, 4);           // Random de 2 a 3
-            if (rand == 2)
-            {
-                RecompensaDinero = Random.Range(20, 40);
-            }
-            else
-            {
-                RecompensaDinero = Random.Range(40, 81);
-            }
 
             for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
             {
@@ -212,14 +207,17 @@ public class CombatController : MonoBehaviour
                     tipo = Random.Range(0, 3);
                     if (tipo == 0)
                     {
+                        RecompensaDinero += 17;
                         EnemyName = "IRA";
                     }
                     else if (tipo == 1)
                     {
+                        RecompensaDinero += 13;
                         EnemyName = "MIEDO";
                     }
                     else
                     {
+                        RecompensaDinero += 9;
                         EnemyName = "TRISTEZA";
                         numTristeza++;
                     }
@@ -244,14 +242,17 @@ public class CombatController : MonoBehaviour
                     tipo = Random.Range(0, 3);
                     if (tipo == 0)
                     {
+                        RecompensaDinero += 17;
                         EnemyName = "IRA";
                     }
                     else if (tipo == 1)
                     {
+                        RecompensaDinero += 13;
                         EnemyName = "MIEDO";
                     }
                     else
                     {
+                        RecompensaDinero += 9;
                         EnemyName = "TRISTEZA";
                         numTristeza++;
                     }
@@ -275,14 +276,17 @@ public class CombatController : MonoBehaviour
                     tipo = Random.Range(0, 3);
                     if (tipo == 0)
                     {
+                        RecompensaDinero += 17;
                         EnemyName = "IRA";
                     }
                     else if (tipo == 1)
                     {
+                        RecompensaDinero += 13;
                         EnemyName = "MIEDO";
                     }
                     else
                     {
+                        RecompensaDinero += 9;
                         EnemyName = "TRISTEZA";
                         numTristeza++;
                     }
@@ -655,7 +659,7 @@ public class CombatController : MonoBehaviour
 
         if (!TurnoJugador)
         {
-        
+           
             for (int i = 0; i < EnemyList.Count; i++)
             {
 
@@ -697,7 +701,7 @@ public class CombatController : MonoBehaviour
         }
         
         Player.GetComponent<PlayerController>().ContadorDeTurnos++;
-
+        ContadorTurnos++;
     }
 
     //crea el popUp de texto con la cantidad de daño o de heal
@@ -1484,6 +1488,16 @@ public class CombatController : MonoBehaviour
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
             VictoriaDerrotaText.text = "VICTORIA";
+
+            if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
+            {
+                RecompensaDinero += RecompensaDinero / 5; //le suma al dinero actual su quinta parte
+            }
+            else
+            {
+                RecompensaDinero -= RecompensaDinero / 5; //le resta al dinero actual su quinta parte
+            }
+            
 
             if(VariablesGlobales.GetComponent<VariablesGlobales>().PasivaCurarseCombate)
             {
