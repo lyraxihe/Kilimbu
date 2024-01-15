@@ -34,6 +34,7 @@ public class ShopController : MonoBehaviour
    
     public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 5, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
 
+    List<int> maxCardTypes = new List<int>(); // para guardar las cartas más usadas
 
     public List<GameObject> ListCards = new List<GameObject>(); // Lista de los IDs de las cartas creadas
 
@@ -45,6 +46,7 @@ public class ShopController : MonoBehaviour
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         numCards = 24;
+        BuscarCartasMasRepetidas();
         CrearCartas();
     }
 
@@ -65,7 +67,7 @@ public class ShopController : MonoBehaviour
                 {
                     if (i < 3)
                     {
-                        cardType = BuscarCartasMasRepetidas(i);
+                        cardType = CartaMasUsada();
                     }
                     else
                     {
@@ -98,69 +100,76 @@ public class ShopController : MonoBehaviour
         }
     }
 
-    public int BuscarCartasMasRepetidas(int i)
+    public void BuscarCartasMasRepetidas()
     {
         List<int> cardUses = VariablesGlobales.GetComponent<VariablesGlobales>().CardUses;
-        List<int> maxCardTypes = new List<int>();
-
-        // Obtener el valor máximo de usos
+      
+        //obtiene el valor máximo de usos
         int maxCount = cardUses.Max();
 
-        // Obtener los tipos de cartas que tienen el máximo número de usos
+       //obtiene los id de cartas que tienen el máximo número de usos
         for (int cardType = 0; cardType < cardUses.Count; cardType++)
         {
             if (cardUses[cardType] == maxCount)
             {
-                maxCardTypes.Add(cardType);
+                maxCardTypes.Add(cardType); //agrega las cartas con mayor numero de usos
             }
+
         }
 
+        int buscarMax = 0, max2 = -1, max3 = -1;
+        if (maxCardTypes.Count < 3) //en caso de que el numero de cartas con mayor uso sea menor a 3 
+        {
+            //pasa por un bucle para agregar más cartas a la lista de cartas con mayores usos
+            do
+            {
+                for (int cardType = 0; cardType < cardUses.Count; cardType++)
+                {
+                    if (buscarMax == 0 && cardUses[cardType] > max2 && cardUses[cardType] != maxCount)
+                    {
+                       max2 = cardUses[cardType]; //busca el segundo número de usos más alto
+                    }
+                    else if (buscarMax == 1 && cardUses[cardType] == max2)
+                    {
+                        maxCardTypes.Add(cardType);  //agrega las cartas con segundo mayor numero de usos
+                    }
+                    else if (buscarMax == 2 && cardUses[cardType] > max3 && cardUses[cardType] != maxCount && cardUses[cardType] != max2)
+                    {
+                        max3 = cardUses[cardType]; // en caso de ser necesario porque la cantidad de cartas con mayor uso
+                                                   // es menor a 3 busca el segundo número de usos más alto
+                    }
+                    else if (buscarMax == 3 && cardUses[cardType] == max3)
+                    {
+                        maxCardTypes.Add(cardType); //agrega las cartas con tercer mayor numero de usos
+                    }
+
+                }
+                if (maxCardTypes.Count >= 3) //en caso que con las cartas del segundo mayor número de usos ya sean 3 o más, entonces sale del bucle
+                {
+                    buscarMax = 4;
+                    break;
+                }
+                else //caso contrario suma +1 en "buscarMax" para así entrar en los "else if" cuando vale 2 y cuando vale 3
+                                                                         //(es decir, busca el tercer mayor número de usos)
+                {
+                    buscarMax++;
+                }
+
+                Debug.Log("pasó con " + buscarMax);
+            } while (buscarMax == 1 || buscarMax == 2 || buscarMax == 3);
+        }
+
+    }
+
+    public int CartaMasUsada()
+    {
         int chosenCardType;
 
-        // Seleccionar de forma aleatoria si hay más de 3 opciones
-        if (maxCardTypes.Count > 3)
-        {
-            int randomIndex = Random.Range(0, maxCardTypes.Count);
-            chosenCardType = maxCardTypes[randomIndex];
-        }
-        else
-        {
-            // Si i es menor que el número de tipos de cartas, usarlo como índice directo
-            if (i < maxCardTypes.Count)
-            {
-                chosenCardType = maxCardTypes[i];
-            }
-            else
-            {
-                // Si hay tipos de cartas que no tienen el máximo número de usos
-                if (cardUses.Count > maxCardTypes.Count)
-                {
-                    //maxCount--;
-                    // for (int cardType = 0; cardType < cardUses.Count; cardType++)
-                    //{
-                    //    if (cardUses[cardType] == maxCount)
-                    //    {
-                    //        maxCardTypes.Add(cardType);
-                    //    }
-                    //}
+        //seleccionar de forma aleatoria cual carta pasar de las de mayor uso
+        chosenCardType = maxCardTypes[Random.Range(0, maxCardTypes.Count)];
 
-                    // Si i es mayor o igual al número de tipos de cartas, elegir el siguiente tipo más grande
-                    maxCardTypes.Sort();
-                    maxCardTypes.Reverse();
-
-                    // Ajustar i para no desbordar el índice
-                    int adjustedIndex = i % maxCardTypes.Count;
-
-                    chosenCardType = maxCardTypes[adjustedIndex];
-                }
-                else
-                {
-                    // En este caso, todas las cartas tienen el mismo número de usos, así que no hay tipos adicionales
-                    chosenCardType = Random.Range(0, cardUses.Count);  // Puedes elegir cualquier tipo ya que todos son iguales
-                }
-            }
-        }
-
+        Debug.Log(" id:" + chosenCardType);
         return chosenCardType;
     }
+
 }
