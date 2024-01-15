@@ -791,8 +791,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowHeadPrefab: {fileID: 3668083710755885820, guid: 9e4d1a0f859ac0d4b8277c637a48c04f, type: 3}
   ArrowNodePrefab: {fileID: 2289873777155798848, guid: 58f4ffc55f291b4469904c464530739f, type: 3}
-  ArrowNodeNum: 9
-  scaleFactor: 0.3
+  ArrowNodeNum: 10
+  scaleFactor: 0.25
   Enemies: []
   IdCarta: 0
   Carta: {fileID: 0}
@@ -2777,13 +2777,14 @@ MonoBehaviour:
   victoria_etc: 0
   numTristeza: 0
   RecompensaDinero: 0
+  ContadorTurnos: 0
   GameObject_Dmg_text: {fileID: 1377292726397514771, guid: 76fa258461c46d2458ef6ece015626f1, type: 3}
   PrefabSpell:
-  - {fileID: 2362553635666029483, guid: 3f5c03765bb2d3847ac31da97c38d609, type: 3}
-  - {fileID: 3140112512869390187, guid: 7904ce3f68513c1499bd2c6538c0fd53, type: 3}
-  - {fileID: 6704492445183802402, guid: cc439b4b98ceb884195ade692a57e629, type: 3}
-  - {fileID: 6607433316577655036, guid: ae69e4bbdc5818d4c90489df29e1a25d, type: 3}
-  - {fileID: 6269455740821257269, guid: 75b3680566c52be449f1e7e00f8b4627, type: 3}
+  - {fileID: 2282241430256155022, guid: fa307647bcc49744cbbf49db65aa422d, type: 3}
+  - {fileID: 7484228080720562073, guid: 7904ce3f68513c1499bd2c6538c0fd53, type: 3}
+  - {fileID: 4690894471995922204, guid: cc439b4b98ceb884195ade692a57e629, type: 3}
+  - {fileID: 4142858225566534658, guid: 428dd8c411f0e7749b5510a5a1f618cc, type: 3}
+  - {fileID: 4794019393124131763, guid: 75b3680566c52be449f1e7e00f8b4627, type: 3}
   CanvasCartas: {fileID: 805516730}
   CardSprites:
   - {fileID: 21300000, guid: 8c330017982009f4cb6606b9e0615a7f, type: 3}
@@ -2791,7 +2792,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e7965b8236b2d2f458e531af00798847, type: 3}
   TotalCards: 
   HandCardsAmount: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  Boss: 0
 --- !u!1 &997867313
 GameObject:
   m_ObjectHideFlags: 0

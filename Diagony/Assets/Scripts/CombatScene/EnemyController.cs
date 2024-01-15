@@ -10,6 +10,11 @@ using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
+    //public Sprite ArrowHeadPrefab_A; //ACTIVO
+    //public Sprite ArrowNodePrefab_A;
+
+    //public Sprite ArrowHeadPrefab_D; //DESACTIVO
+    //public Sprite ArrowNodePrefab_D;
 
     public GameObject VariablesGlobales;
     public GameObject CombatScene;
@@ -911,13 +916,15 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Arrow")
         {
+            //ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHead.GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_A;
             for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
             {
 
                 ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.red;
-                
+               // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodePrefab_A;
 
             }
+           // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_A;
 
             //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
             OverEnemy = true;
@@ -933,13 +940,17 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Arrow")
         {
+           // ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab.GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_D;
             for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
             {
 
                 ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
-
+               // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent <Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodePrefab_D;
 
             }
+           // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_D;
+
+
 
             //ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
             OverEnemy = false;

@@ -10,6 +10,14 @@ public class ArrowEmitter : MonoBehaviour
     // Public Atributes
     public GameObject ArrowHeadPrefab; // The prefab of arrow head
     public GameObject ArrowNodePrefab; // The prefab of arrow node
+
+
+    //public Sprite ArrowHeadPrefab_A; //ACTIVO
+    //public Sprite ArrowNodePrefab_A;
+
+    //public Sprite ArrowHeadPrefab_D; //DESACTIVO
+    //public Sprite ArrowNodePrefab_D;
+
     public int ArrowNodeNum;           // The number of arrow nodes
     public float scaleFactor = 1f;     // The scale multiplier for arrow nodes
     public List<GameObject> Enemies;
