@@ -18,6 +18,8 @@ public class RoomButton : MonoBehaviour
     [SerializeField] public int numContections;
     [SerializeField] public GameObject MapController_;
     [SerializeField] GameObject CanvasSingleton;
+    [SerializeField] public GameObject LinePrefab;
+    [SerializeField] public GameObject Content;
 
 
     public int RoomType; // 0: Combate - 1: Cofre - 2: Tienda - 3: Boss
@@ -26,7 +28,7 @@ public class RoomButton : MonoBehaviour
     {
         CanvasSingleton = GameObject.Find("CanvasSingleton");
         VariablesGlobales = GameObject.Find("VariablesGlobales");
-
+        createLines();
     }
 
 
@@ -82,4 +84,17 @@ public class RoomButton : MonoBehaviour
     //        }
     //    }
     //}
+
+    public void createLines()
+    {
+        if (numContections > 0)
+        {
+            for (int i = 0; i < numContections; i++)
+            {
+                GameObject LineClon = Instantiate(LinePrefab);
+                LineClon.GetComponent<Line>().AsignPositions(new Vector3(transform.position.x, transform.position.y, transform.position.z+1), new Vector3(conections[i].transform.position.x, conections[i].transform.position.y, conections[i].transform.position.z-1));
+                LineClon.transform.SetParent(Content.transform, true);
+            }
+        }
+    }
 }

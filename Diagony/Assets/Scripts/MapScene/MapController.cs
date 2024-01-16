@@ -19,6 +19,7 @@ public class MapController : MonoBehaviour
     [SerializeField] GameObject Canvas;
     [SerializeField] GameObject Content;
     [SerializeField] GameObject RoomButton;
+    [SerializeField] GameObject LinePrefab;
 
     static int x_coord = 5;
     static int y_coord = 12;
@@ -146,6 +147,8 @@ public class MapController : MonoBehaviour
         clonEntrada.GetComponent<Button>().interactable = true;
         clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
         clonEntrada.GetComponent<RoomButton>().RoomType = 0;
+        clonEntrada.GetComponent<RoomButton>().LinePrefab = LinePrefab;
+        clonEntrada.GetComponent<RoomButton>().Content = Content;
 
 
 
@@ -189,6 +192,9 @@ public class MapController : MonoBehaviour
                 clon.GetComponent<RoomButton>().y = j;
                 clon.GetComponent<Button>().interactable = false;
                 clon.GetComponent<RoomButton>().MapController_ = gameObject;
+                clon.GetComponent<RoomButton>().LinePrefab = LinePrefab;
+                clon.GetComponent<RoomButton>().Content = Content;
+
                 if (j == 0)
                 {
                     clon.GetComponent<RoomButton>().RoomType = 2;
@@ -273,6 +279,8 @@ public class MapController : MonoBehaviour
         clonDescanso.GetComponent<Button>().image.color = Color.green;
         clonDescanso.GetComponent<Button>().interactable = false;
         clonDescanso.GetComponent<RoomButton>().MapController_ = gameObject;
+        clonDescanso.GetComponent<RoomButton>().LinePrefab = LinePrefab;
+        clonDescanso.GetComponent<RoomButton>().Content = Content;
 
 
         NextXCoord += 100;
@@ -283,6 +291,8 @@ public class MapController : MonoBehaviour
         clonBoss.GetComponent<Button>().image.color = Color.blue;
         clonBoss.GetComponent<Button>().interactable = false;
         clonBoss.GetComponent<RoomButton>().MapController_ = gameObject;
+        clonBoss.GetComponent<RoomButton>().LinePrefab = LinePrefab;
+        clonBoss.GetComponent<RoomButton>().Content = Content;
 
 
     }
@@ -301,6 +311,8 @@ public class MapController : MonoBehaviour
             }
         }
 
+        
+     
 
         int siguiente_salas_por_fila = 0;
         int actual_salas_por_fila = 0;
@@ -609,6 +621,16 @@ public class MapController : MonoBehaviour
         clonDescanso.GetComponent<RoomButton>().conections[clonDescanso.GetComponent<RoomButton>().numContections] = clonBoss;
         clonDescanso.GetComponent<RoomButton>().numContections++;
 
+        //for (int i = 0; i < y_coord; i++)
+        //{
+        //    for (int j = 0; j < x_coord; j++)
+        //    {
+        //        if (Occupied_Rooms[j, i])
+        //        {
+        //            RoomsGameobjects[j, i].GetComponent<RoomButton>().createLines();
+        //        }
+        //    }
+        //}
     }
 
     public void ComprobarInactivos()
