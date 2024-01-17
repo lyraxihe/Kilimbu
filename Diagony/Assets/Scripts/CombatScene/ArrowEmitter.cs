@@ -11,6 +11,11 @@ public class ArrowEmitter : MonoBehaviour
     public GameObject ArrowHeadPrefab; // The prefab of arrow head
     public GameObject ArrowNodePrefab; // The prefab of arrow node
 
+    public Sprite ArrowHeadDisabled;
+    public Sprite ArrowNodeDisabled;
+    public Sprite ArrowHeadEnabled;
+    public Sprite ArrowNodeEnabled;
+
 
     //public Sprite ArrowHeadPrefab_A; //ACTIVO
     //public Sprite ArrowNodePrefab_A;

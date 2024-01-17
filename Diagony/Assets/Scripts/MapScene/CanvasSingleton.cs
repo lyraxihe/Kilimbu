@@ -44,17 +44,17 @@ public class CanvasSingleton : MonoBehaviour
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         }
         // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
-        if (Content.GetComponent<RectTransform>().anchoredPosition.x > 300)
+        if (Content.GetComponent<RectTransform>().anchoredPosition.x > 30)
         {
 
-            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(300, 0);
+            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(30, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }
-        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -1000)
+        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -3500)
         {
 
-            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1000, 0);
+            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3500, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }
@@ -69,10 +69,10 @@ public class CanvasSingleton : MonoBehaviour
             ScrollAreaCompendio.GetComponent<ScrollRect>().enabled = false;
 
         }
-        else if (Compendio.GetComponent<RectTransform>().anchoredPosition.x < -1055)
+        else if (Compendio.GetComponent<RectTransform>().anchoredPosition.x < -2186)
         {
 
-            Compendio.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1055, 0);
+            Compendio.GetComponent<RectTransform>().anchoredPosition = new Vector2(-2186, 0);
             ScrollAreaCompendio.GetComponent<ScrollRect>().enabled = false;
 
         }

@@ -89,7 +89,7 @@ public class MapController : MonoBehaviour
             Destroy(VariablesGlobales);
             Destroy(gameObject);
         }
-        Dinero_text.text = "Dinero: " + VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount;
+        Dinero_text.text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount;
 
     }
 
@@ -169,7 +169,7 @@ public class MapController : MonoBehaviour
                 nSalasEnColumna = 4;
             }
 
-            NextXCoord += 100;
+            NextXCoord += 300;
             for (int i = 0; i < nSalasEnColumna; i++)
             {
 
@@ -215,7 +215,7 @@ public class MapController : MonoBehaviour
                 {
                     case 0:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 120, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 360, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -223,7 +223,7 @@ public class MapController : MonoBehaviour
 
                     case 1:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 60, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 180, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -239,7 +239,7 @@ public class MapController : MonoBehaviour
 
                     case 3:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 60, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 180, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -247,7 +247,7 @@ public class MapController : MonoBehaviour
 
                     case 4:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 120, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 360, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -271,7 +271,7 @@ public class MapController : MonoBehaviour
                 //clon.GetComponent<Button>().image.color = Color.blue;
             }
         }
-        NextXCoord += 100;
+        NextXCoord += 300;
         // Crea la Sala de Descanso
         clonDescanso = Instantiate(RoomButton);
         clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
@@ -283,7 +283,7 @@ public class MapController : MonoBehaviour
         clonDescanso.GetComponent<RoomButton>().Content = Content;
 
 
-        NextXCoord += 100;
+        NextXCoord += 300;
         // Crea el Boss
         clonBoss = Instantiate(RoomButton);
         clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);

@@ -181,8 +181,11 @@ public class CardController : MonoBehaviour
                 for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
                 {
 
-                    ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
-
+                    //ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
+                    if(j == ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count - 1)
+                        ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadDisabled;
+                    else
+                        ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodeDisabled;
 
                 }
 

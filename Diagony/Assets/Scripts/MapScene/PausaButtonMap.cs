@@ -9,9 +9,6 @@ public class PausaButtonMap : MonoBehaviour
 {
     [SerializeField] GameObject PanelPausa;
     [SerializeField] GameObject VariablesGlobales;
-    [SerializeField] GameObject ScrollArea;
-
-    private ScrollRect DesplazamientoMapa;
 
     TMP_Text textButton;
 
@@ -19,7 +16,6 @@ public class PausaButtonMap : MonoBehaviour
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         textButton = gameObject.GetComponentInChildren<TextMeshPro>();
-        DesplazamientoMapa = ScrollArea.GetComponent<ScrollRect>();
     }
 
 
@@ -37,7 +33,6 @@ public class PausaButtonMap : MonoBehaviour
             PanelPausa.SetActive(true);
             Time.timeScale = 0f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
-            DesplazamientoMapa.enabled = false;
 
         }
         else
@@ -46,7 +41,6 @@ public class PausaButtonMap : MonoBehaviour
             PanelPausa.SetActive(false);
             Time.timeScale = 1f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
-            DesplazamientoMapa.enabled = true;
 
         }
 
@@ -57,7 +51,6 @@ public class PausaButtonMap : MonoBehaviour
 
 
         VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
-        DesplazamientoMapa.enabled = true;
         SceneManager.LoadScene("MainMenu");
 
     }

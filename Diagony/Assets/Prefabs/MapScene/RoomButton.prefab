@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4153963543493444943
 CanvasRenderer:
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1d46bc938cae746aa68b05fc1c4891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VariablesGlobales: {fileID: 0}
   x: 0
   y: 0
   id: 0
@@ -156,4 +157,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   numContections: 0
-  SetInteractuable: {fileID: 4153963543493444941}
+  MapController_: {fileID: 0}
+  CanvasSingleton: {fileID: 0}
+  LinePrefab: {fileID: 0}
+  Content: {fileID: 0}
+  RoomType: 0

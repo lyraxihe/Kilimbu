@@ -920,8 +920,12 @@ public class EnemyController : MonoBehaviour
             for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
             {
 
-                ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.red;
-               // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodePrefab_A;
+                //ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.red;
+                // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodePrefab_A;
+                if (j == ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count - 1)
+                    ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadEnabled;
+                else
+                    ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodeEnabled;
 
             }
            // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_A;
@@ -944,8 +948,12 @@ public class EnemyController : MonoBehaviour
             for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
             {
 
-                ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
-               // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent <Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodePrefab_D;
+                //ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().color = Color.grey;
+                // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent <Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodePrefab_D;
+                if (j == ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count - 1)
+                    ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadDisabled;
+                else
+                    ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[j].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowNodeDisabled;
 
             }
            // ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes[ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count].GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_D;

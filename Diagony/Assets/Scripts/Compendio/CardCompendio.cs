@@ -73,10 +73,10 @@ public class CardCompendio : MonoBehaviour
             CopyCreated = true;
             Copy = Instantiate(gameObject, Parent.transform);
             if(Fila == 0)
-                Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 160, Position.anchoredPosition.y - 35);
+                Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 320, Position.anchoredPosition.y - 70);
             else
-                Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 160, Position.anchoredPosition.y + 35);
-            Copy.transform.localScale = new Vector3(1, 1, 1);
+                Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 320, Position.anchoredPosition.y + 70);
+            Copy.transform.localScale = new Vector3(2, 2, 2);
 
         }
 
