@@ -48,6 +48,7 @@ public class HealthBar : MonoBehaviour
             fill.color = Color.red; //colorea de rojo en caso de tener menos de 15 de vida
         else if (Health <=35)
             fill.color = Color.yellow;
+           // fill.color = new Color { 1, 1, 1, 1 };
         else
             fill.color = Color.green;
     }
