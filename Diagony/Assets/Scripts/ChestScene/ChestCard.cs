@@ -99,7 +99,7 @@ public class ChestCard : MonoBehaviour
         {
 
             MouseOver = true;
-            transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            transform.localScale = new Vector3(2, 2, 2);
 
         }
 
@@ -112,7 +112,7 @@ public class ChestCard : MonoBehaviour
         {
 
             MouseOver = false;
-            transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
         }
 
@@ -146,7 +146,7 @@ public class ChestCard : MonoBehaviour
                 {
 
                     MouseOver = false;
-                    transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     CanvasCards.SetActive(false);
 
                     for (int i = 0; i < 3; i++)
