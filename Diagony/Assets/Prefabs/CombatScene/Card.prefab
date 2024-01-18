@@ -168,7 +168,7 @@ RectTransform:
   m_GameObject: {fileID: 1791528441941151039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2098305122638960124}
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VariablesGlobales: {fileID: 0}
   CombatScene: {fileID: 0}
+  Player: {fileID: 0}
   DragZone: {fileID: 0}
   ArrowEmitter: {fileID: 0}
   EnemigoSeleccionado: 0

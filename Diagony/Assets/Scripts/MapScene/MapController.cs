@@ -146,7 +146,7 @@ public class MapController : MonoBehaviour
         clonEntrada.GetComponent<Button>().image.color = Color.cyan;
         clonEntrada.GetComponent<Button>().interactable = true;
         clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
-        clonEntrada.GetComponent<RoomButton>().RoomType = 1;
+        clonEntrada.GetComponent<RoomButton>().RoomType = 0;
         clonEntrada.GetComponent<RoomButton>().LinePrefab = LinePrefab;
         clonEntrada.GetComponent<RoomButton>().Content = Content;
 
