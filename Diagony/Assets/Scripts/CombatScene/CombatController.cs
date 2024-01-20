@@ -179,7 +179,7 @@ public class CombatController : MonoBehaviour
         GameObject clonPlayer = Instantiate(PrefabPlayer); // Crea el clon del Player
         clonPlayer.transform.position = new Vector2(-4, -0.8f);
         
-        //CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer, CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "PLAYER")); //tipo 3 = player
+        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer, CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "PLAYER")); //tipo 3 = player
         clonPlayer.GetComponent<PlayerController>().VariablesGlobales = VariablesGlobales;
         clonPlayer.GetComponent<PlayerController>().CombatScene = gameObject;
         

@@ -61,18 +61,26 @@ public class ShopController : MonoBehaviour
         int cardType;
         List<int> CardsCreated = new List<int>(); // Lista con las cartas que se van creando para que no se repitan
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 8; i++)
         {
                 do
                 {
-                    if (i < 3)
+                    if (i < 2)
                     {
                         cardType = CartaMasUsada();
                     }
                     else
                     {
-                        cardType = Random.Range(0, numCards);
+                        cardType = CartaNoObtenida();
+
+                        if (cardType == -1 ) //es decir, no hay cartas no obtenidas
+                        {
+                            cardType = Random.Range(0, numCards);
+                        }
+                       
                     }
+                   
+                    
                 } while (CardsCreated.Contains(cardType));
                 // Repite el aleatorio hasta que encuentre uno que no haya salido para que no se repitan
             
@@ -133,30 +141,31 @@ public class ShopController : MonoBehaviour
                     {
                         maxCardTypes.Add(cardType);  //agrega las cartas con segundo mayor numero de usos
                     }
-                    else if (buscarMax == 2 && cardUses[cardType] > max3 && cardUses[cardType] != maxCount && cardUses[cardType] != max2)
-                    {
-                        max3 = cardUses[cardType]; // en caso de ser necesario porque la cantidad de cartas con mayor uso
-                                                   // es menor a 3 busca el segundo número de usos más alto
-                    }
-                    else if (buscarMax == 3 && cardUses[cardType] == max3)
-                    {
-                        maxCardTypes.Add(cardType); //agrega las cartas con tercer mayor numero de usos
-                    }
+
+                    //else if (buscarMax == 2 && cardUses[cardType] > max3 && cardUses[cardType] != maxCount && cardUses[cardType] != max2)
+                    //{
+                    //    max3 = cardUses[cardType]; // en caso de ser necesario porque la cantidad de cartas con mayor uso
+                    //                               // es menor a 3 busca el segundo número de usos más alto
+                    //}
+                    //else if (buscarMax == 3 && cardUses[cardType] == max3)
+                    //{
+                    //    maxCardTypes.Add(cardType); //agrega las cartas con tercer mayor numero de usos
+                    //}
 
                 }
-                if (maxCardTypes.Count >= 3) //en caso que con las cartas del segundo mayor número de usos ya sean 3 o más, entonces sale del bucle
-                {
-                    buscarMax = 4;
-                    break;
-                }
-                else //caso contrario suma +1 en "buscarMax" para así entrar en los "else if" cuando vale 2 y cuando vale 3
-                                                                         //(es decir, busca el tercer mayor número de usos)
-                {
+                //if (maxCardTypes.Count >= 3) //en caso que con las cartas del segundo mayor número de usos ya sean 3 o más, entonces sale del bucle
+                //{
+                //    buscarMax = 4;
+                //    break;
+                //}
+                //else //caso contrario suma +1 en "buscarMax" para así entrar en los "else if" cuando vale 2 y cuando vale 3
+                //                                                         //(es decir, busca el tercer mayor número de usos)
+                //{
                     buscarMax++;
-                }
+                //}
 
                 Debug.Log("pasó con " + buscarMax);
-            } while (buscarMax == 1 || buscarMax == 2 || buscarMax == 3);
+            } while (buscarMax == 1 /*|| buscarMax == 2 || buscarMax == 3*/);
         }
 
     }
@@ -172,4 +181,26 @@ public class ShopController : MonoBehaviour
         return chosenCardType;
     }
 
+    public int CartaNoObtenida()
+    {
+        List<int> NoObtenidas = new List<int>();
+
+        for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards.Count; i++)
+        {
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[i] == 0)
+            {
+                NoObtenidas.Add(i);
+            }
+        }
+
+        if (NoObtenidas.Count > 0)
+        {
+            return NoObtenidas[Random.Range(0, NoObtenidas.Count)];
+        }
+        else
+        {
+            return -1;
+        }
+           
+    }
 }

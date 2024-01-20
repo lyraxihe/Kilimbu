@@ -15,6 +15,7 @@ public class RoomButton : MonoBehaviour
 
     [SerializeField] public float id; // id
     public GameObject[] conections = new GameObject[4];
+    GameObject[] conectionsLines = new GameObject[4];
     [SerializeField] public int numContections;
     [SerializeField] public GameObject MapController_;
     [SerializeField] GameObject CanvasSingleton;
@@ -54,6 +55,7 @@ public class RoomButton : MonoBehaviour
         for (int i = 0; i < numContections; i++)
         {
             conections[i].GetComponent<Button>().interactable = true;
+           //cambiar el color a las lineas acá
         }
 
         MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
@@ -76,16 +78,6 @@ public class RoomButton : MonoBehaviour
 
     }
 
-    //public void ComprobarConexionesActivas()
-    //{
-    //    for (int i = 0; i < numContections; i++)
-    //    {
-    //        if (conections[i].GetComponent<Button>().interactable)
-    //        {
-    //            SetInteractuable.interactable = false;
-    //        }
-    //    }
-    //}
 
     public void createLines()
     {
@@ -94,8 +86,9 @@ public class RoomButton : MonoBehaviour
             for (int i = 0; i < numContections; i++)
             {
                 GameObject LineClon = Instantiate(LinePrefab);
-                LineClon.GetComponent<Line>().AsignPositions(new Vector3(transform.position.x, transform.position.y, transform.position.z+1), new Vector3(conections[i].transform.position.x, conections[i].transform.position.y, conections[i].transform.position.z-1));
+                LineClon.GetComponent<Line>().AsignPositions(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(conections[i].transform.position.x - 0.5f, conections[i].transform.position.y, conections[i].transform.position.z));
                 LineClon.transform.SetParent(Content.transform, true);
+                conectionsLines[i] = LineClon;
             }
         }
     }

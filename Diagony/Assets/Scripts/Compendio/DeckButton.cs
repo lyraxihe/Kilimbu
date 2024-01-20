@@ -8,7 +8,7 @@ public class DeckButton : MonoBehaviour
 {
 
     [SerializeField] GameObject ScrollAreaCompendio;
-    [SerializeField] Sprite MapIcon;
+    [SerializeField] Sprite VolverIcon;
     [SerializeField] Sprite CartasIcon;
     [SerializeField] GameObject Map;
     //[SerializeField] TMP_Text ButtonText;
@@ -31,7 +31,7 @@ public class DeckButton : MonoBehaviour
         if (!ScrollAreaCompendio.activeSelf)
         {
             //ButtonText.text = "Volver";
-            gameObject.GetComponent<Image>().sprite = MapIcon;
+            gameObject.GetComponent<Image>().sprite = VolverIcon;
             Map.SetActive(false);
         }
         else

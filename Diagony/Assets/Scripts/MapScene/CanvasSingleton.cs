@@ -12,6 +12,7 @@ public class CanvasSingleton : MonoBehaviour
     [SerializeField] GameObject ScrollAreaCompendio;
     [SerializeField] GameObject Compendio;
     [SerializeField] GameObject Map;
+    [SerializeField] GameObject HealthBarPersonaje;
     public bool VerMapa;
 
     private void Awake() //sigleton
@@ -34,16 +35,27 @@ public class CanvasSingleton : MonoBehaviour
     void Start()
     {
         VerMapa = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "ShopScene")
-        {
+        //if (SceneManager.GetActiveScene().name == "ShopScene")
+        //{
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
+       // }
+
+        if (SceneManager.GetActiveScene().name == "CombatScene")
+        {
+            HealthBarPersonaje.SetActive(false);
         }
-        // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
+        else
+        {
+            HealthBarPersonaje.SetActive(true);
+        }
+
+            // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
         if (Content.GetComponent<RectTransform>().anchoredPosition.x > 30)
         {
 
