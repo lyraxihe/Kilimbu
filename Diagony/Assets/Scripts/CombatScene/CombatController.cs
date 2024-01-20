@@ -388,12 +388,7 @@ public class CombatController : MonoBehaviour
                 //clon.GetComponent<CardController>().TextDescription = CardDescriptions[i];
 
                 // Implementa los sprites
-                if (TotalCards[cardType] <= 5)
-                    clon.GetComponent<Image>().sprite = CardSprites[0];
-                else if (TotalCards[cardType] <= 12)
-                    clon.GetComponent<Image>().sprite = CardSprites[1];
-                else
-                    clon.GetComponent <Image>().sprite = CardSprites[2];
+                clon.GetComponent<Image>().sprite = CardSprites[TotalCards[cardType]];
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.1f);

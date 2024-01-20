@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 711a26678f56e18448aaf939d3bdfe37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b077804997be8a49b79e7c539d5b0c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,19 +117,27 @@ MonoBehaviour:
   Debilitado: 0
   Debilidad: 0
   ContadorDeTurnosDebilitado: 0
-  ContadorDebilitados: 0
+  ContadorDebilitado: 0
   Envenenado: 0
   Veneno: 0
   ContadorDeTurnosEnvenenado: 0
-  ContadorEnvenenados: 0
+  ContadorEnvenenado: 0
   Fuerte: 0
   Fuerza: 0
   ContadorDeTurnosFuerte: 0
-  ContadorFuerte: 0
+  ContadorFuerza: 0
   ContadorDeTurnosHeal: 0
   EsperandoHeal: 0
+  Esperanzado: 0
+  Esperanza: 0
+  ContadorDeTurnosEsperanzado: 0
+  ContadorEsperanza: 0
+  Transformacion: 0
+  ContadorDeTurnosTransformacion: 0
   ActiveSpell: 0
   SoloTristeza: 0
+  playerSeBufa: 0
+  contAcumulacionDanyoBoss: 0
 --- !u!95 &5142229651343907074
 Animator:
   serializedVersion: 5
@@ -138,9 +146,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565513452180743628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3041e4863ac76c94ba234ef4faaf4db2, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
