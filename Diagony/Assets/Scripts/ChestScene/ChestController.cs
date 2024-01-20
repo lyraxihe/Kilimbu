@@ -15,6 +15,8 @@ public class ChestController : MonoBehaviour
     public GameObject CanvasMana;
     public List<GameObject> CardsMana;
 
+    [SerializeField] Sprite[] Sprites;
+
     // Cartas
     [SerializeField] GameObject prefabCarta;
     public List<Sprite> CardSprites;
@@ -62,6 +64,7 @@ public class ChestController : MonoBehaviour
         {
 
             CartasCreadas = true;
+            GetComponent<SpriteRenderer>().sprite = Sprites[1];
             StartCoroutine(CreateCards());
 
         }
