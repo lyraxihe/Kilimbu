@@ -14,15 +14,17 @@ public class RoomButton : MonoBehaviour
 
 
     [SerializeField] public float id; // id
-    [SerializeField] public GameObject[] conections = new GameObject[4];
+    public GameObject[] conections = new GameObject[4];
     [SerializeField] public int numContections;
     [SerializeField] public GameObject MapController_;
     [SerializeField] GameObject CanvasSingleton;
     [SerializeField] public GameObject LinePrefab;
     [SerializeField] public GameObject Content;
 
+    public int Columna; // Columna que ocupa en el mapa
 
-    public int RoomType; // 0: Combate - 1: Cofre - 2: Tienda - 3: Boss
+
+    public int RoomType; // 0: Combate | 1: Cofre | 2: Tienda | 3: Boss
 
     void Start()
     {

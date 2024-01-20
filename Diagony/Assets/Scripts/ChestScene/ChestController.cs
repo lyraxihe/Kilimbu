@@ -25,7 +25,7 @@ public class ChestController : MonoBehaviour
     public List<GameObject> ListCards = new List<GameObject>(); // Lista de los IDs de las cartas creadas
 
     int numCards; // Número de cartas implementadas
-    bool CartasCreadas;
+    public bool CartasCreadas;
     public bool CardSelected;
     public bool Exit;
     

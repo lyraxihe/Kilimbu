@@ -56,7 +56,7 @@ public class VariablesGlobales : MonoBehaviour
         VidasProtagonista = 3;
         MaxHealthProtagonista = 100;
         HealthProtagonista = 100;
-        MaxManaProtagonista = 5;     // Maná máximo del jugador con el que podrá usar las cartas (se resetea en cada turno)
+        MaxManaProtagonista = 3;     // Maná máximo del jugador con el que podrá usar las cartas (se resetea en cada turno)
 
         // Pasivas
         PasivaGanarDinero = false;

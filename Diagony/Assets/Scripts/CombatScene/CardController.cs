@@ -138,8 +138,8 @@ public class CardController : MonoBehaviour
             }
 
             MouseOver = true;
-            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            transform.position = new Vector3(transform.position.x, -3.33f, 0);
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.position = new Vector3(transform.position.x, -3.62f, 0);
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 

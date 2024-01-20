@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,8 @@ public class MapController : MonoBehaviour
     [SerializeField] GameObject RoomButton;
     [SerializeField] GameObject LinePrefab;
 
+    [SerializeField] Sprite[] RoomIcons; // 0 - Combate | 1 - Cofre | 2 - Cofre abierto | 3 - Tienda | 4 - Boss
+
     static int x_coord = 5;
     static int y_coord = 12;
     int NextXCoord;
@@ -31,6 +34,7 @@ public class MapController : MonoBehaviour
     //Coordinadas[,] RoomsCoord = new Coordinadas[x_coord, y_coord]; // Coordenadas del resto de salas
     bool[,] Occupied_Rooms = new bool[x_coord, y_coord];           // Indicador de si la sala está ocupada
     public GameObject[,] RoomsGameobjects = new GameObject[x_coord, y_coord]; // Guarda los clones de las salas
+    public List<GameObject> ListRooms = new List<GameObject>(); // Guarda los clones de las salas en una sóla dimensión
 
     public int ContSalas;
 
@@ -42,6 +46,8 @@ public class MapController : MonoBehaviour
     GameObject clon;
     GameObject clonDescanso;
     GameObject clonBoss;
+
+    public int contCombates = 0, contTiendas = 0, contCofres = 0;
 
     private void Awake() //sigleton
     {
@@ -68,6 +74,17 @@ public class MapController : MonoBehaviour
         InicializarCoords(); // Inicializa las coordenadas de las salas
         CrearSalas();        // Crea las salas del mapa
         Conections();        // crea las conexiones de las salas
+
+        do
+        {
+
+            CheckMinRooms();     // Comprueba los mínimos de salas de Tienda y Cofres
+            CheckShops();        // Comprueba que dos tiendas no estén conectadas
+
+        } while (contTiendas < 4 || contCofres < 4); // Vuelve ha hacer cambios hasta que se cumplan los mínimos
+
+        SetSprites();
+
     }
 
 
@@ -124,7 +141,10 @@ public class MapController : MonoBehaviour
      */
     public void CrearSalas()
     {
-        int rand;
+        int rand, randRoom, randTienda;
+        //int randTienda1 = 0, randTienda2 = 0;
+        //int randCofre1 = 0, randCofre2 = 0, randCofre3 = 0, randCofre4 = 0;
+
         //asigna falsa las salas para indicar que están libres (luego se pone en true las que SI están ocupadas)
         for (int i = 0; i < Occupied_Rooms.GetLength(0); i++)
         {
@@ -143,19 +163,26 @@ public class MapController : MonoBehaviour
         clonEntrada = Instantiate(RoomButton);
         clonEntrada.transform.position = new Vector3(StartCoord.x, StartCoord.y, 0);
         clonEntrada.transform.SetParent(Content.transform, false);
-        clonEntrada.GetComponent<Button>().image.color = Color.cyan;
+        //clonEntrada.GetComponent<Button>().image.color = Color.cyan;
+        //clonEntrada.GetComponent<Image>().sprite = RoomIcons[0];
         clonEntrada.GetComponent<Button>().interactable = true;
         clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
+        clonEntrada.GetComponent<RoomButton>().Columna = 1;
         clonEntrada.GetComponent<RoomButton>().RoomType = 0;
         clonEntrada.GetComponent<RoomButton>().LinePrefab = LinePrefab;
         clonEntrada.GetComponent<RoomButton>().Content = Content;
-
+        contCombates++;
+        ListRooms.Add(clonEntrada);
 
 
         // Crea el resto de salas
         for (int j = 0; j < Occupied_Rooms.GetLength(1); j++) // Crea un bucle que recorre el array con su respectiva medida
         {
+
+            bool hayTienda = false; // Indica si en la columna hay una tienda o no para que no se repitan
+            randTienda = -1; // -1 para indicar que no hay sala en esta columna
             rand = Random.Range(1, 11); // Establece aleatoriamente el número de salas en esa columna desde 1 a medida con el array
+            
             if (rand <= 4)
             {
                 nSalasEnColumna = 2;
@@ -170,6 +197,10 @@ public class MapController : MonoBehaviour
             }
 
             NextXCoord += 300;
+
+            if (j == 2) // Si es la columna 3 debe haber una tienda si o si
+                randTienda = Random.Range(0, nSalasEnColumna);
+
             for (int i = 0; i < nSalasEnColumna; i++)
             {
 
@@ -194,22 +225,123 @@ public class MapController : MonoBehaviour
                 clon.GetComponent<RoomButton>().MapController_ = gameObject;
                 clon.GetComponent<RoomButton>().LinePrefab = LinePrefab;
                 clon.GetComponent<RoomButton>().Content = Content;
+                clon.GetComponent<RoomButton>().Columna = j + 2;
 
-                if (j == 0)
+                //if (j == 0)
+                //{
+                //    clon.GetComponent<RoomButton>().RoomType = 2;
+                //}
+                //else if (j%2 == 0)
+                //{
+                //    clon.GetComponent<RoomButton>().RoomType = 0;
+                //}
+                //else
+                //{
+                //    clon.GetComponent<RoomButton>().RoomType = 2;
+                //}
+
+                //// Establece las posiciones para un mínimo de 4 Tiendas (2 + Tienda en columna 3 + Tienda en penúltima columna)
+                //randTienda1 = Random.Range(3, Occupied_Rooms.GetLength(1) - 1); // 3 porque la tienda no puede estar en j == 0 ni j == 2 y en j == 3 ya hay una tienda si o si
+                //do
+                //{
+
+                //    randTienda2 = Random.Range(3, Occupied_Rooms.GetLength(1) - 1);
+
+                //} while (randTienda2 == randTienda1);
+
+                //// Establece las posiciones para un mínimo de 4 cofres
+                //randCofre1 = Random.Range(0, Occupied_Rooms.GetLength(1) - 1);
+                //do
+                //{
+
+                //    randCofre2 = Random.Range(0, Occupied_Rooms.GetLength(1) - 1);
+
+                //} while (randCofre2 == randCofre1);
+                //do
+                //{
+
+                //    randCofre3 = Random.Range(0, Occupied_Rooms.GetLength(1) - 1);
+
+                //} while (randCofre3 == randCofre1 || randCofre3 == randCofre2);
+                //do
+                //{
+
+                //    randCofre4 = Random.Range(0, Occupied_Rooms.GetLength(1) - 1);
+
+                //} while (randCofre4 == randCofre1 || randCofre4 == randCofre2 || randCofre4 == randCofre3);
+
+                if (i == randTienda)
                 {
+
                     clon.GetComponent<RoomButton>().RoomType = 2;
-                }
-                else if (j%2 == 0)
-                {
-                    clon.GetComponent<RoomButton>().RoomType = 0;
+                    //clon.GetComponent<Image>().sprite = RoomIcons[3]; // Sala de tienda
+                    hayTienda = true;
+                    contTiendas++;
+
                 }
                 else
                 {
-                    clon.GetComponent<RoomButton>().RoomType = 2;
+
+                    randRoom = Random.Range(0, 11);
+
+                    if (randRoom <= 6 /*&& contCombates < 24*/)
+                    {
+
+                        clon.GetComponent<RoomButton>().RoomType = 0;
+                        //clon.GetComponent<Image>().sprite = RoomIcons[0]; // Sala de combate
+                        contCombates++;
+
+                    }
+                    else if (randRoom <= 8 && contCofres < 8)
+                    {
+
+                        clon.GetComponent<RoomButton>().RoomType = 1;
+                        //clon.GetComponent<Image>().sprite = RoomIcons[1]; // Sala de cofre
+                        contCofres++;
+
+                    }
+                    else
+                    {
+
+                        if (j > 2 && j < Occupied_Rooms.GetLength(1) - 1 && j != 3 && randTienda == -1 && !hayTienda && contTiendas < 4) // En las primeras dos columnas no hay combates
+                        {
+
+                            clon.GetComponent<RoomButton>().RoomType = 2;
+                            //clon.GetComponent<Image>().sprite = RoomIcons[3]; // Sala de tienda
+                            hayTienda = true;
+                            contTiendas++;
+
+                        }
+                        else
+                        {
+
+                            randRoom = Random.Range(0, 9);
+
+                            if (randRoom <= 6 /*&& contCombates < 24*/)
+                            {
+
+                                clon.GetComponent<RoomButton>().RoomType = 0;
+                                //clon.GetComponent<Image>().sprite = RoomIcons[0]; // Sala de combate
+                                contCombates++;
+
+                            }
+                            else if (randRoom <= 8 && contCofres < 8)
+                            {
+
+                                clon.GetComponent<RoomButton>().RoomType = 1;
+                                //clon.GetComponent<Image>().sprite = RoomIcons[1]; // Sala de cofre
+                                contCofres++;
+
+                            }
+
+                        }
+
+                    }
+
                 }
-               
 
                 RoomsGameobjects[posicionSala, j] = clon;
+                ListRooms.Add(clon);
 
                 switch (posicionSala)
                 {
@@ -276,11 +408,16 @@ public class MapController : MonoBehaviour
         clonDescanso = Instantiate(RoomButton);
         clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
         clonDescanso.transform.SetParent(Content.transform, false);
-        clonDescanso.GetComponent<Button>().image.color = Color.green;
+        //clonDescanso.GetComponent<Button>().image.color = Color.green;
+        clonDescanso.GetComponent<RoomButton>().RoomType = 2;
+        //clonDescanso.GetComponent<Image>().sprite = RoomIcons[3];
         clonDescanso.GetComponent<Button>().interactable = false;
         clonDescanso.GetComponent<RoomButton>().MapController_ = gameObject;
+        clonDescanso.GetComponent<RoomButton>().Columna = Occupied_Rooms.GetLength(1) + 2;
         clonDescanso.GetComponent<RoomButton>().LinePrefab = LinePrefab;
         clonDescanso.GetComponent<RoomButton>().Content = Content;
+        contTiendas++;
+        ListRooms.Add(clonDescanso);
 
 
         NextXCoord += 300;
@@ -288,16 +425,156 @@ public class MapController : MonoBehaviour
         clonBoss = Instantiate(RoomButton);
         clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
         clonBoss.transform.SetParent(Content.transform, false);
-        clonBoss.GetComponent<Button>().image.color = Color.blue;
+        //clonBoss.GetComponent<Button>().image.color = Color.blue;
+        clonBoss.GetComponent<RoomButton>().RoomType = 3;
+        //clonBoss.GetComponent<Image>().sprite = RoomIcons[4];
         clonBoss.GetComponent<Button>().interactable = false;
         clonBoss.GetComponent<RoomButton>().MapController_ = gameObject;
+        clonBoss.GetComponent<RoomButton>().Columna = Occupied_Rooms.GetLength(1) + 3;
         clonBoss.GetComponent<RoomButton>().LinePrefab = LinePrefab;
         clonBoss.GetComponent<RoomButton>().Content = Content;
-
+        ListRooms.Add(clonBoss);
 
     }
 
+    // Comprueba que no haya tiendas conectadas a otras tiendas
+    private void CheckShops()
+    {
 
+        for(int i = 0; i < ListRooms.Count; i++) // Recorre la lista de salas del mapa
+        {
+
+            if (ListRooms[i].GetComponent<RoomButton>().RoomType == 2) // Si la sala es una tienda
+            {
+
+                for (int j = 0; j < ListRooms[i].GetComponent<RoomButton>().conections.Length; j++) // Recorre el array de conexiones de la tienda
+                {
+
+                    if (ListRooms[i].GetComponent<RoomButton>().conections[j] != null && ListRooms[i].GetComponent<RoomButton>().conections[j].GetComponent<RoomButton>().RoomType == 2) // Si una de sus conexiones es otra tienda
+                    {
+                        int rand = Random.Range(0, 9);
+
+                        if(rand <= 6 /*&& contCombates < 24*/)
+                        {
+
+                            ListRooms[i].GetComponent<RoomButton>().conections[j].GetComponent<RoomButton>().RoomType = 0; // Cambia la tienda a un combate
+                            //ListRooms[i].GetComponent<RoomButton>().conections[j].GetComponent<Image>().sprite = RoomIcons[0];
+                            contCombates++;
+
+                        }
+                        else if (rand <= 8 && contCofres < 8)
+                        {
+
+                            ListRooms[i].GetComponent<RoomButton>().conections[j].GetComponent<RoomButton>().RoomType = 1; // Cambia la tienda a un cofre
+                            //ListRooms[i].GetComponent<RoomButton>().conections[j].GetComponent<Image>().sprite = RoomIcons[1];
+                            contCofres++;
+
+                        }
+
+                        contTiendas--;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private void CheckMinRooms()
+    {
+
+        List<int> salasCogidas = new List<int>();
+        int rand;
+
+        if(contTiendas < 4)
+        {
+
+            for (int i = 0; i < ListRooms.Count && contTiendas < 4; i++)
+            {
+
+                if (ListRooms[i].GetComponent<RoomButton>().Columna > 3 && ListRooms[i].GetComponent<RoomButton>().Columna < 14)
+                {
+
+                    do
+                    {
+
+                        rand = Random.Range(i, ListRooms.Count - 2); // Aleatorio menos la primera, penúltima y última posición que son predeterminadas
+
+                    } while (salasCogidas.Contains(rand) || ListRooms[rand].GetComponent<RoomButton>().RoomType == 1 || ListRooms[rand].GetComponent<RoomButton>().RoomType == 2); // Repite hasta que el rand no haya sido cogido previamente o no sea una tienda
+
+                    // Cambia la sala escogida por una Tienda
+                    if (ListRooms[rand].GetComponent<RoomButton>().RoomType == 0)
+                        contCombates--;
+                    //else if (ListRooms[rand].GetComponent<RoomButton>().RoomType == 1)
+                    //    contCofres--;
+
+                    ListRooms[rand].GetComponent<RoomButton>().RoomType = 2;
+                    //ListRooms[rand].GetComponent<Image>().sprite = RoomIcons[3];
+                    salasCogidas.Add(rand);
+                    contTiendas++;
+
+                }
+
+            }
+
+        }
+
+        if (contCofres < 4)
+        {
+
+            for (int i = 0; i < ListRooms.Count && contCofres < 4; i++)
+            {
+
+                if (ListRooms[i].GetComponent<RoomButton>().Columna > 1 && ListRooms[i].GetComponent<RoomButton>().Columna < 14)
+                {
+
+                    do
+                    {
+
+                        rand = Random.Range(i, ListRooms.Count - 2); // Aleatorio menos la primera, penúltima y última posición que son predeterminadas
+
+                    } while (salasCogidas.Contains(rand) || ListRooms[rand].GetComponent<RoomButton>().RoomType == 1 || ListRooms[rand].GetComponent<RoomButton>().RoomType == 2); // Repite hasta que el rand no haya sifo cogido previamente
+
+                    // Cambia la sala escogida por un Cofre
+                    if (ListRooms[rand].GetComponent<RoomButton>().RoomType == 0)
+                        contCombates--;
+                    //else if (ListRooms[rand].GetComponent<RoomButton>().RoomType == 2)
+                    //    contTiendas--;
+
+                    ListRooms[rand].GetComponent<RoomButton>().RoomType = 1;
+                    //ListRooms[rand].GetComponent<Image>().sprite = RoomIcons[1];
+                    salasCogidas.Add(rand);
+                    contCofres++;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private void SetSprites()
+    {
+
+        for (int i = 0; i < ListRooms.Count; i++)
+        {
+
+            if (ListRooms[i].GetComponent<RoomButton>().RoomType == 0)
+                ListRooms[i].GetComponent<Image>().sprite = RoomIcons[0];
+            else if (ListRooms[i].GetComponent<RoomButton>().RoomType == 1)
+                ListRooms[i].GetComponent<Image>().sprite = RoomIcons[1];
+            else if (ListRooms[i].GetComponent<RoomButton>().RoomType == 2)
+                ListRooms[i].GetComponent<Image>().sprite = RoomIcons[3];
+            else
+                ListRooms[i].GetComponent<Image>().sprite = RoomIcons[4];
+
+        }
+
+    }
 
     void Conections()
     {
