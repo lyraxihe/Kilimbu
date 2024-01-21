@@ -66,6 +66,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] List<int> TotalCards = new List<int>(); // Lista con el número de cartas del Jugador para el combate (Se rellena con las cantidades especificadas en Variables Globales)
     [SerializeField] List<int> HandCardsAmount = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Cantidad de cartas de cada tipo en la mano durante el turno del Jugador
 
+    [SerializeField] TMP_Text turnosText;
     private void Awake()
     {
         
@@ -123,6 +124,7 @@ public class CombatController : MonoBehaviour
         ManaMax.text = "/ " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
         CardsPosition();
 
+        turnosText.text = "Turnos: " + ContadorTurnos.ToString();
         //victoriaDerrota();
        
 
@@ -367,7 +369,7 @@ public class CombatController : MonoBehaviour
                 {
                     canCreate = true;
                     cardType = Random.Range(0, TotalCards.Count); // Aleatorio entre las cartas totales del Jugador para el combate
-                    if (HandCardsAmount[TotalCards[cardType]] + 1 > VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[TotalCards[cardType]] && VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType] == 0)
+                    if (HandCardsAmount[TotalCards[cardType]] + 1 > VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[TotalCards[cardType]]/* && VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType] == 0*/)
                     {
                         canCreate = false;
                     }

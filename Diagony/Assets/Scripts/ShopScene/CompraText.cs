@@ -21,6 +21,7 @@ public class CompraText : MonoBehaviour
         disappearTimer = 1f;
         textMesh.text = text;
         textColor = textMesh.color;
+
         if (ManaHeal)
         {
             gameObject.GetComponent<TMP_Text>().fontSize = 18;
@@ -44,7 +45,7 @@ public class CompraText : MonoBehaviour
             textColor.a -= disappearSpeed * Time.deltaTime;
             textMesh.color = textColor;
 
-            if (textColor.a < 0)
+            if (textColor.a <= 0)
             {
                 Destroy(gameObject);
             }

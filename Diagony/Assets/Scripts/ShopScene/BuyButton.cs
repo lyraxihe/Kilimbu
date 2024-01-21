@@ -20,13 +20,25 @@ public class BuyButton : MonoBehaviour
         if (EsMana)
         {
             if (VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista == 3)
-            Precio = 40;
+            {
+                Precio = 40;
+                gameObject.GetComponentInChildren<TMP_Text>().text = "$" + Precio.ToString();
+            }
+           
             else if (VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista == 4)
-            Precio = 70;
+            {
+                Precio = 70;
+                gameObject.GetComponentInChildren<TMP_Text>().text = "$" + Precio.ToString();
+            }
+            
             else
-            gameObject.GetComponent<Button>().interactable = false;
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+                gameObject.GetComponentInChildren<TMP_Text>().text = "máximo de maná";
+            }
+            
 
-            gameObject.GetComponentInChildren<TMP_Text>().text = "$" + Precio.ToString();
+           
 
         }
         else if (EsVida)
