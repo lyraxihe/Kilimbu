@@ -34,7 +34,7 @@ public class ChestController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Time.timeScale = 1f;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         numCards = 5;
         CartasCreadas = false;

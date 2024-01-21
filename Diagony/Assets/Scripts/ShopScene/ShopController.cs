@@ -34,9 +34,10 @@ public class ShopController : MonoBehaviour
    
     public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 5, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
 
-    List<int> maxCardTypes = new List<int>(); // para guardar las cartas más usadas
+    [SerializeField] List<int> maxCardTypes = new List<int>(); // para guardar las cartas más usadas
 
     public List<GameObject> ListCards = new List<GameObject>(); // Lista de los IDs de las cartas creadas
+    public List<GameObject> ListButton = new List<GameObject>(); //lista con los botones para poder asignarles sus id con los respectivos precios.
 
     int numCards; // Número de cartas implementadas
 
@@ -46,7 +47,7 @@ public class ShopController : MonoBehaviour
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         numCards = 24;
-        BuscarCartasMasRepetidas();
+       
         CrearCartas();
     }
 
@@ -57,9 +58,11 @@ public class ShopController : MonoBehaviour
 
     public void CrearCartas()
     {
+        BuscarCartasMasRepetidas();
         TMP_Text[] newText;
         int cardType;
         List<int> CardsCreated = new List<int>(); // Lista con las cartas que se van creando para que no se repitan
+
 
         for (int i = 0; i < 8; i++)
         {
@@ -72,29 +75,16 @@ public class ShopController : MonoBehaviour
                     else
                     {
                         cardType = CartaNoObtenida();
-
-                        if (cardType == -1 ) //es decir, no hay cartas no obtenidas
-                        {
-                            cardType = Random.Range(0, numCards);
-                        }
-                       
                     }
                    
                     
                 } while (CardsCreated.Contains(cardType));
                 // Repite el aleatorio hasta que encuentre uno que no haya salido para que no se repitan
-            
+ 
+                 CardsCreated.Add(cardType);
 
-
-            CardsCreated.Add(cardType);
-   
-             //Implementa los sprites
-            if (cardType <= 5)
-                ListCards[i].GetComponent<Image>().sprite = CardSprites[0];
-            else if (cardType <= 12)
-                ListCards[i].GetComponent<Image>().sprite = CardSprites[1];
-            else
-                ListCards[i].GetComponent<Image>().sprite = CardSprites[2];
+            // Implementa los sprites
+            ListCards[i].GetComponent<Image>().sprite = CardSprites[cardType];
 
             // Actualiza los textos
             newText = ListCards[i].GetComponentsInChildren<TMP_Text>();
@@ -104,6 +94,12 @@ public class ShopController : MonoBehaviour
             newText[3].text = CardDuration[cardType];
             newText[4].text = "Tienes: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType].ToString();
             newText[5].text = "$" + CardPrecio[cardType].ToString();
+
+            ListButton[i].GetComponent<BuyButton>().ID = cardType;
+            ListButton[i].GetComponent<BuyButton>().Precio = CardPrecio[cardType];
+
+
+
 
         }
     }
@@ -175,7 +171,7 @@ public class ShopController : MonoBehaviour
         int chosenCardType;
 
         //seleccionar de forma aleatoria cual carta pasar de las de mayor uso
-        chosenCardType = maxCardTypes[Random.Range(0, maxCardTypes.Count)];
+        chosenCardType = maxCardTypes[Random.Range(0, maxCardTypes.Count+1)];
 
         Debug.Log(" id:" + chosenCardType);
         return chosenCardType;
@@ -199,7 +195,8 @@ public class ShopController : MonoBehaviour
         }
         else
         {
-            return -1;
+            return Random.Range(0, numCards + 1);
+
         }
            
     }

@@ -367,8 +367,11 @@ public class CombatController : MonoBehaviour
                 {
                     canCreate = true;
                     cardType = Random.Range(0, TotalCards.Count); // Aleatorio entre las cartas totales del Jugador para el combate
-                    if (HandCardsAmount[TotalCards[cardType]] + 1 > VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[TotalCards[cardType]])
+                    if (HandCardsAmount[TotalCards[cardType]] + 1 > VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[TotalCards[cardType]] && VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType] == 0)
+                    {
                         canCreate = false;
+                    }
+                      
 
                 } while (!canCreate);
 
