@@ -970,7 +970,7 @@ public class EnemyController : MonoBehaviour
     public IEnumerator DoubleAttack(int damageAmount, float tiempo)
     {
 
-        Debug.Log("pasa por el coso de segundos !!!!!");
+        Debug.Log("what the helllllllllllllll !! !! ! :3 ");
 
         if(Player.GetComponent<PlayerController>().Transformacion)
         {

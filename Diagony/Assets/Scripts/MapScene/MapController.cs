@@ -70,7 +70,7 @@ public class MapController : MonoBehaviour
 
     void Start()
     {
-
+        Time.timeScale = 1f;
         InicializarCoords(); // Inicializa las coordenadas de las salas
         CrearSalas();        // Crea las salas del mapa
         Conections();        // crea las conexiones de las salas

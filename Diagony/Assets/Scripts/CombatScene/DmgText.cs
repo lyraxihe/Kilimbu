@@ -48,14 +48,14 @@ public class DmgText : MonoBehaviour
     }
     private void Update()
     {
-       // DmgHeal_text.color = textColor;
+       
         textMesh.color = textColor;
 
         float MoveYSpeed = 2f;
         transform.position += new Vector3(0, MoveYSpeed) * Time.deltaTime;
         disappearTimer -= Time.deltaTime;
 
-        if(disappearTimer < 0 )
+        if(disappearTimer <= 0 )
         {
             //Debug.Log("timer menor que 0");
             float disappearSpeed = 2f;
@@ -63,7 +63,7 @@ public class DmgText : MonoBehaviour
             textColor.a -= disappearSpeed * Time.deltaTime;
             textMesh.color = textColor;
 
-            if (textColor.a < 0)
+            if (textColor.a <= 0)
             {
                // Debug.Log("texto a menor que 0");
                 Destroy(gameObject);

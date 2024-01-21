@@ -101,10 +101,10 @@ public class BuyButton : MonoBehaviour
        
     }
 
-    public void CreateFeedbackText(string compra)
+    public void CreateFeedbackText(string feedback)
     {
         GameObject Text = Instantiate(FeedbackText);
-        Text.GetComponent<CompraText>().text = compra;
+        Text.GetComponent<CompraText>().text = feedback;
         Text.transform.SetParent(canvas, false);
         if (EsMana || EsVida)
         {

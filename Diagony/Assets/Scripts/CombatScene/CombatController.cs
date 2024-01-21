@@ -76,7 +76,7 @@ public class CombatController : MonoBehaviour
     }
     void Start()
     {
-
+        Time.timeScale = 1f;
         PorcentajeDevolverIra = 1f;
 
         RecompensaVictoria = false;
@@ -1621,6 +1621,7 @@ public class CombatController : MonoBehaviour
 
     public IEnumerator DoubleAttack(int enemigo, int danyo, float tiempo, int tipo)
     {
+        bool salir = false;
         if (danyo <0)
             danyo = 0;
 
@@ -1635,8 +1636,14 @@ public class CombatController : MonoBehaviour
         }
         else
         {
-
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
+           
+            if ((EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo - danyoTotal) <= 0)
+            {
+                salir = true;
+                Debug.Log("                                     salir = true");
+            }
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
+          
             CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
@@ -1645,56 +1652,61 @@ public class CombatController : MonoBehaviour
         }
 
         ControlEsperanzado();
-        EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-        Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
-
-        if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+        if (!salir)
         {
-            //  yield return new WaitForSeconds(1);
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
-            CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player);
+            Debug.Log("                                     !salir");
+            EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
+            Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+            {
+                //  yield return new WaitForSeconds(1);
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
+                CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player);
+            }
+
+            yield return new WaitForSeconds(tiempo);
+
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
+                CreateDmgHealText(true, danyoTotal, EnemyList[enemigo]);
+
+            }
+            else
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
+                CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
+
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                    EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
+
+            }
+
+            ControlEsperanzado();
+            EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
+            Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+            {
+                //  yield return new WaitForSeconds(1);
+                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
+                CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player);
+            }
+
+            // Ira devolver ataque
+            if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
+            {
+                float porcentajeIraDevolver = Random.Range(0f, 11f);
+
+                if (porcentajeIraDevolver < PorcentajeDevolverIra)
+                    StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
+
+            }
         }
-
-        yield return new WaitForSeconds(tiempo);
-
-        if (EnemyList[enemigo].GetComponent<EnemyController>().Transformacion) // Si el enemigo está transformado el ataque le curará
-        {
-
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
-            CreateDmgHealText(true, danyoTotal, EnemyList[enemigo]);
-
-        }
-        else
-        {
-
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
-            CreateDmgHealText(false, danyoTotal, EnemyList[enemigo]);
-
-            if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
-                EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
-
-        }
-
-        ControlEsperanzado();
-        EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-        Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
-
-        if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
-        {
-            //  yield return new WaitForSeconds(1);
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
-            CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player);
-        }
-
-        // Ira devolver ataque
-        if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
-        {
-            float porcentajeIraDevolver = Random.Range(0f, 11f);
-
-            if (porcentajeIraDevolver < PorcentajeDevolverIra)
-                StartCoroutine(IraDevolverAtaque(danyo, tipo, enemigo));
-
-        }
+        
 
     }
 
