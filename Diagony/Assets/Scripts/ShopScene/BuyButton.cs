@@ -12,6 +12,8 @@ public class BuyButton : MonoBehaviour
     public int Precio;
     [SerializeField] bool EsMana;
     [SerializeField] bool EsVida;
+    [SerializeField] RectTransform canvas;
+    [SerializeField] GameObject FeedbackText;
     void Start()
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
@@ -54,6 +56,7 @@ public class BuyButton : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount -= Precio;
                 VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista++;
                 gameObject.GetComponent<Button>().interactable = false;
+                CreateFeedbackText("+1 de maná");
                 Debug.Log("se aumento el mana");
             }
           
@@ -68,7 +71,8 @@ public class BuyButton : MonoBehaviour
                 {
                     gameObject.GetComponent<Button>().interactable = false;
                 }
-                   
+                CreateFeedbackText("+10 de vida");
+
             }
             
 
@@ -79,9 +83,28 @@ public class BuyButton : MonoBehaviour
             {
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount -= Precio;
                 VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[ID]++;
+                CreateFeedbackText("carta +1 en el mazo");
             }
         }
        
+    }
+
+    public void CreateFeedbackText(string compra)
+    {
+        GameObject Text = Instantiate(FeedbackText);
+        Text.GetComponent<CompraText>().text = compra;
+        Text.transform.SetParent(canvas, false);
+        if (EsMana || EsVida)
+        {
+            Text.GetComponent<CompraText>().ManaHeal = true;
+            Text.transform.position = new Vector2(gameObject.transform.position.x + 2, gameObject.transform.position.y + 1);
+        }
+        else
+        {
+            Text.GetComponent<CompraText>().ManaHeal = false;
+            Text.transform.position = new Vector2(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y + 0.5f);
+        }
+        
     }
 
 }

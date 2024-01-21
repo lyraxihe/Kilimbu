@@ -41,6 +41,9 @@ public class ShopController : MonoBehaviour
 
     int numCards; // Número de cartas implementadas
 
+    List<int> CardsCreated = new List<int>(); // Lista con las cartas que se van creando para que no se repitan
+    TMP_Text[] newText;
+
 
 
     void Start()
@@ -49,19 +52,25 @@ public class ShopController : MonoBehaviour
         numCards = 24;
        
         CrearCartas();
+
     }
 
     void Update()
     {
 
+        for (int i = 0; i < CardsCreated.Count; i++)
+        {
+            newText = ListCards[i].GetComponentsInChildren<TMP_Text>();
+            newText[4].text = "Tienes: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
+        }
+      
     }
 
     public void CrearCartas()
     {
         BuscarCartasMasRepetidas();
-        TMP_Text[] newText;
         int cardType;
-        List<int> CardsCreated = new List<int>(); // Lista con las cartas que se van creando para que no se repitan
+        
 
 
         for (int i = 0; i < 8; i++)
@@ -171,7 +180,7 @@ public class ShopController : MonoBehaviour
         int chosenCardType;
 
         //seleccionar de forma aleatoria cual carta pasar de las de mayor uso
-        chosenCardType = maxCardTypes[Random.Range(0, maxCardTypes.Count+1)];
+        chosenCardType = maxCardTypes[Random.Range(0, maxCardTypes.Count)];
 
         Debug.Log(" id:" + chosenCardType);
         return chosenCardType;
@@ -195,8 +204,7 @@ public class ShopController : MonoBehaviour
         }
         else
         {
-            return Random.Range(0, numCards + 1);
-
+            return Random.Range(0, VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards.Count);
         }
            
     }

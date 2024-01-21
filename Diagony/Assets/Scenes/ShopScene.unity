@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -242,6 +250,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -557,6 +573,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -669,6 +693,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1007,6 +1039,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1388,6 +1428,8 @@ MonoBehaviour:
   Precio: 0
   EsMana: 1
   EsVida: 0
+  canvas: {fileID: 1396059418}
+  FeedbackText: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
 --- !u!1001 &1106732715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1395,6 +1437,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1949,6 +1999,8 @@ MonoBehaviour:
   Precio: 0
   EsMana: 0
   EsVida: 1
+  canvas: {fileID: 1396059418}
+  FeedbackText: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
 --- !u!1 &1396059417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +2313,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2916,6 +2976,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1294846375}
     m_Modifications:
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1396059418}
+    - target: {fileID: 1621663239827590938, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
+      propertyPath: FeedbackText
+      value: 
+      objectReference: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
     - target: {fileID: 6297673766527281072, guid: 3d6c09e69558ba942bc74942490434b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
