@@ -62,8 +62,8 @@ public class HealthBar : MonoBehaviour
         {
             if (EsPlayer)
             {
-                Destroy(_player);
-                Destroy(TextCharacter);
+                //Destroy(_player);
+                //Destroy(TextCharacter);
 
             }
             else

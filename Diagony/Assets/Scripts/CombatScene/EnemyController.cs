@@ -316,7 +316,7 @@ public class EnemyController : MonoBehaviour
                         
                 }
 
-                if (AttackType >= 5f && ContadorDeTurnosFuerte <= 0)
+                if (AttackType >= 5f && ContadorFuerza <= 0)
                 {
                     
                     Debug.Log("aumenta la fuerza");
@@ -337,14 +337,14 @@ public class EnemyController : MonoBehaviour
                     {
                         Debug.Log("ataque que cura al player");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+                        StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
                     }
                     else
                     {
                         Debug.Log("atq normal");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                        StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
 
                     }
 
@@ -375,7 +375,7 @@ public class EnemyController : MonoBehaviour
                     Debug.Log("se cura miedo");
                     HealthEnemigo += damageAmount;
 
-                    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
+                    StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject, false));
 
                     EnemyAnimator.SetBool("atacar", true);
 
@@ -401,6 +401,7 @@ public class EnemyController : MonoBehaviour
 
                     //}
                     Debug.Log("atq normal");
+                   // StartCoroutine(DoubleAttack(damageAmount, 1f));
                     StartCoroutine(DoubleAttack(damageAmount, 0.5f));
 
                 }
@@ -415,14 +416,14 @@ public class EnemyController : MonoBehaviour
                         
                         damageAmount = 2;
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+                        StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
                     }
                     else
                     {
                         damageAmount = 2;
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                        StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
 
                     }
 
@@ -491,7 +492,7 @@ public class EnemyController : MonoBehaviour
                     damageAmount = 30;
                     HealthEnemigo += damageAmount;
 
-                    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject);
+                    StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject, false));
 
                 }
                 else // Comportamiento normal
@@ -617,14 +618,14 @@ public class EnemyController : MonoBehaviour
                             {
 
                                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                                CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+                                StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
                             }
                             else
                             {
 
                                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                                CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+                                StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
 
                             }
 
@@ -678,7 +679,7 @@ public class EnemyController : MonoBehaviour
         {
 
             HealthEnemigo -= Veneno;
-            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject);
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject, true));
         
         }
 
@@ -970,34 +971,34 @@ public class EnemyController : MonoBehaviour
     public IEnumerator DoubleAttack(int damageAmount, float tiempo)
     {
 
-        Debug.Log("what the helllllllllllllll !! !! ! :3 ");
+       
 
         if(Player.GetComponent<PlayerController>().Transformacion)
         {
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
             EnemyAnimator.SetBool("atacar", true);
 
             yield return new WaitForSeconds(tiempo);
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
-            EnemyAnimator.SetBool("atacar", true);
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
+           // EnemyAnimator.SetBool("atacar", true);
 
         }
         else
         {
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
             EnemyAnimator.SetBool("atacar", true);
 
             yield return new WaitForSeconds(tiempo);
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-            CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
-            EnemyAnimator.SetBool("atacar", true);
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+           // EnemyAnimator.SetBool("atacar", true);
 
         }
 
@@ -1032,7 +1033,8 @@ public class EnemyController : MonoBehaviour
         {
 
             HealthEnemigo += Esperanza;
-            CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, Esperanza, gameObject);
+           // CombatScene.GetComponent<CombatController>().wait(0.5f);
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, Esperanza, gameObject, true));
 
         }
 
@@ -1042,7 +1044,7 @@ public class EnemyController : MonoBehaviour
     {
 
         //yield return new WaitForSeconds(0.5f);
-
+       // CombatScene.GetComponent<CombatController>().wait(0.5f);
         CombatScene.GetComponent<CombatController>().CreateSpellText("Se ha cansado de ti", gameObject);
         CombatScene.GetComponent<CombatController>().botonTurno.GetComponent<FinalizarTurnoButton>().OnClick();
 
