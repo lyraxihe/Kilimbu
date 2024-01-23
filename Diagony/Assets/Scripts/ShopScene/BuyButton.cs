@@ -34,7 +34,7 @@ public class BuyButton : MonoBehaviour
             else
             {
                 gameObject.GetComponent<Button>().interactable = false;
-                gameObject.GetComponentInChildren<TMP_Text>().text = "máximo de maná";
+                gameObject.GetComponentInChildren<TMP_Text>().text = "límite maná";
             }
             
 

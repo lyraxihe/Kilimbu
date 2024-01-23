@@ -337,7 +337,7 @@ public class CombatController : MonoBehaviour
             clonEnemy.GetComponent<EnemyController>().AuraEnemigo.transform.position = new Vector3(2.5f, 0.5f, 1);
 
             EnemyList.Add(clonEnemy);
-            CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 1.5f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y, EnemyName));
+            CreateHealthBar(clonEnemy.transform.position.x, clonEnemy.transform.position.y + 3f, false, clonEnemy, CreateCharacterText(clonEnemy.transform.position.x, clonEnemy.transform.position.y - 0.5f, EnemyName));
             //CreateHealthBar(486, 58, false, clonEnemy, CreateCharacterText(486, -216, EnemyName));
 
             ArrowEmitter.GetComponent<ArrowEmitter>().Enemies.Add(clonEnemy);

@@ -162,12 +162,13 @@ public class ChestCard : MonoBehaviour
                         ListCardsMana.Add(rand);
 
                         //Implementa los sprites
-                        if (rand <= 5)
-                            CardsMana[i].GetComponent<Image>().sprite = CardSprites[0];
-                        else if (rand <= 12)
-                            CardsMana[i].GetComponent<Image>().sprite = CardSprites[1];
-                        else
-                            CardsMana[i].GetComponent<Image>().sprite = CardSprites[2];
+                        //if (rand <= 5)
+                        //    CardsMana[i].GetComponent<Image>().sprite = CardSprites[0];
+                        //else if (rand <= 12)
+                        //    CardsMana[i].GetComponent<Image>().sprite = CardSprites[1];
+                        //else
+                        //    CardsMana[i].GetComponent<Image>().sprite = CardSprites[2];
+                        CardsMana[i].GetComponent<Image>().sprite = CardSprites[rand];
 
                         // Actualiza los textos
                         CardsMana[i].GetComponent<ChestCard>().newText = CardsMana[i].GetComponentsInChildren<TMP_Text>();

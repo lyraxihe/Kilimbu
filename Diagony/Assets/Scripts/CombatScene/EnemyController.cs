@@ -124,7 +124,15 @@ public class EnemyController : MonoBehaviour
         for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)
         {
             ActiveSpellGap[i] = false;
-            SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
+           
+            if (Tipo == 3)
+            {
+                SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell + 1.5f);
+            }
+            else
+            {
+                SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
+            }
            
         }
 
