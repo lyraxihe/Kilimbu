@@ -201,7 +201,12 @@ public class ChestCard : MonoBehaviour
                     if (Tipo == 0)
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista;
                     else if (Tipo == 1)
+                    {
+
                         VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista += 10;
+                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
+
+                    }
                     else if (Tipo == 2)
                     {
 

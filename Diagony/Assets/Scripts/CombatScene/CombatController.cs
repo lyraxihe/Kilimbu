@@ -691,6 +691,9 @@ public class CombatController : MonoBehaviour
 
             }
 
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+                EnemyList[0].GetComponent<EnemyController>().contAcumulacionDanyoBoss = 0;
+
             ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista; // Se resetea el maná del jugador
 
             if (Player.GetComponent<PlayerController>().ReducirMana)
