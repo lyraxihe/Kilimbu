@@ -15,8 +15,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] public GameObject _enemy;
     [SerializeField] public GameObject TextCharacter;
 
+    private int _maxHealth; // Para controlar la vida Máxima en el script
+
     void Start()
     {
+        
         //Color verde = new Color(0.541f, 0.658f, 0.596f, 1.0f);
         //Color amarillo = new Color(0.86f, 0.89f, 0.776f, 1.0f);
         //Color rojo = new Color(0.447f, 0.149f, 0.27f, 1.0f);
@@ -47,9 +50,9 @@ public class HealthBar : MonoBehaviour
         HealthBarSlider.maxValue = MaxHealth;
         HealthBarSlider.value = Health; //asigna el valor al slider
         
-        if (Health <= 15)
+        if (Health <= (MaxHealth * 0.3f))
             fill.color = new Color(0.447f, 0.149f, 0.27f, 1.0f); // colorea de rojo en caso de tener menos de 15 de vida
-        else if (Health <=35)
+        else if (Health <= (MaxHealth * 0.5f))
             fill.color = new Color(0.86f, 0.89f, 0.776f, 1.0f); // amarillo
         else
             fill.color = new Color(0.541f, 0.658f, 0.596f, 1.0f); // verde

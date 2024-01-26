@@ -51,7 +51,10 @@ public class PausaButton : MonoBehaviour
 
     public void Escapar()
     {
-        
+
+        // Indica que el tutorial ha finalizado
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial)
+            VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial = false;
 
         VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
         CombatScene.GetComponent<CombatController>().botonTurno.enabled = true;
@@ -62,6 +65,10 @@ public class PausaButton : MonoBehaviour
     public void VictoriaDerrota()
     {
         victoria = CombatScene.GetComponent<CombatController>().RecompensaVictoria;
+
+        // Indica que el tutorial ha finalizado
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial)
+            VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial = false;
 
         if (victoria && !VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
         {

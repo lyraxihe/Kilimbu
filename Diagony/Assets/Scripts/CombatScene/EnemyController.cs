@@ -240,14 +240,21 @@ public class EnemyController : MonoBehaviour
     public void SetHealthEnemigo()
     {
 
-        if (Tipo == 0)         // Ira
-            MaxHealthEnemigo = 50;
-        else if (Tipo == 1)    // Miedo
-            MaxHealthEnemigo = 50;
-        else if (Tipo == 2)    // Tristeza
-            MaxHealthEnemigo = 50;
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial)
+            MaxHealthEnemigo = 30;
         else
-            MaxHealthEnemigo = 200;
+        {
+
+            if (Tipo == 0)         // Ira
+                MaxHealthEnemigo = 50;
+            else if (Tipo == 1)    // Miedo
+                MaxHealthEnemigo = 50;
+            else if (Tipo == 2)    // Tristeza
+                MaxHealthEnemigo = 50;
+            else                   // Boss
+                MaxHealthEnemigo = 200;
+
+        }
 
         HealthEnemigo = MaxHealthEnemigo;
 

@@ -168,7 +168,7 @@ public class MapController : MonoBehaviour
         clonEntrada.GetComponent<Button>().interactable = true;
         clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
         clonEntrada.GetComponent<RoomButton>().Columna = 1;
-        clonEntrada.GetComponent<RoomButton>().RoomType = 0;
+        clonEntrada.GetComponent<RoomButton>().RoomType = 4; // 4 - Tutorial
         clonEntrada.GetComponent<RoomButton>().LinePrefab = LinePrefab;
         clonEntrada.GetComponent<RoomButton>().Content = Content;
         contCombates++;
@@ -560,14 +560,18 @@ public class MapController : MonoBehaviour
     private void SetSprites()
     {
 
+        int RoomType;
+
         for (int i = 0; i < ListRooms.Count; i++)
         {
 
-            if (ListRooms[i].GetComponent<RoomButton>().RoomType == 0)
+            RoomType = ListRooms[i].GetComponent<RoomButton>().RoomType;
+
+            if (RoomType == 0 || RoomType == 4)
                 ListRooms[i].GetComponent<Image>().sprite = RoomIcons[0];
-            else if (ListRooms[i].GetComponent<RoomButton>().RoomType == 1)
+            else if (RoomType == 1)
                 ListRooms[i].GetComponent<Image>().sprite = RoomIcons[1];
-            else if (ListRooms[i].GetComponent<RoomButton>().RoomType == 2)
+            else if (RoomType == 2)
                 ListRooms[i].GetComponent<Image>().sprite = RoomIcons[3];
             else
                 ListRooms[i].GetComponent<Image>().sprite = RoomIcons[4];

@@ -24,6 +24,9 @@ public class VariablesGlobales : MonoBehaviour
     // Boss
     public bool Boss; // Si es true significa que el combate será contra el Boss, si es false es un combate normal
 
+    // Tutorial
+    public bool Tutorial; // Si es true significa que el combate es el tutorial, si es false es un combate normal
+
     // Pasivas
     public bool PasivaGanarDinero;
     public int PasivaDinero;

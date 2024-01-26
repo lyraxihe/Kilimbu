@@ -67,6 +67,10 @@ public class CombatController : MonoBehaviour
     [SerializeField] List<int> HandCardsAmount = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Cantidad de cartas de cada tipo en la mano durante el turno del Jugador
 
     [SerializeField] TMP_Text turnosText;
+
+    // Tutorial
+    public bool Tutorial;
+
     private void Awake()
     {
 
@@ -82,6 +86,9 @@ public class CombatController : MonoBehaviour
         RecompensaVictoria = false;
         RecompensaDinero = 0;
         ContadorTurnos = 0;
+
+        // Tutorial
+        Tutorial = VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial;
 
         //CardList.cards = new GameObject[5];
         //CardList.cont = 0; // Inicializa el contador de la lista
@@ -200,31 +207,46 @@ public class CombatController : MonoBehaviour
 
         if (!VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
         {
+            int rand;
 
-            int rand = Random.Range(2, 4);           // Random de 2 a 3
+            if(Tutorial)
+                rand = 1;                  // Un sólo enemigo porque es el tutorial
+            else if (VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista <= 3 || VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 50)
+            {
+                Debug.Log("Tiene 3 o menos de maná o 50 o menos de vida");
+                rand = 2;                  // Si el Jugador tiene 3 o menos de maná o 50 o menos de vida, habrá 2 enemigos
+            }
+            else
+                rand = Random.Range(2, 4); // Random de 2 a 3
 
             for (int i = 0; i < rand; i++)           // Bucle dependiendo del número de enemigos que hay en la sala
             {
 
+                if (Tutorial)
+                    tipo = 1; // Si es el tutorial, el enemigo será Miedo
+                else
+                    tipo = Random.Range(0, 3);
+
+                if (tipo == 0)
+                {
+                    RecompensaDinero += 17;
+                    EnemyName = "IRA";
+                }
+                else if (tipo == 1)
+                {
+                    RecompensaDinero += 13;
+                    EnemyName = "MIEDO";
+                }
+                else
+                {
+                    RecompensaDinero += 9;
+                    EnemyName = "TRISTEZA";
+                    numTristeza++;
+                }
+
                 if (i == 0)                          // Si es el primer enemigo
                 {
-                    tipo = Random.Range(0, 3);
-                    if (tipo == 0)
-                    {
-                        RecompensaDinero += 17;
-                        EnemyName = "IRA";
-                    }
-                    else if (tipo == 1)
-                    {
-                        RecompensaDinero += 13;
-                        EnemyName = "MIEDO";
-                    }
-                    else
-                    {
-                        RecompensaDinero += 9;
-                        EnemyName = "TRISTEZA";
-                        numTristeza++;
-                    }
+
                     clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                     clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
                     clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
@@ -243,24 +265,7 @@ public class CombatController : MonoBehaviour
                 }
                 else if (i == 1)                     // Si es el segundo enemigo
                 {
-
-                    tipo = Random.Range(0, 3);
-                    if (tipo == 0)
-                    {
-                        RecompensaDinero += 17;
-                        EnemyName = "IRA";
-                    }
-                    else if (tipo == 1)
-                    {
-                        RecompensaDinero += 13;
-                        EnemyName = "MIEDO";
-                    }
-                    else
-                    {
-                        RecompensaDinero += 9;
-                        EnemyName = "TRISTEZA";
-                        numTristeza++;
-                    }
+                    
                     clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                     clonEnemy.transform.position = new Vector3(4.5f, -0.5f, 0);
                     clonEnemy.GetComponent<EnemyController>().Tipo = tipo;
@@ -279,23 +284,7 @@ public class CombatController : MonoBehaviour
                 }
                 else                                 // Si es el tercer enemigo
                 {
-                    tipo = Random.Range(0, 3);
-                    if (tipo == 0)
-                    {
-                        RecompensaDinero += 17;
-                        EnemyName = "IRA";
-                    }
-                    else if (tipo == 1)
-                    {
-                        RecompensaDinero += 13;
-                        EnemyName = "MIEDO";
-                    }
-                    else
-                    {
-                        RecompensaDinero += 9;
-                        EnemyName = "TRISTEZA";
-                        numTristeza++;
-                    }
+                    
                     clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
                     clonEnemy.transform.position = new Vector3(6.5f, -1.5f, 0);
                     clonEnemy.GetComponent<EnemyController>().Tipo = tipo;

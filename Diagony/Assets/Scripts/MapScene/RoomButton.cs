@@ -25,7 +25,7 @@ public class RoomButton : MonoBehaviour
     public int Columna; // Columna que ocupa en el mapa
 
 
-    public int RoomType; // 0: Combate | 1: Cofre | 2: Tienda | 3: Boss
+    public int RoomType; // 0: Combate | 1: Cofre | 2: Tienda | 3: Boss | 4: Tutorial
 
     void Start()
     {
@@ -70,6 +70,13 @@ public class RoomButton : MonoBehaviour
         {
 
             VariablesGlobales.GetComponent<VariablesGlobales>().Boss = true;
+            SceneManager.LoadScene("CombatScene");
+
+        }
+        else if (RoomType == 4)
+        {
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial = true;
             SceneManager.LoadScene("CombatScene");
 
         }
