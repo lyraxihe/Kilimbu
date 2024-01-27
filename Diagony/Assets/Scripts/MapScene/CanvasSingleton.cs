@@ -34,7 +34,9 @@ public class CanvasSingleton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         VerMapa = false;
+        Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3850, Content.GetComponent<RectTransform>().anchoredPosition.y);
 
     }
 
@@ -55,18 +57,18 @@ public class CanvasSingleton : MonoBehaviour
             HealthBarPersonaje.SetActive(true);
         }
 
-            // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
-        if (Content.GetComponent<RectTransform>().anchoredPosition.x > 30)
+        // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
+        if (Content.GetComponent<RectTransform>().anchoredPosition.x > 350)
         {
 
-            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(30, Content.GetComponent<RectTransform>().anchoredPosition.y);
+            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(350, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }
-        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -3500)
+        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -3850)
         {
 
-            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3500, Content.GetComponent<RectTransform>().anchoredPosition.y);
+            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3850, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }

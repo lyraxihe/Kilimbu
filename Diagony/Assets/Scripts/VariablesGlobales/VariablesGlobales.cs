@@ -36,8 +36,12 @@ public class VariablesGlobales : MonoBehaviour
     // Array con numero de usos en cada carta, están acomodadas según su id y aumentan en (+1) cada vez que se usa una en combate
     public List<int> CardUses = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+    // Controla si los botones de la interfaz se pueden tocar
+    public bool ButtonsEnabled;
+
     private void Awake() //sigleton
     {
+        
         DineroAmount = 0;
         if (instance == null)
         {
@@ -51,6 +55,10 @@ public class VariablesGlobales : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        // Controla si los botones de la interfaz se pueden tocar
+        ButtonsEnabled = true;
+
     }
     void Start()
     {

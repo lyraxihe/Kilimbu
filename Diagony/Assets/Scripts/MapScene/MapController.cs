@@ -49,6 +49,9 @@ public class MapController : MonoBehaviour
 
     public int contCombates = 0, contTiendas = 0, contCofres = 0;
 
+    // Array de posiciones de las columnas
+    public List<int> ColumnasPos;
+
     private void Awake() //sigleton
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
@@ -165,12 +168,13 @@ public class MapController : MonoBehaviour
         clonEntrada.transform.SetParent(Content.transform, false);
         //clonEntrada.GetComponent<Button>().image.color = Color.cyan;
         //clonEntrada.GetComponent<Image>().sprite = RoomIcons[0];
-        clonEntrada.GetComponent<Button>().interactable = true;
+        clonEntrada.GetComponent<Button>().interactable = false;
         clonEntrada.GetComponent<RoomButton>().MapController_ = gameObject;
         clonEntrada.GetComponent<RoomButton>().Columna = 1;
         clonEntrada.GetComponent<RoomButton>().RoomType = 4; // 4 - Tutorial
         clonEntrada.GetComponent<RoomButton>().LinePrefab = LinePrefab;
         clonEntrada.GetComponent<RoomButton>().Content = Content;
+        Content.GetComponent<FelipeBarridoMap>().FirstRoom = clonEntrada;
         contCombates++;
         ListRooms.Add(clonEntrada);
 

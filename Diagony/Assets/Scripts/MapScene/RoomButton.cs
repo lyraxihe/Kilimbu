@@ -21,6 +21,7 @@ public class RoomButton : MonoBehaviour
     [SerializeField] GameObject CanvasSingleton;
     [SerializeField] public GameObject LinePrefab;
     [SerializeField] public GameObject Content;
+    private RectTransform ContentTransform;
 
     public int Columna; // Columna que ocupa en el mapa
 
@@ -29,9 +30,11 @@ public class RoomButton : MonoBehaviour
 
     void Start()
     {
+        
         CanvasSingleton = GameObject.Find("CanvasSingleton");
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         createLines();
+
     }
 
 
@@ -60,7 +63,14 @@ public class RoomButton : MonoBehaviour
 
         MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
 
+        // Recoloca el mapa para apuntar a la sala en la que estará
+        if (Columna < 15) // Si no es la sala del boss
+        {
+            Debug.Log("Mapa Columna");
+            ContentTransform = Content.GetComponent<RectTransform>();
+            ContentTransform.anchoredPosition = new Vector2(MapController_.GetComponent<MapController>().ColumnasPos[Columna], ContentTransform.anchoredPosition.y);
 
+        }
 
         if (RoomType == 1)      // Sala Cofre
             SceneManager.LoadScene("ChestScene");
