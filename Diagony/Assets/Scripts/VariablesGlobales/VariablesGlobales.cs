@@ -39,6 +39,9 @@ public class VariablesGlobales : MonoBehaviour
     // Controla si los botones de la interfaz se pueden tocar
     public bool ButtonsEnabled;
 
+    // Idiomas
+    public int Language; // 0 - Inglés || 1 - Español
+
     private void Awake() //sigleton
     {
         
@@ -58,6 +61,8 @@ public class VariablesGlobales : MonoBehaviour
 
         // Controla si los botones de la interfaz se pueden tocar
         ButtonsEnabled = true;
+
+        Language = 0; // Inglés por defecto
 
     }
     void Start()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -81,6 +82,8 @@ public class EnemyController : MonoBehaviour
     public bool playerSeBufa;
 
     public int contAcumulacionDanyoBoss;
+
+    public TMP_Text EnemyNameText;
 
     void Start()
     {
@@ -339,7 +342,10 @@ public class EnemyController : MonoBehaviour
                     Fuerte = true;
                     Fuerza += 3;
                     ContadorDeTurnosFuerte += 3;
-                    CombatScene.GetComponent<CombatController>().CreateSpellText("Fuerte", gameObject);
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Strong", gameObject);
+                    else                                                                  // Spanish
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Fuerte", gameObject);
 
                 }
                 else
@@ -448,7 +454,10 @@ public class EnemyController : MonoBehaviour
                 {
                     
                     Debug.Log("Jugador Envenenado");
-                    CombatScene.GetComponent<CombatController>().CreateSpellText("Envenenado", Player);
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Poisoned", Player);
+                    else                                                                  // Spanish
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Envenenado", Player);
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
@@ -458,7 +467,10 @@ public class EnemyController : MonoBehaviour
                 {
                     
                     Debug.Log("Jugador Debilitado");
-                    CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Weakened", Player);
+                    else                                                                  // Spanish
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=2;
@@ -487,7 +499,10 @@ public class EnemyController : MonoBehaviour
 
                     //}
 
-                    CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Reduce Mana", Player);
+                    else                                                                  // Spanish
+                        CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
                     Player.GetComponent<PlayerController>().ReducirMana = true;
 
                 }
@@ -617,7 +632,10 @@ public class EnemyController : MonoBehaviour
 
                         }
 
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Intercambio", gameObject);
+                        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Swap", gameObject);
+                        else                                                                  // Spanish
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Intercambio", gameObject);
 
                     }
                     else // Ataques normales
@@ -648,7 +666,10 @@ public class EnemyController : MonoBehaviour
                         else if (AttackType <= 8) // Pone Débil al Jugador
                         {
 
-                            CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
+                            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                                CombatScene.GetComponent<CombatController>().CreateSpellText("Weakened", Player);
+                            else                                                                  // Spanish
+                                CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
                             CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
                             CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
                             CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
@@ -659,13 +680,19 @@ public class EnemyController : MonoBehaviour
 
                             Transformacion = true;
                             ContadorDeTurnosTransformacion += 1;
-                            CombatScene.GetComponent<CombatController>().CreateSpellText("Transformado", gameObject);
+                            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                                CombatScene.GetComponent<CombatController>().CreateSpellText("Transformed", gameObject);
+                            else                                                                  // Spanish
+                                CombatScene.GetComponent<CombatController>().CreateSpellText("Transformado", gameObject);
 
                         }
                         else
                         {
 
-                            CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
+                            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                                CombatScene.GetComponent<CombatController>().CreateSpellText("Reduce Mana", Player);
+                            else                                                                  // Spanish
+                                CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
                             Player.GetComponent<PlayerController>().ReducirMana = true;
 
                         }
@@ -685,7 +712,10 @@ public class EnemyController : MonoBehaviour
         {
 
             Debug.Log("El Enemigo está Bloqueado");
-            CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", gameObject);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CombatScene.GetComponent<CombatController>().CreateSpellText("Stunned", gameObject);
+            else                                                                  // Spanish
+                CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", gameObject);
             Bloqueado = false;
 
         }
@@ -1059,8 +1089,11 @@ public class EnemyController : MonoBehaviour
     {
 
         //yield return new WaitForSeconds(0.5f);
-       // CombatScene.GetComponent<CombatController>().wait(0.5f);
-        CombatScene.GetComponent<CombatController>().CreateSpellText("Se ha cansado de ti", gameObject);
+        // CombatScene.GetComponent<CombatController>().wait(0.5f);
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            CombatScene.GetComponent<CombatController>().CreateSpellText("He is tired of you", gameObject);
+        else                                                                  // Spanish
+            CombatScene.GetComponent<CombatController>().CreateSpellText("Se ha cansado de ti", gameObject);
         CombatScene.GetComponent<CombatController>().botonTurno.GetComponent<FinalizarTurnoButton>().OnClick();
 
     }

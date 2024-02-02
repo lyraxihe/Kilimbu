@@ -147,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2370254926079363927}
   - component: {fileID: 1130049595317896727}
+  - component: {fileID: -22899210594982158}
   - component: {fileID: 5281377689009903888}
   - component: {fileID: 608645351128936655}
   - component: {fileID: 5487672735390999179}
@@ -209,6 +210,21 @@ MonoBehaviour:
   MouseOver: 0
   ElegibleMana: 0
   RandTipo: 0
+--- !u!114 &-22899210594982158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791528441941151039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6a28231b9fc1b469900728711438cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VariablesGlobales: {fileID: 0}
+  TitleCard: {fileID: 446136351887848298}
+  DescriptionCard: {fileID: 1011467057751626505}
 --- !u!61 &5281377689009903888
 BoxCollider2D:
   m_ObjectHideFlags: 0

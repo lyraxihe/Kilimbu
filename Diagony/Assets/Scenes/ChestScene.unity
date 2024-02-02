@@ -466,8 +466,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.54101, y: 296.15}
-  m_SizeDelta: {x: 11.623, y: 1.1721}
+  m_AnchoredPosition: {x: -0.54, y: 296.15}
+  m_SizeDelta: {x: 12.42, y: 1.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &537116580
 MonoBehaviour:
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Elije una carta a la que reducir el man\xE1 en 1"
+  m_text: Elige una carta a la que reducir su coste en 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -723,6 +723,7 @@ MonoBehaviour:
   CartasCreadas: 0
   CardSelected: 0
   Exit: 0
+  SelectCardManaText: {fileID: 537116580}
 --- !u!50 &985108183
 Rigidbody2D:
   serializedVersion: 4

@@ -2,28 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CardCompendio : MonoBehaviour
+public class CardManaText : MonoBehaviour
 {
 
-    public GameObject VariablesGlobales;
-    [SerializeField] GameObject ScrollAreaCompendio;
-    [SerializeField] GameObject Compendio;
+    [SerializeField] GameObject VariablesGlobales;
+    [SerializeField] TMP_Text TitleCard;
+    [SerializeField] TMP_Text DescriptionCard;
 
-    [SerializeField] GameObject Parent;
-    [SerializeField] int Tipo;
-    private GameObject Copy;
-    private bool CopyCreated;
-    private RectTransform Position;
-    private Image Image;
-    [SerializeField] TMP_Text CantidadText;
-
-    private Color FullTransparency;
-    private Color MidTransparency;
-
-    // Card Interface
-    [SerializeField] TMP_Text CardTitle;
     List<string> CardTitlesES = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Acepto que me afecta", "Puedo decir que no", "Reconozco lo que siento",
                                                    "Aprendo de lo que siento", "Me divierto con amigos", "Salgo a tomar el sol", "Un paseo por la naturaleza", "Cantar",
                                                    "Cuento hasta diez", "Me ordeno por dentro y por fuera", "Me cuido", "Ahora no, luego sí", "No me pasa nada", "Estoy así ahora",
@@ -34,7 +20,7 @@ public class CardCompendio : MonoBehaviour
                                                    "I count to ten", "I put myself in order inside and outside", "I take care of myself", "Not now, then yes", "Nothing happens to me", "I am like this now",
                                                    "Nothing happens if it goes wrong", "I talk about what happens to me", "I talk all the time about what happens to me", "I am on it",
                                                    "Nothing is forever", "I don't know what to do", "Everything transforms", "I am aware of how what I do affects me"};
-    [SerializeField] TMP_Text CardDescription;
+
     List<string> CardDescriptionsES = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos los enemigos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
                                                          "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos los enemigos", "Roba 10 de vida a todos los enemigos", "<b>Bloquear</b> a un enemigo",
                                                          "<b>Bloquear</b> a un enemigo pero le cura 10", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
@@ -48,91 +34,42 @@ public class CardCompendio : MonoBehaviour
                                                          "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but heals him 15", "Enemies heal instead of dealing damage",
                                                          "Remove all player's effects" };
 
-    [SerializeField] int Fila; // Posición en el compendio | 0 - arriba | 1 - abajo 
+    private void Awake()
+    {
 
-    TMP_Text[] newText;
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
+
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
-        VariablesGlobales = GameObject.Find("VariablesGlobales");
-        Position = GetComponent<RectTransform>();
-        Image = GetComponent<Image>();
-        CopyCreated = false;
-
-        FullTransparency = Image.color;
-        MidTransparency = Image.color;
-        MidTransparency.a = 0.3f;
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        CantidadText.text = "x" + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[Tipo];
-
-        if (VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[Tipo] == 0)
-            Image.color = MidTransparency;
-        else
-            Image.color = FullTransparency;
-
-        newText = GetComponentsInChildren<TMP_Text>();
-        if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
-            newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
-        else if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] < VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
-            newText[2].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
-        else
-            newText[2].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
-
-        UpdateCardInterface();
+        UpdateTexts();
 
     }
 
-    private void OnMouseOver()
+    private void UpdateTexts()
     {
 
-        if (!CopyCreated)
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
         {
 
-            //Color tempColor;
-
-            CopyCreated = true;
-            Copy = Instantiate(gameObject, Parent.transform);
-            if(Fila == 0)
-                Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 320, Position.anchoredPosition.y - 70);
-            else
-                Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 320, Position.anchoredPosition.y + 70);
-            Copy.transform.localScale = new Vector3(2, 2, 2);
+            TitleCard.text = CardTitlesEN[gameObject.GetComponent<ChestCard>().RandTipo];
+            DescriptionCard.text = CardDescriptionsEN[gameObject.GetComponent<ChestCard>().RandTipo];
 
         }
-
-    }
-
-    private void OnMouseExit()
-    {
-
-        Destroy(Copy);
-        CopyCreated = false;
-
-    }
-
-    private void UpdateCardInterface()
-    {
-
-        if(VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        else                                                                   // Spanish
         {
 
-            CardTitle.text = CardTitlesEN[Tipo];
-            CardDescription.text = CardDescriptionsEN[Tipo];
-
-        }
-        else                                                                 // Spanish
-        {
-
-            CardTitle.text = CardTitlesES[Tipo];
-            CardDescription.text = CardDescriptionsES[Tipo];
+            TitleCard.text = CardTitlesES[gameObject.GetComponent<ChestCard>().RandTipo];
+            DescriptionCard.text = CardDescriptionsES[gameObject.GetComponent<ChestCard>().RandTipo];
 
         }
 

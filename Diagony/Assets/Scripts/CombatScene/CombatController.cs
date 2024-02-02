@@ -68,6 +68,9 @@ public class CombatController : MonoBehaviour
 
     [SerializeField] TMP_Text turnosText;
 
+    [SerializeField] TMP_Text EndTurnText;
+    [SerializeField] TMP_Text LeaveCombatText;
+
     // Tutorial
     public bool Tutorial;
 
@@ -131,9 +134,12 @@ public class CombatController : MonoBehaviour
         ManaMax.text = "/ " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
         CardsPosition();
 
-        turnosText.text = "Turnos: " + ContadorTurnos.ToString();
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            turnosText.text = "Turn: " + ContadorTurnos.ToString();
+        else                                                                  // Spanish
+            turnosText.text = "Turno: " + ContadorTurnos.ToString();
+        UpdateLanguageTexts();
         //victoriaDerrota();
-
 
     }
 
@@ -188,7 +194,10 @@ public class CombatController : MonoBehaviour
         GameObject clonPlayer = Instantiate(PrefabPlayer); // Crea el clon del Player
         clonPlayer.transform.position = new Vector2(-4, -0.8f);
 
-        CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer, CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "PLAYER")); //tipo 3 = player
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer, CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "YOU")); //tipo 3 = player
+        else                                                                  // Spanish
+            CreateHealthBar(clonPlayer.transform.position.x, clonPlayer.transform.position.y + 1.5f, true, clonPlayer, CreateCharacterText(clonPlayer.transform.position.x, clonPlayer.transform.position.y, "TÚ")); //tipo 3 = player
         clonPlayer.GetComponent<PlayerController>().VariablesGlobales = VariablesGlobales;
         clonPlayer.GetComponent<PlayerController>().CombatScene = gameObject;
 
@@ -230,17 +239,26 @@ public class CombatController : MonoBehaviour
                 if (tipo == 0)
                 {
                     RecompensaDinero += 17;
-                    EnemyName = "IRA";
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        EnemyName = "ANGER";
+                    else                                                                  // Spanish
+                        EnemyName = "IRA";
                 }
                 else if (tipo == 1)
                 {
                     RecompensaDinero += 13;
-                    EnemyName = "MIEDO";
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        EnemyName = "FEAR";
+                    else                                                                  // Spanish
+                        EnemyName = "MIEDO";
                 }
                 else
                 {
                     RecompensaDinero += 9;
-                    EnemyName = "TRISTEZA";
+                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                        EnemyName = "SADNESS";
+                    else                                                                  // Spanish
+                        EnemyName = "TRISTEZA";
                     numTristeza++;
                 }
 
@@ -312,7 +330,10 @@ public class CombatController : MonoBehaviour
         {
 
             tipo = 3; // Boss
-            EnemyName = "BOSS";
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                EnemyName = "BOSS";
+            else                                                                  // Spanish
+                EnemyName = "JEFE";
             clonEnemy = Instantiate(PrefabEnemyList[tipo]); // Crea el clon del prefab
             clonEnemy.transform.position = new Vector3(2.5f, 0.5f, 0);
             clonEnemy.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
@@ -1150,7 +1171,10 @@ public class CombatController : MonoBehaviour
             // El Jugador bloquea a un enemigo
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-            CreateSpellText("Bloqueado", EnemyList[enemigo]);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Stunned", EnemyList[enemigo]);
+            else                                                                  // Spanish
+                CreateSpellText("Bloqueado", EnemyList[enemigo]);
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -1172,7 +1196,10 @@ public class CombatController : MonoBehaviour
             // El Jugador bloquea a un enemigo pero le cura 10
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-            CreateSpellText("Bloqueado", EnemyList[enemigo]);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Stunned", EnemyList[enemigo]);
+            else                                                                  // Spanish
+                CreateSpellText("Bloqueado", EnemyList[enemigo]);
             // StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
 
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 10;
@@ -1199,7 +1226,10 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 3;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-            CreateSpellText("Debilitado", EnemyList[enemigo]);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Weakened", EnemyList[enemigo]);
+            else                                                                  // Spanish
+                CreateSpellText("Debilitado", EnemyList[enemigo]);
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -1228,7 +1258,10 @@ public class CombatController : MonoBehaviour
                 EnemyList[i].GetComponent<EnemyController>().Debilidad -= 3;
                 EnemyList[i].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
-                CreateSpellText("Debilitado", EnemyList[i]);
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                    CreateSpellText("Weakened", EnemyList[i]);
+                else                                                                  // Spanish
+                    CreateSpellText("Debilitado", EnemyList[i]);
 
                 // Ira devolver ataque
                 if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1256,7 +1289,10 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Fuerte = true;
             Player.GetComponent<PlayerController>().Fuerza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte += 4;
-            CreateSpellText("Fuerte", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Strong", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Fuerte", Player);
 
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1273,6 +1309,10 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Fuerte = true;
             Player.GetComponent<PlayerController>().Fuerza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte += 4;
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Strong", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Fuerte", Player);
             CreateSpellText("Fuerte", Player);
 
             for (int i = 0; i < EnemyList.Count; i++)
@@ -1295,7 +1335,10 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Esperanzado = true;
             Player.GetComponent<PlayerController>().Esperanza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado += 4;
-            CreateSpellText("Esperanzado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Hopeful", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Esperanzado", Player);
             Debug.Log("El Jugador obtiene Esperanza");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -1312,7 +1355,10 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().Veneno += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosEnvenenado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
-            CreateSpellText("Envenenado", EnemyList[enemigo]);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Poisoned", EnemyList[enemigo]);
+            else                                                                  // Spanish
+                CreateSpellText("Envenenado", EnemyList[enemigo]);
 
             Debug.Log("Enemigo Envenenado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1342,9 +1388,12 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 15;
-            
+
             //StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
-            CreateSpellText("Debilitado", EnemyList[enemigo]);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Weakened", EnemyList[enemigo]);
+            else                                                                  // Spanish
+                CreateSpellText("Debilitado", EnemyList[enemigo]);
             StartCoroutine(CreateDmgHealText(true, 15, EnemyList[enemigo], true));
 
             Debug.Log("Enemigo Debilitado");
@@ -1371,7 +1420,10 @@ public class CombatController : MonoBehaviour
             // Durante un turno, todos los ataques al Jugador le curan en vez de hacerle daño
             Player.GetComponent<PlayerController>().Transformacion = true;
             Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion += 1;
-            CreateSpellText("Transformado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Transformed", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Transformado", Player);
             Debug.Log("Jugador Transformado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -1440,7 +1492,10 @@ public class CombatController : MonoBehaviour
 
             }
 
-            CreateSpellText("Efectos Eliminados", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Effects Removed", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Efectos Eliminados", Player);
             Debug.Log("Efectos del Jugador eliminados");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
@@ -1481,8 +1536,20 @@ public class CombatController : MonoBehaviour
         {
 
             VictoriaDerrotaPanel.SetActive(true);
-            VictoriaDerrotaText.text = "DERROTA";
-            RecompensaText.text = "¡Te han derrotado!";
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            {
+
+                VictoriaDerrotaText.text = "DEFEAT";
+                RecompensaText.text = "¡You have been defeated!";
+
+            }
+            else                                                                  // Spanish
+            {
+
+                VictoriaDerrotaText.text = "DERROTA";
+                RecompensaText.text = "¡Te han derrotado!";
+
+            }
             Time.timeScale = 0f;
             // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
@@ -1495,7 +1562,6 @@ public class CombatController : MonoBehaviour
             RecompensaVictoria = true;
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
-            VictoriaDerrotaText.text = "VICTORIA";
 
             if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
             {
@@ -1515,10 +1581,26 @@ public class CombatController : MonoBehaviour
 
             }
 
-            if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
-                RecompensaText.text = "Recompensa " + RecompensaDinero + " de oro";
-            else
-                RecompensaText.text = "Recompensa " + RecompensaDinero + " + (Pasiva: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " de oro";
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            {
+
+                VictoriaDerrotaText.text = "VICTORY";
+                if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
+                    RecompensaText.text = "You earn " + RecompensaDinero + " gold";
+                else
+                    RecompensaText.text = "You earn " + RecompensaDinero + " + (Passive: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " gold";
+
+            }
+            else                                                                  // Spanish
+            {
+
+                VictoriaDerrotaText.text = "VICTORIA";
+                if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
+                    RecompensaText.text = "Obtienes " + RecompensaDinero + " de oro";
+                else
+                    RecompensaText.text = "Obtienes " + RecompensaDinero + " + (Pasiva: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " de oro";
+
+            }
 
             if (victoria_etc == 0 && RecompensaVictoria == true)
             {
@@ -1539,8 +1621,20 @@ public class CombatController : MonoBehaviour
             RecompensaVictoria = true;
             Debug.Log("victoria lol");
             VictoriaDerrotaPanel.SetActive(true);
-            VictoriaDerrotaText.text = "VICTORIA";
-            RecompensaText.text = "Enhorabuena, has derrotado al boss y completado la mazmorra";
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            {
+
+                VictoriaDerrotaText.text = "VICTORY";
+                RecompensaText.text = "Congratulations, you have defeated the boss and completed the dungeon";
+
+            }
+            else                                                                  // Spanish
+            {
+
+                VictoriaDerrotaText.text = "VICTORIA";
+                RecompensaText.text = "Enhorabuena, has derrotado al boss y completado la mazmorra";
+
+            }
 
             //if (victoria_etc == 0 && RecompensaVictoria == true)
             //{
@@ -1735,7 +1829,10 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("Ira devuelve el ataque");
 
-        CreateSpellText("Devolver Ataque", EnemyList[enemigo]);
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            CreateSpellText("Return Attack", EnemyList[enemigo]);
+        else                                                                  // Spanish
+            CreateSpellText("Devolver Ataque", EnemyList[enemigo]);
 
         if (tipo == 0 || tipo == 2 || tipo == 3 || tipo == 4)
         {
@@ -1795,7 +1892,10 @@ public class CombatController : MonoBehaviour
         {
 
             Player.GetComponent<PlayerController>().Bloqueado = true;
-            CreateSpellText("Bloqueado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Stunned", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Bloqueado", Player);
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
 
@@ -1804,7 +1904,10 @@ public class CombatController : MonoBehaviour
         {
 
             Player.GetComponent<PlayerController>().Bloqueado = true;
-            CreateSpellText("Bloqueado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Stunned", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Bloqueado", Player);
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
             StartCoroutine(CreateDmgHealText(true, 10, Player, true));
@@ -1815,7 +1918,10 @@ public class CombatController : MonoBehaviour
         else if (tipo == 15 || tipo == 16)
         {
 
-            CreateSpellText("Debilitado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Weakened", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Debilitado", Player);
             Player.GetComponent<PlayerController>().Debilitado = true;
             Player.GetComponent<PlayerController>().Debilidad -= 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra += 3;
@@ -1826,7 +1932,10 @@ public class CombatController : MonoBehaviour
         else if (tipo == 20)
         {
 
-            CreateSpellText("Envenenado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Poisoned", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Envenenado", Player);
             Player.GetComponent<PlayerController>().Envenenado = true;
             Player.GetComponent<PlayerController>().Veneno += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
@@ -1837,7 +1946,10 @@ public class CombatController : MonoBehaviour
         else if (tipo == 21)
         {
 
-            CreateSpellText("Envenenado", Player);
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                CreateSpellText("Poisoned", Player);
+            else                                                                  // Spanish
+                CreateSpellText("Envenenado", Player);
             Player.GetComponent<PlayerController>().Envenenado = true;
             Player.GetComponent<PlayerController>().Veneno += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
@@ -1849,6 +1961,26 @@ public class CombatController : MonoBehaviour
 
         }
 
+
+    }
+
+    public void UpdateLanguageTexts()
+    {
+
+        if(VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        {
+
+            EndTurnText.text = "End Turn";
+            LeaveCombatText.text = "Leave Combat";
+
+        }
+        else                                                                  // Spanish
+        {
+
+            EndTurnText.text = "Finalizar Turno";
+            LeaveCombatText.text = "Salir del Combate";
+
+        }
 
     }
 

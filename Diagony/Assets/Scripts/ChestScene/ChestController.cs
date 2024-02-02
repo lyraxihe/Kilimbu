@@ -21,8 +21,10 @@ public class ChestController : MonoBehaviour
     [SerializeField] GameObject prefabCarta;
     public List<Sprite> CardSprites;
 
-    List<string> CardDescriptions = new List<string>() { "Te curas por completo", "+10 a la vida máxima del personaje", "Ganas 10 de dinero en cada combate",
+    List<string> CardDescriptionsES = new List<string>() { "Te curas por completo", "+10 a la vida máxima del personaje", "Ganas 10 de oro en cada combate",
                                                          "Una carta de tu elección cuesta 1 menos de maná", "+5 de vida después de cada combate" };
+    List<string> CardDescriptionsEN = new List<string>() { "You heal completely", "+10 to player's maximum health", "You earn +10 gold in every combat",
+                                                         "A card of your choice costs 1 less mana", "+5 health after every combat" };
 
     public List<GameObject> ListCards = new List<GameObject>(); // Lista de los IDs de las cartas creadas
 
@@ -30,7 +32,9 @@ public class ChestController : MonoBehaviour
     public bool CartasCreadas;
     public bool CardSelected;
     public bool Exit;
-    
+
+    [SerializeField] TMP_Text SelectCardManaText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,8 @@ public class ChestController : MonoBehaviour
     void Update()
     {
         
+        UpdateTexts();
+
         if(Exit)
         {
 
@@ -135,7 +141,10 @@ public class ChestController : MonoBehaviour
             // Actualiza los textos
             newText = clon.GetComponentsInChildren<TMP_Text>();
             //newText[0].text = CardTitles[cardType];
-            newText[0].text = CardDescriptions[cardType];
+            if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
+                newText[0].text = CardDescriptionsEN[cardType];
+            else
+                newText[0].text = CardDescriptionsES[cardType];
             //newText[2].text = CardCost[cardType];
             //newText[3].text = CardDuration[cardType];
 
@@ -144,6 +153,26 @@ public class ChestController : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
 
         }
+
+    }
+
+    public void UpdateTexts()
+    {
+
+        for (int i = 0; i < ListCards.Count; i++)
+        {
+
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                ListCards[i].GetComponentsInChildren<TMP_Text>()[0].text = CardDescriptionsEN[ListCards[i].GetComponent<ChestCard>().Tipo];
+            else                                                                   // Spanish
+                ListCards[i].GetComponentsInChildren<TMP_Text>()[0].text = CardDescriptionsES[ListCards[i].GetComponent<ChestCard>().Tipo];
+
+        }
+
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+            SelectCardManaText.text = "Choose a card to reduce its mana cost by 1";
+        else                                                                   // Spanish
+            SelectCardManaText.text = "Elige una carta a la que reducir su coste en 1";
 
     }
 

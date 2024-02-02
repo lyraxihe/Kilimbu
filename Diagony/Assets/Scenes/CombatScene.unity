@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Finalizar Turno
+  m_text: End Turn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2071,6 +2071,9 @@ MonoBehaviour:
   TotalCards: 
   HandCardsAmount: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   turnosText: {fileID: 247991784}
+  EndTurnText: {fileID: 30641742}
+  LeaveCombatText: {fileID: 1754284538}
+  Tutorial: 0
 --- !u!1 &1118711420
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,7 +2488,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelPausa: {fileID: 1938352611}
+  SettingsInterface: {fileID: 0}
   VariablesGlobales: {fileID: 0}
+  ResumeText: {fileID: 0}
+  SettingsText: {fileID: 0}
+  MainMenuText: {fileID: 0}
+  SettingsTitleText: {fileID: 0}
+  LanguageText: {fileID: 0}
+  AcceptText: {fileID: 0}
 --- !u!114 &1453142988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2634,7 +2644,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelPausa: {fileID: 1938352611}
+  SettingsInterface: {fileID: 0}
   VariablesGlobales: {fileID: 0}
+  ResumeText: {fileID: 0}
+  SettingsText: {fileID: 0}
+  MainMenuText: {fileID: 0}
+  SettingsTitleText: {fileID: 0}
+  LanguageText: {fileID: 0}
+  AcceptText: {fileID: 0}
 --- !u!114 &1609039810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,7 +2859,7 @@ GameObject:
   - component: {fileID: 1754284539}
   - component: {fileID: 1754284538}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: EscaparText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2888,7 +2905,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Volver
+  m_text: Leave Combat
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

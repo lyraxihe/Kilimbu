@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class MainMenuController : MonoBehaviour
+{
+
+    // Variables Globales
+    [SerializeField] GameObject VariablesGlobales;
+
+    // Main Interface
+    [SerializeField] TMP_Text NewGameText;
+    [SerializeField] TMP_Text SettingsText;
+    [SerializeField] TMP_Text CreditsText;
+    [SerializeField] TMP_Text ExitText;
+
+    // Settings Interface
+    [SerializeField] TMP_Text SettingsTitleText;
+    [SerializeField] TMP_Text LanguageText;
+    [SerializeField] TMP_Text AcceptText;
+
+    private void Awake()
+    {
+
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
+
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        // Traductions
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        {
+
+            // Main Interface
+            NewGameText.text = "New Game";
+            SettingsText.text = "Settings";
+            CreditsText.text = "Credits";
+            ExitText.text = "Exit Game";
+
+            // Settings Interface
+            SettingsTitleText.text = "Settings";
+            LanguageText.text = "Select Language:";
+            AcceptText.text = "Accept";
+
+        }
+        else                                                                   // Spanish
+        {
+
+            // Main Interface
+            NewGameText.text = "Nueva Partida";
+            SettingsText.text = "Configuración";
+            CreditsText.text = "Créditos";
+            ExitText.text = "Salir del Juego";
+
+            // Settings Interface
+            SettingsTitleText.text = "Configuración";
+            LanguageText.text = "Selecciona Idioma:";
+            AcceptText.text = "Aceptar";
+
+        }
+
+    }
+}
