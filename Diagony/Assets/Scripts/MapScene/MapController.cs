@@ -145,6 +145,7 @@ public class MapController : MonoBehaviour
     public void CrearSalas()
     {
         int rand, randRoom, randTienda;
+        int minX = -80, maxX = 80, minY = -40, maxY = 40;
         //int randTienda1 = 0, randTienda2 = 0;
         //int randCofre1 = 0, randCofre2 = 0, randCofre3 = 0, randCofre4 = 0;
 
@@ -164,7 +165,9 @@ public class MapController : MonoBehaviour
 
         // Crea la Entrada
         clonEntrada = Instantiate(RoomButton);
-        clonEntrada.transform.position = new Vector3(StartCoord.x, StartCoord.y, 0);
+        int randRuidoX = RandRuido(minX, maxX);
+        int randRuidoY = RandRuido(minY, maxY);
+        clonEntrada.transform.position = new Vector3(StartCoord.x + randRuidoX, StartCoord.y + randRuidoY, 0);
         clonEntrada.transform.SetParent(Content.transform, false);
         //clonEntrada.GetComponent<Button>().image.color = Color.cyan;
         //clonEntrada.GetComponent<Image>().sprite = RoomIcons[0];
@@ -347,11 +350,14 @@ public class MapController : MonoBehaviour
                 RoomsGameobjects[posicionSala, j] = clon;
                 ListRooms.Add(clon);
 
+                randRuidoX = RandRuido(minX, maxX);
+                randRuidoY = RandRuido(minY, maxY);
+
                 switch (posicionSala)
                 {
                     case 0:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 360, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + 360 + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -359,7 +365,7 @@ public class MapController : MonoBehaviour
 
                     case 1:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y + 180, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + 180 + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -367,7 +373,7 @@ public class MapController : MonoBehaviour
 
                     case 2:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -375,7 +381,7 @@ public class MapController : MonoBehaviour
 
                     case 3:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 180, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y - 180 + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -383,7 +389,7 @@ public class MapController : MonoBehaviour
 
                     case 4:
                         {
-                            clon.transform.position = new Vector3(NextXCoord, StartCoord.y - 360, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y - 360 + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -410,7 +416,9 @@ public class MapController : MonoBehaviour
         NextXCoord += 300;
         // Crea la Sala de Descanso
         clonDescanso = Instantiate(RoomButton);
-        clonDescanso.transform.position = new Vector3(NextXCoord, StartCoord.y, 0);
+        randRuidoX = RandRuido(minX, maxX);
+        randRuidoY = RandRuido(minY, maxY);
+        clonDescanso.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + randRuidoY, 0);
         clonDescanso.transform.SetParent(Content.transform, false);
         //clonDescanso.GetComponent<Button>().image.color = Color.green;
         clonDescanso.GetComponent<RoomButton>().RoomType = 2;
@@ -427,7 +435,9 @@ public class MapController : MonoBehaviour
         NextXCoord += 300;
         // Crea el Boss
         clonBoss = Instantiate(RoomButton);
-        clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x, StartCoord.y + Canvas.transform.position.y, 0);
+        randRuidoX = RandRuido(minX, maxX);
+        randRuidoY = RandRuido(minY, maxY);
+        clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x + randRuidoX, StartCoord.y + Canvas.transform.position.y + randRuidoY, 0);
         clonBoss.transform.SetParent(Content.transform, false);
         //clonBoss.GetComponent<Button>().image.color = Color.blue;
         clonBoss.GetComponent<RoomButton>().RoomType = 3;
@@ -949,6 +959,48 @@ public class MapController : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    public int RandRuido(int min, int max)
+    {
+
+        int randRuido = Random.Range(min, max + 1);
+
+        if (randRuido < -70)
+            return -80;
+        else if (randRuido < -60)
+            return -70;
+        else if (randRuido < -50)
+            return -60;
+        else if (randRuido < -40)
+            return -50;
+        else if (randRuido < -30)
+            return -40;
+        else if (randRuido < -20)
+            return -30;
+        else if (randRuido < -10)
+            return -20;
+        else if (randRuido < 0)
+            return -10;
+        else if (randRuido == 0)
+            return 0;
+        else if (randRuido <= 10)
+            return 10;
+        else if (randRuido <= 20)
+            return 20;
+        else if (randRuido <= 30)
+            return 30;
+        else if (randRuido <= 40)
+            return 40;
+        else if (randRuido <= 50)
+            return 50;
+        else if (randRuido <= 60)
+            return 60;
+        else if (randRuido <= 70)
+            return 70;
+        else
+            return 80;
 
     }
 }

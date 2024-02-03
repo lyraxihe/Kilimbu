@@ -169,7 +169,7 @@ public class ChestCard : MonoBehaviour
                             
                             rand = Random.Range(0, 24);
 
-                        } while (ListCardsMana.Contains(rand) || VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] <= 0);
+                        } while (ListCardsMana.Contains(rand) || VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] <= 0 || VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[rand] == 0);
 
                         ListCardsMana.Add(rand);
 
