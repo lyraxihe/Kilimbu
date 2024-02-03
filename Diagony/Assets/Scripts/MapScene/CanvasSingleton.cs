@@ -65,10 +65,10 @@ public class CanvasSingleton : MonoBehaviour
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }
-        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -3850)
+        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -5290)
         {
 
-            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3850, Content.GetComponent<RectTransform>().anchoredPosition.y);
+            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5290, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }

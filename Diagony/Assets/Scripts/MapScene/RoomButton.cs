@@ -30,6 +30,8 @@ public class RoomButton : MonoBehaviour
 
     public bool Visitado;
 
+    [SerializeField] float minTam = 0.6f, maxTam = 1; // Tamaños sala
+
     void Start()
     {
         
@@ -120,16 +122,16 @@ public class RoomButton : MonoBehaviour
     {
 
         if (!gameObject.GetComponent<Button>().interactable && !Visitado && RoomType != 3)
-            gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            gameObject.transform.localScale = new Vector3(minTam, minTam, minTam);
         else if (Visitado)
         {
 
-            gameObject.transform.localScale = Vector3.one;
+            gameObject.transform.localScale = new Vector3(maxTam, maxTam, maxTam);
             gameObject.GetComponent<Image>().color = new Color(0, 0, 0);
 
         }
         else
-            gameObject.transform.localScale = Vector3.one;
+            gameObject.transform.localScale = new Vector3(maxTam, maxTam, maxTam);
 
     }
 }

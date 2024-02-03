@@ -52,7 +52,7 @@ public class MapController : MonoBehaviour
     // Posiciones salas (ruido, distancia, etc.)
     [SerializeField] int distanciaSalaX = 400;
     [SerializeField] int distanciaSalaY = 180;
-    [SerializeField] int minX = -80, maxX = 80, minY = -40, maxY = 40;
+    [SerializeField] int minRuidoX = -80, maxRuidoX = 80, minRuidoY = -40, maxRuidoY = 40;
 
     // Array de posiciones de las columnas
     public List<int> ColumnasPos;
@@ -169,8 +169,8 @@ public class MapController : MonoBehaviour
 
         // Crea la Entrada
         clonEntrada = Instantiate(RoomButton);
-        int randRuidoX = RandRuido(minX, maxX);
-        int randRuidoY = RandRuido(minY, maxY);
+        int randRuidoX = RandRuido(minRuidoX, maxRuidoX);
+        int randRuidoY = RandRuido(minRuidoY, maxRuidoY);
         clonEntrada.transform.position = new Vector3(StartCoord.x + randRuidoX, StartCoord.y + randRuidoY, 0);
         clonEntrada.transform.SetParent(Content.transform, false);
         //clonEntrada.GetComponent<Button>().image.color = Color.cyan;
@@ -354,8 +354,8 @@ public class MapController : MonoBehaviour
                 RoomsGameobjects[posicionSala, j] = clon;
                 ListRooms.Add(clon);
 
-                randRuidoX = RandRuido(minX, maxX);
-                randRuidoY = RandRuido(minY, maxY);
+                randRuidoX = RandRuido(minRuidoX, maxRuidoX);
+                randRuidoY = RandRuido(minRuidoY, maxRuidoY);
 
                 switch (posicionSala)
                 {
@@ -420,8 +420,8 @@ public class MapController : MonoBehaviour
         NextXCoord += distanciaSalaX;
         // Crea la Sala de Descanso
         clonDescanso = Instantiate(RoomButton);
-        randRuidoX = RandRuido(minX, maxX);
-        randRuidoY = RandRuido(minY, maxY);
+        randRuidoX = RandRuido(minRuidoX, maxRuidoX);
+        randRuidoY = RandRuido(minRuidoY, maxRuidoY);
         clonDescanso.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + randRuidoY, 0);
         clonDescanso.transform.SetParent(Content.transform, false);
         //clonDescanso.GetComponent<Button>().image.color = Color.green;
@@ -439,8 +439,8 @@ public class MapController : MonoBehaviour
         NextXCoord += distanciaSalaX;
         // Crea el Boss
         clonBoss = Instantiate(RoomButton);
-        randRuidoX = RandRuido(minX, maxX);
-        randRuidoY = RandRuido(minY, maxY);
+        randRuidoX = RandRuido(minRuidoX, maxRuidoX);
+        randRuidoY = RandRuido(minRuidoY, maxRuidoY);
         clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x + randRuidoX, StartCoord.y + Canvas.transform.position.y + randRuidoY, 0);
         clonBoss.transform.SetParent(Content.transform, false);
         //clonBoss.GetComponent<Button>().image.color = Color.blue;
