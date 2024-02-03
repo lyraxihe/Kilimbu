@@ -50,7 +50,8 @@ public class MapController : MonoBehaviour
     public int contCombates = 0, contTiendas = 0, contCofres = 0;
 
     // Posiciones salas (ruido, distancia, etc.)
-    [SerializeField] int distanciaSala = 400;
+    [SerializeField] int distanciaSalaX = 400;
+    [SerializeField] int distanciaSalaY = 180;
     [SerializeField] int minX = -80, maxX = 80, minY = -40, maxY = 40;
 
     // Array de posiciones de las columnas
@@ -206,7 +207,7 @@ public class MapController : MonoBehaviour
                 nSalasEnColumna = 4;
             }
 
-            NextXCoord += distanciaSala;
+            NextXCoord += distanciaSalaX;
 
             if (j == 2) // Si es la columna 3 debe haber una tienda si o si
                 randTienda = Random.Range(0, nSalasEnColumna);
@@ -360,7 +361,7 @@ public class MapController : MonoBehaviour
                 {
                     case 0:
                         {
-                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + 360 + randRuidoY, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + (distanciaSalaY * 2) + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -368,7 +369,7 @@ public class MapController : MonoBehaviour
 
                     case 1:
                         {
-                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + 180 + randRuidoY, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y + distanciaSalaY + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -384,7 +385,7 @@ public class MapController : MonoBehaviour
 
                     case 3:
                         {
-                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y - 180 + randRuidoY, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y - distanciaSalaY + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -392,7 +393,7 @@ public class MapController : MonoBehaviour
 
                     case 4:
                         {
-                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y - 360 + randRuidoY, 0); // Coloca la sala en sus coordenadas
+                            clon.transform.position = new Vector3(NextXCoord + randRuidoX, StartCoord.y - (distanciaSalaY * 2) + randRuidoY, 0); // Coloca la sala en sus coordenadas
 
                             break;
                         }
@@ -416,7 +417,7 @@ public class MapController : MonoBehaviour
                 //clon.GetComponent<Button>().image.color = Color.blue;
             }
         }
-        NextXCoord += distanciaSala;
+        NextXCoord += distanciaSalaX;
         // Crea la Sala de Descanso
         clonDescanso = Instantiate(RoomButton);
         randRuidoX = RandRuido(minX, maxX);
@@ -435,7 +436,7 @@ public class MapController : MonoBehaviour
         ListRooms.Add(clonDescanso);
 
 
-        NextXCoord += distanciaSala;
+        NextXCoord += distanciaSalaX;
         // Crea el Boss
         clonBoss = Instantiate(RoomButton);
         randRuidoX = RandRuido(minX, maxX);
