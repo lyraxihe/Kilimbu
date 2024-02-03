@@ -49,6 +49,10 @@ public class MapController : MonoBehaviour
 
     public int contCombates = 0, contTiendas = 0, contCofres = 0;
 
+    // Posiciones salas (ruido, distancia, etc.)
+    [SerializeField] int distanciaSala = 400;
+    [SerializeField] int minX = -80, maxX = 80, minY = -40, maxY = 40;
+
     // Array de posiciones de las columnas
     public List<int> ColumnasPos;
 
@@ -145,7 +149,6 @@ public class MapController : MonoBehaviour
     public void CrearSalas()
     {
         int rand, randRoom, randTienda;
-        int minX = -80, maxX = 80, minY = -40, maxY = 40;
         //int randTienda1 = 0, randTienda2 = 0;
         //int randCofre1 = 0, randCofre2 = 0, randCofre3 = 0, randCofre4 = 0;
 
@@ -203,7 +206,7 @@ public class MapController : MonoBehaviour
                 nSalasEnColumna = 4;
             }
 
-            NextXCoord += 300;
+            NextXCoord += distanciaSala;
 
             if (j == 2) // Si es la columna 3 debe haber una tienda si o si
                 randTienda = Random.Range(0, nSalasEnColumna);
@@ -413,7 +416,7 @@ public class MapController : MonoBehaviour
                 //clon.GetComponent<Button>().image.color = Color.blue;
             }
         }
-        NextXCoord += 300;
+        NextXCoord += distanciaSala;
         // Crea la Sala de Descanso
         clonDescanso = Instantiate(RoomButton);
         randRuidoX = RandRuido(minX, maxX);
@@ -432,7 +435,7 @@ public class MapController : MonoBehaviour
         ListRooms.Add(clonDescanso);
 
 
-        NextXCoord += 300;
+        NextXCoord += distanciaSala;
         // Crea el Boss
         clonBoss = Instantiate(RoomButton);
         randRuidoX = RandRuido(minX, maxX);

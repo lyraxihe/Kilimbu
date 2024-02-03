@@ -28,11 +28,14 @@ public class RoomButton : MonoBehaviour
 
     public int RoomType; // 0: Combate | 1: Cofre | 2: Tienda | 3: Boss | 4: Tutorial
 
+    public bool Visitado;
+
     void Start()
     {
         
         CanvasSingleton = GameObject.Find("CanvasSingleton");
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+        Visitado = false;
         createLines();
 
     }
@@ -47,6 +50,8 @@ public class RoomButton : MonoBehaviour
         else
             GetComponent<Button>().enabled = true;
 
+        ControlButtonSize();
+
     }
 
     public void OnClick()
@@ -54,6 +59,7 @@ public class RoomButton : MonoBehaviour
         
         CanvasSingleton.GetComponent<CanvasSingleton>().VerMapa = false;
         gameObject.GetComponent<Button>().interactable = false;
+        Visitado = true;
 
         for (int i = 0; i < numContections; i++)
         {
@@ -108,5 +114,22 @@ public class RoomButton : MonoBehaviour
                 conectionsLines[i] = LineClon;
             }
         }
+    }
+
+    public void ControlButtonSize()
+    {
+
+        if (!gameObject.GetComponent<Button>().interactable && !Visitado && RoomType != 3)
+            gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        else if (Visitado)
+        {
+
+            gameObject.transform.localScale = Vector3.one;
+            gameObject.GetComponent<Image>().color = new Color(0, 0, 0);
+
+        }
+        else
+            gameObject.transform.localScale = Vector3.one;
+
     }
 }
