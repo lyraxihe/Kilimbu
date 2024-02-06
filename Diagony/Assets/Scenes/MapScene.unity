@@ -8186,10 +8186,10 @@ MonoBehaviour:
   contCofres: 0
   distanciaSalaX: 400
   distanciaSalaY: 180
-  minX: -80
-  maxX: 80
-  minY: -40
-  maxY: 40
+  minRuidoX: -80
+  maxRuidoX: 80
+  minRuidoY: -40
+  maxRuidoY: 40
   ColumnasPos: 5e0100003200000006ffffffdafdffffaefcffff82fbffff56faffff2af9fffffef7ffffd2f6ffffa6f5ffff7af4ffff4ef3ffff22f2fffff6f0ffff
 --- !u!1 &1002836247
 GameObject:
@@ -9323,6 +9323,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181457078}
   m_CullTransparentMesh: 1
+--- !u!1 &1182734420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1182734422}
+  - component: {fileID: 1182734421}
+  m_Layer: 0
+  m_Name: VariablesGlobales
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1182734421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182734420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8050062d3925d42aa1c768ac39115b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidasProtagonista: 0
+  HealthProtagonista: 0
+  MaxHealthProtagonista: 0
+  MaxManaProtagonista: 0
+  DineroAmount: 0
+  EstaEnPausa: 0
+  SpellNumber: 5
+  AmountCards: 030000000200000002000000000000000000000000000000000000000300000002000000010000000000000000000000000000000100000001000000000000000000000001000000010000000000000000000000010000000000000000000000
+  CardCostOriginal: 010000000100000002000000020000000300000003000000000000000100000002000000020000000300000003000000050000000100000000000000010000000200000001000000000000000200000001000000000000000400000003000000
+  CardCost: 010000000100000002000000020000000300000003000000000000000100000002000000020000000300000003000000050000000100000000000000010000000200000001000000000000000200000001000000000000000400000003000000
+  Traduction: {fileID: 0}
+  Boss: 0
+  Tutorial: 0
+  PasivaGanarDinero: 0
+  PasivaDinero: 0
+  PasivaCurarseCombate: 0
+  PasivaCuracionCombate: 0
+  CardUses: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  ButtonsEnabled: 0
+  Language: 0
+--- !u!4 &1182734422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182734420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.453458, y: 0.3271128, z: -1.7490658}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191240996
 GameObject:
   m_ObjectHideFlags: 0

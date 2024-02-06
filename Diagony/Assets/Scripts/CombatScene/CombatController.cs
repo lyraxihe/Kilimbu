@@ -15,6 +15,7 @@ public class CombatController : MonoBehaviour
 {
     public List<GameObject> CardList;
     public GameObject VariablesGlobales;
+   
 
     public GameObject ArrowEmitter;
     public bool MovingArrow;
@@ -76,7 +77,7 @@ public class CombatController : MonoBehaviour
 
     private void Awake()
     {
-
+       
         victoria_etc = 0;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
 
@@ -134,7 +135,7 @@ public class CombatController : MonoBehaviour
         ManaMax.text = "/ " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
         CardsPosition();
 
-        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language== 0) // English
             turnosText.text = "Turn: " + ContadorTurnos.ToString();
         else                                                                  // Spanish
             turnosText.text = "Turno: " + ContadorTurnos.ToString();

@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class LanguageDropdown : MonoBehaviour
 {
 
-    [SerializeField] GameObject VariablesGlobales;
+    [SerializeField] GameObject Traduction;
 
+    private void Awake()
+    {
+        Traduction = GameObject.Find("Traduction");
+    }
     // Start is called before the first frame update
     void Start()
     {
 
-        VariablesGlobales = GameObject.Find("VariablesGlobales");
-        gameObject.GetComponent<TMP_Dropdown>().value = VariablesGlobales.GetComponent<VariablesGlobales>().Language;
+        gameObject.GetComponent<TMP_Dropdown>().value = Traduction.GetComponent<Traduction>().Language;
 
     }
 
@@ -22,7 +25,7 @@ public class LanguageDropdown : MonoBehaviour
     void Update()
     {
 
-        VariablesGlobales.GetComponent<VariablesGlobales>().Language = gameObject.GetComponent<TMP_Dropdown>().value;
+        Traduction.GetComponent<Traduction>().Language = gameObject.GetComponent<TMP_Dropdown>().value;
 
     }
 }

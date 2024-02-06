@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class MainMenuController : MonoBehaviour
 {
 
     // Variables Globales
-    [SerializeField] GameObject VariablesGlobales;
+    public GameObject Traduction;
 
     // Main Interface
     [SerializeField] TMP_Text NewGameText;
@@ -22,9 +23,7 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
-
-        VariablesGlobales = GameObject.Find("VariablesGlobales");
-
+        Traduction = GameObject.Find("Traduction");
     }
 
     // Start is called before the first frame update
@@ -38,7 +37,7 @@ public class MainMenuController : MonoBehaviour
     {
         
         // Traductions
-        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        if (Traduction.GetComponent<Traduction>().Language == 0) // English
         {
 
             // Main Interface

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class VariablesGlobales : MonoBehaviour
 {
     // declaración de variables personajes
@@ -20,6 +21,8 @@ public class VariablesGlobales : MonoBehaviour
     public List<int> AmountCards = new List<int>() {3, 2, 2, 0, 0, 0, 0, 3, 2, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0}; // Lista con las cantidades de cada carta (posición = ID carta en el excel)
     public List<int> CardCostOriginal = new List<int>() { 1, 1, 2, 2, 3, 3, 0, 1, 2, 2, 3, 3, 5, 1, 0, 1, 2, 1, 0, 2, 1, 0, 4, 3 };
     public List<int> CardCost = new List<int>() { 1, 1, 2, 2, 3, 3, 0, 1, 2, 2, 3, 3, 5, 1, 0, 1, 2, 1, 0, 2, 1, 0, 4, 3 };
+
+    public GameObject Traduction;
 
     // Boss
     public bool Boss; // Si es true significa que el combate será contra el Boss, si es false es un combate normal
@@ -39,7 +42,7 @@ public class VariablesGlobales : MonoBehaviour
     // Controla si los botones de la interfaz se pueden tocar
     public bool ButtonsEnabled;
 
-    // Idiomas
+    //// Idiomas
     public int Language; // 0 - Inglés || 1 - Español
 
     private void Awake() //sigleton
@@ -62,8 +65,9 @@ public class VariablesGlobales : MonoBehaviour
         // Controla si los botones de la interfaz se pueden tocar
         ButtonsEnabled = true;
 
-        Language = 0; // Inglés por defecto
-
+        //Language = 0; // Inglés por defecto
+        Traduction = GameObject.Find("Traduction");
+       
     }
     void Start()
     {
@@ -86,7 +90,7 @@ public class VariablesGlobales : MonoBehaviour
    
     void Update()
     {
-
+        Language = Traduction.GetComponent<Traduction>().Language;
         //if (EstaEnPausa)
         //    Time.timeScale = 0;
         //else

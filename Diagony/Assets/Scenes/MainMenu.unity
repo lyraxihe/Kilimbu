@@ -1309,69 +1309,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312153734}
   m_CullTransparentMesh: 1
---- !u!1 &1412641690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1412641692}
-  - component: {fileID: 1412641691}
-  m_Layer: 0
-  m_Name: VariablesGlobales
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1412641691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412641690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d8050062d3925d42aa1c768ac39115b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidasProtagonista: 0
-  HealthProtagonista: 0
-  MaxHealthProtagonista: 0
-  MaxManaProtagonista: 0
-  DineroAmount: 0
-  EstaEnPausa: 0
-  SpellNumber: 5
-  AmountCards: 030000000200000002000000000000000000000000000000000000000300000002000000010000000000000000000000000000000100000001000000000000000000000001000000010000000000000000000000010000000000000000000000
-  CardCostOriginal: 010000000100000002000000020000000300000003000000000000000100000002000000020000000300000003000000050000000100000000000000010000000200000001000000000000000200000001000000000000000400000003000000
-  CardCost: 010000000100000002000000020000000300000003000000000000000100000002000000020000000300000003000000050000000100000000000000010000000200000001000000000000000200000001000000000000000400000003000000
-  Boss: 0
-  Tutorial: 0
-  PasivaGanarDinero: 0
-  PasivaDinero: 0
-  PasivaCurarseCombate: 0
-  PasivaCuracionCombate: 0
-  CardUses: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  ButtonsEnabled: 0
-  Language: 0
---- !u!4 &1412641692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412641690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3941689, y: -0.26070732, z: -1.7792362}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1548720904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,6 +2749,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044073627}
   m_CullTransparentMesh: 1
+--- !u!1 &2083199342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083199343}
+  - component: {fileID: 2083199344}
+  m_Layer: 0
+  m_Name: Traduction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2083199343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083199342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2083199344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083199342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59fdd065be2c9543aecdc2f9074ed4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Language: 0
 --- !u!1001 &554113864185595773
 PrefabInstance:
   m_ObjectHideFlags: 0

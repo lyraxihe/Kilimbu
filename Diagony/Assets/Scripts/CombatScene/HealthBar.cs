@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class HealthBar : MonoBehaviour
 {
+    public GameObject VariablesGlobales;
     [SerializeField] public TMP_Text HealthLabel;
     [SerializeField] UnityEngine.UI.Slider HealthBarSlider;
     [SerializeField] UnityEngine.UI.Image fill;
@@ -16,6 +17,13 @@ public class HealthBar : MonoBehaviour
     [SerializeField] public GameObject TextCharacter;
 
     private int _maxHealth; // Para controlar la vida Máxima en el script
+
+    private void Awake()
+    {
+
+        VariablesGlobales = GameObject.Find("VariablesGlobales");
+
+    }
 
     void Start()
     {
@@ -40,6 +48,8 @@ public class HealthBar : MonoBehaviour
             ValueHealthBar(_enemy.GetComponent<EnemyController>().HealthEnemigo, _enemy.GetComponent<EnemyController>().MaxHealthEnemigo);
             ControlHealthbar(_enemy.GetComponent<EnemyController>().HealthEnemigo);
         }
+
+        UpdateLanguageTexts();
 
     }
 
@@ -78,6 +88,52 @@ public class HealthBar : MonoBehaviour
             Destroy(gameObject);
         }
            
+
+    }
+
+    public void UpdateLanguageTexts()
+    {
+
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        {
+
+            if (EsPlayer)
+                TextCharacter.GetComponent<TMP_Text>().text = "YOU";
+            else
+            {
+
+                if (_enemy.GetComponent<EnemyController>().Tipo == 0)
+                    TextCharacter.GetComponent<TMP_Text>().text = "ANGER";
+                else if (_enemy.GetComponent<EnemyController>().Tipo == 1)
+                    TextCharacter.GetComponent<TMP_Text>().text = "FEAR";
+                else if (_enemy.GetComponent<EnemyController>().Tipo == 2)
+                    TextCharacter.GetComponent<TMP_Text>().text = "SADNESS";
+                else
+                    TextCharacter.GetComponent<TMP_Text>().text = "BOSS";
+
+            }
+
+        }
+        else                                                                  // Spanish
+        {
+
+            if (EsPlayer)
+                TextCharacter.GetComponent<TMP_Text>().text = "TÚ";
+            else
+            {
+
+                if (_enemy.GetComponent<EnemyController>().Tipo == 0)
+                    TextCharacter.GetComponent<TMP_Text>().text = "IRA";
+                else if (_enemy.GetComponent<EnemyController>().Tipo == 1)
+                    TextCharacter.GetComponent<TMP_Text>().text = "MIEDO";
+                else if (_enemy.GetComponent<EnemyController>().Tipo == 2)
+                    TextCharacter.GetComponent<TMP_Text>().text = "TRISTEZA";
+                else
+                    TextCharacter.GetComponent<TMP_Text>().text = "JEFE";
+
+            }
+
+        }
 
     }
 }

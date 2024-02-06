@@ -387,7 +387,7 @@ public class EnemyController : MonoBehaviour
                     }
                 }
 
-                if (AttackType >= 8 && HealthEnemigo < 35 && !EsperandoHeal)
+                if (AttackType >= 8 && HealthEnemigo <= (MaxHealthEnemigo * 0.4f) && !EsperandoHeal)
                 {
                     ContadorDeTurnosHeal = 2;
                     EsperandoHeal = true;
