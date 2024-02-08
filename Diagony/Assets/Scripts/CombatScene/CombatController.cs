@@ -720,6 +720,9 @@ public class CombatController : MonoBehaviour
 
         }
 
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+            EnemyList[0].GetComponent<EnemyController>().BossDanyoComprobado = false;
+
         Player.GetComponent<PlayerController>().ContadorDeTurnos++;
         ContadorTurnos++;
     }
@@ -1515,10 +1518,15 @@ public class CombatController : MonoBehaviour
 
         }
 
-        if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
-            if (EnemyList[0].GetComponent<EnemyController>().contAcumulacionDanyoBoss > 20)
-                //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
-                EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss();
+        //if(tipo != 1 || tipo != 5) // Ya se hace este control de ambos casos en la función DoubleAttack()
+        //{
+
+        //    if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+        //        if (EnemyList[0].GetComponent<EnemyController>().contAcumulacionDanyoBoss > 20)
+        //            //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
+        //            EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss();
+
+        //}
 
     }
 
@@ -1806,6 +1814,10 @@ public class CombatController : MonoBehaviour
             }
         }
 
+        //if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
+        //    if (EnemyList[0].GetComponent<EnemyController>().contAcumulacionDanyoBoss > 20)
+        //        //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
+        //        EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss();
 
     }
 

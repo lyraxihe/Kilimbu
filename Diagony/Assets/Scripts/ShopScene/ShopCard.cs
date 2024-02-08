@@ -8,6 +8,7 @@ public class ShopCard : MonoBehaviour
     [SerializeField] GameObject VariablesGlobales;
     [SerializeField] TMP_Text TitleCard;
     [SerializeField] TMP_Text DescriptionCard;
+    [SerializeField] TMP_Text ManaCostCard;
     public int Tipo;
 
     List<string> CardTitlesES = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Acepto que me afecta", "Puedo decir que no", "Reconozco lo que siento",
@@ -58,6 +59,7 @@ public class ShopCard : MonoBehaviour
     private void UpdateCardTexts()
     {
 
+        // Actualiza el idioma
         if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
         {
 
@@ -73,6 +75,13 @@ public class ShopCard : MonoBehaviour
 
         }
 
+        // Actualiza con colorines el coste de mana de la carta
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
+            ManaCostCard.text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
+        else if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] < VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
+            ManaCostCard.text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
+        else
+            ManaCostCard.text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
     }
 
 }

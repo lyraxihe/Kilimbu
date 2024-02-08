@@ -85,6 +85,8 @@ public class EnemyController : MonoBehaviour
 
     public TMP_Text EnemyNameText;
 
+    public bool BossDanyoComprobado; // Controla que el "se ha casado de ti" del Boss sólo se ejecute una vez, sobretodo para los DoubleAttack
+
     void Start()
     {
         SoloTristeza = false;
@@ -181,6 +183,7 @@ public class EnemyController : MonoBehaviour
         playerSeBufa = false;
 
         contAcumulacionDanyoBoss = 0;
+        BossDanyoComprobado = false;
 
     }
 
@@ -197,6 +200,11 @@ public class EnemyController : MonoBehaviour
             SoloTristeza = true;
         }
 
+        // Comprueba el daño recibido por el Boss en el turno del Jugador para su "Se ha cansado de ti"
+        if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss) // Si es el Boss
+            if (contAcumulacionDanyoBoss > 20 && !BossDanyoComprobado) // Si el daño recibido es mayor que 20 y no se ha comprobado previamente
+                //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
+                ControlAcumulacionDanyoBoss();
 
     }
 
@@ -1087,6 +1095,9 @@ public class EnemyController : MonoBehaviour
 
     public void ControlAcumulacionDanyoBoss()
     {
+
+        contAcumulacionDanyoBoss = 0; // Resetea el daño recibido
+        BossDanyoComprobado = true;   // Indica que ya se ha controlado para que si en este mismo turno se vuelve a intentar comprobar, no lo haga, sobretodo para los DoubleAttack()
 
         //yield return new WaitForSeconds(0.5f);
         // CombatScene.GetComponent<CombatController>().wait(0.5f);
