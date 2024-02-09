@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] TMP_Text SettingsTitleText;
     [SerializeField] TMP_Text LanguageText;
     [SerializeField] TMP_Text AcceptText;
+    [SerializeField] Text DescriptiveText;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class MainMenuController : MonoBehaviour
             SettingsTitleText.text = "Settings";
             LanguageText.text = "Select Language:";
             AcceptText.text = "Accept";
+            DescriptiveText.text = "Descriptive texts";
 
         }
         else                                                                   // Spanish
@@ -65,6 +67,7 @@ public class MainMenuController : MonoBehaviour
             SettingsTitleText.text = "Configuración";
             LanguageText.text = "Selecciona Idioma:";
             AcceptText.text = "Aceptar";
+            DescriptiveText.text = "Textos descriptivos";
 
         }
 

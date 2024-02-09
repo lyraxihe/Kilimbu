@@ -166,7 +166,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6297673766527281072}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -242,7 +242,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6297673766527281072}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -782,7 +782,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6297673766527281072}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -923,9 +923,9 @@ RectTransform:
   - {fileID: 7855629858565023467}
   - {fileID: 4687423534125198105}
   - {fileID: 2048381629154603455}
+  - {fileID: 5398050370203465867}
   - {fileID: 7462408617467020683}
   - {fileID: 2263946494989973108}
-  - {fileID: 5398050370203465867}
   - {fileID: 937525609701219425}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -948,6 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VariablesGlobales: {fileID: 0}
+  Traduction: {fileID: 0}
   TitleCard: {fileID: 8192606297491431309}
   DescriptionCard: {fileID: 8757374057700704238}
   ManaCostCard: {fileID: 8354476769716671259}

@@ -7,6 +7,7 @@ public class CardManaText : MonoBehaviour
 {
 
     [SerializeField] GameObject VariablesGlobales;
+    [SerializeField] Traduction Traduction; // Script del singleton de Traduction
     [SerializeField] TMP_Text TitleCard;
     [SerializeField] TMP_Text DescriptionCard;
     private int Tipo;
@@ -46,6 +47,7 @@ public class CardManaText : MonoBehaviour
     {
 
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+        Traduction = GameObject.Find("Traduction").GetComponent<Traduction>(); // Script del singleton de Traduction
         Tipo = gameObject.GetComponent<ChestCard>().RandTipo;
 
     }
@@ -67,14 +69,16 @@ public class CardManaText : MonoBehaviour
     public void OnMouseOver()
     {
 
-        // Activa el texto explicativo de las cartas que lo necesiten
-        if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
-        {
+        // Si la opción de los textos descriptivos está activada
+        if (Traduction.DescriptiveTexts)
+            // Activa el texto explicativo de las cartas que lo necesiten
+            if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
+            {
 
-            EffectContainer.SetActive(true);
-            EffectText.gameObject.SetActive(true);
+                EffectContainer.SetActive(true);
+                EffectText.gameObject.SetActive(true);
 
-        }
+            }
 
     }
 

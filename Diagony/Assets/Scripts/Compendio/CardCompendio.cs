@@ -8,6 +8,7 @@ public class CardCompendio : MonoBehaviour
 {
 
     public GameObject VariablesGlobales;
+    [SerializeField] Traduction Traduction; // Script del singleton de Traduction
     [SerializeField] GameObject ScrollAreaCompendio;
     [SerializeField] GameObject Compendio;
 
@@ -66,6 +67,7 @@ public class CardCompendio : MonoBehaviour
     {
 
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+        Traduction = GameObject.Find("Traduction").GetComponent<Traduction>(); // Script del singleton de Traduction
         Position = GetComponent<RectTransform>();
         Image = GetComponent<Image>();
         CopyCreated = false;
@@ -131,14 +133,16 @@ public class CardCompendio : MonoBehaviour
                 Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 320, Position.anchoredPosition.y + 70);
             Copy.transform.localScale = new Vector3(2, 2, 2);
 
-            // Activa el texto explicativo de las cartas que lo necesiten
-            if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
-            {
+            // Si la opción de los textos descriptivos está activada
+            if(Traduction.DescriptiveTexts)
+                // Activa el texto explicativo de las cartas que lo necesiten
+                if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
+                {
 
-                Copy.GetComponent<CardCompendio>().EffectContainer.SetActive(true);
-                Copy.GetComponent<CardCompendio>().EffectText.gameObject.SetActive(true);
+                    Copy.GetComponent<CardCompendio>().EffectContainer.SetActive(true);
+                    Copy.GetComponent<CardCompendio>().EffectText.gameObject.SetActive(true);
 
-            }
+                }
 
         }
 

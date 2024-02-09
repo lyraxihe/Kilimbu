@@ -8,6 +8,7 @@ public class CardController : MonoBehaviour
 {
 
     public GameObject VariablesGlobales;
+    [SerializeField] Traduction Traduction; // Script del singleton de Traduction
     public GameObject CombatScene;
     public GameObject Player;
     public GameObject DragZone;
@@ -76,6 +77,9 @@ public class CardController : MonoBehaviour
 
     void Start()
     {
+
+        Traduction = GameObject.Find("Traduction").GetComponent<Traduction>(); // Script del singleton de Traduction
+
         MouseDrag = true;
         MouseOver = true;
 
@@ -163,14 +167,16 @@ public class CardController : MonoBehaviour
 
            }
 
-           // Activa el texto explicativo de las cartas que lo necesiten
-           if(Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
-           {
+            // Si la opción de los textos descriptivos está activada
+            if (Traduction.DescriptiveTexts)
+                // Activa el texto explicativo de las cartas que lo necesiten
+                if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
+                {
 
-                EffectContainer.SetActive(true);
-                EffectText.gameObject.SetActive(true);
+                    EffectContainer.SetActive(true);
+                    EffectText.gameObject.SetActive(true);
 
-           }
+                }
 
            MouseOver = true;
            transform.localScale = new Vector3(1, 1, 1);

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PausaButtonMap : MonoBehaviour
 {
     [SerializeField] GameObject PanelPausa;
-    [SerializeField] GameObject SettingsInterface;
+    [SerializeField] Transform SettingsInterface;
     [SerializeField] GameObject VariablesGlobales;
 
     // Pause Interface
@@ -20,12 +20,18 @@ public class PausaButtonMap : MonoBehaviour
     [SerializeField] TMP_Text SettingsTitleText;
     [SerializeField] TMP_Text LanguageText;
     [SerializeField] TMP_Text AcceptText;
+    [SerializeField] Text DescriptiveText;
 
     TMP_Text textButton;
 
     void Start()
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+        SettingsInterface = GameObject.Find("CanvasSettings").transform.GetChild(0);
+        SettingsTitleText = SettingsInterface.GetChild(0).GetComponent<TMP_Text>();
+        LanguageText = SettingsInterface.GetChild(1).GetComponent<TMP_Text>();
+        AcceptText = SettingsInterface.GetChild(3).GetChild(0).GetComponent<TMP_Text>();
+        DescriptiveText = SettingsInterface.GetChild(4).GetChild(1).GetComponent<Text>(); ;
         textButton = gameObject.GetComponentInChildren<TextMeshPro>();
     }
 
@@ -46,6 +52,7 @@ public class PausaButtonMap : MonoBehaviour
             SettingsTitleText.text = "Settings";
             LanguageText.text = "Select Language:";
             AcceptText.text = "Accept";
+            DescriptiveText.text = "Descriptive texts";
 
         }
         else                                                                   // Spanish
@@ -60,6 +67,7 @@ public class PausaButtonMap : MonoBehaviour
             SettingsTitleText.text = "Configuración";
             LanguageText.text = "Selecciona Idioma:";
             AcceptText.text = "Aceptar";
+            DescriptiveText.text = "Textos descriptivos";
 
         }
 
@@ -70,6 +78,15 @@ public class PausaButtonMap : MonoBehaviour
 
         if (!VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
+
+            if(SceneManager.GetActiveScene().name != "MainMenu")
+            {
+
+                SettingsInterface.GetComponent<RectTransform>().offsetMin = new Vector2(552.655f, SettingsInterface.GetComponent<RectTransform>().offsetMin.y);
+                SettingsInterface.GetComponent<RectTransform>().offsetMax = new Vector2(-552.655f, SettingsInterface.GetComponent<RectTransform>().offsetMax.y);
+
+            }
+
 
             PanelPausa.SetActive(true);
             Time.timeScale = 0f;
@@ -91,14 +108,14 @@ public class PausaButtonMap : MonoBehaviour
     {
 
         PanelPausa.SetActive(!PanelPausa.activeSelf);
-        SettingsInterface.SetActive(!SettingsInterface.activeSelf);
+        SettingsInterface.gameObject.SetActive(!SettingsInterface.gameObject.activeSelf);
 
     }
 
     public void AcceptSettings()
     {
 
-        SettingsInterface.SetActive(!SettingsInterface.activeSelf);
+        SettingsInterface.gameObject.SetActive(!SettingsInterface.gameObject.activeSelf);
         PanelPausa.SetActive(!PanelPausa.activeSelf);
 
     }

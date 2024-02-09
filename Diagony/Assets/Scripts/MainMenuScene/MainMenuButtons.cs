@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class MainMenuButtons : MonoBehaviour
     [SerializeField] GameObject MainMenu;
     [SerializeField] GameObject Levels;
     [SerializeField] GameObject OptionsPanel;
+    [SerializeField] GameObject CanvasPause;
 
     public void Play()
     {
@@ -31,15 +33,23 @@ public class MainMenuButtons : MonoBehaviour
     {
 
         MainMenu.SetActive(!MainMenu.activeSelf);
-        OptionsPanel.SetActive(!OptionsPanel.activeSelf);
+        OptionsPanel.gameObject.SetActive(!OptionsPanel.gameObject.activeSelf);
 
     }
 
     public void OptionsAceptar()
     {
 
-        OptionsPanel.SetActive(!OptionsPanel.activeSelf);
-        MainMenu.SetActive(!MainMenu.activeSelf);
+        OptionsPanel.gameObject.SetActive(!OptionsPanel.gameObject.activeSelf);
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+            MainMenu.SetActive(!MainMenu.activeSelf);
+        else
+        {
+
+            CanvasPause = GameObject.Find("CanvasPause");
+            CanvasPause.transform.GetChild(0).gameObject.SetActive(true);
+
+        }
 
     }
 
