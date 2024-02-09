@@ -39,14 +39,23 @@ public class CardCompendio : MonoBehaviour
                                                          "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos los enemigos", "Roba 10 de vida a todos los enemigos", "<b>Bloquear</b> a un enemigo",
                                                          "<b>Bloquear</b> a un enemigo pero le cura 10", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
                                                          "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero cura 5 a los enemigos", "<b>Esperanza</b> al jugador",
-                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 15", "Los enemigos curan en vez de dañar",
+                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 15", "<b>Transformar</b> al jugador",
                                                          "Se eliminan todos los efectos del jugador" };
     List<string> CardDescriptionsEN = new List<string>() { "Attack 5", "Attack 3x2", "Attack 5 to all enemies", "Attack 10", "Attack 20", "Attack 10x2", "Gain 2 mana", "Heal 5",
                                                          "Heal 10", "Drain 5 to an enemy", "Drain 10 to an enemy", "Drain 5 to all enemies", "Drain 10 to all enemies", "<b>Stun</b> to an enemy",
                                                          "<b>Stun</b> to an enemy but heals him 10", "<b>Weak</b> to an enemy", "<b>Weak</b> to all enemies",
                                                          "<b>Strong</b> to the player", "<b>Strong</b> to the player but heals all enemies 5", "<b>Hope</b> to the player",
-                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but heals him 15", "Enemies heal instead of dealing damage",
+                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but heals him 15", "<b>Transform</b> to the player",
                                                          "Remove all player's effects" };
+    public TMP_Text CardCost;
+    public TMP_Text CardDuracion;
+    public GameObject EffectContainer; // Container del texto que explica el efecto de la carta
+    public TMP_Text EffectText;        // Texto que explica el efecto de la carta
+    List<string> CardEffectDescriptionES = new List<string>() { "<b>Bloquear</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -3 de daño",
+                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Los ataques del jugador restauran +3 de vida",
+                                                                "<b>Envenenar</b>: Las acciones del jugador infligen -3 de vida", "<b>Transformar</b>: Los ataques de los enemigos curan en vez de hacer daño" };
+    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stun</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -3 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
+                                                                "<b>Hope</b>: Player's attacks heal +3 health", "<b>Poison</b>: Player's actions deal -3 health", "<b>Transform</b>: Enemy's attacks heal instead of dealing damage" };
 
     [SerializeField] int Fila; // Posición en el compendio | 0 - arriba | 1 - abajo 
 
@@ -74,9 +83,25 @@ public class CardCompendio : MonoBehaviour
         CantidadText.text = "x" + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[Tipo];
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[Tipo] == 0)
+        {
+
             Image.color = MidTransparency;
+            CardTitle.color = new Color (CardTitle.color.r, CardTitle.color.g, CardTitle.color.b, MidTransparency.a);
+            CardDescription.color = new Color(CardDescription.color.r, CardDescription.color.g, CardDescription.color.b, MidTransparency.a);
+            CardCost.color = new Color(CardCost.color.r, CardCost.color.g, CardCost.color.b, MidTransparency.a);
+            CardDuracion.color = new Color(CardDuracion.color.r, CardDuracion.color.g, CardDuracion.color.b, MidTransparency.a);
+
+        }
         else
+        {
+
             Image.color = FullTransparency;
+            CardTitle.color = new Color(CardTitle.color.r, CardTitle.color.g, CardTitle.color.b, 1);
+            CardDescription.color = new Color(CardDescription.color.r, CardDescription.color.g, CardDescription.color.b, 1);
+            CardCost.color = new Color(CardCost.color.r, CardCost.color.g, CardCost.color.b, 1);
+            CardDuracion.color = new Color(CardDuracion.color.r, CardDuracion.color.g, CardDuracion.color.b, 1);
+
+        }
 
         newText = GetComponentsInChildren<TMP_Text>();
         if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
@@ -106,12 +131,30 @@ public class CardCompendio : MonoBehaviour
                 Copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(Position.anchoredPosition.x + 320, Position.anchoredPosition.y + 70);
             Copy.transform.localScale = new Vector3(2, 2, 2);
 
+            // Activa el texto explicativo de las cartas que lo necesiten
+            if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
+            {
+
+                Copy.GetComponent<CardCompendio>().EffectContainer.SetActive(true);
+                Copy.GetComponent<CardCompendio>().EffectText.gameObject.SetActive(true);
+
+            }
+
         }
 
     }
 
     private void OnMouseExit()
     {
+
+        // Desactiva el texto explicativo de las cartas que lo necesiten
+        if (Tipo == 13 || Tipo == 14 || Tipo == 15 || Tipo == 16 || Tipo == 17 || Tipo == 18 || Tipo == 19 || Tipo == 20 || Tipo == 21 || Tipo == 22)
+        {
+
+            Copy.GetComponent<CardCompendio>().EffectContainer.SetActive(false);
+            Copy.GetComponent<CardCompendio>().EffectText.gameObject.SetActive(false);
+
+        }
 
         Destroy(Copy);
         CopyCreated = false;
@@ -127,12 +170,41 @@ public class CardCompendio : MonoBehaviour
             CardTitle.text = CardTitlesEN[Tipo];
             CardDescription.text = CardDescriptionsEN[Tipo];
 
+            // Traducción inglesa de los textos explicativos de los efectos
+            if (Tipo == 13 || Tipo == 14)
+                EffectText.text = CardEffectDescriptionEN[0];
+            else if (Tipo == 15 || Tipo == 16 || Tipo == 21)
+                EffectText.text = CardEffectDescriptionEN[1];
+            else if (Tipo == 17 || Tipo == 18)
+                EffectText.text = CardEffectDescriptionEN[2];
+            else if (Tipo == 19)
+                EffectText.text = CardEffectDescriptionEN[3];
+            else if (Tipo == 20)
+                EffectText.text = CardEffectDescriptionEN[4];
+            else if (Tipo == 21)
+                EffectText.text = CardEffectDescriptionEN[5];
+
+
         }
         else                                                                 // Spanish
         {
 
             CardTitle.text = CardTitlesES[Tipo];
             CardDescription.text = CardDescriptionsES[Tipo];
+
+            // Traducción española de los textos explicativos de los efectos
+            if (Tipo == 13 || Tipo == 14)
+                EffectText.text = CardEffectDescriptionES[0];
+            else if (Tipo == 15 || Tipo == 16 || Tipo == 21)
+                EffectText.text = CardEffectDescriptionES[1];
+            else if (Tipo == 17 || Tipo == 18)
+                EffectText.text = CardEffectDescriptionES[2];
+            else if (Tipo == 19)
+                EffectText.text = CardEffectDescriptionES[3];
+            else if (Tipo == 20)
+                EffectText.text = CardEffectDescriptionES[4];
+            else if (Tipo == 21)
+                EffectText.text = CardEffectDescriptionES[5];
 
         }
 

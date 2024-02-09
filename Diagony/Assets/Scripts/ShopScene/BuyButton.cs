@@ -34,7 +34,11 @@ public class BuyButton : MonoBehaviour
             else
             {
                 gameObject.GetComponent<Button>().interactable = false;
-                gameObject.GetComponentInChildren<TMP_Text>().text = "límite maná";
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                    gameObject.GetComponentInChildren<TMP_Text>().text = "Mana limit";
+                else                                                                   // Spanish
+                    gameObject.GetComponentInChildren<TMP_Text>().text = "Límite maná";
+
             }
             
 
@@ -68,7 +72,10 @@ public class BuyButton : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount -= Precio;
                 VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista++;
                 gameObject.GetComponent<Button>().interactable = false;
-                CreateFeedbackText("+1 de maná");
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                    CreateFeedbackText("+1 mana");
+                else                                                                   // Spanish
+                    CreateFeedbackText("+1 de maná");
                 Debug.Log("se aumento el mana");
             }
           
@@ -83,7 +90,10 @@ public class BuyButton : MonoBehaviour
                 {
                     gameObject.GetComponent<Button>().interactable = false;
                 }
-                CreateFeedbackText("+10 de vida");
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                    CreateFeedbackText("+10 health");
+                else                                                                   // Spanish
+                    CreateFeedbackText("+10 de vida");
 
             }
             
@@ -95,7 +105,10 @@ public class BuyButton : MonoBehaviour
             {
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount -= Precio;
                 VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[ID]++;
-                CreateFeedbackText("carta +1 en el mazo");
+                if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                    CreateFeedbackText("+1 card to the deck");
+                else                                                                   // Spanish
+                    CreateFeedbackText("+1 carta al mazo");
             }
         }
        
