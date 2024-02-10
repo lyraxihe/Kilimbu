@@ -18,7 +18,7 @@ public class VariablesGlobales : MonoBehaviour
 
     public static VariablesGlobales instance;
 
-    public List<int> AmountCards = new List<int>() {3, 2, 2, 0, 0, 0, 0, 3, 2, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0}; // Lista con las cantidades de cada carta (posición = ID carta en el excel)
+    public List<int> AmountCards = new List<int>() {3, 2, 2, 0, 0, 0, 0, 2, 2, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0}; // Lista con las cantidades de cada carta (posición = ID carta en el excel)
     public List<int> CardCostOriginal = new List<int>() { 1, 1, 2, 2, 3, 3, 0, 1, 2, 2, 3, 3, 5, 1, 0, 1, 2, 1, 0, 2, 1, 0, 4, 3 };
     public List<int> CardCost = new List<int>() { 1, 1, 2, 2, 3, 3, 0, 1, 2, 2, 3, 3, 5, 1, 0, 1, 2, 1, 0, 2, 1, 0, 4, 3 };
 

@@ -146,7 +146,7 @@ public class FinalizarTurnoButton : MonoBehaviour
                 if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitado == 4)
                 {
 
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitado = 0; // Se resetea cada vez que se termina un efecto de Débil
 
                 }   
@@ -162,7 +162,7 @@ public class FinalizarTurnoButton : MonoBehaviour
                 if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitadoDevolverIra == 3)
                 {
 
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDebilitadoDevolverIra = 0; // Se resetea cada vez que se termina un efecto de Débil
 
                 }

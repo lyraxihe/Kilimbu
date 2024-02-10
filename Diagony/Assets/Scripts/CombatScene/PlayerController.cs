@@ -364,7 +364,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Envenenado")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 4)
                 {
                     ReestructuraIcons(i);
                     break;
@@ -375,7 +375,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Debilitado")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 1)
                 {
                     ReestructuraIcons(i);
                     break;
@@ -386,7 +386,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Fuerza")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 2)
                 {
                     ReestructuraIcons(i);
                     break;
@@ -397,7 +397,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Esperanzado")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 3)
                 {
                     ReestructuraIcons(i);
                     break;
@@ -408,7 +408,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Transformado")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 5)
                 {
                     ReestructuraIcons(i);
                     break;

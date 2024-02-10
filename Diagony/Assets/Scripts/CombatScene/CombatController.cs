@@ -1208,8 +1208,8 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Bloqueado", EnemyList[enemigo]);
             // StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
 
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 10;
-            StartCoroutine(CreateDmgHealText(true, 10, EnemyList[enemigo], true));
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 7;
+            StartCoroutine(CreateDmgHealText(true, 7, EnemyList[enemigo], true));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
             // Ira devolver ataque
@@ -1229,7 +1229,7 @@ public class CombatController : MonoBehaviour
 
             // El Jugador aplica Débil a un enemigo durante 3 turnos (efecto acumulativo)
             EnemyList[enemigo].GetComponent<EnemyController>().Debilitado = true;
-            EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 3;
+            EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 2;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
@@ -1261,7 +1261,7 @@ public class CombatController : MonoBehaviour
             {
 
                 EnemyList[i].GetComponent<EnemyController>().Debilitado = true;
-                EnemyList[i].GetComponent<EnemyController>().Debilidad -= 3;
+                EnemyList[i].GetComponent<EnemyController>().Debilidad -= 2;
                 EnemyList[i].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
                 EnemyList[i].GetComponent<EnemyController>().RecibirDanyo = true;
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
@@ -1388,18 +1388,18 @@ public class CombatController : MonoBehaviour
 
             // El Jugador aplica Débil a un enemigo pero le cura 15
             EnemyList[enemigo].GetComponent<EnemyController>().Debilitado = true;
-            EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 3;
+            EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 2;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 15;
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 8;
 
             //StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
                 CreateSpellText("Weakened", EnemyList[enemigo]);
             else                                                                  // Spanish
                 CreateSpellText("Debilitado", EnemyList[enemigo]);
-            StartCoroutine(CreateDmgHealText(true, 15, EnemyList[enemigo], true));
+            StartCoroutine(CreateDmgHealText(true, 8, EnemyList[enemigo], true));
 
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1937,7 +1937,7 @@ public class CombatController : MonoBehaviour
             else                                                                  // Spanish
                 CreateSpellText("Debilitado", Player);
             Player.GetComponent<PlayerController>().Debilitado = true;
-            Player.GetComponent<PlayerController>().Debilidad -= 3;
+            Player.GetComponent<PlayerController>().Debilidad -= 2;
             Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra += 3;
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);

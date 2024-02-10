@@ -359,7 +359,7 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     
-                    damageAmount = Random.Range(5, 8) + Fuerza + Debilidad;
+                    damageAmount = Random.Range(4, 7) + Fuerza + Debilidad;
                     if(damageAmount < 0)
                         damageAmount = 0;
                     if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
@@ -443,14 +443,14 @@ public class EnemyController : MonoBehaviour
                     if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
                     {
                         
-                        damageAmount = 2;
+                        damageAmount = 2 + Debilidad;
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                         StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
                     }
                     else
                     {
-                        damageAmount = 2;
+                        damageAmount = 2 + Debilidad;
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                         StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
 
@@ -746,7 +746,7 @@ public class EnemyController : MonoBehaviour
             if (ContadorDebilitado == 3)
             {
 
-                Debilidad += 3;
+                Debilidad += 2;
                 ContadorDebilitado = 0; // Se resetea cada vez que se termina un efecto de Débil
 
             }
@@ -758,7 +758,7 @@ public class EnemyController : MonoBehaviour
                 debilidad_icon = 0;
                 for (int i = 0; i < ActiveSpell; i++)
                 {
-                    if (ActiveSpellGameobject[i].tag == "Debilitado")
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 1)
                     {
                         ReestructuraIcons(i);
                         break;
@@ -791,7 +791,7 @@ public class EnemyController : MonoBehaviour
                 veneno_icon = 0;
                 for (int i = 0; i < ActiveSpell; i++)
                 {
-                    if (ActiveSpellGameobject[i].tag == "Envenenado")
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 4)
                     {
                         ReestructuraIcons(i);
                         break;
@@ -824,7 +824,7 @@ public class EnemyController : MonoBehaviour
                 fuerte_icon = 0;
                 for (int i = 0; i < ActiveSpell; i++)
                 {
-                    if (ActiveSpellGameobject[i].tag == "Fuerza")
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 2)
                     {
                         ReestructuraIcons(i);
                         break;
@@ -955,7 +955,7 @@ public class EnemyController : MonoBehaviour
             veneno_icon = 0;
             for (int i = 0; i<ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Envenenado")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 4)
                 {
                     ReestructuraIcons(i);
                     break;
@@ -971,7 +971,7 @@ public class EnemyController : MonoBehaviour
             debilidad_icon = 0;
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Debilitado")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 1)
                 {
                     ReestructuraIcons(i);
                     break;
@@ -986,7 +986,7 @@ public class EnemyController : MonoBehaviour
             fuerte_icon = 0;
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].tag == "Fuerza")
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 2)
                 {
                     ReestructuraIcons(i);
                     break;

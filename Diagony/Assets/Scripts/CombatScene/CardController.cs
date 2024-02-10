@@ -54,21 +54,21 @@ public class CardController : MonoBehaviour
 
     List<string> CardDescriptionsES = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos los enemigos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
                                                          "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos los enemigos", "Roba 10 de vida a todos los enemigos", "<b>Bloquear</b> a un enemigo",
-                                                         "<b>Bloquear</b> a un enemigo pero le cura 10", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
+                                                         "<b>Bloquear</b> a un enemigo pero le cura 7", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
                                                          "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero cura 5 a los enemigos", "<b>Esperanza</b> al jugador",
-                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 15", "<b>Transformar</b> al jugador",
+                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero le cura 8", "<b>Transformar</b> al jugador",
                                                          "Se eliminan todos los efectos del jugador" };
     List<string> CardDescriptionsEN = new List<string>() { "Attack 5", "Attack 3x2", "Attack 5 to all enemies", "Attack 10", "Attack 20", "Attack 10x2", "Gain 2 mana", "Heal 5",
                                                          "Heal 10", "Drain 5 to an enemy", "Drain 10 to an enemy", "Drain 5 to all enemies", "Drain 10 to all enemies", "<b>Stun</b> to an enemy",
-                                                         "<b>Stun</b> to an enemy but heals him 10", "<b>Weak</b> to an enemy", "<b>Weak</b> to all enemies",
+                                                         "<b>Stun</b> to an enemy but heals him 7", "<b>Weak</b> to an enemy", "<b>Weak</b> to all enemies",
                                                          "<b>Strong</b> to the player", "<b>Strong</b> to the player but heals all enemies 5", "<b>Hope</b> to the player",
-                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but heals him 15", "<b>Transform</b> to the player",
+                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but heals him 8", "<b>Transform</b> to the player",
                                                          "Remove all player's effects" };
 
-    List<string> CardEffectDescriptionES = new List<string>() { "<b>Bloquear</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -3 de daño",
+    List<string> CardEffectDescriptionES = new List<string>() { "<b>Bloquear</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -2 de daño",
                                                                 "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Los ataques del jugador restauran +3 de vida",
                                                                 "<b>Envenenar</b>: Las acciones del jugador infligen -3 de vida", "<b>Transformar</b>: Los ataques de los enemigos curan en vez de hacer daño" };
-    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stun</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -3 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
+    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stun</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
                                                                 "<b>Hope</b>: Player's attacks heal +3 health", "<b>Poison</b>: Player's actions deal -3 health", "<b>Transform</b>: Enemy's attacks heal instead of dealing damage" };
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
