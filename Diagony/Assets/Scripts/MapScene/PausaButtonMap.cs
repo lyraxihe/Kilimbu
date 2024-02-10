@@ -20,7 +20,7 @@ public class PausaButtonMap : MonoBehaviour
     [SerializeField] TMP_Text SettingsTitleText;
     [SerializeField] TMP_Text LanguageText;
     [SerializeField] TMP_Text AcceptText;
-    [SerializeField] Text DescriptiveText;
+    [SerializeField] TMP_Text DescriptiveText;
 
     TMP_Text textButton;
 
@@ -31,7 +31,7 @@ public class PausaButtonMap : MonoBehaviour
         SettingsTitleText = SettingsInterface.GetChild(0).GetComponent<TMP_Text>();
         LanguageText = SettingsInterface.GetChild(1).GetComponent<TMP_Text>();
         AcceptText = SettingsInterface.GetChild(3).GetChild(0).GetComponent<TMP_Text>();
-        DescriptiveText = SettingsInterface.GetChild(4).GetChild(1).GetComponent<Text>(); ;
+        DescriptiveText = SettingsInterface.GetChild(4).GetComponent<TMP_Text>(); ;
         textButton = gameObject.GetComponentInChildren<TextMeshPro>();
     }
 

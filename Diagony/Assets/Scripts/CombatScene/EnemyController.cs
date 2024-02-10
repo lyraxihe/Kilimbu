@@ -868,21 +868,47 @@ public class EnemyController : MonoBehaviour
 
     public void ControlStatus()
     {
-        if (Envenenado && veneno_icon == 0)
-        {
-            GameObject ClonSpell;
-            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[0]); // Crea el clon del prefab de veneno ([0])
-            ClonSpell.transform.position = SpellCoords[ActiveSpell];
-            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
-            ActiveSpellGap[ActiveSpell] = true;
-            ActiveSpell++;
-            veneno_icon++;
-        }
+        //if (Envenenado && veneno_icon == 0)
+        //{
+        //    GameObject ClonSpell;
+        //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[0]); // Crea el clon del prefab de veneno ([0])
+        //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
+        //    ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+        //    ActiveSpellGap[ActiveSpell] = true;
+        //    ActiveSpell++;
+        //    veneno_icon++;
+        //}
+        //if (Debilitado && debilidad_icon == 0)
+        //{
+        //    GameObject ClonSpell;
+        //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[1]); // Crea el clon del prefab de debilidad ([1])
+        //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
+        //    ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+        //    ActiveSpellGap[ActiveSpell] = true;
+        //    ActiveSpell++;
+        //    debilidad_icon++;
+        //}
+        //if (Fuerte && fuerte_icon == 0)
+        //{
+        //    GameObject ClonSpell;
+        //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[2]); // Crea el clon del prefab de fuerza ([2])
+        //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
+        //    ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+        //    ActiveSpellGap[ActiveSpell] = true;
+        //    ActiveSpell++;
+        //    fuerte_icon++;
+        //}
         if (Debilitado && debilidad_icon == 0)
         {
             GameObject ClonSpell;
-            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[1]); // Crea el clon del prefab de debilidad ([1])
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().IconSpell);
+            ClonSpell.transform.SetParent(GameObject.Find("CanvasEffects").transform, false);
+            ClonSpell.GetComponent<Image>().sprite = CombatScene.GetComponent<CombatController>().IconSpellSprites[1];
+            ClonSpell.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ClonSpell.GetComponent<EffectIcon>().Personaje = gameObject;
+            ClonSpell.GetComponent<EffectIcon>().EsPlayer = false;
+            ClonSpell.GetComponent<EffectIcon>().Tipo = 1;
             ActiveSpellGameobject[ActiveSpell] = ClonSpell;
             ActiveSpellGap[ActiveSpell] = true;
             ActiveSpell++;
@@ -891,14 +917,35 @@ public class EnemyController : MonoBehaviour
         if (Fuerte && fuerte_icon == 0)
         {
             GameObject ClonSpell;
-            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[2]); // Crea el clon del prefab de fuerza ([2])
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().IconSpell);
+            ClonSpell.transform.SetParent(GameObject.Find("CanvasEffects").transform, false);
+            ClonSpell.GetComponent<Image>().sprite = CombatScene.GetComponent<CombatController>().IconSpellSprites[2];
+            ClonSpell.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ClonSpell.GetComponent<EffectIcon>().Personaje = gameObject;
+            ClonSpell.GetComponent<EffectIcon>().EsPlayer = false;
+            ClonSpell.GetComponent<EffectIcon>().Tipo = 2;
             ActiveSpellGameobject[ActiveSpell] = ClonSpell;
             ActiveSpellGap[ActiveSpell] = true;
             ActiveSpell++;
             fuerte_icon++;
         }
-
+        if (Envenenado && veneno_icon == 0)
+        {
+            GameObject ClonSpell;
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().IconSpell);
+            ClonSpell.transform.SetParent(GameObject.Find("CanvasEffects").transform, false);
+            ClonSpell.GetComponent<Image>().sprite = CombatScene.GetComponent<CombatController>().IconSpellSprites[4];
+            ClonSpell.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ClonSpell.GetComponent<EffectIcon>().Personaje = gameObject;
+            ClonSpell.GetComponent<EffectIcon>().EsPlayer = false;
+            ClonSpell.GetComponent<EffectIcon>().Tipo = 4;
+            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+            ActiveSpellGap[ActiveSpell] = true;
+            ActiveSpell++;
+            veneno_icon++;
+        }
 
         if (ContadorDeTurnosEnvenenado < 0)
         {

@@ -55,7 +55,9 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject GameObject_Dmg_text;
     // [SerializeField] TMP_Text Dmg_text;
 
-    [SerializeField] public GameObject[] PrefabSpell;
+    //[SerializeField] public GameObject[] PrefabSpell;
+    public GameObject IconSpell;
+    public List<Sprite> IconSpellSprites;
 
     float PorcentajeDevolverIra;
 
@@ -1317,7 +1319,6 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Strong", Player);
             else                                                                  // Spanish
                 CreateSpellText("Fuerte", Player);
-            CreateSpellText("Fuerte", Player);
 
             for (int i = 0; i < EnemyList.Count; i++)
             {

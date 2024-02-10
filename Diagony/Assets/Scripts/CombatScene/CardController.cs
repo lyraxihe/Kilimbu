@@ -853,6 +853,15 @@ public class CardController : MonoBehaviour
             }
 
         }
+        else
+        {
+
+            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                newText[1].text = CardDescriptionsEN[Tipo];
+            else                                                                  // Spanish
+                newText[1].text = CardDescriptionsES[Tipo];
+
+        }
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
             newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];

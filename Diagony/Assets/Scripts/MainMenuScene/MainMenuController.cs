@@ -20,7 +20,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] TMP_Text SettingsTitleText;
     [SerializeField] TMP_Text LanguageText;
     [SerializeField] TMP_Text AcceptText;
-    [SerializeField] Text DescriptiveText;
+    [SerializeField] TMP_Text DescriptiveText;
 
     private void Awake()
     {
