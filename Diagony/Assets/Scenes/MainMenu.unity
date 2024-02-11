@@ -643,7 +643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1093414935008135241, guid: cdea629b2581cba4dbbd5279a733ae4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -49
+      value: -74.999954
       objectReference: {fileID: 0}
     - target: {fileID: 1093414935008135241, guid: cdea629b2581cba4dbbd5279a733ae4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1885,11 +1885,6 @@ MonoBehaviour:
   SettingsText: {fileID: 1667967627}
   CreditsText: {fileID: 1117591435}
   ExitText: {fileID: 1548720906}
-  SettingsTitleText: {fileID: 440058974}
-  LanguageText: {fileID: 1201360463}
-  AcceptText: {fileID: 52818747}
-  DescriptiveText: {fileID: 2017537230}
-  TurnsText: {fileID: 747208054}
 --- !u!4 &1576984492
 Transform:
   m_ObjectHideFlags: 0
@@ -2587,7 +2582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444123043444925778, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3444123043444925779, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_Pivot.x
@@ -2659,7 +2654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444123043444925779, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -49.000046
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 3444123043444925779, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3027,6 +3022,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Descriptive Texts
       objectReference: {fileID: 0}
+    - target: {fileID: 3444123043444925778, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3444123043444925779, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3280,6 +3279,11 @@ MonoBehaviour:
   Language: 0
   DescriptiveTexts: 1
   ShowTurns: 0
+  SettingsTitleText: {fileID: 440058974}
+  LanguageText: {fileID: 1201360463}
+  AcceptText: {fileID: 52818747}
+  DescriptiveText: {fileID: 2017537230}
+  TurnsText: {fileID: 747208054}
 --- !u!4 &2083199345
 Transform:
   m_ObjectHideFlags: 0
@@ -3640,6 +3644,10 @@ PrefabInstance:
     - target: {fileID: 3444123043444925776, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_Name
       value: LanguageText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444123043444925778, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3444123043444925779, guid: 60dc2509ae28be74091b8cdb1bc8844e, type: 3}
       propertyPath: m_Pivot.x
