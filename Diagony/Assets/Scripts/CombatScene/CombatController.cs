@@ -15,6 +15,7 @@ public class CombatController : MonoBehaviour
 {
     public List<GameObject> CardList;
     public GameObject VariablesGlobales;
+    public GameObject Traduction;
    
 
     public GameObject ArrowEmitter;
@@ -77,11 +78,14 @@ public class CombatController : MonoBehaviour
     // Tutorial
     public bool Tutorial;
 
+    
+
     private void Awake()
     {
        
         victoria_etc = 0;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+        Traduction = GameObject.Find("Traduction");
 
     }
     void Start()
@@ -137,6 +141,11 @@ public class CombatController : MonoBehaviour
         ManaMax.text = "/ " + VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
         CardsPosition();
 
+        if (Traduction.GetComponent<Traduction>().ShowTurns)
+            turnosText.gameObject.SetActive(true);
+        else
+            turnosText.gameObject.SetActive(false);
+
         if (VariablesGlobales.GetComponent<VariablesGlobales>().Language== 0) // English
             turnosText.text = "Turn: " + ContadorTurnos.ToString();
         else                                                                  // Spanish
@@ -170,7 +179,10 @@ public class CombatController : MonoBehaviour
         clonHealthBar.transform.position = new Vector2(x, y);    //lo coloca arriba del personaje
         clonHealthBar.GetComponent<HealthBar>().EsPlayer = EsPlayer;
         clonHealthBar.GetComponent<HealthBar>().TextCharacter = TextCharacter;
-
+        if (EsPlayer)
+        {
+            personaje.GetComponent<PlayerController>().PlayerName = TextCharacter;
+        }
 
 
 
@@ -1839,7 +1851,7 @@ public class CombatController : MonoBehaviour
     public IEnumerator IraDevolverAtaque(int danyo, int tipo, int enemigo)
     {
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.2f);
 
         Debug.Log("Ira devuelve el ataque");
 
@@ -1929,7 +1941,7 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
 
         }
-        else if (tipo == 15 || tipo == 16)
+        else if (tipo == 15 || tipo == 16 || tipo == 21)
         {
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
@@ -1957,23 +1969,23 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
 
         }
-        else if (tipo == 21)
-        {
+        //else if (tipo == 21)
+        //{
 
-            if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                CreateSpellText("Poisoned", Player);
-            else                                                                  // Spanish
-                CreateSpellText("Envenenado", Player);
-            Player.GetComponent<PlayerController>().Envenenado = true;
-            Player.GetComponent<PlayerController>().Veneno += 3;
-            Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
+        //    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+        //        CreateSpellText("Poisoned", Player);
+        //    else                                                                  // Spanish
+        //        CreateSpellText("Envenenado", Player);
+        //    Player.GetComponent<PlayerController>().Envenenado = true;
+        //    Player.GetComponent<PlayerController>().Veneno += 3;
+        //    Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
 
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 15;
-            StartCoroutine(CreateDmgHealText(true, 15, Player, true));
+        //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 15;
+        //    StartCoroutine(CreateDmgHealText(true, 15, Player, true));
 
-            EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+        //    EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
 
-        }
+        //}
 
 
     }

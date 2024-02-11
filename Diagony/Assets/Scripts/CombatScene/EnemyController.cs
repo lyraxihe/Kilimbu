@@ -77,6 +77,7 @@ public class EnemyController : MonoBehaviour
     int debilidad_icon;
     int veneno_icon;
     int fuerte_icon;
+    int bloqueado_icon;
     public bool SoloTristeza;
 
     public bool playerSeBufa;
@@ -112,17 +113,17 @@ public class EnemyController : MonoBehaviour
         if (Id == 0)
         {
             //sumarle a la x 0.4f
-            x_inicial_spell = 0.9f;
+            x_inicial_spell = 0.95f;
             y_inicial_spell = 2.5f;
         }
         else if (Id == 1)
         {
-            x_inicial_spell = 2.9f;
+            x_inicial_spell = 2.95f;
             y_inicial_spell = 1.5f;
         }
         else
         {
-            x_inicial_spell = 4.9f;
+            x_inicial_spell = 4.95f;
             y_inicial_spell = 0.5f;
         }
 
@@ -132,11 +133,11 @@ public class EnemyController : MonoBehaviour
            
             if (Tipo == 3)
             {
-                SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell + 1.5f);
+                SpellCoords[i] = new Vector2(x_inicial_spell += 0.5f, y_inicial_spell + 1.5f);
             }
             else
             {
-                SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
+                SpellCoords[i] = new Vector2(x_inicial_spell += 0.5f, y_inicial_spell);
             }
            
         }
@@ -331,13 +332,19 @@ public class EnemyController : MonoBehaviour
 
                     }
 
-                    if (ContadorDeTurnosFuerte == 0)
+                    if (ContadorDeTurnosFuerte <= 0)
                     {
-                        Fuerte = false;
                         Fuerza = 0;
-                        ContadorDeTurnosFuerte = 0;
+                        Fuerte = false;
                         fuerte_icon = 0;
-                       
+                        for (int i = 0; i < ActiveSpell; i++)
+                        {
+                            if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 2)
+                            {
+                                ReestructuraIcons(i);
+                                break;
+                            }
+                        }
                     }
                         
                 }
@@ -946,8 +953,36 @@ public class EnemyController : MonoBehaviour
             ActiveSpell++;
             veneno_icon++;
         }
+        if (Bloqueado && bloqueado_icon == 0)
+        {
+            GameObject ClonSpell;
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().IconSpell);
+            ClonSpell.transform.SetParent(GameObject.Find("CanvasEffects").transform, false);
+            ClonSpell.GetComponent<Image>().sprite = CombatScene.GetComponent<CombatController>().IconSpellSprites[0];
+            ClonSpell.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ClonSpell.GetComponent<EffectIcon>().Personaje = gameObject;
+            ClonSpell.GetComponent<EffectIcon>().EsPlayer = false;
+            ClonSpell.GetComponent<EffectIcon>().Tipo = 0;
+            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+            ActiveSpellGap[ActiveSpell] = true;
+            ActiveSpell++;
+            bloqueado_icon++;
+        }
 
-        if (ContadorDeTurnosEnvenenado < 0)
+        if (!Bloqueado)
+        {
+            bloqueado_icon = 0;
+            for (int i = 0; i < ActiveSpell; i++)
+            {
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 0)
+                {
+                    ReestructuraIcons(i);
+                    break;
+                }
+            }
+        }
+        if (ContadorDeTurnosEnvenenado <= 0)
         {
             ContadorDeTurnosEnvenenado = 0;
             Veneno = 0;
@@ -963,7 +998,7 @@ public class EnemyController : MonoBehaviour
             }
 
         }
-        if (ContadorDeTurnosDebilitado < 0)
+        if (ContadorDeTurnosDebilitado <= 0)
         {
             ContadorDeTurnosDebilitado = 0;
             Debilidad = 0;
@@ -978,7 +1013,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        if (ContadorDeTurnosFuerte < 0)
+        if (ContadorDeTurnosFuerte <= 0)
         {
             ContadorDeTurnosFuerte = 0;
             Fuerza = 0;

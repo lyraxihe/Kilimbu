@@ -574,7 +574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 452}
+  m_AnchoredPosition: {x: 96, y: 452}
   m_SizeDelta: {x: 413.94, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &247991784
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'turnos: 100'
+  m_text: 'turno: 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -624,13 +624,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.21
-  m_fontSizeBase: 41.21
+  m_fontSize: 43.09
+  m_fontSizeBase: 43.09
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 9
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2104,6 +2104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardList: []
   VariablesGlobales: {fileID: 0}
+  Traduction: {fileID: 0}
   ArrowEmitter: {fileID: 289995008}
   MovingArrow: 0
   AuraEnemigoPrefab: {fileID: 4539765081883468422, guid: 7b949a85518a7d9449db6194446f7a17, type: 3}
@@ -2136,12 +2137,6 @@ MonoBehaviour:
   RecompensaDinero: 0
   ContadorTurnos: 0
   GameObject_Dmg_text: {fileID: 1377292726397514771, guid: 76fa258461c46d2458ef6ece015626f1, type: 3}
-  PrefabSpell:
-  - {fileID: 2282241430256155022, guid: fa307647bcc49744cbbf49db65aa422d, type: 3}
-  - {fileID: 7484228080720562073, guid: 7904ce3f68513c1499bd2c6538c0fd53, type: 3}
-  - {fileID: 4690894471995922204, guid: cc439b4b98ceb884195ade692a57e629, type: 3}
-  - {fileID: 4142858225566534658, guid: 428dd8c411f0e7749b5510a5a1f618cc, type: 3}
-  - {fileID: 4794019393124131763, guid: 75b3680566c52be449f1e7e00f8b4627, type: 3}
   IconSpell: {fileID: 1319726400654492976, guid: 24c1990293f322e4f9465ea46882ef69, type: 3}
   IconSpellSprites:
   - {fileID: 21300000, guid: 8f4e8004369cac344b682b72c709539c, type: 3}
@@ -2178,6 +2173,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9b3089f21de9b5f4c847b41d9d8e9236, type: 3}
   TotalCards: 
   HandCardsAmount: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  turnos: {fileID: 247991782}
   turnosText: {fileID: 247991784}
   EndTurnText: {fileID: 30641742}
   LeaveCombatText: {fileID: 1754284538}

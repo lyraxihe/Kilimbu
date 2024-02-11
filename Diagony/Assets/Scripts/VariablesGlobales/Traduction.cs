@@ -13,6 +13,9 @@ public class Traduction : MonoBehaviour
     // Textos descriptivos
     public bool DescriptiveTexts;
 
+    // Texto con turnos
+    public bool ShowTurns;
+
     private void Awake()
     {
         if (instance == null)
@@ -32,6 +35,7 @@ public class Traduction : MonoBehaviour
         
         Language = 0; // Inglés por defecto
         DescriptiveTexts = true; // Textos descriptivos activados
+        ShowTurns = false; // Textos con turnos desactivados
 
     }
 
@@ -51,6 +55,11 @@ public class Traduction : MonoBehaviour
 
         DescriptiveTexts = !DescriptiveTexts;
 
+    }
+
+    public void changeTurnsText()
+    {
+        ShowTurns = !ShowTurns;
     }
 
 }

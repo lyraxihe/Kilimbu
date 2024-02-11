@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +17,12 @@ public class PlayerController : MonoBehaviour
     public Animator PlayerAnimator;
     [SerializeField] bool animation_damage;
 
+    [SerializeField] public GameObject PlayerName;
     public int ContadorDeTurnos;
 
     // Bloqueado
     public bool Bloqueado;
+
 
     // Débil
     public bool Debilitado;
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public int fuerte_icon;
     public int transformacion_icon;
     public int esperanza_icon;
+    public int bloqueado_icon;
 
 
     void Start()
@@ -85,20 +89,21 @@ public class PlayerController : MonoBehaviour
         transformacion_icon = 0;
 
         ActiveSpell = 0;
-       
-            x_inicial_spell = -5.6f;
-            y_inicial_spell = 1.2f;
-       
+
+        x_inicial_spell = -5.6f;
+        y_inicial_spell = 1.2f;
+
 
         for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)
         {
             ActiveSpellGap[i] = false;
-            SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
+            SpellCoords[i] = new Vector2(x_inicial_spell += 0.5f, y_inicial_spell);
 
         }
 
         // Bloqueado
         Bloqueado = false;
+        bloqueado_icon = 0;
 
         // Débil
         Debilitado = false;
@@ -146,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
         ControlStatus();
 
+
     }
 
     public void ControlAnimation(int valor)
@@ -155,7 +161,7 @@ public class PlayerController : MonoBehaviour
         {
 
             PlayerAnimator.SetBool("atacar", false);
-            
+
             for (int i = 0; i < CombatScene.GetComponent<CombatController>().EnemyList.Count(); i++)
             {
 
@@ -172,7 +178,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if(valor == 1) // Indica que ha finalizado la animacion de recibir danyo
+        if (valor == 1) // Indica que ha finalizado la animacion de recibir danyo
             PlayerAnimator.SetBool("danyo", false);
 
     }
@@ -199,12 +205,12 @@ public class PlayerController : MonoBehaviour
         {
             ContadorDeTurnosTransformacion = 0;
         }
-          
+
         if (ContadorDeTurnosEnvenenado < 0)
         {
             ContadorDeTurnosEsperanzado = 0;
         }
-        
+
 
         //if (Envenenado && veneno_icon == 0)
         //{
@@ -256,6 +262,22 @@ public class PlayerController : MonoBehaviour
         //    ActiveSpell++;
         //    transformacion_icon++;
         //}
+        if (Bloqueado && bloqueado_icon == 0)
+        {
+            GameObject ClonSpell;
+            ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().IconSpell);
+            ClonSpell.transform.SetParent(GameObject.Find("CanvasEffects").transform, false);
+            ClonSpell.GetComponent<Image>().sprite = CombatScene.GetComponent<CombatController>().IconSpellSprites[0];
+            ClonSpell.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            ClonSpell.transform.position = SpellCoords[ActiveSpell];
+            ClonSpell.GetComponent<EffectIcon>().Personaje = gameObject;
+            ClonSpell.GetComponent<EffectIcon>().EsPlayer = true;
+            ClonSpell.GetComponent<EffectIcon>().Tipo = 0;
+            ActiveSpellGameobject[ActiveSpell] = ClonSpell;
+            ActiveSpellGap[ActiveSpell] = true;
+            ActiveSpell++;
+            bloqueado_icon++;
+        }
         if (Debilitado && debilidad_icon == 0)
         {
             GameObject ClonSpell;
@@ -415,7 +437,27 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        else if (SpellID == 5)
+        {
+            for (int i = 0; i < ActiveSpell; i++)
+            {
+                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 0)
+                {
+                    ReestructuraIcons(i);
+                    break;
+                }
+            }
+        }
 
+    }
+
+    public void OnMouseOver()
+    {
+        PlayerName.gameObject.SetActive(true);
+    }
+    public void OnMouseExit()
+    {
+        PlayerName.gameObject.SetActive(false);
     }
 
 }

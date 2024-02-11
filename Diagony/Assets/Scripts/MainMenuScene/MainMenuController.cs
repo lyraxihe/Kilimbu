@@ -21,6 +21,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] TMP_Text LanguageText;
     [SerializeField] TMP_Text AcceptText;
     [SerializeField] TMP_Text DescriptiveText;
+    [SerializeField] TMP_Text TurnsText;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class MainMenuController : MonoBehaviour
             LanguageText.text = "Select Language:";
             AcceptText.text = "Accept";
             DescriptiveText.text = "Descriptive texts";
+            TurnsText.text = "Show number of turns";
 
         }
         else                                                                   // Spanish
@@ -68,6 +70,7 @@ public class MainMenuController : MonoBehaviour
             LanguageText.text = "Selecciona Idioma:";
             AcceptText.text = "Aceptar";
             DescriptiveText.text = "Textos descriptivos";
+            TurnsText.text = "Mostrar cantidad de turnos";
 
         }
 

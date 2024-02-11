@@ -69,6 +69,12 @@ public class FinalizarTurnoButton : MonoBehaviour
                 }
             }
 
+            // control del estado bloqueado en el player
+            if (!CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Bloqueado)
+            {
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().bloqueado_icon = 0;
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(5);
+            }
             // Control del estado Esperanza en el Player
             if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado > 0)
             {
