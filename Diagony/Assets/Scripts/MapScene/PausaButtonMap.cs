@@ -16,23 +16,13 @@ public class PausaButtonMap : MonoBehaviour
     [SerializeField] TMP_Text SettingsText;
     [SerializeField] TMP_Text MainMenuText;
 
-    // Settings Interface
-    [SerializeField] TMP_Text SettingsTitleText;
-    [SerializeField] TMP_Text LanguageText;
-    [SerializeField] TMP_Text AcceptText;
-    [SerializeField] TMP_Text DescriptiveText;
-
-    TMP_Text textButton;
+  
 
     void Start()
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         SettingsInterface = GameObject.Find("CanvasSettings").transform.GetChild(0);
-        SettingsTitleText = SettingsInterface.GetChild(0).GetComponent<TMP_Text>();
-        LanguageText = SettingsInterface.GetChild(1).GetComponent<TMP_Text>();
-        AcceptText = SettingsInterface.GetChild(3).GetChild(0).GetComponent<TMP_Text>();
-        DescriptiveText = SettingsInterface.GetChild(4).GetComponent<TMP_Text>(); ;
-        textButton = gameObject.GetComponentInChildren<TextMeshPro>();
+      
     }
 
 
@@ -48,11 +38,6 @@ public class PausaButtonMap : MonoBehaviour
             SettingsText.text = "Settings";
             MainMenuText.text = "Main Menu";
 
-            // Settings Interface
-            SettingsTitleText.text = "Settings";
-            LanguageText.text = "Select Language:";
-            AcceptText.text = "Accept";
-            DescriptiveText.text = "Descriptive texts";
 
         }
         else                                                                   // Spanish
@@ -62,12 +47,6 @@ public class PausaButtonMap : MonoBehaviour
             ResumeText.text = "Reanudar";
             SettingsText.text = "Configuración";
             MainMenuText.text = "Menú Principal";
-
-            // Settings Interface
-            SettingsTitleText.text = "Configuración";
-            LanguageText.text = "Selecciona Idioma:";
-            AcceptText.text = "Aceptar";
-            DescriptiveText.text = "Textos descriptivos";
 
         }
 

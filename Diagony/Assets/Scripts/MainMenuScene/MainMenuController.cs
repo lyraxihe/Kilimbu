@@ -16,12 +16,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] TMP_Text CreditsText;
     [SerializeField] TMP_Text ExitText;
 
-    // Settings Interface
-    [SerializeField] TMP_Text SettingsTitleText;
-    [SerializeField] TMP_Text LanguageText;
-    [SerializeField] TMP_Text AcceptText;
-    [SerializeField] TMP_Text DescriptiveText;
-    [SerializeField] TMP_Text TurnsText;
+
 
     private void Awake()
     {
@@ -48,12 +43,6 @@ public class MainMenuController : MonoBehaviour
             CreditsText.text = "Credits";
             ExitText.text = "Exit Game";
 
-            // Settings Interface
-            SettingsTitleText.text = "Settings";
-            LanguageText.text = "Select Language:";
-            AcceptText.text = "Accept";
-            DescriptiveText.text = "Descriptive texts";
-            TurnsText.text = "Show number of turns";
 
         }
         else                                                                   // Spanish
@@ -65,12 +54,7 @@ public class MainMenuController : MonoBehaviour
             CreditsText.text = "Créditos";
             ExitText.text = "Salir del Juego";
 
-            // Settings Interface
-            SettingsTitleText.text = "Configuración";
-            LanguageText.text = "Selecciona Idioma:";
-            AcceptText.text = "Aceptar";
-            DescriptiveText.text = "Textos descriptivos";
-            TurnsText.text = "Mostrar cantidad de turnos";
+           
 
         }
 

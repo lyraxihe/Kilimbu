@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Traduction : MonoBehaviour
@@ -15,6 +16,13 @@ public class Traduction : MonoBehaviour
 
     // Texto con turnos
     public bool ShowTurns;
+
+    // Settings Interface
+    [SerializeField] TMP_Text SettingsTitleText;
+    [SerializeField] TMP_Text LanguageText;
+    [SerializeField] TMP_Text AcceptText;
+    [SerializeField] TMP_Text DescriptiveText;
+    [SerializeField] TMP_Text TurnsText;
 
     private void Awake()
     {
@@ -47,7 +55,24 @@ public class Traduction : MonoBehaviour
    
     void Update()
     {
-        
+        if (Language == 0) //ingles
+        {
+            // Settings Interface
+            SettingsTitleText.text = "Settings";
+            LanguageText.text = "Select Language:";
+            AcceptText.text = "Accept";
+            DescriptiveText.text = "Descriptive texts";
+            TurnsText.text = "Show number of turns";
+        }
+        else if (Language == 1) //español
+        {
+            // Settings Interface
+            SettingsTitleText.text = "Configuración";
+            LanguageText.text = "Selecciona Idioma:";
+            AcceptText.text = "Aceptar";
+            DescriptiveText.text = "Textos descriptivos";
+            TurnsText.text = "Mostrar cantidad de turnos";
+        }
     }
 
     public void ChangeDescriptiveTexts()
