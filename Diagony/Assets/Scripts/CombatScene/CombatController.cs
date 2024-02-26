@@ -179,23 +179,17 @@ public class CombatController : MonoBehaviour
         clonHealthBar.transform.position = new Vector2(x, y);    //lo coloca arriba del personaje
         clonHealthBar.GetComponent<HealthBar>().EsPlayer = EsPlayer;
         clonHealthBar.GetComponent<HealthBar>().TextCharacter = TextCharacter;
-        if (EsPlayer)
-        {
-            personaje.GetComponent<PlayerController>().PlayerName = TextCharacter;
-        }
-
-
-
+     
         if (EsPlayer)
         {
             clonHealthBar.GetComponent<HealthBar>()._player = personaje;
+            personaje.GetComponent<PlayerController>().Name = TextCharacter;
         }
         else
         {
             clonHealthBar.GetComponent<HealthBar>()._enemy = personaje;
+            personaje.GetComponent<EnemyController>().Name = TextCharacter;
         }
-
-
     }
 
 

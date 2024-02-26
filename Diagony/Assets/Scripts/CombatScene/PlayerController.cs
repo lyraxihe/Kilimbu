@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public Animator PlayerAnimator;
     [SerializeField] bool animation_damage;
 
-    [SerializeField] public GameObject PlayerName;
+    public GameObject Name;
     public int ContadorDeTurnos;
 
     // Bloqueado
@@ -262,6 +262,7 @@ public class PlayerController : MonoBehaviour
         //    ActiveSpell++;
         //    transformacion_icon++;
         //}
+
         if (Bloqueado && bloqueado_icon == 0)
         {
             GameObject ClonSpell;
@@ -453,11 +454,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnMouseOver()
     {
-        PlayerName.gameObject.SetActive(true);
+        Name.gameObject.SetActive(true);
     }
     public void OnMouseExit()
     {
-        PlayerName.gameObject.SetActive(false);
+        Name.gameObject.SetActive(false);
     }
 
 }

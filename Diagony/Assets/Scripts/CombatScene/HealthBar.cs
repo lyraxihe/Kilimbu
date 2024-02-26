@@ -27,10 +27,9 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        if (EsPlayer)
-        {
+       
             TextCharacter.SetActive(false);
-        }
+       
         //Color verde = new Color(0.541f, 0.658f, 0.596f, 1.0f);
         //Color amarillo = new Color(0.86f, 0.89f, 0.776f, 1.0f);
         //Color rojo = new Color(0.447f, 0.149f, 0.27f, 1.0f);

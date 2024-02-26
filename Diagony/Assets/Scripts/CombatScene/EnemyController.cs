@@ -21,7 +21,10 @@ public class EnemyController : MonoBehaviour
     public GameObject CombatScene;
     public GameObject Player;
     public GameObject AuraEnemigo;
-    
+    public GameObject Name;
+    bool showName;
+    bool showName2;
+
     public GameObject ArrowEmitter;
     public bool OverEnemy;
 
@@ -206,7 +209,7 @@ public class EnemyController : MonoBehaviour
             if (contAcumulacionDanyoBoss > 20 && !BossDanyoComprobado) // Si el daño recibido es mayor que 20 y no se ha comprobado previamente
                 //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
                 ControlAcumulacionDanyoBoss();
-
+        ShowName();
     }
 
     //public void OnMouseOver()
@@ -487,7 +490,7 @@ public class EnemyController : MonoBehaviour
                     else                                                                  // Spanish
                         CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
+                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
                     CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=2;
                 }
                 else
@@ -1052,6 +1055,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Arrow")
         {
+            showName = true;
             //ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHead.GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_A;
             for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
             {
@@ -1080,7 +1084,8 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Arrow")
         {
-           // ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab.GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_D;
+            showName = false;
+            // ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab.GetComponent<Image>().sprite = ArrowEmitter.GetComponent<ArrowEmitter>().ArrowHeadPrefab_D;
             for (int j = 0; j < ArrowEmitter.GetComponent<ArrowEmitter>().arrowNodes.Count; j++)
             {
 
@@ -1189,6 +1194,23 @@ public class EnemyController : MonoBehaviour
             CombatScene.GetComponent<CombatController>().CreateSpellText("Se ha cansado de ti", gameObject);
         CombatScene.GetComponent<CombatController>().botonTurno.GetComponent<FinalizarTurnoButton>().OnClick();
 
+    }
+
+    public void OnMouseEnter()
+    {
+       showName2 = true;
+    }
+    public void OnMouseExit()
+    {
+        showName2 = false;
+    }
+
+    void ShowName()
+    {
+        if (showName || showName2)
+            Name.gameObject.SetActive(true);
+        else if (!showName && !showName2)
+            Name.gameObject.SetActive(false);
     }
 
 }
