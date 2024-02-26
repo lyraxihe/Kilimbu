@@ -43,7 +43,7 @@ public class ShopController : MonoBehaviour
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
    
-    public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 5, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
+    public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 20, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
 
     [SerializeField] List<int> maxCardTypes = new List<int>(); // para guardar las cartas más usadas
 
@@ -119,7 +119,6 @@ public class ShopController : MonoBehaviour
             newText[5].text = "$" + CardPrecio[cardType].ToString();
 
             ListCards[i].GetComponent<ShopCard>().Tipo = cardType;
-
             ListButton[i].GetComponent<BuyButton>().ID = cardType;
             ListButton[i].GetComponent<BuyButton>().Precio = CardPrecio[cardType];
 
@@ -132,21 +131,52 @@ public class ShopController : MonoBehaviour
     public void BuscarCartasMasRepetidas()
     {
         List<int> cardUses = VariablesGlobales.GetComponent<VariablesGlobales>().CardUses;
-      
+
         //obtiene el valor máximo de usos
         int maxCount = cardUses.Max();
+
+        bool hayOtra = false;
+        if (cardUses[6] == maxCount)
+        {
+            for (int cardType = 0; cardType < cardUses.Count; cardType++)
+            {
+                if (cardUses[cardType] == maxCount && cardType != 6)
+                {
+                    Debug.Log("hay otra");
+                    hayOtra = true;
+                    break;
+                }
+            }
+
+            if (!hayOtra)
+            {
+                Debug.Log("no hay otra");
+                int max_no6 = -1;
+                for (int cardType = 0; cardType < cardUses.Count; cardType++)
+                {
+                    if (cardUses[cardType] > max_no6 && cardType != 6)
+                    {
+                        max_no6 = cardUses[cardType]; //busca cartas con mayor numero de usos que no sea carta id 6
+                    }
+                }
+                maxCount = max_no6;
+                Debug.Log("encontró el " + maxCount + " como num más usado");
+            }
+        }
+            
+       
 
        //obtiene los id de cartas que tienen el máximo número de usos
         for (int cardType = 0; cardType < cardUses.Count; cardType++)
         {
-            if (cardUses[cardType] == maxCount)
+            if (cardUses[cardType] == maxCount && cardType!=6)
             {
                 maxCardTypes.Add(cardType); //agrega las cartas con mayor numero de usos
             }
 
         }
 
-        int buscarMax = 0, max2 = -1, max3 = -1;
+        int buscarMax = 0, max2 = -1;
         if (maxCardTypes.Count < 3) //en caso de que el numero de cartas con mayor uso sea menor a 3 
         {
             //pasa por un bucle para agregar más cartas a la lista de cartas con mayores usos
@@ -154,11 +184,11 @@ public class ShopController : MonoBehaviour
             {
                 for (int cardType = 0; cardType < cardUses.Count; cardType++)
                 {
-                    if (buscarMax == 0 && cardUses[cardType] > max2 && cardUses[cardType] != maxCount)
+                    if (buscarMax == 0 && cardUses[cardType] > max2 && cardUses[cardType] != maxCount && cardType!=6)
                     {
                        max2 = cardUses[cardType]; //busca el segundo número de usos más alto
                     }
-                    else if (buscarMax == 1 && cardUses[cardType] == max2)
+                    else if (buscarMax == 1 && cardUses[cardType] == max2 && cardType!=6)
                     {
                         maxCardTypes.Add(cardType);  //agrega las cartas con segundo mayor numero de usos
                     }
@@ -174,6 +204,7 @@ public class ShopController : MonoBehaviour
                     //}
 
                 }
+                buscarMax++;
                 //if (maxCardTypes.Count >= 3) //en caso que con las cartas del segundo mayor número de usos ya sean 3 o más, entonces sale del bucle
                 //{
                 //    buscarMax = 4;
@@ -182,7 +213,7 @@ public class ShopController : MonoBehaviour
                 //else //caso contrario suma +1 en "buscarMax" para así entrar en los "else if" cuando vale 2 y cuando vale 3
                 //                                                         //(es decir, busca el tercer mayor número de usos)
                 //{
-                    buscarMax++;
+
                 //}
 
                 Debug.Log("pasó con " + buscarMax);
@@ -220,7 +251,13 @@ public class ShopController : MonoBehaviour
         }
         else
         {
-            return Random.Range(0, VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards.Count);
+            int random = -1;
+            do
+            {
+               random = Random.Range(0, VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards.Count);
+            } while (random == 6);
+            Debug.Log("no hay cartas no obtenidas así que devuelve: " + random);
+            return random;
         }
            
     }

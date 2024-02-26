@@ -175,8 +175,8 @@ public class CombatController : MonoBehaviour
     public void CreateHealthBar(float x, float y, bool EsPlayer, GameObject personaje, GameObject TextCharacter)
     {
         GameObject clonHealthBar = Instantiate(HealthBar);          //crea el prefab de la barra de vida
-        clonHealthBar.transform.SetParent(canvas, false);            //declara el canvas como padre para que sea visible
-        clonHealthBar.transform.position = new Vector2(x, y);    //lo coloca arriba del personaje
+        clonHealthBar.transform.SetParent(canvas, false);           //declara el canvas como padre para que sea visible
+        clonHealthBar.transform.position = new Vector2(x, y);       //lo coloca arriba del personaje
         clonHealthBar.GetComponent<HealthBar>().EsPlayer = EsPlayer;
         clonHealthBar.GetComponent<HealthBar>().TextCharacter = TextCharacter;
      
@@ -253,6 +253,8 @@ public class CombatController : MonoBehaviour
                     else                                                                  // Spanish
                         EnemyName = "IRA";
                 }
+
+
                 else if (tipo == 1)
                 {
                     RecompensaDinero += 13;

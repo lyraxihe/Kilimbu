@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BuyButton : MonoBehaviour
 {
-    public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 5, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
+   // public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 20, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
     public GameObject VariablesGlobales;
     public int ID;
     public int Precio;
@@ -109,6 +109,9 @@ public class BuyButton : MonoBehaviour
                     CreateFeedbackText("+1 card to the deck");
                 else                                                                   // Spanish
                     CreateFeedbackText("+1 carta al mazo");
+
+                if (ID==6) //Si es la carta de maná solo te deja comprarla una vez
+                    gameObject.GetComponent<Button>().interactable = false;
             }
         }
        
