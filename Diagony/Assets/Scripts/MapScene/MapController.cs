@@ -50,9 +50,9 @@ public class MapController : MonoBehaviour
     public int contCombates = 0, contTiendas = 0, contCofres = 0;
 
     // Posiciones salas (ruido, distancia, etc.)
-    [SerializeField] int distanciaSalaX = 400;
-    [SerializeField] int distanciaSalaY = 180;
-    [SerializeField] int minRuidoX = -80, maxRuidoX = 80, minRuidoY = -40, maxRuidoY = 40;
+    [SerializeField] int distanciaSalaX = 0;
+    [SerializeField] int distanciaSalaY = 0;
+    [SerializeField] int minRuidoX = 0, maxRuidoX = 0, minRuidoY = 0, maxRuidoY = 0;
 
     // Array de posiciones de las columnas
     public List<int> ColumnasPos;
@@ -139,7 +139,7 @@ public class MapController : MonoBehaviour
 
         // Inicialización de las coordenadas de la Entrada
         StartCoord.x = -350;
-        StartCoord.y = 0;
+        StartCoord.y = 50;
         NextXCoord = StartCoord.x;
 
     }
@@ -443,7 +443,6 @@ public class MapController : MonoBehaviour
         randRuidoY = RandRuido(minRuidoY, maxRuidoY);
         clonBoss.transform.position = new Vector3(NextXCoord + Canvas.transform.position.x + randRuidoX, StartCoord.y + Canvas.transform.position.y + randRuidoY, 0);
         clonBoss.transform.SetParent(Content.transform, false);
-        //clonBoss.GetComponent<Button>().image.color = Color.blue;
         clonBoss.GetComponent<RoomButton>().RoomType = 3;
         //clonBoss.GetComponent<Image>().sprite = RoomIcons[4];
         clonBoss.GetComponent<Button>().interactable = false;
