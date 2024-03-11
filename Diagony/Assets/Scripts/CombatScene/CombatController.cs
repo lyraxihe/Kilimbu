@@ -1207,7 +1207,7 @@ public class CombatController : MonoBehaviour
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[14]++;
 
-            // El Jugador bloquea a un enemigo pero le cura 10
+            // El Jugador bloquea a un enemigo pero recibe 8 de daño
             EnemyList[enemigo].GetComponent<EnemyController>().Bloqueado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
@@ -1216,9 +1216,12 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Bloqueado", EnemyList[enemigo]);
             // StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
 
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 7;
-            StartCoroutine(CreateDmgHealText(true, 7, EnemyList[enemigo], true));
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= 8;
+            StartCoroutine(CreateDmgHealText(false, 8, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
+            victoriaDerrota();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1319,26 +1322,28 @@ public class CombatController : MonoBehaviour
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[18]++;
 
-            // El Jugador se aplica Fuerte 4 turnos (efecto acumulativo) pero cura 5 a todos los enemigos
+            // El Jugador se aplica Fuerte 4 turnos (efecto acumulativo) pero recibe 8 de daño
             Player.GetComponent<PlayerController>().Fuerte = true;
             Player.GetComponent<PlayerController>().Fuerza += 3;
             Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte += 4;
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= 8;
+
+            //StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
                 CreateSpellText("Strong", Player);
             else                                                                  // Spanish
                 CreateSpellText("Fuerte", Player);
+            StartCoroutine(CreateDmgHealText(false, 8, Player, true));
 
             for (int i = 0; i < EnemyList.Count; i++)
-            {
-
-                EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += 5;
-                StartCoroutine(CreateDmgHealText(true, 5, EnemyList[i], false));
-
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
 
-            }
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
+            victoriaDerrota();
 
         }
         else if (tipo == 19)
@@ -1394,23 +1399,27 @@ public class CombatController : MonoBehaviour
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[21]++;
 
-            // El Jugador aplica Débil a un enemigo pero le cura 15
+            // El Jugador aplica Débil a un enemigo pero recibe 8 de daño
             EnemyList[enemigo].GetComponent<EnemyController>().Debilitado = true;
             EnemyList[enemigo].GetComponent<EnemyController>().Debilidad -= 2;
             EnemyList[enemigo].GetComponent<EnemyController>().ContadorDeTurnosDebilitado += 3;
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
-            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 8;
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= 8;
 
             //StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
                 CreateSpellText("Weakened", EnemyList[enemigo]);
             else                                                                  // Spanish
                 CreateSpellText("Debilitado", EnemyList[enemigo]);
-            StartCoroutine(CreateDmgHealText(true, 8, EnemyList[enemigo], true));
+
+            StartCoroutine(CreateDmgHealText(false, 8, Player, false));
 
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+
+            // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
+            victoriaDerrota();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1893,7 +1902,7 @@ public class CombatController : MonoBehaviour
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 0;
-                StartCoroutine(CreateDmgHealText(true, 0, EnemyList[enemigo], false));
+                StartCoroutine(CreateDmgHealText(true, 0, EnemyList[enemigo], true));
 
             }
             else
@@ -1903,7 +1912,7 @@ public class CombatController : MonoBehaviour
                 StartCoroutine(CreateDmgHealText(false, danyo, Player, false));
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
-                StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
+                StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], true));
 
             }
 
@@ -1931,8 +1940,8 @@ public class CombatController : MonoBehaviour
             else                                                                  // Spanish
                 CreateSpellText("Bloqueado", Player);
 
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
-            StartCoroutine(CreateDmgHealText(true, 10, Player, true));
+            EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= 8;
+            StartCoroutine(CreateDmgHealText(false, 8, EnemyList[enemigo], true));
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
 
@@ -1947,6 +1956,14 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().Debilitado = true;
             Player.GetComponent<PlayerController>().Debilidad -= 2;
             Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitadoDevolverIra += 3;
+
+            if (tipo == 21)
+            {
+
+                EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= 8;
+                StartCoroutine(CreateDmgHealText(false, 8, EnemyList[enemigo], true));
+
+            }
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
 
@@ -1983,6 +2000,8 @@ public class CombatController : MonoBehaviour
 
         //}
 
+        // Comprueba que si al devolver el ataque, ira muere en el proceso, se controle si se termina la partida o no
+        victoriaDerrota();
 
     }
 
