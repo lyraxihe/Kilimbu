@@ -448,82 +448,102 @@ public class EnemyController : MonoBehaviour
             }
             else if (Tipo == 2)                   // Tristeza
             {
-                if (SoloTristeza)
+
+                bool repetirTirada;
+
+                do
                 {
-                    if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+
+                    repetirTirada = false;
+
+                    if (SoloTristeza)
                     {
-                        
-                        damageAmount = 2 + Debilidad;
-                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                        StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
+                        if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                        {
+
+                            damageAmount = 2 + Debilidad;
+                            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
+
+                        }
+                        else
+                        {
+                            damageAmount = 2 + Debilidad;
+                            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+
+                        }
 
                     }
-                    else
+
+                    else if (AttackType <= 3.3f)
                     {
-                        damageAmount = 2 + Debilidad;
-                        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+
+                        Debug.Log("Jugador Envenenado");
+                        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Poisoned", Player);
+                        else                                                                  // Spanish
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Envenenado", Player);
+                        CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
+                        CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
+                        CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
+
+                    }
+                    else if (AttackType > 3.3f && AttackType <= 6.6 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado <= 0)
+                    {
+
+                        Debug.Log("Jugador Debilitado");
+                        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Weakened", Player);
+                        else                                                                  // Spanish
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
+                        CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
+                        CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
+                        CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
+                    }
+                    else if (AttackType > 6.6f && !CombatScene.GetComponent<CombatController>().ManaReducido)
+                    {
+
+                        Debug.Log("Reducir 1 de mana");
+                        //damageAmount = Random.Range(1, 5) + AttackEnemigo + Debilidad;
+
+                        //if (damageAmount < 0)
+                        //    damageAmount = 0;
+
+                        //if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
+                        //{
+                        //    Debug.Log("ataque que cura al player");
+                        //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
+                        //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
+
+                        //}
+                        //else
+                        //{
+                        //    Debug.Log("atq normal");
+                        //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
+                        //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
+
+                        //}
+
+                        CombatScene.GetComponent<CombatController>().ManaReducido = true; // Indica que el maná ya se ha reducido una vez en este turno
+
+                        if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Reduce Mana", Player);
+                        else                                                                  // Spanish
+                            CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
+                        Player.GetComponent<PlayerController>().ReducirMana = true;
+
+                    }
+                    else // Caso muerto
+                    {
+
+                        Debug.Log("Ataca pero no hace nada");
+                        repetirTirada = true;               // Indica que la tirada se tiene que repetir
+                        AttackType = Random.Range(1f, 11f); // La tirada se repite
 
                     }
 
-                }
-
-                else if (AttackType <= 3.3f && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado <=0)
-                {
-                    
-                    Debug.Log("Jugador Envenenado");
-                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Poisoned", Player);
-                    else                                                                  // Spanish
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Envenenado", Player);
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = true;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
-
-                }
-                else if (AttackType > 3.3f && AttackType <= 6.6 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado <=0)
-                {
-                    
-                    Debug.Log("Jugador Debilitado");
-                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Weakened", Player);
-                    else                                                                  // Spanish
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Debilitado", Player);
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
-                    CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado +=2;
-                }
-                else
-                {
-                    
-                    Debug.Log("Reducir 1 de mana");
-                    //damageAmount = Random.Range(1, 5) + AttackEnemigo + Debilidad;
-
-                    //if (damageAmount < 0)
-                    //    damageAmount = 0;
-
-                    //if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
-                    //{
-                    //    Debug.Log("ataque que cura al player");
-                    //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                    //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
-
-                    //}
-                    //else
-                    //{
-                    //    Debug.Log("atq normal");
-                    //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                    //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
-
-                    //}
-
-                    if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Reduce Mana", Player);
-                    else                                                                  // Spanish
-                        CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
-                    Player.GetComponent<PlayerController>().ReducirMana = true;
-
-                }
+                } while (repetirTirada);
 
                 EnemyAnimator.SetBool("atacar", true);
 

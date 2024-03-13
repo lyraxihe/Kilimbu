@@ -49,6 +49,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] public bool RecompensaVictoria;
     [SerializeField] int victoria_etc;
     public int numTristeza;
+    public bool ManaReducido; // Controla que sólo se pueda reducir Maná una vez por turno
 
     public int RecompensaDinero;
     public int ContadorTurnos;
@@ -125,6 +126,9 @@ public class CombatController : MonoBehaviour
         ManaProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista;
 
         MovingArrow = false;
+
+        numTristeza = 0;
+        ManaReducido = false;
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
@@ -241,7 +245,11 @@ public class CombatController : MonoBehaviour
             {
 
                 if (Tutorial)
-                    tipo = 1; // Si es el tutorial, el enemigo será Miedo
+                {
+
+                    tipo = 1;
+
+                }
                 else
                     tipo = Random.Range(0, 3);
 
@@ -724,6 +732,8 @@ public class CombatController : MonoBehaviour
                 Player.GetComponent<PlayerController>().ReducirMana = false;
 
             }
+
+            ManaReducido = false; // Se resetea la condición para que se vuelva a poder reducir el maná
 
             TurnoJugador = true;                                                                        // Cambia de turno
             StartCoroutine(CreateCards());
