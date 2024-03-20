@@ -743,7 +743,7 @@ public class EnemyController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
 
         }
         else
@@ -756,14 +756,6 @@ public class EnemyController : MonoBehaviour
                 CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", gameObject);
             Bloqueado = false;
 
-        }
-
-        if (Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
-        {
-
-            HealthEnemigo -= Veneno;
-            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject, true));
-        
         }
 
         // Debil (Enemigo)
@@ -1186,7 +1178,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void ControlEsperanzado()
+    public void ControlEsperanzado(bool esperar)
     {
 
         if (Esperanzado)
@@ -1194,7 +1186,20 @@ public class EnemyController : MonoBehaviour
 
             HealthEnemigo += Esperanza;
            // CombatScene.GetComponent<CombatController>().wait(0.5f);
-            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, Esperanza, gameObject, true));
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, Esperanza, gameObject, esperar));
+
+        }
+
+    }
+
+    public void ControlEnvenenado(bool esperar)
+    {
+
+        if (Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+        {
+
+            HealthEnemigo -= Veneno;
+            StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject, esperar));
 
         }
 

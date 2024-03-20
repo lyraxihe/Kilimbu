@@ -430,6 +430,14 @@ public class CombatController : MonoBehaviour
                 //CardList.cont++;                                                   // Aumenta el contador de la lista
             }
 
+            // Nada más sacar las cartas controla el estado de envenenado y esperanzado
+            ControlEnvenenado(false);
+            // Si está envenenado y esperanzado espera un poco, si no no
+            if(Player.GetComponent<PlayerController>().Envenenado && Player.GetComponent<PlayerController>().Esperanzado)
+                ControlEsperanzado(true);
+            else
+                ControlEsperanzado(false);
+
         }
 
     }
@@ -695,6 +703,10 @@ public class CombatController : MonoBehaviour
         if (!TurnoJugador)
         {
 
+            yield return new WaitForSeconds(0.5f);
+
+            ControlEnemiesEffects();
+
             for (int i = 0; i < EnemyList.Count; i++)
             {
 
@@ -803,7 +815,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
 
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -866,7 +878,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
 
         }
@@ -895,7 +907,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
 
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -936,7 +948,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
 
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1020,7 +1032,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1068,7 +1080,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
             EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1130,7 +1142,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i + contTransformados));
             StartCoroutine(CreateDmgHealText(true, (danyo * (i + contTransformados)), Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1182,7 +1194,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i - contTransformados));
             StartCoroutine(CreateDmgHealText(true, (danyo * (i - contTransformados)), Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
@@ -1533,18 +1545,18 @@ public class CombatController : MonoBehaviour
 
         }
 
-        if (tipo != 1 && tipo != 5)
-        {
+        //if (tipo != 1 && tipo != 5)
+        //{
 
-            if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
-            {
-                //  yield return new WaitForSeconds(1);
-              // StartCoroutine(wait(0.5f));
-                VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
-                StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, true));
-            }
+        //    if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+        //    {
+        //        //  yield return new WaitForSeconds(1);
+        //      // StartCoroutine(wait(0.5f));
+        //        VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
+        //        StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, true));
+        //    }
 
-        }
+        //}
 
         //if(tipo != 1 || tipo != 5) // Ya se hace este control de ambos casos en la función DoubleAttack()
         //{
@@ -1784,7 +1796,7 @@ public class CombatController : MonoBehaviour
 
         }
 
-        ControlEsperanzado();
+        //ControlEsperanzado();
         if (!salir)
         {
             Debug.Log("                                     !salir");
@@ -1818,7 +1830,7 @@ public class CombatController : MonoBehaviour
 
             }
 
-            ControlEsperanzado();
+            //ControlEsperanzado();
             //              !!    comento lo de abajo para que la animación no se repita 2 veces        !!
 
            // EnemyList[enemigo].GetComponent<EnemyController>().RecibirDanyo = true;
@@ -1849,7 +1861,7 @@ public class CombatController : MonoBehaviour
 
     }
 
-    public void ControlEsperanzado()
+    public void ControlEsperanzado(bool esperar)
     {
 
         if (Player.GetComponent<PlayerController>().Esperanzado)
@@ -1857,8 +1869,21 @@ public class CombatController : MonoBehaviour
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += Player.GetComponent<PlayerController>().Esperanza;
           //  StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
-            StartCoroutine(CreateDmgHealText(true, Player.GetComponent<PlayerController>().Esperanza, Player, true));
+            StartCoroutine(CreateDmgHealText(true, Player.GetComponent<PlayerController>().Esperanza, Player, esperar));
 
+        }
+
+    }
+
+    public void ControlEnvenenado(bool esperar)
+    {
+
+        if (Player.GetComponent<PlayerController>().Envenenado) // Creo que esto tiene que ser cada vez que ataca el Jugador, no cada vez que usa una carta (hablar con Flipper)
+        {
+            //  yield return new WaitForSeconds(1);
+            // StartCoroutine(wait(0.5f));
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
+            StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, esperar));
         }
 
     }
@@ -2041,4 +2066,25 @@ public class CombatController : MonoBehaviour
     //    yield return new WaitForSeconds(sec);
     //    Debug.Log("termina wait segundos");
     //}
+
+    // Controla el efecto envenenado y esperanzado de los enemigos del combate
+    public void ControlEnemiesEffects()
+    {
+
+        for (int i = 0; i < EnemyList.Count; i++)
+        {
+
+            // Nada más sacar las cartas controla el estado de envenenado y esperanzado
+            EnemyList[i].GetComponent<EnemyController>().ControlEnvenenado(false);
+
+            // Si está envenenado y esperanzado espera un poco, si no no
+            if (EnemyList[i].GetComponent<EnemyController>().Envenenado && EnemyList[i].GetComponent<EnemyController>().Esperanzado)
+                EnemyList[i].GetComponent<EnemyController>().ControlEsperanzado(true);
+            else
+                EnemyList[i].GetComponent<EnemyController>().ControlEsperanzado(false);
+
+        }
+
+    }
+
 }

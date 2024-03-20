@@ -66,10 +66,10 @@ public class CardController : MonoBehaviour
                                                          "Remove all player's effects" };
 
     List<string> CardEffectDescriptionES = new List<string>() { "<b>Bloquear</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -2 de daño",
-                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Los ataques del jugador restauran +3 de vida",
-                                                                "<b>Envenenar</b>: Las acciones del jugador infligen -3 de vida", "<b>Transformar</b>: Los ataques de los enemigos curan en vez de hacer daño" };
+                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Cada turno restaura vida al jugador",
+                                                                "<b>Envenenar</b>: Cada turno inflige daño al enemigo", "<b>Transformar</b>: Los ataques de los enemigos curan en vez de hacer daño" };
     List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stun</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
-                                                                "<b>Hope</b>: Player's attacks heal +3 health", "<b>Poison</b>: Player's actions deal -3 health", "<b>Transform</b>: Enemy's attacks heal instead of dealing damage" };
+                                                                "<b>Hope</b>: Each turn restores health to the player", "<b>Poison</b>: Each turn deals damage to the enemy", "<b>Transform</b>: Enemy's attacks heal instead of dealing damage" };
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
 
