@@ -1884,6 +1884,7 @@ public class CombatController : MonoBehaviour
             // StartCoroutine(wait(0.5f));
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
             StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, esperar));
+            Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("danyo", true);
         }
 
     }
@@ -2076,6 +2077,7 @@ public class CombatController : MonoBehaviour
 
             // Nada más sacar las cartas controla el estado de envenenado y esperanzado
             EnemyList[i].GetComponent<EnemyController>().ControlEnvenenado(false);
+            EnemyList[i].GetComponent<EnemyController>().EnemyAnimator.SetBool("danyo", true);
 
             // Si está envenenado y esperanzado espera un poco, si no no
             if (EnemyList[i].GetComponent<EnemyController>().Envenenado && EnemyList[i].GetComponent<EnemyController>().Esperanzado)

@@ -91,6 +91,8 @@ public class EnemyController : MonoBehaviour
 
     public bool BossDanyoComprobado; // Controla que el "se ha casado de ti" del Boss sólo se ejecute una vez, sobretodo para los DoubleAttack
 
+    private bool PlayerRecibeDanyo; // Cuando el enemigo realiza la animación de ataque, indica si el player debe realizar la animación de recibir daño | false - no recibe daño | true - si recibe daño
+
     void Start()
     {
         SoloTristeza = false;
@@ -188,6 +190,8 @@ public class EnemyController : MonoBehaviour
 
         contAcumulacionDanyoBoss = 0;
         BossDanyoComprobado = false;
+
+        PlayerRecibeDanyo = false;
 
     }
 
@@ -368,7 +372,7 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
-                    
+
                     damageAmount = Random.Range(4, 7) + Fuerza + Debilidad;
                     if(damageAmount < 0)
                         damageAmount = 0;
@@ -384,6 +388,7 @@ public class EnemyController : MonoBehaviour
                         Debug.Log("atq normal");
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                         StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+                        PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
 
                     }
 
@@ -440,7 +445,8 @@ public class EnemyController : MonoBehaviour
 
                     //}
                     Debug.Log("atq normal");
-                   // StartCoroutine(DoubleAttack(damageAmount, 1f));
+                    // StartCoroutine(DoubleAttack(damageAmount, 1f));
+                    PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
                     StartCoroutine(DoubleAttack(damageAmount, 0.5f));
 
                 }
@@ -471,6 +477,7 @@ public class EnemyController : MonoBehaviour
                             damageAmount = 2 + Debilidad;
                             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+                            PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
 
                         }
 
@@ -500,6 +507,7 @@ public class EnemyController : MonoBehaviour
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
+
                     }
                     else if (AttackType > 6.6f && !CombatScene.GetComponent<CombatController>().ManaReducido)
                     {
@@ -697,6 +705,7 @@ public class EnemyController : MonoBehaviour
 
                                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                                 StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+                                PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
 
                             }
 
@@ -1053,7 +1062,15 @@ public class EnemyController : MonoBehaviour
         {
 
             EnemyAnimator.SetBool("atacar", false);
-            CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("danyo", true);
+            
+            // Controla si el Player debe ejecutar
+            if (PlayerRecibeDanyo)
+            {
+
+                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("danyo", true);
+                PlayerRecibeDanyo = false;
+
+            }
 
         }
 
