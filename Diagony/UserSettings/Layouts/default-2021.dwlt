@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 50
+  controlID: 29496
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 51
+  controlID: 29497
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 52
+  controlID: 29462
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 53
+  controlID: 29463
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -213,8 +213,8 @@ MonoBehaviour:
     y: 0
     width: 299
     height: 579
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -239,15 +239,15 @@ MonoBehaviour:
     y: 0
     width: 1192
     height: 579
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 15}
   - {fileID: 16}
   - {fileID: 13}
-  m_Selected: 2
-  m_LastSelected: 0
+  m_Selected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -427,9 +427,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: dc950000
       m_LastClickedID: 0
-      m_ExpandedIDs: ceb4feff3ad1feff92ddfeff3ae6feffbcf2feffd203ffff520fffff1c1affffae33ffff5a4dffff9655ffff585dffff0e72ffffa088ffff329afffff6a1ffffd4b8fffffac3ffff3ec5fffff4fffffff2020100e203010024050100
+      m_ExpandedIDs: 660dfdff0e16fdff2e17fdff3c70fdff3282feff3eabfeff4abdfeff62befeff28c4feff60d1feffb0d5feff1cf5feffc4fcfeffd407ffffae0fffff0c37ffff7a3dffffe048ffffe24fffff7470ffffe47cffff44a5ffff0aafffff5ac4ffff3ec5fffff4ffffffc6b50000b6b60000f8b7000098bc0000c2bc0000e2bc000010bd00003ebd000052bd00001ad1000088d2000078d30000bad4000042db00006cdb00008cdb0000badb0000e8db0000fcdb0000f2f80000e2f9000024fb0000d80a0100060b0100720f01009c0f0100bc0f0100ea0f01000e100100181001002c10010004220100f42201004c2301003624010064240100ea33010018340100f8470100044801001e4801003e48010004520100f45201004c530100365401007c55010090550100e05501001e560100a65601004e5701003e58010096580100ec5801008059010052650100e0650100426901005caa01008cab0100bead010008b30100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -867,9 +867,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.8996932, y: -0.34661236, z: 44.63234}
+    m_Target: {x: 4.223746, y: -0.06486257, z: 64.78093}
     speed: 2
-    m_Value: {x: 0.8996932, y: -0.34661236, z: 44.63234}
+    m_Value: {x: 4.223746, y: -0.06486257, z: 64.78093}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -920,9 +920,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.4773383
+    m_Target: 7.4509664
     speed: 2
-    m_Value: 7.4773383
+    m_Value: 7.4509664
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -989,13 +989,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/CombatScene
+    - Assets/Scripts/Compendio
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 63
   m_LastFolders:
-  - Assets/Scripts/CombatScene
+  - Assets/Scripts/Compendio
   m_LastFoldersGridSize: 63
   m_LastProjectPath: C:\Users\Alumno\Documents\GitHub\Kilimbu\Diagony
   m_LockTracker:
@@ -1004,7 +1004,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: dc950000
     m_LastClickedID: 38364
-    m_ExpandedIDs: 000000009a950000a295000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000009a950000a2950000a4950000549c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1032,7 +1032,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 000000009a950000a2950000a4950000549c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1148,7 +1148,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 72422
+  m_LastSelectedObjectID: 91474
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
