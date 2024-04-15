@@ -58,14 +58,14 @@ public class CanvasSingleton : MonoBehaviour
         }
 
         // Control límites del mapa (Un poco meh de momento la verdad pero funciona)
-        if (Content.GetComponent<RectTransform>().anchoredPosition.x > 350)
+        if (Content.GetComponent<RectTransform>().anchoredPosition.x > 355)
         {
 
             Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(350, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
         }
-        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -5290)
+        else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -5295)
         {
 
             Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5290, Content.GetComponent<RectTransform>().anchoredPosition.y);
@@ -76,17 +76,17 @@ public class CanvasSingleton : MonoBehaviour
             ScrollArea.GetComponent<ScrollRect>().enabled = true;
 
         // Control límites del compendio de cartas (Un poco meh de momento la verdad pero funciona)
-        if (Compendio.GetComponent<RectTransform>().anchoredPosition.x > 5)
+        if (Compendio.GetComponent<RectTransform>().anchoredPosition.x > 10)
         {
 
-            Compendio.GetComponent<RectTransform>().anchoredPosition = new Vector2(5, 0);
+            Compendio.GetComponent<RectTransform>().anchoredPosition = new Vector2(5, Compendio.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollAreaCompendio.GetComponent<ScrollRect>().enabled = false;
 
         }
-        else if (Compendio.GetComponent<RectTransform>().anchoredPosition.x < -2186)
+        else if (Compendio.GetComponent<RectTransform>().anchoredPosition.x < -2191)
         {
 
-            Compendio.GetComponent<RectTransform>().anchoredPosition = new Vector2(-2186, 0);
+            Compendio.GetComponent<RectTransform>().anchoredPosition = new Vector2(-2186, Compendio.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollAreaCompendio.GetComponent<ScrollRect>().enabled = false;
 
         }

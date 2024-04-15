@@ -400,19 +400,10 @@ public class EnemyController : MonoBehaviour
 
             else if (Tipo == 1)    // Miedo
             {
-                if (EsperandoHeal)
-                {
-                    ContadorDeTurnosHeal--;
-                    if (ContadorDeTurnosHeal <= 0)
-                    {
-                        ContadorDeTurnosHeal = 0;
-                        EsperandoHeal = false;
-                    }
-                }
 
-                if (AttackType >= 8 && HealthEnemigo <= (MaxHealthEnemigo * 0.4f) && !EsperandoHeal)
+                if (HealthEnemigo <= (MaxHealthEnemigo * 0.35f) && !EsperandoHeal)
                 {
-                    ContadorDeTurnosHeal = 2;
+                    ContadorDeTurnosHeal = 3;
                     EsperandoHeal = true;
 
                     damageAmount = 10;
@@ -1216,6 +1207,7 @@ public class EnemyController : MonoBehaviour
         {
 
             HealthEnemigo -= Veneno;
+            EnemyAnimator.SetBool("danyo", true);
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject, esperar));
 
         }
