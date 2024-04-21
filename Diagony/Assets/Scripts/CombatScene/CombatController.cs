@@ -390,19 +390,104 @@ public class CombatController : MonoBehaviour
             GameObject clon;
             int cardType;
             bool canCreate;
+            int healthProttagonista = VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista;
+            int maxHealthProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista;
+            bool reroll;
+            int contReroll = 0;
+            bool rerollIncreased;
 
             for (int i = 0; i < 5; i++)
             {
 
                 do
                 {
+                    rerollIncreased = false;
                     canCreate = true;
                     cardType = Random.Range(0, TotalCards.Count); // Aleatorio entre las cartas totales del Jugador para el combate
+
+                    // Control porcentaje de vida del Jugador ("falsea" las cartas que le tocan)
+                    if(healthProttagonista > (maxHealthProtagonista * 0.95f))      // Si la vida del jugador supera el 95%
+                    {
+
+                        // Sirve para que los rerolls estén distribuidos a lo largo de las 5 cartas a crear y no sean siempre los 3 primeros
+                        if(Random.Range(0, 2) == 0 || (i - contReroll) == 2)
+                            reroll = true;
+                        else
+                            reroll = false;
+
+                        Debug.Log("Id: " + i + " | Vida del Jugador superior al 95%");
+                        // Fuerza el reroll de las primeras 3 cartas en el caso de que sean de curación (id 7 - 12)
+                        if (reroll && contReroll < 3)
+                        {
+
+                            if (TotalCards[cardType] >= 7 && TotalCards[cardType] <= 12)
+                            {
+
+                                Debug.Log("Reroll, era de curación - " + TotalCards[cardType]);
+                                canCreate = false;
+                                contReroll--;
+
+                            }
+
+                            contReroll++;
+                            rerollIncreased = true;
+                            Debug.Log("contReroll++");
+                        }
+                        else
+                            Debug.Log("No hace falta reroll");
+
+                    }
+                    else if (healthProttagonista < (maxHealthProtagonista * 0.3f)) // Si la vida del jugador es inferior al 30%
+                    {
+
+                        // Sirve para que los rerolls estén distribuidos a lo largo de las 5 cartas a crear y no sean siempre los 3 primeros
+                        if (Random.Range(0, 2) == 0 || (i - contReroll) == 2)
+                            reroll = true;
+                        else
+                            reroll = false;
+
+                        Debug.Log("Id: " + i + " | Vida del Jugador inferior al 30%");
+                        // Las 3 primeras cartas tienen el procentaje "falseado" (50% - 0: curación | 1: normal)
+                        if (reroll && contReroll < 3)
+                        {
+
+                            if (Random.Range(0, 2) == 0)
+                            {
+
+                                Debug.Log("50% - sale curación");
+                                // Fuerza el reroll hasta que la carta sea de curación (id 7 - 12)
+                                do
+                                {
+                                    cardType = Random.Range(0, TotalCards.Count); // Aleatorio entre las cartas totales del Jugador para el combate
+                                    Debug.Log("cardType: " + TotalCards[cardType]);
+                                } while (TotalCards[cardType] < 7 || TotalCards[cardType] > 12);
+
+                            }
+                            else
+                                Debug.Log("50% - sale normal");
+
+                            contReroll++;
+                            rerollIncreased = true;
+                            Debug.Log("contReroll++");
+
+                        }
+                        else
+                            Debug.Log("No hace falta reroll (es más de la tercera carta)");
+
+                    }
+
                     if (HandCardsAmount[TotalCards[cardType]] + 1 > VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[TotalCards[cardType]]/* && VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType] == 0*/)
                     {
                         canCreate = false;
-                    }
+                        // Si la carta había incrementado el contReroll lo decrementa, si no no
+                        if(rerollIncreased)
+                        {
 
+                            contReroll--;
+                            Debug.Log("contReroll--");
+
+                        }
+                    }
 
                 } while (!canCreate);
 
@@ -437,30 +522,10 @@ public class CombatController : MonoBehaviour
                 ControlEsperanzado(true);
             else
                 ControlEsperanzado(false);
-
+            Debug.Log("ContReroll: " + contReroll);
         }
 
     }
-
-    //public void CreateCards()
-    //{
-
-    //    GameObject clon;
-
-    //    for (int i = 0; i < 5; i++)
-    //    {
-
-    //        clon = Instantiate(Card);                                          // Crea una carta
-    //        clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
-    //        clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
-    //        clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-    //        CardList.Add(clon);                                         // Almacena la carta en la lista
-    //        //yield return new WaitForSeconds(0.05f);
-    //        //CardList.cards[CardList.cont] = clon;                              // Almacena la carta en la lista
-    //        //CardList.cont++;                                                   // Aumenta el contador de la lista
-    //    }
-
-    //}
 
     /*
      * Controla la posicion de las cartas en funcion del numero de ellas que haya en pantalla
