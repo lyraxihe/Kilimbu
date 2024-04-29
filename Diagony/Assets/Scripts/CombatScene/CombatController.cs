@@ -406,11 +406,12 @@ public class CombatController : MonoBehaviour
             bool rerollIncreased;
             bool tutorialRandomDone = false; // Si es true, el random necesario para generar las cartas durante los diferentes turnos del tutorial ya ha sido generado
             int tutorialRand = 6;            // Valor por defecto que está fuera de los límites del número de cartas en mano del Jugador
+            int tutorialRandCard = 0;        // ALmacena el id de la carta del tutorial escogida
 
             for (int i = 0; i < 5; i++)
             {
 
-                if (Tutorial && TutorialTurn < 6) // Si se trata del tutorial la creación de cartas viene predeterminada hasta el turno 6
+                if (Tutorial) // Si se trata del tutorial la creación de cartas viene predeterminada hasta el turno 6
                 {
                     Debug.Log("Posición: " + tutorialRand);
                     // Si no es el primer turno del tutorial y el random no ha sido generado todavía, lo genera
@@ -422,7 +423,14 @@ public class CombatController : MonoBehaviour
                         Debug.Log("Posición: " + tutorialRand);
                     }
 
-                    if (i == tutorialRand)
+                    if(TutorialTurn >= 6)
+                    {
+
+                        tutorialRandCard = Random.Range(0, 5);
+                        cardType = CardsTutorial[tutorialRandCard];
+
+                    }
+                    else if (i == tutorialRand)
                     {
 
                         if (TutorialTurn == 2)
@@ -559,7 +567,7 @@ public class CombatController : MonoBehaviour
                 clon.GetComponent<CardController>().CombatScene = gameObject; // Almacena el controlador del combate en cada carta para acceder a sus variables
                 clon.GetComponent<CardController>().DragZone = DragZone;         // Almacena la DragZone en cada carta para poder eliminarla una vez se acerque a ella
                 clon.GetComponent<CardController>().Id = i;                        // Almacena el ID de cada carta (para saber su posicion al eliminarla de la lista)
-                if(Tutorial && TutorialTurn < 6)
+                if(Tutorial)
                 {
 
                     clon.GetComponent<CardController>().Tipo = cardType; //hace que la carta sea de alguna de las del tipo
