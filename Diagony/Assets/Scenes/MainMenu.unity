@@ -1053,7 +1053,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &495235981
 RectTransform:
@@ -3656,6 +3656,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5515172736891140776, guid: cdea629b2581cba4dbbd5279a733ae4b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 5515172736891140776, guid: cdea629b2581cba4dbbd5279a733ae4b, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -4122,6 +4126,22 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -6287220302732482055, guid: 5900a4187a2abf046bf646bd13732883, type: 2}
+    - target: {fileID: 3950782854140349962, guid: 47bd41a09751df344ba8f64d46c9a565, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 803.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950782854140349962, guid: 47bd41a09751df344ba8f64d46c9a565, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 96.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950782854140349962, guid: 47bd41a09751df344ba8f64d46c9a565, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950782854140349962, guid: 47bd41a09751df344ba8f64d46c9a565, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bd41a09751df344ba8f64d46c9a565, type: 3}
 --- !u!1001 &7850303796340494180

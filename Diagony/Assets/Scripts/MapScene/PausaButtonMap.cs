@@ -58,11 +58,11 @@ public class PausaButtonMap : MonoBehaviour
         if (!VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
         {
 
-            if(SceneManager.GetActiveScene().name != "MainMenu")
+            if (SceneManager.GetActiveScene().name != "MainMenu")
             {
 
-                SettingsInterface.GetComponent<RectTransform>().offsetMin = new Vector2(552.655f, SettingsInterface.GetComponent<RectTransform>().offsetMin.y);
-                SettingsInterface.GetComponent<RectTransform>().offsetMax = new Vector2(-552.655f, SettingsInterface.GetComponent<RectTransform>().offsetMax.y);
+                SettingsInterface.GetComponent<RectTransform>().offsetMin = new Vector2(393.82f, SettingsInterface.GetComponent<RectTransform>().offsetMin.y);
+                SettingsInterface.GetComponent<RectTransform>().offsetMax = new Vector2(-393.82f, SettingsInterface.GetComponent<RectTransform>().offsetMax.y);
 
             }
 

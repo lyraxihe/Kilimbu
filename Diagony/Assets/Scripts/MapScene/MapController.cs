@@ -57,9 +57,16 @@ public class MapController : MonoBehaviour
     // Array de posiciones de las columnas
     public List<int> ColumnasPos;
 
+    // Settings Interface
+    [SerializeField] Canvas CanvasSettings;
+
     private void Awake() //sigleton
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+
+        // Settings Interface
+        CanvasSettings = GameObject.Find("CanvasSettings").GetComponent<Canvas>();
+        CanvasSettings.GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Sets the new main camera as the CanvasSettings camera
 
         if (instance == null)
         {

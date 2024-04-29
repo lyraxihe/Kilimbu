@@ -260,7 +260,7 @@ public class EnemyController : MonoBehaviour
     {
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().Tutorial)
-            MaxHealthEnemigo = 30;
+            MaxHealthEnemigo = 50;
         else
         {
 
