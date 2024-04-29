@@ -39,11 +39,11 @@ public class ShopController : MonoBehaviour
                                                          "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but deals 8 damage to the player", "<b>Transform</b> to the player",
                                                          "Remove all player's effects" };
 
-    List<string> CardCost = new List<string>() { "1", "1", "2", "2", "3", "3", "0", "1", "2", "2", "3", "3", "5", "1", "0", "1", "2", "1", "0", "2", "1", "0", "4", "3" };
+    List<string> CardCost = new List<string>() { "1", "1", "2", "2", "3", "3", "0", "1", "2", "2", "3", "3", "5", "1", "0", "1", "2", "1", "0", "2", "1", "0", "4", "1" };
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
    
-    public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 20, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 20 };
+    public List<int> CardPrecio = new List<int>() { 10, 10, 15, 15, 20, 20, 20, 10, 15, 15, 20, 20, 30, 10, 5, 10, 15, 10, 5, 15, 10, 5, 25, 10 };
 
     [SerializeField] List<int> maxCardTypes = new List<int>(); // para guardar las cartas más usadas
 

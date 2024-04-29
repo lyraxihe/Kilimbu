@@ -1823,7 +1823,7 @@ public class CombatController : MonoBehaviour
         else if (cardType == 22)
             return 4;
         else if (cardType == 23)
-            return 3;
+            return 1;
         else
             return -1;
 

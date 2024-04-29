@@ -38,7 +38,7 @@ public class CardController : MonoBehaviour
     public bool MouseDrag, MouseOver, IsInDragZone, SePuede;
     public int Id; // ID de la carta en la lista de cartas (para saber su posicion al eliminarla de la lista)
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
-    public int Tipo; //por ahora vamos a hacer 3, 0- que haga 5 de daño, 1- que haga 10 y 2- que cure 3 de vida del personaje
+    public int Tipo; 
     public int CosteMana;
 
     List<string> CardTitlesES = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Acepto que me afecta", "Puedo decir que no", "Reconozco lo que siento",
@@ -103,6 +103,7 @@ public class CardController : MonoBehaviour
         //TextDescription.GetComponent<MeshRenderer>().enabled = true;
 
         newText = GetComponentsInChildren<TMP_Text>();
+        CosteMana = VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
 
     }
 
@@ -118,7 +119,7 @@ public class CardController : MonoBehaviour
         CardAnimator.SetInteger("NumCartas", NumCartas);
         CardAnimator.SetInteger("CardID", Id);
 
-        CosteMana = VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
+       
         //AnimacionCarta();
 
         SetText();
