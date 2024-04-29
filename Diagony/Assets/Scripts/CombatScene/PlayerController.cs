@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         ActiveSpell = 0;
 
         x_inicial_spell = -5.6f;
-        y_inicial_spell = 1.2f;
+        y_inicial_spell = 1.1f;
 
 
         for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)
@@ -206,10 +206,11 @@ public class PlayerController : MonoBehaviour
             ContadorDeTurnosTransformacion = 0;
         }
 
-        if (ContadorDeTurnosEnvenenado < 0)
+        if (ContadorDeTurnosEsperanzado < 0)
         {
             ContadorDeTurnosEsperanzado = 0;
         }
+
 
 
         //if (Envenenado && veneno_icon == 0)

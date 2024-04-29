@@ -790,7 +790,7 @@ public class CombatController : MonoBehaviour
                 if (Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion == 0)
                 {
                     Player.GetComponent<PlayerController>().Transformacion = false;
-                    Player.GetComponent<PlayerController>().debilidad_icon = 0;
+                    Player.GetComponent<PlayerController>().transformacion_icon = 0;
                     Player.GetComponent<PlayerController>().EliminarSpell(4);
                 }
 

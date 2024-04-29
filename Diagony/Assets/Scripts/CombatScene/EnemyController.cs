@@ -119,17 +119,17 @@ public class EnemyController : MonoBehaviour
         {
             //sumarle a la x 0.4f
             x_inicial_spell = 0.95f;
-            y_inicial_spell = 2.5f;
+            y_inicial_spell = 2.4f;
         }
         else if (Id == 1)
         {
             x_inicial_spell = 2.95f;
-            y_inicial_spell = 1.5f;
+            y_inicial_spell = 1.4f;
         }
         else
         {
             x_inicial_spell = 4.95f;
-            y_inicial_spell = 0.5f;
+            y_inicial_spell = 0.4f;
         }
 
         for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)

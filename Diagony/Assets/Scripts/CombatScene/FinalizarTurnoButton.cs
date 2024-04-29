@@ -118,6 +118,7 @@ public class FinalizarTurnoButton : MonoBehaviour
 
             }
 
+
             if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra > 0)
             {
 
