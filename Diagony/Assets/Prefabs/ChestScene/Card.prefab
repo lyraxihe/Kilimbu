@@ -95,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -194,10 +194,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VariablesGlobales: {fileID: 0}
   ChestScene: {fileID: 0}
+  CardMana: {fileID: 0}
+  CanvasCards: {fileID: 0}
+  CanvasMana: {fileID: 0}
+  CardsMana: []
+  ListCardsMana: 
+  CardSprites: []
   CardAnimator: {fileID: 0}
   Id: 0
   Tipo: 0
   MouseOver: 0
+  ElegibleMana: 0
+  RandTipo: 0
 --- !u!61 &5281377689009903888
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -21,10 +21,10 @@ public class ChestController : MonoBehaviour
     [SerializeField] GameObject prefabCarta;
     public List<Sprite> CardSprites;
 
-    List<string> CardDescriptionsES = new List<string>() { "Te curas por completo", "+10 a la vida máxima del personaje", "Ganas 10 de oro en cada combate",
-                                                         "Una carta de tu elección cuesta 1 menos de maná", "+5 de vida después de cada combate" };
-    List<string> CardDescriptionsEN = new List<string>() { "You heal completely", "+10 to player's maximum health", "You earn +10 gold in every combat",
-                                                         "A card of your choice costs 1 less mana", "+5 health after every combat" };
+    List<string> CardDescriptionsES = new List<string>() { "Te curas por completo", "+10 a la vida máxima del personaje", "Ganas 10 de experiencia en cada enfrentamiento",
+                                                         "Una carta de tu elección cuesta 1 menos de maná", "+5 de vida después de cada enfrentamiento" };
+    List<string> CardDescriptionsEN = new List<string>() { "You heal completely", "+10 to player's maximum health", "You gain +10 experience in every confrontation",
+                                                         "A card of your choice costs 1 less mana", "+5 health after every confrontation" };
 
     public List<GameObject> ListCards = new List<GameObject>(); // Lista de los IDs de las cartas creadas
 
