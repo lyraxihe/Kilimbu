@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5eaa09bf94d18408ed68bf41e52a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VariablesGlobales: {fileID: 0}
   HealthLabel: {fileID: 7872630971472184622}
   HealthBarSlider: {fileID: 7872630970208688129}
   fill: {fileID: 7872630971910928422}
@@ -370,8 +371,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100/100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 968e04d42e7b35e4da9a64f6a71547f3, type: 2}
+  m_sharedMaterial: {fileID: 3716773500694273277, guid: 968e04d42e7b35e4da9a64f6a71547f3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
