@@ -1,0 +1,264 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.22f1 (b6c551784ba3) revision 11978065'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit Core' Language: 'es' Physical Memory: 16004 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.22f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker16
+-projectPath
+C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
+-logFile
+Logs/AssetImportWorker16.log
+-srvPort
+65373
+Successfully changed project path to: C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
+C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [31228] Host "[IP] 192.168.1.66 [Port] 0 [Flags] 2 [Guid] 3602034066 [EditorId] 3602034066 [Version] 1048832 [Id] WindowsEditor(7,yu) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [31228] Host "[IP] 192.168.1.66 [Port] 0 [Flags] 2 [Guid] 3602034066 [EditorId] 3602034066 [Version] 1048832 [Id] WindowsEditor(7,yu) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 87.14 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.22f1 (b6c551784ba3)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
+    Vendor:   NVIDIA
+    VRAM:     6023 MB
+    Driver:   30.0.15.1278
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56944
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004133 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 80.49 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.635 seconds
+Domain Reload Profiling:
+	ReloadAssembly (635ms)
+		BeginReloadAssembly (87ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (460ms)
+			LoadAssemblies (84ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (100ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (285ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (81ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (145ms)
+				ProcessInitializeOnLoadMethodAttributes (50ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.006179 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lyrax\OneDrive\Escritorio\kilimbu\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lyrax\OneDrive\Escritorio\kilimbu\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 68.91 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.071 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1072ms)
+		BeginReloadAssembly (124ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (19ms)
+		EndReloadAssembly (839ms)
+			LoadAssemblies (86ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (214ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (451ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (3ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (69ms)
+				BeforeProcessingInitializeOnLoad (75ms)
+				ProcessInitializeOnLoadAttributes (268ms)
+				ProcessInitializeOnLoadMethodAttributes (31ms)
+				AfterProcessingInitializeOnLoad (4ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.89 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3788 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 35 unused Assets / (56.5 KB). Loaded Objects now: 4251.
+Memory consumption went from 146.8 MB to 146.7 MB.
+Total: 4.155900 ms (FindLiveObjects: 0.342700 ms CreateObjectMapping: 0.238400 ms MarkObjects: 3.458000 ms  DeleteObjects: 0.115500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 714520.949373 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Ira/Danyo/7.png
+  artifactKey: Guid(ffc99291fd3266e43ae8827d293ee16e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Ira/Danyo/7.png using Guid(ffc99291fd3266e43ae8827d293ee16e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '243dd1aa81b7d44bdfc4bfee3ffb9b68') in 0.348345 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Ira/Attack/1.png
+  artifactKey: Guid(99b695de24c851d41b91a523c1c068f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Ira/Attack/1.png using Guid(99b695de24c851d41b91a523c1c068f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a05f8d46066c5a22c7a810a96dab848') in 0.197338 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Ira/Danyo/2.png
+  artifactKey: Guid(f6a58ae320736fd4689ff6f52524e1f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Ira/Danyo/2.png using Guid(f6a58ae320736fd4689ff6f52524e1f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '966aa9b979fca41f0631f06f8e703a31') in 0.174234 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Ira/Attack/9.png
+  artifactKey: Guid(46f66b844f622d24b98c89be8f38141e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Ira/Attack/9.png using Guid(46f66b844f622d24b98c89be8f38141e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd856ad1d68d7516610dc17c22fd3afea') in 0.188217 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Tristeza/Attack/9.png
+  artifactKey: Guid(0cff2da75a31bfa4fbc620dc2960fda1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Tristeza/Attack/9.png using Guid(0cff2da75a31bfa4fbc620dc2960fda1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1938329f596f0b9d5bd5ace4302da253') in 0.172721 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Sprites/CombatScene/Protagonista/Danyo/1.png
+  artifactKey: Guid(1f76f1015303e8744a5ca7e378a4f0c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Protagonista/Danyo/1.png using Guid(1f76f1015303e8744a5ca7e378a4f0c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1c171db13c2b49662c113635969bd1e') in 0.172634 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Ira/Danyo/4.png
+  artifactKey: Guid(d58d0652e977bf74fa685475b780ee53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Ira/Danyo/4.png using Guid(d58d0652e977bf74fa685475b780ee53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb742e9721a45d3fdb70f2b71c9b6227') in 0.182431 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Miedo/Attack/13.png
+  artifactKey: Guid(7c999ecb290692f4e940a6e30a640d76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Miedo/Attack/13.png using Guid(7c999ecb290692f4e940a6e30a640d76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c8ebfc39ba919e88a61a55fe6242c52') in 0.153106 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Tristeza/Idle/5.png
+  artifactKey: Guid(6a489e9d105c60f44a840bf4862f1d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Tristeza/Idle/5.png using Guid(6a489e9d105c60f44a840bf4862f1d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0399b9fb77e9d2bd5bc1c48688668f10') in 0.165112 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Sprites/CombatScene/Protagonista/Danyo/7.png
+  artifactKey: Guid(0f1ca9e875d97724ea3248d9626320be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Protagonista/Danyo/7.png using Guid(0f1ca9e875d97724ea3248d9626320be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5316ea6479b4570a6ff2b0b59ea5897c') in 0.182163 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Tristeza/Attack/5.png
+  artifactKey: Guid(04febf5b4e59dd14196bbdd934e47e9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Tristeza/Attack/5.png using Guid(04febf5b4e59dd14196bbdd934e47e9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '391576de675a8a8dec1f3b6e0c125344') in 0.154837 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Tristeza/Idle/7.png
+  artifactKey: Guid(43df17dc49f58004f94ca80f2b35eae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Tristeza/Idle/7.png using Guid(43df17dc49f58004f94ca80f2b35eae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d900f682e358e10ab526a5fdbec876e') in 0.174176 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Ira/Idle/5.png
+  artifactKey: Guid(f80c14c7e8897fc48b84d3a55e59a08f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Ira/Idle/5.png using Guid(f80c14c7e8897fc48b84d3a55e59a08f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '247aa0ca37d0ff59b914056474ca48ad') in 0.170460 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Miedo/Idle/2.png
+  artifactKey: Guid(b277fe2e61c26564a8bbe4072764a15c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Miedo/Idle/2.png using Guid(b277fe2e61c26564a8bbe4072764a15c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc9cb60593444c2f89d3d8b87cd567fd') in 0.181879 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Sprites/Backgrounds/MainMenuAnimation/4.png
+  artifactKey: Guid(1752bda8460b9bb4183a17cae834494c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Backgrounds/MainMenuAnimation/4.png using Guid(1752bda8460b9bb4183a17cae834494c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '856980aa41e0e3f613e296c39512caa3') in 0.122880 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Tristeza/Attack/11.png
+  artifactKey: Guid(4d3e0cac53782724c83279377c1c35c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Tristeza/Attack/11.png using Guid(4d3e0cac53782724c83279377c1c35c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b92983aa3418379e645b1957df23363') in 0.168979 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PausaButtonMap : MonoBehaviour
 {
@@ -16,13 +17,22 @@ public class PausaButtonMap : MonoBehaviour
     [SerializeField] TMP_Text SettingsText;
     [SerializeField] TMP_Text MainMenuText;
 
-  
+    // Music management
+    public GameObject Music;
+    public AudioSource MusicSource;
+    public AudioMixerGroup defaultGroup;
+    public AudioMixerGroup pausedGroup;
+
+
 
     void Start()
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         SettingsInterface = GameObject.Find("CanvasSettings").transform.GetChild(0);
-      
+        Music = GameObject.Find("Music");
+        MusicSource = Music.GetComponent<AudioSource>();
+        MusicSource.outputAudioMixerGroup = defaultGroup;
+
     }
 
 
@@ -70,6 +80,7 @@ public class PausaButtonMap : MonoBehaviour
             PanelPausa.SetActive(true);
             Time.timeScale = 0f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+            MusicSource.outputAudioMixerGroup = pausedGroup;
 
         }
         else
@@ -78,6 +89,7 @@ public class PausaButtonMap : MonoBehaviour
             PanelPausa.SetActive(false);
             Time.timeScale = 1f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+            MusicSource.outputAudioMixerGroup = defaultGroup;
 
         }
 
@@ -108,4 +120,24 @@ public class PausaButtonMap : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Cambiar la m sica cuando se cambia de escena.
+    /// </summary>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("ON SCENE LOADED");
+        Music = GameObject.Find("Music");
+        MusicSource = Music.GetComponent<AudioSource>();
+        //MusicSource.outputAudioMixerGroup = defaultGroup;
+    }
 }

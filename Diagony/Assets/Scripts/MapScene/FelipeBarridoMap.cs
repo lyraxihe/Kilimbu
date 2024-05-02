@@ -8,6 +8,7 @@ public class FelipeBarridoMap : MonoBehaviour
 
     [SerializeField] Animator Animator;  // Animator Barrido
     [SerializeField] Button DeckButton;  // Botón compendio, para controlar que no se puede tocar hasta que acabe la animación
+    [SerializeField] Button PauseButton;  // Botón compendio, para controlar que no se puede tocar hasta que acabe la animación
     public GameObject FirstRoom;   // Primera sala, para que no puedas acceder hasta que termine la animación
 
     // Start is called before the first frame update
@@ -29,8 +30,8 @@ public class FelipeBarridoMap : MonoBehaviour
 
         Animator.enabled = false;
         DeckButton.GetComponent<Button>().interactable = true; // Activa el botón
+        PauseButton.GetComponent<Button>().interactable = true; // Activa el botón
         FirstRoom.GetComponent<Button>().interactable = true; // Activa el botón
-
     }
 
 }
