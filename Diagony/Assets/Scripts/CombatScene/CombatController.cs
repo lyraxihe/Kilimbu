@@ -84,7 +84,10 @@ public class CombatController : MonoBehaviour
     private List<int> CardsTutorial = new List<int>() { 0, 7, 9, 17, 18}; // Lista de IDs de cartas usadas durante el tutorial
     private int TutorialTurn = 1;                                         // Contador que indica el turno del jugador durante el tutorial y que determinará las condiciones del mismo
 
-    
+    // SoundFX
+    public AudioSource useCardSound;
+
+
 
     private void Awake()
     {
@@ -940,8 +943,12 @@ public class CombatController : MonoBehaviour
         SpellText.transform.position = new Vector2(Character.transform.position.x + 2, Character.transform.position.y + 1);
     }
 
+    /// <summary>
+    /// Usar Carta
+    /// </summary>
     public void UsarCarta(int tipo, int enemigo) // enemigo -> 0: EnemyList[0] | 1: EnemyList[1] | 2: EnemyList[2] | 3: Jugador | 4: TODOS los enemigos (casi no se usa)
     {
+        useCardSound.Play();
 
         if (tipo == 0)
         {

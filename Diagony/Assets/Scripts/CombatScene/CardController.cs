@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class CardController : MonoBehaviour
 {
@@ -75,6 +76,9 @@ public class CardController : MonoBehaviour
 
     TMP_Text[] newText;
 
+    // Efectos de sonido
+    public AudioSource hoverCardSound;
+
     void Start()
     {
 
@@ -104,6 +108,8 @@ public class CardController : MonoBehaviour
 
         newText = GetComponentsInChildren<TMP_Text>();
         CosteMana = VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
+
+        hoverCardSound = GameObject.Find("SoundFX/CartaHover_SoundFX").GetComponent<AudioSource>(); //Get SoundFX
 
     }
 
@@ -135,6 +141,7 @@ public class CardController : MonoBehaviour
 
     private void OnMouseOver()
     {
+       // hoverCardSound.Play();
 
         if (!MouseDrag && /*CombatScene.GetComponent<CombatController>().ManaProtagonista > 0 &&*/ !VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa && !CombatScene.GetComponent<CombatController>().MovingArrow)
         {
