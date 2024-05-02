@@ -98,7 +98,7 @@ public class PausaButtonMap : MonoBehaviour
     public void Settings()
     {
 
-        PanelPausa.SetActive(!PanelPausa.activeSelf);
+      //  PanelPausa.SetActive(!PanelPausa.activeSelf);
         SettingsInterface.gameObject.SetActive(!SettingsInterface.gameObject.activeSelf);
 
     }
@@ -107,7 +107,7 @@ public class PausaButtonMap : MonoBehaviour
     {
 
         SettingsInterface.gameObject.SetActive(!SettingsInterface.gameObject.activeSelf);
-        PanelPausa.SetActive(!PanelPausa.activeSelf);
+       // PanelPausa.SetActive(!PanelPausa.activeSelf);
 
     }
 

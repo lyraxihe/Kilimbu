@@ -11,6 +11,7 @@ public class DeckButton : MonoBehaviour
     [SerializeField] Sprite VolverIcon;
     [SerializeField] Sprite CartasIcon;
     [SerializeField] GameObject Map;
+    [SerializeField] GameObject PauseButton;
     //[SerializeField] TMP_Text ButtonText;
 
     // Start is called before the first frame update
@@ -33,12 +34,14 @@ public class DeckButton : MonoBehaviour
             //ButtonText.text = "Volver";
             gameObject.GetComponent<Image>().sprite = VolverIcon;
             Map.SetActive(false);
+            PauseButton.SetActive(false);
         }
         else
         {
             //ButtonText.text = "Mis Cartas";
             gameObject.GetComponent<Image>().sprite = CartasIcon;
             Map.SetActive(true);
+            PauseButton.SetActive(true);
         }
 
         ScrollAreaCompendio.SetActive(!ScrollAreaCompendio.activeSelf);

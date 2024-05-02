@@ -15,7 +15,7 @@ C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-65373
+51989
 Successfully changed project path to: C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
 C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,11 +47,11 @@ C:/Users/lyrax/OneDrive/Escritorio/kilimbu/Kilimbu/Diagony
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [9628] Host "[IP] 192.168.1.66 [Port] 0 [Flags] 2 [Guid] 790105776 [EditorId] 790105776 [Version] 1048832 [Id] WindowsEditor(7,yu) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [29536] Host "[IP] 192.168.1.66 [Port] 0 [Flags] 2 [Guid] 2318383648 [EditorId] 2318383648 [Version] 1048832 [Id] WindowsEditor(7,yu) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [9628] Host "[IP] 192.168.1.66 [Port] 0 [Flags] 2 [Guid] 790105776 [EditorId] 790105776 [Version] 1048832 [Id] WindowsEditor(7,yu) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [29536] Host "[IP] 192.168.1.66 [Port] 0 [Flags] 2 [Guid] 2318383648 [EditorId] 2318383648 [Version] 1048832 [Id] WindowsEditor(7,yu) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 60.44 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 66.35 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.22f1 (b6c551784ba3)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Resources/UnitySubsystems
@@ -67,89 +67,89 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56888
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56172
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002536 seconds.
+Registered in 0.002839 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 66.73 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 60.25 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.451 seconds
+- Completed reload, in  0.509 seconds
 Domain Reload Profiling:
-	ReloadAssembly (451ms)
-		BeginReloadAssembly (55ms)
+	ReloadAssembly (509ms)
+		BeginReloadAssembly (60ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (330ms)
-			LoadAssemblies (53ms)
+		EndReloadAssembly (381ms)
+			LoadAssemblies (58ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (72ms)
+			SetupTypeCache (84ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (21ms)
-			SetupLoadedEditorAssemblies (201ms)
+			RebuildScriptCaches (23ms)
+			SetupLoadedEditorAssemblies (230ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (6ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (67ms)
+				RefreshPlugins (60ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (96ms)
-				ProcessInitializeOnLoadMethodAttributes (31ms)
+				ProcessInitializeOnLoadAttributes (125ms)
+				ProcessInitializeOnLoadMethodAttributes (37ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.003513 seconds.
+Registered in 0.004816 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\lyrax\OneDrive\Escritorio\kilimbu\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\lyrax\OneDrive\Escritorio\kilimbu\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 57.67 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 62.55 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.792 seconds
+- Completed reload, in  0.959 seconds
 Domain Reload Profiling:
-	ReloadAssembly (792ms)
-		BeginReloadAssembly (85ms)
+	ReloadAssembly (959ms)
+		BeginReloadAssembly (83ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (15ms)
-		EndReloadAssembly (638ms)
+			CreateAndSetChildDomain (14ms)
+		EndReloadAssembly (808ms)
 			LoadAssemblies (68ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (162ms)
+			SetupTypeCache (262ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (40ms)
-			SetupLoadedEditorAssemblies (333ms)
+			RebuildScriptCaches (50ms)
+			SetupLoadedEditorAssemblies (381ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (3ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (58ms)
+				RefreshPlugins (63ms)
 				BeforeProcessingInitializeOnLoad (70ms)
-				ProcessInitializeOnLoadAttributes (170ms)
-				ProcessInitializeOnLoadMethodAttributes (29ms)
+				ProcessInitializeOnLoadAttributes (210ms)
+				ProcessInitializeOnLoadMethodAttributes (30ms)
 				AfterProcessingInitializeOnLoad (4ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.54 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 0.73 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3788 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 35 unused Assets / (56.5 KB). Loaded Objects now: 4251.
-Memory consumption went from 146.8 MB to 146.7 MB.
-Total: 2.589800 ms (FindLiveObjects: 0.196000 ms CreateObjectMapping: 0.091100 ms MarkObjects: 2.233300 ms  DeleteObjects: 0.068400 ms)
+Unloading 35 unused Assets / (56.3 KB). Loaded Objects now: 4254.
+Memory consumption went from 147.3 MB to 147.3 MB.
+Total: 2.657300 ms (FindLiveObjects: 0.197600 ms CreateObjectMapping: 0.097900 ms MarkObjects: 2.289200 ms  DeleteObjects: 0.071600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -164,72 +164,134 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 709509.514251 seconds.
-  path: Assets/Sprites/interface/EffectParticleMat.mat
-  artifactKey: Guid(db99fb048ad215248b4523aec9523af2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/interface/EffectParticleMat.mat using Guid(db99fb048ad215248b4523aec9523af2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca38a3291223ec5b29e3e29f110eee14') in 0.110377 seconds 
+  Time since last request: 727058.011676 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka-Regular SDF.asset
+  artifactKey: Guid(968e04d42e7b35e4da9a64f6a71547f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka-Regular SDF.asset using Guid(968e04d42e7b35e4da9a64f6a71547f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '599b5ae23dcc593919c659a64d6fb78b') in 0.106338 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 10.850274 seconds.
-  path: Assets/Sprites/interface/DanyoParticleMat.mat
-  artifactKey: Guid(63017b87feb648d4ca6a8e8e05b931f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/interface/DanyoParticleMat.mat using Guid(63017b87feb648d4ca6a8e8e05b931f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e0a6e592f063f0f0b397341d077c0a5') in 0.031661 seconds 
+  Time since last request: 673.312609 seconds.
+  path: Assets/TextMesh Pro/Resources/TMP Settings.asset
+  artifactKey: Guid(3f5b5dff67a942289a9defa416b206f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/TMP Settings.asset using Guid(3f5b5dff67a942289a9defa416b206f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d39d3b365ae06f4a5d582e5614ba55e') in 0.030352 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 10.448417 seconds.
-  path: Assets/Sprites/interface/HPparticlesMat.mat
-  artifactKey: Guid(9b390f8f74adc884587d7619bb7ea969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/interface/HPparticlesMat.mat using Guid(9b390f8f74adc884587d7619bb7ea969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0327d77940b82f6da2ec43cc7551d6a8') in 0.028036 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2646.032014 seconds.
-  path: Assets/TextMesh Pro
-  artifactKey: Guid(f54d1bd14bd3ca042bd867b519fee8cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro using Guid(f54d1bd14bd3ca042bd867b519fee8cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5648c5ef36b7beab651a001a8d08867') in 0.019091 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2.986183 seconds.
-  path: Assets/TextMesh Pro/Fonts
-  artifactKey: Guid(6ab70aee4d56447429c680537fbf93ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts using Guid(6ab70aee4d56447429c680537fbf93ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c35bbd85dc86dd2ef332d439fd9c360') in 0.018017 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.040885 seconds.
-  path: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
-  artifactKey: Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/LiberationSans.ttf using Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3bd036785823e2281556a384dd6489b') in 0.068080 seconds 
+  Time since last request: 0.732692 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka-Bold SDF.asset
+  artifactKey: Guid(2b221330dcbd29944b24e7c88a81334e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka-Bold SDF.asset using Guid(2b221330dcbd29944b24e7c88a81334e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99f2d21c847d2435c928c261d1f09f46') in 0.097549 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000019 seconds.
-  path: Assets/TextMesh Pro/Fonts/Ubuntu-Light SDF.asset
-  artifactKey: Guid(816c7f09a15414a44bb83512ed6d1d94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/Ubuntu-Light SDF.asset using Guid(816c7f09a15414a44bb83512ed6d1d94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c848a3152252d880d37c46d11e8091ad') in 0.044321 seconds 
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiCondensed-Regular SDF.asset
+  artifactKey: Guid(b6c7f6f3422b84b4c893d92b115f8904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiCondensed-Regular SDF.asset using Guid(b6c7f6f3422b84b4c893d92b115f8904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd8c0a1f56e904253377ae0b290080da') in 0.039933 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/TextMesh Pro/Fonts/Ubuntu-LightItalic SDF.asset
-  artifactKey: Guid(28089f846cc45bc46bb9cb2b1fdc4f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/Ubuntu-LightItalic SDF.asset using Guid(28089f846cc45bc46bb9cb2b1fdc4f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bccd711fd0691c4eccc3f9f35558a735') in 0.067187 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/TextMesh Pro/Fonts/Ubuntu-BoldItalic SDF.asset
-  artifactKey: Guid(75877a81f7b081c47b3bcefd29655dd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/Ubuntu-BoldItalic SDF.asset using Guid(75877a81f7b081c47b3bcefd29655dd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8fbd0dc5f2dcc7f44e6d85ed23bd5d3') in 0.033089 seconds 
+  Time since last request: 0.000022 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiCondensed-Medium SDF.asset
+  artifactKey: Guid(bf6b44a9dea3cb344b58c339fef10cac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiCondensed-Medium SDF.asset using Guid(bf6b44a9dea3cb344b58c339fef10cac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a12b070d68bdb0bc39c91b1f3e374f4f') in 0.030884 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000021 seconds.
-  path: Assets/TextMesh Pro/Fonts/Ubuntu-MediumItalic SDF.asset
-  artifactKey: Guid(3a35dfc995b363246bc10125d25c30f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/Ubuntu-MediumItalic SDF.asset using Guid(3a35dfc995b363246bc10125d25c30f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ec101ce1b7ab9eb79a5a9ad2584c0b8') in 0.066055 seconds 
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka-Medium SDF.asset
+  artifactKey: Guid(9ccaed279af817249991a231778f6438) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka-Medium SDF.asset using Guid(9ccaed279af817249991a231778f6438) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90762b8dce7dbe08510da898ff2c74a2') in 0.039304 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/TextMesh Pro/Fonts/Ubuntu-Italic SDF.asset
-  artifactKey: Guid(184657d1139f6ab4d9c4e9434f24b80c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/Ubuntu-Italic SDF.asset using Guid(184657d1139f6ab4d9c4e9434f24b80c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7c550a23877d579c301c9f5dfc94c75') in 0.110055 seconds 
+  Time since last request: 0.000072 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiCondensed-SemiBold SDF.asset
+  artifactKey: Guid(a288d90f3a54d2643864bda53b8338aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiCondensed-SemiBold SDF.asset using Guid(a288d90f3a54d2643864bda53b8338aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89e428de41e973e49aeb6364fe557b40') in 0.037756 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiExpanded-Light SDF.asset
+  artifactKey: Guid(7c18bdb298226ab479d3e5ad1d0a550c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka_SemiExpanded-Light SDF.asset using Guid(7c18bdb298226ab479d3e5ad1d0a550c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8be5323a4af6c5fd74bedc9980fcec5') in 0.032626 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka_Expanded-Medium SDF.asset
+  artifactKey: Guid(fd15deacbaf0c014bb2de09a7eacfccd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka_Expanded-Medium SDF.asset using Guid(fd15deacbaf0c014bb2de09a7eacfccd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '773573afbbcbf401815712a0c84474c7') in 0.030986 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Fredoka_Expanded-Regular SDF.asset
+  artifactKey: Guid(83142ca4d64a36f4d991a4b7a5092707) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Fredoka_Expanded-Regular SDF.asset using Guid(83142ca4d64a36f4d991a4b7a5092707) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5596f680e53dfec1ae9e5435bf018055') in 0.041537 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.479108 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Mukta-ExtraLight SDF.asset
+  artifactKey: Guid(dad037ad62d6d9e4397ca76a8afd458a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Mukta-ExtraLight SDF.asset using Guid(dad037ad62d6d9e4397ca76a8afd458a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43821b1f5efb809fa573032465818f0e') in 0.036758 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.067413 seconds.
+  path: Assets/TextMesh Pro/Resources/myFonts/Mukta-Light SDF.asset
+  artifactKey: Guid(45c98941765d354468834020ccc9fe07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/myFonts/Mukta-Light SDF.asset using Guid(45c98941765d354468834020ccc9fe07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ca9517af78c5249bc7e5fc77fba2ff7') in 0.061329 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003684 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lyrax\OneDrive\Escritorio\kilimbu\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lyrax\OneDrive\Escritorio\kilimbu\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.80 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.047 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1048ms)
+		BeginReloadAssembly (135ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (38ms)
+		EndReloadAssembly (837ms)
+			LoadAssemblies (91ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (224ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (414ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (77ms)
+				ProcessInitializeOnLoadAttributes (278ms)
+				ProcessInitializeOnLoadMethodAttributes (44ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.86 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3764 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 22 unused Assets / (24.7 KB). Loaded Objects now: 4300.
+Memory consumption went from 149.5 MB to 149.5 MB.
+Total: 3.840800 ms (FindLiveObjects: 0.282900 ms CreateObjectMapping: 0.170000 ms MarkObjects: 3.336300 ms  DeleteObjects: 0.050200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file
 AssetImportWorker is now disconnected from the server
 Process exiting
 Exiting without the bug reporter. Application will terminate with return code 0
