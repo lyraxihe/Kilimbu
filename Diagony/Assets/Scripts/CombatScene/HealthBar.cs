@@ -83,7 +83,7 @@ public class HealthBar : MonoBehaviour
             }
             else
             {
-                Destroy(_enemy);
+                //Destroy(_enemy);
                 Destroy(TextCharacter);
             }
 

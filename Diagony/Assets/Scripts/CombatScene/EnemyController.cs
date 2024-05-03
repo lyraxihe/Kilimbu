@@ -93,6 +93,17 @@ public class EnemyController : MonoBehaviour
 
     private bool PlayerRecibeDanyo; // Cuando el enemigo realiza la animación de ataque, indica si el player debe realizar la animación de recibir daño | false - no recibe daño | true - si recibe daño
 
+    // Animation Muerte
+    private bool EndMuerteTransformacion;
+    private List<Vector3> ListPositionsMuerte;
+    private Vector3 PositionMuerte;
+    public bool Derrotado; // Controla si el enemigo ha sido derrotado, para que no haga acciones antes de ejecutar su animación de derrota
+
+    // Partículas
+    public ParticleSystem HealParticle;
+    public ParticleSystem EffectParticle;
+    public ParticleSystem DamageParticle;
+
     void Start()
     {
         SoloTristeza = false;
@@ -193,7 +204,12 @@ public class EnemyController : MonoBehaviour
 
         PlayerRecibeDanyo = false;
 
-    }
+        // Animation Muerte
+        EndMuerteTransformacion = false;
+        ListPositionsMuerte = new List<Vector3> { new Vector3(-5, -1, transform.position.z), new Vector3(-6, -1, transform.position.z), new Vector3(-7, -1, transform.position.z) };
+        Derrotado = false;
+
+}
 
     // Update is called once per frame
     void Update()
@@ -214,6 +230,27 @@ public class EnemyController : MonoBehaviour
                 //StartCoroutine(EnemyList[0].GetComponent<EnemyController>().ControlAcumulacionDanyoBoss());
                 ControlAcumulacionDanyoBoss();
         ShowName();
+
+        if(EndMuerteTransformacion)
+        {
+
+            transform.position = Vector3.Lerp(transform.position, PositionMuerte, 0.01f);
+
+            if (Vector3.Distance(transform.position, PositionMuerte) < 0.05f)
+            {
+
+                EndMuerteTransformacion = false;
+                transform.position = PositionMuerte;
+
+                EnemyAnimator.SetTrigger("muerte_idle");
+
+                CombatScene.GetComponent<CombatController>().EliminarEnemig0(Id);
+                CombatScene.GetComponent<CombatController>().victoriaDerrota();
+
+            }
+
+        }
+
     }
 
     //public void OnMouseOver()
@@ -285,14 +322,16 @@ public class EnemyController : MonoBehaviour
         if (HealthEnemigo <= 0)
         {
 
+            Derrotado = true;
             HealthEnemigo = 0;
-            CombatScene.GetComponent<CombatController>().EliminarEnemig0(Id);
+            EnemyAnimator.SetTrigger("muerte");
+            //CombatScene.GetComponent<CombatController>().EliminarEnemig0(Id);
             for (int i = 0; i < ActiveSpell; i++)
             {
                 Destroy(ActiveSpellGameobject[i]);
             }
-            CombatScene.GetComponent<CombatController>().victoriaDerrota();
-            Destroy(gameObject);
+            //CombatScene.GetComponent<CombatController>().victoriaDerrota();
+            //Destroy(gameObject);
 
         }
 
@@ -413,6 +452,8 @@ public class EnemyController : MonoBehaviour
                     StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject, false));
 
                     EnemyAnimator.SetBool("atacar", true);
+
+                    HealParticle.Play();
 
                 }
                 else
@@ -990,10 +1031,15 @@ public class EnemyController : MonoBehaviour
             bloqueado_icon = 0;
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 0)
+                if(ActiveSpellGameobject[i] != null)
                 {
-                    ReestructuraIcons(i);
-                    break;
+
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 0)
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+
                 }
             }
         }
@@ -1005,10 +1051,15 @@ public class EnemyController : MonoBehaviour
             veneno_icon = 0;
             for (int i = 0; i<ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 4)
+                if(ActiveSpellGameobject[i] != null)
                 {
-                    ReestructuraIcons(i);
-                    break;
+
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 4)
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+
                 }
             }
 
@@ -1021,10 +1072,15 @@ public class EnemyController : MonoBehaviour
             debilidad_icon = 0;
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 1)
+                if(ActiveSpellGameobject[i] != null)
                 {
-                    ReestructuraIcons(i);
-                    break;
+
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 1)
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+
                 }
             }
         }
@@ -1036,10 +1092,15 @@ public class EnemyController : MonoBehaviour
             fuerte_icon = 0;
             for (int i = 0; i < ActiveSpell; i++)
             {
-                if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 2)
+                if(ActiveSpellGameobject[i] != null)
                 {
-                    ReestructuraIcons(i);
-                    break;
+
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 2)
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+
                 }
             }
         }
@@ -1241,10 +1302,24 @@ public class EnemyController : MonoBehaviour
 
     void ShowName()
     {
-        if (showName || showName2)
-            Name.gameObject.SetActive(true);
-        else if (!showName && !showName2)
-            Name.gameObject.SetActive(false);
+        if(Name != null)
+        {
+
+            if (showName || showName2)
+                Name.gameObject.SetActive(true);
+            else if (!showName && !showName2)
+                Name.gameObject.SetActive(false);
+
+        }
+    }
+
+    public void EndMuerteAnimation()
+    {
+
+        EndMuerteTransformacion = true;
+        CombatScene.GetComponent<CombatController>().NumEnemiesDefeat++;
+        PositionMuerte = ListPositionsMuerte[CombatScene.GetComponent<CombatController>().NumEnemiesDefeat - 1];
+
     }
 
 }

@@ -50,6 +50,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] int victoria_etc;
     public int numTristeza;
     public bool ManaReducido; // Controla que sólo se pueda reducir Maná una vez por turno
+    public int NumEnemiesDefeat; // Cuenta el número de enemigos derrotados durante el combate
 
     public int RecompensaDinero;
     public int ContadorTurnos;
@@ -141,6 +142,7 @@ public class CombatController : MonoBehaviour
 
         numTristeza = 0;
         ManaReducido = false;
+        NumEnemiesDefeat = 0;
 
         CreatePlayer();  // Crea al jugador
         CreateEnemies(); // Crea los enemigos
@@ -416,14 +418,14 @@ public class CombatController : MonoBehaviour
 
                 if (Tutorial) // Si se trata del tutorial la creación de cartas viene predeterminada hasta el turno 6
                 {
-                    Debug.Log("Posición: " + tutorialRand);
+
                     // Si no es el primer turno del tutorial y el random no ha sido generado todavía, lo genera
                     if (TutorialTurn != 1 && !tutorialRandomDone)
                     {
 
                         tutorialRand = Random.Range(0, 5); // Random para elegir una posición de las 5 cartas en mano del jugador en la que se colacará la carta diferente
                         tutorialRandomDone = true;
-                        Debug.Log("Posición: " + tutorialRand);
+
                     }
 
                     if(TutorialTurn >= 6)
@@ -437,25 +439,13 @@ public class CombatController : MonoBehaviour
                     {
 
                         if (TutorialTurn == 2)
-                        {
                             cardType = CardsTutorial[1];
-                            Debug.Log("Turno: " + TutorialTurn);
-                        }
                         else if (TutorialTurn == 3)
-                        {
                             cardType = CardsTutorial[2];
-                            Debug.Log("Turno: " + TutorialTurn);
-                        }
                         else if (TutorialTurn == 4)
-                        {
                             cardType = CardsTutorial[3];
-                            Debug.Log("Turno: " + TutorialTurn);
-                        }
                         else
-                        {
                             cardType = CardsTutorial[4];
-                            Debug.Log("Turno: " + TutorialTurn);
-                        }
 
                     }
                     else
@@ -488,7 +478,6 @@ public class CombatController : MonoBehaviour
                             else
                                 reroll = false;
 
-                            Debug.Log("Id: " + i + " | Vida del Jugador superior al 95%");
                             // Fuerza el reroll de las primeras 3 cartas en el caso de que sean de curación (id 7 - 12)
                             if (reroll && contReroll < 3)
                             {
@@ -496,7 +485,6 @@ public class CombatController : MonoBehaviour
                                 if (TotalCards[cardType] >= 7 && TotalCards[cardType] <= 12)
                                 {
 
-                                    Debug.Log("Reroll, era de curación - " + TotalCards[cardType]);
                                     canCreate = false;
                                     contReroll--;
 
@@ -504,10 +492,8 @@ public class CombatController : MonoBehaviour
 
                                 contReroll++;
                                 rerollIncreased = true;
-                                Debug.Log("contReroll++");
+
                             }
-                            else
-                                Debug.Log("No hace falta reroll");
 
                         }
                         else if (healthProttagonista < (maxHealthProtagonista * 0.3f)) // Si la vida del jugador es inferior al 30%
@@ -519,7 +505,6 @@ public class CombatController : MonoBehaviour
                             else
                                 reroll = false;
 
-                            Debug.Log("Id: " + i + " | Vida del Jugador inferior al 30%");
                             // Las 3 primeras cartas tienen el procentaje "falseado" (50% - 0: curación | 1: normal)
                             if (reroll && contReroll < 3)
                             {
@@ -527,25 +512,19 @@ public class CombatController : MonoBehaviour
                                 if (Random.Range(0, 2) == 0)
                                 {
 
-                                    Debug.Log("50% - sale curación");
                                     // Fuerza el reroll hasta que la carta sea de curación (id 7 - 12)
                                     do
                                     {
                                         cardType = Random.Range(0, TotalCards.Count); // Aleatorio entre las cartas totales del Jugador para el combate
-                                        Debug.Log("cardType: " + TotalCards[cardType]);
+
                                     } while (TotalCards[cardType] < 7 || TotalCards[cardType] > 12);
 
                                 }
-                                else
-                                    Debug.Log("50% - sale normal");
 
                                 contReroll++;
                                 rerollIncreased = true;
-                                Debug.Log("contReroll++");
 
                             }
-                            else
-                                Debug.Log("No hace falta reroll (es más de la tercera carta)");
 
                         }
 
@@ -554,12 +533,7 @@ public class CombatController : MonoBehaviour
                             canCreate = false;
                             // Si la carta había incrementado el contReroll lo decrementa, si no no
                             if (rerollIncreased)
-                            {
-
                                 contReroll--;
-                                Debug.Log("contReroll--");
-
-                            }
                         }
 
                     } while (!canCreate);
@@ -595,7 +569,6 @@ public class CombatController : MonoBehaviour
                 clon.transform.SetParent(CanvasCartas, false);
                 //clon.GetComponent<CardController>().TextTitle = CardTitles[i];
                 //clon.GetComponent<CardController>().TextDescription = CardDescriptions[i];
-                Debug.Log("Carta tipo: " + cardType);
 
                 CardList.Add(clon);                                         // Almacena la carta en la lista
                 yield return new WaitForSeconds(0.1f);
@@ -610,7 +583,6 @@ public class CombatController : MonoBehaviour
                 ControlEsperanzado(true);
             else
                 ControlEsperanzado(false);
-            Debug.Log("ContReroll: " + contReroll);
 
             TutorialTurn++;
 
@@ -867,7 +839,8 @@ public class CombatController : MonoBehaviour
             {
 
                 yield return new WaitForSeconds(1);
-                EnemyList[i].GetComponent<EnemyController>().Atacar();
+                if(!EnemyList[i].GetComponent<EnemyController>().Derrotado)
+                    EnemyList[i].GetComponent<EnemyController>().Atacar();
 
             }
 
@@ -1769,7 +1742,7 @@ public class CombatController : MonoBehaviour
         else if (EnemyList.Count == 0 && !VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
         {
             RecompensaVictoria = true;
-            Debug.Log("victoria lol");
+
             VictoriaDerrotaPanel.SetActive(true);
 
             if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
@@ -1795,9 +1768,9 @@ public class CombatController : MonoBehaviour
 
                 VictoriaDerrotaText.text = "VICTORY";
                 if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
-                    RecompensaText.text = "You earn " + RecompensaDinero + " gold";
+                    RecompensaText.text = "You gain " + RecompensaDinero + " experience";
                 else
-                    RecompensaText.text = "You earn " + RecompensaDinero + " + (Passive: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " gold";
+                    RecompensaText.text = "You gain " + RecompensaDinero + " + (Passive: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " experience";
 
             }
             else                                                                  // Spanish
@@ -1805,15 +1778,15 @@ public class CombatController : MonoBehaviour
 
                 VictoriaDerrotaText.text = "VICTORIA";
                 if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
-                    RecompensaText.text = "Obtienes " + RecompensaDinero + " de oro";
+                    RecompensaText.text = "Obtienes " + RecompensaDinero + " de experiencia";
                 else
-                    RecompensaText.text = "Obtienes " + RecompensaDinero + " + (Pasiva: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " de oro";
+                    RecompensaText.text = "Obtienes " + RecompensaDinero + " + (Pasiva: " + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero + ")" + " de experiencia";
 
             }
 
             if (victoria_etc == 0 && RecompensaVictoria == true)
             {
-                Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
+
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += (RecompensaDinero + VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero);
                 victoria_etc += 1;
 
@@ -1828,7 +1801,7 @@ public class CombatController : MonoBehaviour
         {
 
             RecompensaVictoria = true;
-            Debug.Log("victoria lol");
+
             VictoriaDerrotaPanel.SetActive(true);
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
