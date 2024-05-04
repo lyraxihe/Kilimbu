@@ -104,6 +104,15 @@ public class EnemyController : MonoBehaviour
     public ParticleSystem EffectParticle;
     public ParticleSystem DamageParticle;
 
+    //SoundFX Management
+    public AudioSource AtaqueEmocionSound;
+    public AudioSource CurarEmocionSound;
+    public AudioSource AplicarEfectoDeEmocionSound;
+    public AudioSource IntegrarEmocionSound;
+
+
+
+
     void Start()
     {
         SoloTristeza = false;
@@ -209,7 +218,11 @@ public class EnemyController : MonoBehaviour
         ListPositionsMuerte = new List<Vector3> { new Vector3(-5, -1, transform.position.z), new Vector3(-6, -1, transform.position.z), new Vector3(-7, -1, transform.position.z) };
         Derrotado = false;
 
-}
+        AtaqueEmocionSound = GameObject.Find("AtaqueEmocion_SoundFX").GetComponent<AudioSource>();
+        CurarEmocionSound = GameObject.Find("CurarEmocion_SoundFX").GetComponent<AudioSource>();
+        AplicarEfectoDeEmocionSound = GameObject.Find("AplicarEfectoDeEmocion_SoundFX").GetComponent<AudioSource>();
+        IntegrarEmocionSound = GameObject.Find("IntegrarEmocion_SoundFX").GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -1160,7 +1173,6 @@ public class EnemyController : MonoBehaviour
 
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Arrow")
@@ -1218,6 +1230,7 @@ public class EnemyController : MonoBehaviour
 
         }
     }
+
     public IEnumerator DoubleAttack(int damageAmount, float tiempo)
     {
 
@@ -1329,6 +1342,7 @@ public class EnemyController : MonoBehaviour
     {
        showName2 = true;
     }
+
     public void OnMouseExit()
     {
         showName2 = false;

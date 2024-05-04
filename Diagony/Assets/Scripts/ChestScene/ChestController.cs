@@ -35,6 +35,12 @@ public class ChestController : MonoBehaviour
 
     [SerializeField] TMP_Text SelectCardManaText;
 
+    // SoundFX Management
+    AudioSource CofreSound;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +50,9 @@ public class ChestController : MonoBehaviour
         CartasCreadas = false;
         CardSelected = false;
         Exit = false;
+
+        // Get SounFx's
+        CofreSound = GameObject.Find("Cofre_SoundFX").GetComponent<AudioSource>();
 
     }
 
@@ -68,6 +77,7 @@ public class ChestController : MonoBehaviour
 
         if(!CartasCreadas)
         {
+            CofreSound.Play();
 
             CartasCreadas = true;
             GetComponent<SpriteRenderer>().sprite = Sprites[1];

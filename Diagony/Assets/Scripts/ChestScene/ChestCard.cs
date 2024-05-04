@@ -60,6 +60,14 @@ public class ChestCard : MonoBehaviour
 
     TMP_Text[] newText;
 
+    // SoundFX Management
+    public AudioSource ElegirCartaSound;
+    public AudioSource MejoraCofreSound;
+    public AudioSource CurarProtaSound;
+
+
+
+
     void Start()
     {
         
@@ -74,6 +82,10 @@ public class ChestCard : MonoBehaviour
         MouseOver = false;
         Abajo = true;
 
+        // Get SounFx's
+        ElegirCartaSound = GameObject.Find("ElegirCartaCofre_SoundFX").GetComponent<AudioSource>();
+        MejoraCofreSound = GameObject.Find("MejoraCofre_SoundFX").GetComponent<AudioSource>();
+        CurarProtaSound = GameObject.Find("CurarProta_SoundFX").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -161,6 +173,8 @@ public class ChestCard : MonoBehaviour
                     transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     CanvasCards.SetActive(false);
 
+                    ElegirCartaSound.Play();
+
                     for (int i = 0; i < 3; i++)
                     {
 
@@ -223,12 +237,20 @@ public class ChestCard : MonoBehaviour
                 {
 
                     if (Tipo == 0)
+                    {
+
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista = VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista;
+
+                        CurarProtaSound.Play();
+
+                    }
                     else if (Tipo == 1)
                     {
 
                         VariablesGlobales.GetComponent<VariablesGlobales>().MaxHealthProtagonista += 10;
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
+
+                        MejoraCofreSound.Play();
 
                     }
                     else if (Tipo == 2)
@@ -237,12 +259,16 @@ public class ChestCard : MonoBehaviour
                         VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero = true;
                         VariablesGlobales.GetComponent<VariablesGlobales>().PasivaDinero += 10;
 
+                        MejoraCofreSound.Play();
+
                     }
                     else
                     {
 
                         VariablesGlobales.GetComponent<VariablesGlobales>().PasivaCurarseCombate = true;
                         VariablesGlobales.GetComponent<VariablesGlobales>().PasivaCuracionCombate += 5;
+
+                        MejoraCofreSound.Play();
 
                     }
 

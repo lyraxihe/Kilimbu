@@ -14,6 +14,13 @@ public class CanvasSingleton : MonoBehaviour
     [SerializeField] GameObject Map;
     [SerializeField] GameObject HealthBarPersonaje;
     public bool VerMapa;
+    public bool barridoTerminado;
+
+    // SoundFX Management
+    public AudioSource LlegarTopeMapaSound;
+
+
+
 
     private void Awake() //sigleton
     {
@@ -34,9 +41,12 @@ public class CanvasSingleton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        barridoTerminado = false;
         VerMapa = false;
         Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-3850, Content.GetComponent<RectTransform>().anchoredPosition.y);
+
+        // Find SoundFx
+        LlegarTopeMapaSound = GameObject.Find("LlegarTopeMapa_SoundFX").GetComponent<AudioSource>();
 
     }
 
@@ -63,6 +73,11 @@ public class CanvasSingleton : MonoBehaviour
 
             Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(350, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
+            if (barridoTerminado)
+            {
+                LlegarTopeMapaSound.Play();
+            }
+               
 
         }
         else if (Content.GetComponent<RectTransform>().anchoredPosition.x < -5005)
@@ -71,6 +86,10 @@ public class CanvasSingleton : MonoBehaviour
             Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5000, Content.GetComponent<RectTransform>().anchoredPosition.y);
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
 
+            if (barridoTerminado)
+            {
+                LlegarTopeMapaSound.Play();
+            }
         }
         else
             ScrollArea.GetComponent<ScrollRect>().enabled = true;

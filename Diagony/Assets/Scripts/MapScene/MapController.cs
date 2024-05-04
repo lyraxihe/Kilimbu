@@ -60,6 +60,9 @@ public class MapController : MonoBehaviour
     // Settings Interface
     [SerializeField] Canvas CanvasSettings;
 
+
+
+
     private void Awake() //sigleton
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");

@@ -91,6 +91,12 @@ public class CombatController : MonoBehaviour
     // Music management
     public GameObject Music;
     public AudioSource MusicSource;
+    public AudioSource AtaqueProtaSound;
+    public AudioSource CurarProtaSound;
+    public AudioSource AplicarEfectoDeProtaSound;
+    public AudioSource VictoriaSound;
+    public AudioSource VictoriaMusic;
+    public AudioSource DerrotaSound;
 
 
 

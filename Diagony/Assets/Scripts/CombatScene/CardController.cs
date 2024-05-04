@@ -78,6 +78,7 @@ public class CardController : MonoBehaviour
 
     // Efectos de sonido
     public AudioSource hoverCardSound;
+    public AudioSource SinEnergiaSound; 
 
     void Start()
     {
@@ -110,6 +111,7 @@ public class CardController : MonoBehaviour
         CosteMana = VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
 
         hoverCardSound = GameObject.Find("SoundFX/CartaHover_SoundFX").GetComponent<AudioSource>(); //Get SoundFX
+        SinEnergiaSound = GameObject.Find("SinEnergia_SoundFX").GetComponent<AudioSource>(); //Get SoundFX
 
     }
 
@@ -172,6 +174,12 @@ public class CardController : MonoBehaviour
                     }
 
                 }
+                else
+                {
+                    // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH SIN ENERGIA
+                    SinEnergiaSound.Play();
+                    Debug.Log("SIN ENERGIA");
+                }
 
            }
 
@@ -193,8 +201,6 @@ public class CardController : MonoBehaviour
         }
 
     }
-
-
 
     private void OnMouseExit()
     {
@@ -911,6 +917,7 @@ public class CardController : MonoBehaviour
             //gameObject.GetComponent<SpriteRenderer>().sprite = curar10;
         }
     }
+
     //public void AnimacionCarta()
     //{
 

@@ -4927,8 +4927,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1320623602816348134, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f074e790f13934a479be48e4e4346e2d, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -10416,7 +10416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3849.9998, y: -68}
+  m_AnchoredPosition: {x: -3849.9995, y: -68}
   m_SizeDelta: {x: 0, y: -544}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1302619614
@@ -15051,6 +15051,7 @@ MonoBehaviour:
   Map: {fileID: 879856728}
   HealthBarPersonaje: {fileID: 8308465935755344257}
   VerMapa: 0
+  LlegarTopeMapaSound: {fileID: 0}
 --- !u!1 &2122190195
 GameObject:
   m_ObjectHideFlags: 0
