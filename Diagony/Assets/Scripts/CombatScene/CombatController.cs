@@ -55,6 +55,10 @@ public class CombatController : MonoBehaviour
     public int RecompensaDinero;
     public int ContadorTurnos;
 
+    // Para las corrutinas, para que espere y no pasen ambas acciones a la vez
+    private float esperaRobarVida = 0.85f;
+    private float esperaAtaquePropio = 0.85f;
+
     [SerializeField] GameObject GameObject_Dmg_text;
     // [SerializeField] TMP_Text Dmg_text;
 
@@ -92,10 +96,16 @@ public class CombatController : MonoBehaviour
     public GameObject Music;
     public AudioSource MusicSource;
     public AudioSource AtaqueProtaSound;
+    public AudioSource AtaqueDobleProtaSound;
     public AudioSource CurarProtaSound;
     public AudioSource AplicarEfectoDeProtaSound;
+    public AudioSource AtaqueEmocionSound;
+    public AudioSource CurarEmocionSound;
+    public AudioSource AplicarEfectoDeEmocionSound;
     public AudioSource VictoriaSound;
     public AudioSource VictoriaMusic;
+    public AudioSource VictoriaBossSound;
+    public AudioSource VictoriaBossMusic;
     public AudioSource DerrotaSound;
 
 
@@ -106,7 +116,9 @@ public class CombatController : MonoBehaviour
         victoria_etc = 0;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         Traduction = GameObject.Find("Traduction");
+
     }
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -947,6 +959,7 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+                PlayCurarProtaSound();
 
             }
             else
@@ -957,6 +970,7 @@ public class CombatController : MonoBehaviour
                 //le puse "EnemyList[0]" porque es el que marca arriba para restarle la vida
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+                PlayAtaqueProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1000,6 +1014,7 @@ public class CombatController : MonoBehaviour
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
                     StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[i], false));
                     EnemyList[i].GetComponent<EnemyController>().HealParticle.Play();
+                    PlayCurarProtaSound();
 
                 }
                 else
@@ -1008,6 +1023,7 @@ public class CombatController : MonoBehaviour
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                     StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[i], false));
                     EnemyList[i].GetComponent<EnemyController>().DamageParticle.Play();
+                    PlayAtaqueProtaSound();
 
                     if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                         EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1045,6 +1061,7 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+                PlayCurarProtaSound();
 
             }
             else
@@ -1053,6 +1070,7 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+                PlayAtaqueProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1088,6 +1106,7 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+                PlayCurarProtaSound();
 
             }
             else
@@ -1096,6 +1115,7 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+                PlayAtaqueProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1134,6 +1154,7 @@ public class CombatController : MonoBehaviour
             ManaProtagonista += 2;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
         }
         else if (tipo == 7)
@@ -1145,6 +1166,7 @@ public class CombatController : MonoBehaviour
             StartCoroutine(CreateDmgHealText(true, 5, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().HealParticle.Play();
+            PlayCurarProtaSound();
 
         }
         else if (tipo == 8)
@@ -1156,6 +1178,7 @@ public class CombatController : MonoBehaviour
             StartCoroutine(CreateDmgHealText(true, 10, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().HealParticle.Play();
+            PlayCurarProtaSound();
 
         }
         else if (tipo == 9)
@@ -1171,6 +1194,9 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+                PlayCurarProtaSound();
+
+                StartCoroutine(WaitForSeconds(esperaRobarVida)); // Esperar para que no pase todo a la vez
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 0;
                 StartCoroutine(CreateDmgHealText(true, 0, Player, false));
@@ -1182,10 +1208,14 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+                PlayAtaqueProtaSound();
+
+                StartCoroutine(WaitForSeconds(esperaRobarVida)); // Esperar para que no pase todo a la vez
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
                 Player.GetComponent<PlayerController>().HealParticle.Play();
+                PlayCurarProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1208,7 +1238,6 @@ public class CombatController : MonoBehaviour
             }
 
         }
-
         else if (tipo == 10)
         {
             VariablesGlobales.GetComponent<VariablesGlobales>().CardUses[10]++;
@@ -1222,6 +1251,9 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+                PlayCurarProtaSound();
+
+                StartCoroutine(WaitForSeconds(esperaRobarVida)); // Esperar para que no pase todo a la vez
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 0;
                 StartCoroutine(CreateDmgHealText(true, 0, Player, false));
@@ -1233,10 +1265,14 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
                 EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+                PlayAtaqueProtaSound();
+
+                StartCoroutine(WaitForSeconds(esperaRobarVida)); // Esperar para que no pase todo a la vez
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
                 Player.GetComponent<PlayerController>().HealParticle.Play();
+                PlayCurarProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1277,6 +1313,7 @@ public class CombatController : MonoBehaviour
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
                     StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[i], false));
                     EnemyList[i].GetComponent<EnemyController>().HealParticle.Play();
+                    PlayCurarProtaSound();
 
                     contTransformados++;
 
@@ -1287,6 +1324,7 @@ public class CombatController : MonoBehaviour
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                     StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[i], false));
                     EnemyList[i].GetComponent<EnemyController>().DamageParticle.Play();
+                    PlayAtaqueProtaSound();
 
                     if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                         EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1307,11 +1345,14 @@ public class CombatController : MonoBehaviour
 
             }
 
+            StartCoroutine(WaitForSeconds(esperaRobarVida)); // Esperar para que no pase todo a la vez
+
             //ControlEsperanzado();
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i + contTransformados));
             StartCoroutine(CreateDmgHealText(true, (danyo * (i + contTransformados)), Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().HealParticle.Play();
+            PlayCurarProtaSound();
 
         }
         else if (tipo == 12)
@@ -1332,6 +1373,7 @@ public class CombatController : MonoBehaviour
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
                     StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[i], false));
                     EnemyList[i].GetComponent<EnemyController>().HealParticle.Play();
+                    PlayCurarProtaSound();
 
                     contTransformados++;
 
@@ -1342,6 +1384,7 @@ public class CombatController : MonoBehaviour
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                     StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[i], false));
                     EnemyList[i].GetComponent<EnemyController>().DamageParticle.Play();
+                    PlayAtaqueProtaSound();
 
                     if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                         EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1362,11 +1405,14 @@ public class CombatController : MonoBehaviour
 
             }
 
+            StartCoroutine(WaitForSeconds(esperaRobarVida)); // Esperar para que no pase todo a la vez
+
             //ControlEsperanzado();
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i - contTransformados));
             StartCoroutine(CreateDmgHealText(true, (danyo * (i - contTransformados)), Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().HealParticle.Play();
+            PlayCurarProtaSound();
 
         }
         else if (tipo == 13)
@@ -1383,6 +1429,7 @@ public class CombatController : MonoBehaviour
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1408,11 +1455,16 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Bloqueado", EnemyList[enemigo]);
             // StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
 
-            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= 8;
-            StartCoroutine(CreateDmgHealText(false, 8, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
+
+            StartCoroutine(WaitForSeconds(esperaAtaquePropio)); // Esperar para que no pase todo a la vez
+
+            VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= 8;
+            StartCoroutine(CreateDmgHealText(false, 8, Player, false));
             Player.GetComponent<PlayerController>().DamageParticle.Play();
+            PlayAtaqueProtaSound();
 
             // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
             victoriaDerrota();
@@ -1444,6 +1496,7 @@ public class CombatController : MonoBehaviour
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1476,6 +1529,7 @@ public class CombatController : MonoBehaviour
                     CreateSpellText("Debilitado", EnemyList[i]);
 
                 EnemyList[i].GetComponent<EnemyController>().EffectParticle.Play();
+                PlayAplicarEfectoDeProtaSound();
 
                 // Ira devolver ataque
                 if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1511,6 +1565,7 @@ public class CombatController : MonoBehaviour
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
@@ -1532,15 +1587,21 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Strong", Player);
             else                                                                  // Spanish
                 CreateSpellText("Fuerte", Player);
-            StartCoroutine(CreateDmgHealText(false, 8, Player, true));
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
 
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
-            Player.GetComponent<PlayerController>().DamageParticle.Play();
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
+
+            StartCoroutine(WaitForSeconds(esperaAtaquePropio)); // Esperar para que no pase todo a la vez
+
+            StartCoroutine(CreateDmgHealText(false, 8, Player, true));
+            Player.GetComponent<PlayerController>().DamageParticle.Play();
+            PlayAtaqueProtaSound();
+
 
             // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
             victoriaDerrota();
@@ -1560,6 +1621,7 @@ public class CombatController : MonoBehaviour
             Debug.Log("El Jugador obtiene Esperanza");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
@@ -1582,6 +1644,7 @@ public class CombatController : MonoBehaviour
             Debug.Log("Enemigo Envenenado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1612,15 +1675,20 @@ public class CombatController : MonoBehaviour
             //StartCoroutine(wait(0.5f)); //para que espere 0.5s antes de poner el otro pop up
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
                 CreateSpellText("Weakened", EnemyList[enemigo]);
-            else                                                                  // Spanish
+            else                                                                   // Spanish
                 CreateSpellText("Debilitado", EnemyList[enemigo]);
 
-            StartCoroutine(CreateDmgHealText(false, 8, Player, false));
 
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
+
+            StartCoroutine(WaitForSeconds(esperaAtaquePropio)); // Esperar para que no pase todo a la vez
+
+            StartCoroutine(CreateDmgHealText(false, 8, Player, false));
             Player.GetComponent<PlayerController>().DamageParticle.Play();
+            PlayAtaqueProtaSound();
 
             // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
             victoriaDerrota();
@@ -1653,6 +1721,7 @@ public class CombatController : MonoBehaviour
             Debug.Log("Jugador Transformado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
@@ -1726,6 +1795,7 @@ public class CombatController : MonoBehaviour
             Debug.Log("Efectos del Jugador eliminados");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeProtaSound();
 
         }
 
@@ -1772,6 +1842,7 @@ public class CombatController : MonoBehaviour
 
             VictoriaDerrotaPanel.SetActive(true);
             MusicSource.Stop();
+            DerrotaSound.Play();
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
@@ -1802,6 +1873,8 @@ public class CombatController : MonoBehaviour
 
             VictoriaDerrotaPanel.SetActive(true);
             MusicSource.Stop();
+            VictoriaMusic.Play();
+            VictoriaSound.Play();
 
             if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
             {
@@ -1864,6 +1937,8 @@ public class CombatController : MonoBehaviour
 
             VictoriaDerrotaPanel.SetActive(true);
             MusicSource.Stop();
+            VictoriaBossMusic.Play();
+            VictoriaBossSound.Play();
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
@@ -1905,8 +1980,11 @@ public class CombatController : MonoBehaviour
 
     public IEnumerator WaitForSeconds(float time)
     {
+        Debug.Log("WAITFORSECONDS");
         yield return new WaitForSeconds(time);
+        Debug.Log("WAITFORSECONDS AFTER");
     }
+
     public int CardManaCost(int cardType)
     {
 
@@ -1977,6 +2055,7 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
             StartCoroutine(CreateDmgHealText(true, danyoTotal, EnemyList[enemigo], false));
             EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+            PlayCurarProtaSound();
 
         }
         else
@@ -1991,6 +2070,7 @@ public class CombatController : MonoBehaviour
 
             StartCoroutine(CreateDmgHealText(false, danyoTotal, EnemyList[enemigo], false));
             EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+            PlayAtaqueDobleProtaSound();
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                 EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
@@ -2010,6 +2090,7 @@ public class CombatController : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
                 StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, false));
                 Player.GetComponent<PlayerController>().DamageParticle.Play();
+                PlayAtaqueDobleProtaSound();
             }
 
             yield return new WaitForSeconds(tiempo);
@@ -2019,6 +2100,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
                 StartCoroutine(CreateDmgHealText(true, danyoTotal, EnemyList[enemigo], false));
+                PlayCurarProtaSound();
 
             }
             else
@@ -2026,6 +2108,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
                 StartCoroutine(CreateDmgHealText(false, danyoTotal, EnemyList[enemigo], false));
+                PlayAtaqueProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
@@ -2114,6 +2197,7 @@ public class CombatController : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
                 Player.GetComponent<PlayerController>().HealParticle.Play();
+                PlayCurarEmocionSound();
 
             }
             else
@@ -2122,6 +2206,7 @@ public class CombatController : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, Player, false));
                 Player.GetComponent <PlayerController>().DamageParticle.Play();
+                PlayAtaqueEmocionSound();
 
             }
 
@@ -2143,6 +2228,7 @@ public class CombatController : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
                 Player.GetComponent<PlayerController>().HealParticle.Play();
+                PlayCurarEmocionSound();
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 0;
                 StartCoroutine(CreateDmgHealText(true, 0, EnemyList[enemigo], true));
@@ -2154,10 +2240,12 @@ public class CombatController : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, Player, false));
                 Player.GetComponent <PlayerController>().DamageParticle.Play();
+                PlayAtaqueEmocionSound();
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], true));
                 EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
+                PlayCurarEmocionSound();
 
             }
 
@@ -2175,6 +2263,7 @@ public class CombatController : MonoBehaviour
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeEmocionSound();
 
         }
         else if (tipo == 14)
@@ -2191,6 +2280,7 @@ public class CombatController : MonoBehaviour
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeEmocionSound();
 
         }
         else if (tipo == 15 || tipo == 16 || tipo == 21)
@@ -2210,11 +2300,13 @@ public class CombatController : MonoBehaviour
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= 8;
                 StartCoroutine(CreateDmgHealText(false, 8, EnemyList[enemigo], true));
                 EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
+                PlayAtaqueEmocionSound();
 
             }
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeEmocionSound();
 
         }
         else if (tipo == 20)
@@ -2230,6 +2322,7 @@ public class CombatController : MonoBehaviour
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
             Player.GetComponent<PlayerController>().EffectParticle.Play();
+            PlayAplicarEfectoDeEmocionSound();
 
         }
         //else if (tipo == 21)
@@ -2302,4 +2395,59 @@ public class CombatController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// En cada carta que el personaje haga daño, tanto a él como a las emociones
+    /// </summary>
+    public void PlayAtaqueProtaSound()
+    {
+        AtaqueProtaSound.Play();
+    }
+    
+    /// <summary>
+    /// En cada carta que el personaje haga daño, tanto a él como a las emociones
+    /// </summary>
+    public void PlayAtaqueDobleProtaSound()
+    {
+        AtaqueDobleProtaSound.Play();
+    }
+    
+    /// <summary>
+    /// En cada carta que el prota se cure
+    /// </summary>
+    public void PlayCurarProtaSound()
+    {
+        CurarProtaSound.Play();
+    }
+    
+    /// <summary>
+    /// En cada carta que el personaje aplique un efecto secundario, tanto a él como a las emociones
+    /// </summary>
+    public void PlayAplicarEfectoDeProtaSound()
+    {
+        AplicarEfectoDeProtaSound.Play();
+    }
+
+    /// <summary>
+    /// En cada carta que Ira devuelva el ataque (ataque)
+    /// </summary>
+    public void PlayAtaqueEmocionSound()
+    {
+        AtaqueEmocionSound.Play();
+    }
+
+    /// <summary>
+    /// En cada carta que Ira devuelva el ataque (curar)
+    /// </summary>
+    public void PlayCurarEmocionSound()
+    {
+        CurarEmocionSound.Play();
+    }
+
+    /// <summary>
+    /// En cada carta que Ira devuelva el ataque (aplicar efecto secundaro)
+    /// </summary>
+    public void PlayAplicarEfectoDeEmocionSound()
+    {
+        AplicarEfectoDeEmocionSound.Play();
+    }
 }

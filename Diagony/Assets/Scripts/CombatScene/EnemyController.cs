@@ -108,7 +108,11 @@ public class EnemyController : MonoBehaviour
     public AudioSource AtaqueEmocionSound;
     public AudioSource CurarEmocionSound;
     public AudioSource AplicarEfectoDeEmocionSound;
+    public AudioSource AtaqueBossSound;
+    public AudioSource CurarBossSound;
+    public AudioSource AplicarEfectoDeBossSound;
     public AudioSource IntegrarEmocionSound;
+    public AudioSource BloqueadoSound;
 
 
 
@@ -218,10 +222,15 @@ public class EnemyController : MonoBehaviour
         ListPositionsMuerte = new List<Vector3> { new Vector3(-5, -1, transform.position.z), new Vector3(-6, -1, transform.position.z), new Vector3(-7, -1, transform.position.z) };
         Derrotado = false;
 
+        //Find SoundFxs from scene
         AtaqueEmocionSound = GameObject.Find("AtaqueEmocion_SoundFX").GetComponent<AudioSource>();
         CurarEmocionSound = GameObject.Find("CurarEmocion_SoundFX").GetComponent<AudioSource>();
         AplicarEfectoDeEmocionSound = GameObject.Find("AplicarEfectoDeEmocion_SoundFX").GetComponent<AudioSource>();
+        AtaqueBossSound = GameObject.Find("AtaqueBoss_SoundFX").GetComponent<AudioSource>();
+        CurarBossSound = GameObject.Find("CurarBoss_SoundFX").GetComponent<AudioSource>();
+        AplicarEfectoDeBossSound = GameObject.Find("AplicarEfectoDeBoss_SoundFX").GetComponent<AudioSource>();
         IntegrarEmocionSound = GameObject.Find("IntegrarEmocion_SoundFX").GetComponent<AudioSource>();
+        BloqueadoSound = GameObject.Find("Bloqueado_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -346,6 +355,8 @@ public class EnemyController : MonoBehaviour
             //CombatScene.GetComponent<CombatController>().victoriaDerrota();
             //Destroy(gameObject);
 
+            IntegrarEmocionSound.Play();
+
         }
 
         if (HealthEnemigo > MaxHealthEnemigo)
@@ -422,6 +433,7 @@ public class EnemyController : MonoBehaviour
                         CombatScene.GetComponent<CombatController>().CreateSpellText("Fuerte", gameObject);
 
                     EffectParticle.Play();
+                    AplicarEfectoDeEmocionSound.Play();
 
                 }
                 else
@@ -437,6 +449,7 @@ public class EnemyController : MonoBehaviour
                         StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
                         Player.GetComponent<PlayerController>().HealParticle.Play();
+                        CurarEmocionSound.Play();
 
                     }
                     else
@@ -447,6 +460,7 @@ public class EnemyController : MonoBehaviour
                         PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
 
                         Player.GetComponent<PlayerController>().DamageParticle.Play();
+                        AtaqueEmocionSound.Play();
 
                     }
 
@@ -473,6 +487,7 @@ public class EnemyController : MonoBehaviour
                     EnemyAnimator.SetBool("atacar", true);
 
                     HealParticle.Play();
+                    CurarEmocionSound.Play();
 
                 }
                 else
@@ -522,6 +537,7 @@ public class EnemyController : MonoBehaviour
                             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
                             Player.GetComponent<PlayerController>().HealParticle.Play();
+                            CurarEmocionSound.Play();
 
                         }
                         else
@@ -531,6 +547,7 @@ public class EnemyController : MonoBehaviour
                             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
                             PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
                             Player.GetComponent<PlayerController>().DamageParticle.Play();
+                            AtaqueEmocionSound.Play();
 
                         }
 
@@ -549,6 +566,7 @@ public class EnemyController : MonoBehaviour
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
 
                         Player.GetComponent<PlayerController>().EffectParticle.Play();
+                        AplicarEfectoDeEmocionSound.Play();
 
                     }
                     else if (AttackType > 3.3f && AttackType <= 6.6 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado <= 0)
@@ -564,6 +582,7 @@ public class EnemyController : MonoBehaviour
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
 
                         Player.GetComponent<PlayerController>().EffectParticle.Play();
+                        AplicarEfectoDeEmocionSound.Play();
 
                     }
                     else if (AttackType > 6.6f && !CombatScene.GetComponent<CombatController>().ManaReducido)
@@ -599,6 +618,7 @@ public class EnemyController : MonoBehaviour
                         Player.GetComponent<PlayerController>().ReducirMana = true;
 
                         Player.GetComponent<PlayerController>().EffectParticle.Play();
+                        AplicarEfectoDeEmocionSound.Play();
 
                     }
                     else // Caso muerto
@@ -630,6 +650,7 @@ public class EnemyController : MonoBehaviour
                     StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject, false));
 
                     HealParticle.Play();
+                    CurarBossSound.Play();
 
                 }
                 else // Comportamiento normal
@@ -746,6 +767,7 @@ public class EnemyController : MonoBehaviour
 
                         EffectParticle.Play();
                         Player.GetComponent<PlayerController>().EffectParticle.Play();
+                        AplicarEfectoDeBossSound.Play();
 
                     }
                     else // Ataques normales
@@ -764,6 +786,7 @@ public class EnemyController : MonoBehaviour
                                 StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
                                 Player.GetComponent<PlayerController>().HealParticle.Play();
+                                CurarBossSound.Play();
 
                             }
                             else
@@ -774,6 +797,7 @@ public class EnemyController : MonoBehaviour
                                 PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
 
                                 Player.GetComponent<PlayerController>().DamageParticle.Play();
+                                AtaqueBossSound.Play();
 
                             }
 
@@ -790,6 +814,7 @@ public class EnemyController : MonoBehaviour
                             CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
 
                             Player.GetComponent<PlayerController>().EffectParticle.Play();
+                            AplicarEfectoDeBossSound.Play();
 
                         }
                         else if (AttackType <= 8.5f) // Se pone transformado
@@ -803,6 +828,7 @@ public class EnemyController : MonoBehaviour
                                 CombatScene.GetComponent<CombatController>().CreateSpellText("Transformado", gameObject);
 
                             EffectParticle.Play();
+                            AplicarEfectoDeBossSound.Play();
 
                         }
                         else
@@ -815,6 +841,7 @@ public class EnemyController : MonoBehaviour
                             Player.GetComponent<PlayerController>().ReducirMana = true;
 
                             Player.GetComponent<PlayerController>().EffectParticle.Play();
+                            AplicarEfectoDeBossSound.Play();
 
                         }
 
@@ -838,6 +865,8 @@ public class EnemyController : MonoBehaviour
             else                                                                  // Spanish
                 CombatScene.GetComponent<CombatController>().CreateSpellText("Bloqueado", gameObject);
             Bloqueado = false;
+
+            BloqueadoSound.Play();
 
         }
 
@@ -1243,6 +1272,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
             Player.GetComponent<PlayerController>().HealParticle.Play();
             EnemyAnimator.SetBool("atacar", true);
+            CurarEmocionSound.Play();
 
             yield return new WaitForSeconds(tiempo);
 
@@ -1250,6 +1280,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
             //Player.GetComponent<PlayerController>().HealParticle.Play();
             // EnemyAnimator.SetBool("atacar", true);
+            CurarEmocionSound.Play();
 
         }
         else
@@ -1259,6 +1290,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
             Player.GetComponent<PlayerController>().DamageParticle.Play();
             EnemyAnimator.SetBool("atacar", true);
+            AtaqueEmocionSound.Play();
 
             yield return new WaitForSeconds(tiempo);
 
@@ -1266,6 +1298,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
             //Player.GetComponent<PlayerController>().DamageParticle.Play();
             // EnemyAnimator.SetBool("atacar", true);
+            AtaqueEmocionSound.Play();
 
         }
 
