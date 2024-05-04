@@ -31,7 +31,6 @@ public class PausaButtonMap : MonoBehaviour
         SettingsInterface = GameObject.Find("CanvasSettings").transform.GetChild(0);
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
-        MusicSource.outputAudioMixerGroup = defaultGroup;
 
     }
 
@@ -81,6 +80,7 @@ public class PausaButtonMap : MonoBehaviour
             Time.timeScale = 0f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             MusicSource.outputAudioMixerGroup = pausedGroup;
+            Debug.Log("pauSED GROUP");
 
         }
         else
@@ -90,6 +90,7 @@ public class PausaButtonMap : MonoBehaviour
             Time.timeScale = 1f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
             MusicSource.outputAudioMixerGroup = defaultGroup;
+            Debug.Log("DEFault GROUP");
 
         }
 
