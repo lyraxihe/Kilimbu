@@ -88,6 +88,10 @@ public class CombatController : MonoBehaviour
     // SoundFX
     public AudioSource useCardSound;
 
+    // Music management
+    public GameObject Music;
+    public AudioSource MusicSource;
+
 
 
     private void Awake()
@@ -96,7 +100,6 @@ public class CombatController : MonoBehaviour
         victoria_etc = 0;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         Traduction = GameObject.Find("Traduction");
-
     }
     void Start()
     {
@@ -148,6 +151,10 @@ public class CombatController : MonoBehaviour
         CreateEnemies(); // Crea los enemigos
         StartCoroutine(CreateCards());   // Crea las cartas
                                          //CreateCards();
+
+        // Encontrar la música sonando para poder editarla
+        Music = GameObject.Find("Music");
+        MusicSource = Music.GetComponent<AudioSource>();
 
     }
 
@@ -1752,11 +1759,14 @@ public class CombatController : MonoBehaviour
         //    }
 
         //}
+
         if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
         {
             StartCoroutine(WaitForSeconds(0.85f));
 
             VictoriaDerrotaPanel.SetActive(true);
+            MusicSource.Stop();
+
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
@@ -1783,7 +1793,9 @@ public class CombatController : MonoBehaviour
             RecompensaVictoria = true;
 
             StartCoroutine(WaitForSeconds(0.85f));
+
             VictoriaDerrotaPanel.SetActive(true);
+            MusicSource.Stop();
 
             if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
             {
@@ -1845,6 +1857,8 @@ public class CombatController : MonoBehaviour
             StartCoroutine(WaitForSeconds(0.85f));
 
             VictoriaDerrotaPanel.SetActive(true);
+            MusicSource.Stop();
+
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 

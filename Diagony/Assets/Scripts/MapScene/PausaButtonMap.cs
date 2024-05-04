@@ -29,9 +29,10 @@ public class PausaButtonMap : MonoBehaviour
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         SettingsInterface = GameObject.Find("CanvasSettings").transform.GetChild(0);
+
+        // Encontrar la música sonando para poder editarla
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
-
     }
 
 

@@ -19,6 +19,8 @@ public class DeckButton : MonoBehaviour
     [SerializeField] Sprite CartasIconDisabled;
     [SerializeField] GameObject Map;
     [SerializeField] GameObject PauseButton;
+    public GameObject MapButton;
+
     private SpriteState deckButtonState;
     private Button button;
     //[SerializeField] TMP_Text ButtonText;
@@ -34,6 +36,8 @@ public class DeckButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         deckButtonState = button.spriteState;
+
+        // Encontrar la música sonando para poder editarla
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
     }
@@ -41,7 +45,7 @@ public class DeckButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void OnClick()
@@ -57,6 +61,10 @@ public class DeckButton : MonoBehaviour
 
             Map.SetActive(false);
             PauseButton.SetActive(false);
+            if (MapButton != null)
+            {
+                MapButton.SetActive(false);
+            }
 
             MusicSource.outputAudioMixerGroup = pausedGroup;
         }
@@ -71,6 +79,10 @@ public class DeckButton : MonoBehaviour
 
             Map.SetActive(true);
             PauseButton.SetActive(true);
+            if (MapButton != null)
+            {
+              MapButton.SetActive(true);
+            }
 
             MusicSource.outputAudioMixerGroup = defaultGroup;
         }
@@ -101,6 +113,11 @@ public class DeckButton : MonoBehaviour
     /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "ShopScene")
+        {
+            Debug.Log("escena shop");
+            MapButton = GameObject.Find("VerMapa");
+        }
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
     }
