@@ -79,8 +79,8 @@ public class PausaButtonMap : MonoBehaviour
             PanelPausa.SetActive(true);
             Time.timeScale = 0f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
+
             MusicSource.outputAudioMixerGroup = pausedGroup;
-            Debug.Log("pauSED GROUP");
 
         }
         else
@@ -89,8 +89,8 @@ public class PausaButtonMap : MonoBehaviour
             PanelPausa.SetActive(false);
             Time.timeScale = 1f;
             VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = false;
+
             MusicSource.outputAudioMixerGroup = defaultGroup;
-            Debug.Log("DEFault GROUP");
 
         }
 
@@ -132,13 +132,11 @@ public class PausaButtonMap : MonoBehaviour
     }
 
     /// <summary>
-    /// Cambiar la m sica cuando se cambia de escena.
+    /// Cambiar la musica cuando se cambia de escena.
     /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("ON SCENE LOADED");
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
-        //MusicSource.outputAudioMixerGroup = defaultGroup;
     }
 }

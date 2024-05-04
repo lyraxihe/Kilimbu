@@ -2827,6 +2827,10 @@ MonoBehaviour:
   CartasIconDisabled: {fileID: 21300000, guid: e6554c29d1a61694bb6bf801880d3dcc, type: 3}
   Map: {fileID: 1302619611}
   PauseButton: {fileID: 1829451}
+  Music: {fileID: 0}
+  MusicSource: {fileID: 0}
+  defaultGroup: {fileID: 3952021127896858167, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
+  pausedGroup: {fileID: 4734028655107132221, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
 --- !u!114 &291979844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10658,7 +10662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3850, y: -68}
+  m_AnchoredPosition: {x: -3849.9998, y: -68}
   m_SizeDelta: {x: 0, y: -544}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1302619614

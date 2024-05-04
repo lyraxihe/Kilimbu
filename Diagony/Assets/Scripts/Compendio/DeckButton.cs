@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class DeckButton : MonoBehaviour
 {
@@ -21,11 +23,19 @@ public class DeckButton : MonoBehaviour
     private Button button;
     //[SerializeField] TMP_Text ButtonText;
 
+    // Music management
+    public GameObject Music;
+    public AudioSource MusicSource;
+    public AudioMixerGroup defaultGroup;
+    public AudioMixerGroup pausedGroup;
+
     // Start is called before the first frame update
     void Start()
     {
         button = GetComponent<Button>();
         deckButtonState = button.spriteState;
+        Music = GameObject.Find("Music");
+        MusicSource = Music.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -47,6 +57,8 @@ public class DeckButton : MonoBehaviour
 
             Map.SetActive(false);
             PauseButton.SetActive(false);
+
+            MusicSource.outputAudioMixerGroup = pausedGroup;
         }
         else
         {
@@ -56,13 +68,41 @@ public class DeckButton : MonoBehaviour
             deckButtonState.pressedSprite = CartasIconPressed;
             deckButtonState.highlightedSprite = CartasIconHighlight;
             button.spriteState = deckButtonState;
+
             Map.SetActive(true);
             PauseButton.SetActive(true);
+
+            MusicSource.outputAudioMixerGroup = defaultGroup;
         }
 
         ScrollAreaCompendio.SetActive(!ScrollAreaCompendio.activeSelf);
 
 
+    }
+
+    /// <summary>
+    /// Cambiar la musica cuando se cambia de escena.
+    /// </summary>
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Cambiar la musica cuando se cambia de escena.
+    /// </summary>
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Cambiar la musica cuando se cambia de escena.
+    /// </summary>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Music = GameObject.Find("Music");
+        MusicSource = Music.GetComponent<AudioSource>();
     }
 
 }
