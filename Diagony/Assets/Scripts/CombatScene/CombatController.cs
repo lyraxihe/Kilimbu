@@ -933,6 +933,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
             }
             else
@@ -942,6 +943,7 @@ public class CombatController : MonoBehaviour
                 // en esta fución como ultimo parametro debería pasarse el gameobject del enemigo al que ataca la flecha
                 //le puse "EnemyList[0]" porque es el que marca arriba para restarle la vida
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -984,6 +986,7 @@ public class CombatController : MonoBehaviour
 
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
                     StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[i], false));
+                    EnemyList[i].GetComponent<EnemyController>().HealParticle.Play();
 
                 }
                 else
@@ -991,6 +994,7 @@ public class CombatController : MonoBehaviour
 
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                     StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[i], false));
+                    EnemyList[i].GetComponent<EnemyController>().DamageParticle.Play();
 
                     if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                         EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1027,6 +1031,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
             }
             else
@@ -1034,6 +1039,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1068,6 +1074,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
             }
             else
@@ -1075,6 +1082,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1112,6 +1120,7 @@ public class CombatController : MonoBehaviour
             // El Jugador gana 2 de maná
             ManaProtagonista += 2;
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
         }
         else if (tipo == 7)
@@ -1122,6 +1131,7 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 5;
             StartCoroutine(CreateDmgHealText(true, 5, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().HealParticle.Play();
 
         }
         else if (tipo == 8)
@@ -1132,6 +1142,7 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 10;
             StartCoroutine(CreateDmgHealText(true, 10, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().HealParticle.Play();
 
         }
         else if (tipo == 9)
@@ -1146,6 +1157,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 0;
                 StartCoroutine(CreateDmgHealText(true, 0, Player, false));
@@ -1156,9 +1168,11 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
+                Player.GetComponent<PlayerController>().HealParticle.Play();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1194,6 +1208,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += 0;
                 StartCoroutine(CreateDmgHealText(true, 0, Player, false));
@@ -1204,9 +1219,11 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[enemigo], false));
+                EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
+                Player.GetComponent<PlayerController>().HealParticle.Play();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1246,6 +1263,7 @@ public class CombatController : MonoBehaviour
 
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
                     StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[i], false));
+                    EnemyList[i].GetComponent<EnemyController>().HealParticle.Play();
 
                     contTransformados++;
 
@@ -1255,6 +1273,7 @@ public class CombatController : MonoBehaviour
 
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                     StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[i], false));
+                    EnemyList[i].GetComponent<EnemyController>().DamageParticle.Play();
 
                     if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                         EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1279,6 +1298,7 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i + contTransformados));
             StartCoroutine(CreateDmgHealText(true, (danyo * (i + contTransformados)), Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().HealParticle.Play();
 
         }
         else if (tipo == 12)
@@ -1298,6 +1318,7 @@ public class CombatController : MonoBehaviour
 
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo += danyo;
                     StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[i], false));
+                    EnemyList[i].GetComponent<EnemyController>().HealParticle.Play();
 
                     contTransformados++;
 
@@ -1307,6 +1328,7 @@ public class CombatController : MonoBehaviour
 
                     EnemyList[i].GetComponent<EnemyController>().HealthEnemigo -= danyo;
                     StartCoroutine(CreateDmgHealText(false, danyo, EnemyList[i], false));
+                    EnemyList[i].GetComponent<EnemyController>().DamageParticle.Play();
 
                     if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                         EnemyList[i].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyo;
@@ -1331,6 +1353,7 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += (danyo * (i - contTransformados));
             StartCoroutine(CreateDmgHealText(true, (danyo * (i - contTransformados)), Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().HealParticle.Play();
 
         }
         else if (tipo == 13)
@@ -1346,6 +1369,7 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Bloqueado", EnemyList[enemigo]);
 
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1374,6 +1398,8 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= 8;
             StartCoroutine(CreateDmgHealText(false, 8, Player, false));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            Player.GetComponent<PlayerController>().DamageParticle.Play();
 
             // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
             victoriaDerrota();
@@ -1404,6 +1430,7 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Debilitado", EnemyList[enemigo]);
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1434,6 +1461,8 @@ public class CombatController : MonoBehaviour
                     CreateSpellText("Weakened", EnemyList[i]);
                 else                                                                  // Spanish
                     CreateSpellText("Debilitado", EnemyList[i]);
+
+                EnemyList[i].GetComponent<EnemyController>().EffectParticle.Play();
 
                 // Ira devolver ataque
                 if (EnemyList[i].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1468,6 +1497,7 @@ public class CombatController : MonoBehaviour
 
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
@@ -1496,6 +1526,8 @@ public class CombatController : MonoBehaviour
 
             Debug.Log("El Jugador obtiene Fuerte");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().DamageParticle.Play();
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
             // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
             victoriaDerrota();
@@ -1514,6 +1546,7 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Esperanzado", Player);
             Debug.Log("El Jugador obtiene Esperanza");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
@@ -1535,6 +1568,7 @@ public class CombatController : MonoBehaviour
 
             Debug.Log("Enemigo Envenenado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
 
             // Ira devolver ataque
             if (EnemyList[enemigo].GetComponent<EnemyController>().Tipo == 0) // Si el enemigo seleccionado es Ira
@@ -1572,6 +1606,8 @@ public class CombatController : MonoBehaviour
 
             Debug.Log("Enemigo Debilitado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            EnemyList[enemigo].GetComponent<EnemyController>().EffectParticle.Play();
+            Player.GetComponent<PlayerController>().DamageParticle.Play();
 
             // Comprueba que si al quitarse el jugador vida, esta llega a 0, el jugador pierde
             victoriaDerrota();
@@ -1603,6 +1639,7 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Transformado", Player);
             Debug.Log("Jugador Transformado");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
             for (int i = 0; i < EnemyList.Count; i++)
                 EnemyList[i].GetComponent<EnemyController>().playerSeBufa = true;
@@ -1675,6 +1712,7 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Efectos Eliminados", Player);
             Debug.Log("Efectos del Jugador eliminados");
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
         }
 
@@ -1910,6 +1948,7 @@ public class CombatController : MonoBehaviour
 
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyoTotal;
             StartCoroutine(CreateDmgHealText(true, danyoTotal, EnemyList[enemigo], false));
+            EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
         }
         else
@@ -1923,6 +1962,7 @@ public class CombatController : MonoBehaviour
             EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
 
             StartCoroutine(CreateDmgHealText(false, danyoTotal, EnemyList[enemigo], false));
+            EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                 EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
@@ -1941,6 +1981,7 @@ public class CombatController : MonoBehaviour
                 //  yield return new WaitForSeconds(1);
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
                 StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, false));
+                Player.GetComponent<PlayerController>().DamageParticle.Play();
             }
 
             yield return new WaitForSeconds(tiempo);
@@ -2018,6 +2059,8 @@ public class CombatController : MonoBehaviour
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= Player.GetComponent<PlayerController>().Veneno;
             StartCoroutine(CreateDmgHealText(false, Player.GetComponent<PlayerController>().Veneno, Player, esperar));
             Player.GetComponent<PlayerController>().PlayerAnimator.SetBool("danyo", true);
+            Player.GetComponent<PlayerController>().DamageParticle.Play();
+
         }
 
     }
@@ -2042,6 +2085,7 @@ public class CombatController : MonoBehaviour
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
+                Player.GetComponent<PlayerController>().HealParticle.Play();
 
             }
             else
@@ -2049,6 +2093,7 @@ public class CombatController : MonoBehaviour
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, Player, false));
+                Player.GetComponent <PlayerController>().DamageParticle.Play();
 
             }
 
@@ -2069,6 +2114,7 @@ public class CombatController : MonoBehaviour
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, Player, false));
+                Player.GetComponent<PlayerController>().HealParticle.Play();
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += 0;
                 StartCoroutine(CreateDmgHealText(true, 0, EnemyList[enemigo], true));
@@ -2079,9 +2125,11 @@ public class CombatController : MonoBehaviour
 
                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= danyo;
                 StartCoroutine(CreateDmgHealText(false, danyo, Player, false));
+                Player.GetComponent <PlayerController>().DamageParticle.Play();
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo += danyo;
                 StartCoroutine(CreateDmgHealText(true, danyo, EnemyList[enemigo], true));
+                EnemyList[enemigo].GetComponent<EnemyController>().HealParticle.Play();
 
             }
 
@@ -2098,6 +2146,7 @@ public class CombatController : MonoBehaviour
                 CreateSpellText("Bloqueado", Player);
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
         }
         else if (tipo == 14)
@@ -2113,6 +2162,7 @@ public class CombatController : MonoBehaviour
             StartCoroutine(CreateDmgHealText(false, 8, EnemyList[enemigo], true));
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
         }
         else if (tipo == 15 || tipo == 16 || tipo == 21)
@@ -2131,10 +2181,12 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= 8;
                 StartCoroutine(CreateDmgHealText(false, 8, EnemyList[enemigo], true));
+                EnemyList[enemigo].GetComponent<EnemyController>().DamageParticle.Play();
 
             }
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
         }
         else if (tipo == 20)
@@ -2149,6 +2201,7 @@ public class CombatController : MonoBehaviour
             Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra += 3;
 
             EnemyList[enemigo].GetComponent<EnemyController>().EnemyAnimator.SetBool("atacar", true);
+            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
         }
         //else if (tipo == 21)

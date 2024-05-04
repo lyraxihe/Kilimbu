@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour
     public int esperanza_icon;
     public int bloqueado_icon;
 
+    // Partículas
+    public ParticleSystem HealParticle;
+    public ParticleSystem EffectParticle;
+    public ParticleSystem DamageParticle;
+
 
     void Start()
     {

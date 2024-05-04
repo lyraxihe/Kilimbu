@@ -408,6 +408,8 @@ public class EnemyController : MonoBehaviour
                     else                                                                  // Spanish
                         CombatScene.GetComponent<CombatController>().CreateSpellText("Fuerte", gameObject);
 
+                    EffectParticle.Play();
+
                 }
                 else
                 {
@@ -421,6 +423,8 @@ public class EnemyController : MonoBehaviour
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                         StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
+                        Player.GetComponent<PlayerController>().HealParticle.Play();
+
                     }
                     else
                     {
@@ -428,6 +432,8 @@ public class EnemyController : MonoBehaviour
                         VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                         StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
                         PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
+
+                        Player.GetComponent<PlayerController>().DamageParticle.Play();
 
                     }
 
@@ -502,6 +508,7 @@ public class EnemyController : MonoBehaviour
                             damageAmount = 2 + Debilidad;
                             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
+                            Player.GetComponent<PlayerController>().HealParticle.Play();
 
                         }
                         else
@@ -510,6 +517,7 @@ public class EnemyController : MonoBehaviour
                             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
                             PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
+                            Player.GetComponent<PlayerController>().DamageParticle.Play();
 
                         }
 
@@ -527,6 +535,8 @@ public class EnemyController : MonoBehaviour
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno += 3;
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado += 1;
 
+                        Player.GetComponent<PlayerController>().EffectParticle.Play();
+
                     }
                     else if (AttackType > 3.3f && AttackType <= 6.6 && CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado <= 0)
                     {
@@ -539,6 +549,8 @@ public class EnemyController : MonoBehaviour
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = true;
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 2;
                         CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
+
+                        Player.GetComponent<PlayerController>().EffectParticle.Play();
 
                     }
                     else if (AttackType > 6.6f && !CombatScene.GetComponent<CombatController>().ManaReducido)
@@ -573,6 +585,8 @@ public class EnemyController : MonoBehaviour
                             CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
                         Player.GetComponent<PlayerController>().ReducirMana = true;
 
+                        Player.GetComponent<PlayerController>().EffectParticle.Play();
+
                     }
                     else // Caso muerto
                     {
@@ -601,6 +615,8 @@ public class EnemyController : MonoBehaviour
                     HealthEnemigo += damageAmount;
 
                     StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, gameObject, false));
+
+                    HealParticle.Play();
 
                 }
                 else // Comportamiento normal
@@ -715,6 +731,9 @@ public class EnemyController : MonoBehaviour
                         else                                                                  // Spanish
                             CombatScene.GetComponent<CombatController>().CreateSpellText("Intercambio", gameObject);
 
+                        EffectParticle.Play();
+                        Player.GetComponent<PlayerController>().EffectParticle.Play();
+
                     }
                     else // Ataques normales
                     {
@@ -731,6 +750,8 @@ public class EnemyController : MonoBehaviour
                                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
                                 StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
 
+                                Player.GetComponent<PlayerController>().HealParticle.Play();
+
                             }
                             else
                             {
@@ -738,6 +759,8 @@ public class EnemyController : MonoBehaviour
                                 VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
                                 StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
                                 PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
+
+                                Player.GetComponent<PlayerController>().DamageParticle.Play();
 
                             }
 
@@ -753,6 +776,8 @@ public class EnemyController : MonoBehaviour
                             CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad -= 3;
                             CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado += 2;
 
+                            Player.GetComponent<PlayerController>().EffectParticle.Play();
+
                         }
                         else if (AttackType <= 8.5f) // Se pone transformado
                         {
@@ -764,6 +789,8 @@ public class EnemyController : MonoBehaviour
                             else                                                                  // Spanish
                                 CombatScene.GetComponent<CombatController>().CreateSpellText("Transformado", gameObject);
 
+                            EffectParticle.Play();
+
                         }
                         else
                         {
@@ -773,6 +800,8 @@ public class EnemyController : MonoBehaviour
                             else                                                                  // Spanish
                                 CombatScene.GetComponent<CombatController>().CreateSpellText("Reducir Maná", Player);
                             Player.GetComponent<PlayerController>().ReducirMana = true;
+
+                            Player.GetComponent<PlayerController>().EffectParticle.Play();
 
                         }
 
@@ -1199,13 +1228,15 @@ public class EnemyController : MonoBehaviour
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
+            Player.GetComponent<PlayerController>().HealParticle.Play();
             EnemyAnimator.SetBool("atacar", true);
 
             yield return new WaitForSeconds(tiempo);
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player, false));
-           // EnemyAnimator.SetBool("atacar", true);
+            //Player.GetComponent<PlayerController>().HealParticle.Play();
+            // EnemyAnimator.SetBool("atacar", true);
 
         }
         else
@@ -1213,13 +1244,15 @@ public class EnemyController : MonoBehaviour
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
+            Player.GetComponent<PlayerController>().DamageParticle.Play();
             EnemyAnimator.SetBool("atacar", true);
 
             yield return new WaitForSeconds(tiempo);
 
             VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
-           // EnemyAnimator.SetBool("atacar", true);
+            //Player.GetComponent<PlayerController>().DamageParticle.Play();
+            // EnemyAnimator.SetBool("atacar", true);
 
         }
 
@@ -1270,6 +1303,7 @@ public class EnemyController : MonoBehaviour
             HealthEnemigo -= Veneno;
             EnemyAnimator.SetBool("danyo", true);
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, Veneno, gameObject, esperar));
+            DamageParticle.Play();
 
         }
 
