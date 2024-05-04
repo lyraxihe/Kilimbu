@@ -22,6 +22,9 @@ public class PausaButtonMap : MonoBehaviour
     public AudioSource MusicSource;
     public AudioMixerGroup defaultGroup;
     public AudioMixerGroup pausedGroup;
+    // SoundFX management
+    public AudioSource ButtonSound;
+    public AudioSource UnpauseSound;
 
 
 
@@ -30,9 +33,11 @@ public class PausaButtonMap : MonoBehaviour
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         SettingsInterface = GameObject.Find("CanvasSettings").transform.GetChild(0);
 
-        // Encontrar la música sonando para poder editarla
+        // Encontrar la música sonando para poder editarla y soundfx para asignarlos
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
+        ButtonSound = GameObject.Find("Button_SoundFX").GetComponent<AudioSource>();
+        UnpauseSound = GameObject.Find("Unpause_SoundFX").GetComponent<AudioSource>();
     }
 
 
@@ -139,5 +144,15 @@ public class PausaButtonMap : MonoBehaviour
     {
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
+    }
+
+    public void PlayButtonSound()
+    {
+        ButtonSound.Play();
+    }
+
+    public void PlayUnpauseSound()
+    {
+        UnpauseSound.Play();
     }
 }

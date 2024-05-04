@@ -12,6 +12,9 @@ public class MainMenuButtons : MonoBehaviour
     [SerializeField] GameObject OptionsPanel;
     [SerializeField] GameObject CanvasPause;
 
+
+
+
     public void Play()
     {
 

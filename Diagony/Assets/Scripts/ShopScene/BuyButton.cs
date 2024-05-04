@@ -14,6 +14,13 @@ public class BuyButton : MonoBehaviour
     [SerializeField] bool EsVida;
     [SerializeField] RectTransform canvas;
     [SerializeField] GameObject FeedbackText;
+
+    // SoundFX management
+    public AudioSource AnyadirCartaSound;
+
+
+
+
     void Start()
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
@@ -52,6 +59,9 @@ public class BuyButton : MonoBehaviour
                 gameObject.GetComponent<Button>().interactable = false;
         }
         //VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType].ToString();
+
+        // Encontrar efecto de sonido para asignarlo en el botón cada vez que se hace click
+        AnyadirCartaSound = GameObject.Find("AnyadirCarta_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -133,6 +143,11 @@ public class BuyButton : MonoBehaviour
             Text.transform.position = new Vector2(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y + 0.5f);
         }
         
+    }
+
+    public void PlayAnyadirCartaSound()
+    {
+        AnyadirCartaSound.Play();
     }
 
 }

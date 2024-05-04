@@ -30,6 +30,11 @@ public class DeckButton : MonoBehaviour
     public AudioSource MusicSource;
     public AudioMixerGroup defaultGroup;
     public AudioMixerGroup pausedGroup;
+    // SoundFX management
+    public AudioSource ButtonSound;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +42,10 @@ public class DeckButton : MonoBehaviour
         button = GetComponent<Button>();
         deckButtonState = button.spriteState;
 
-        // Encontrar la música sonando para poder editarla
+        // Encontrar la música sonando para poder editarla y soundfx para asignarlos
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
+        ButtonSound = GameObject.Find("Button_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -120,6 +126,11 @@ public class DeckButton : MonoBehaviour
         }
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
+    }
+
+    public void PlayButtonSound()
+    {
+        ButtonSound.Play();
     }
 
 }

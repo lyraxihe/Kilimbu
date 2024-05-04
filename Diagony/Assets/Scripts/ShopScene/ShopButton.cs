@@ -11,10 +11,20 @@ public class ShopButton : MonoBehaviour
     [SerializeField] Sprite verMapa;
     [SerializeField] Sprite Volver;
     bool mapavisible;
+
+    // SoundFX management
+    public AudioSource ButtonSound;
+
+
+
+
     void Start()
     {
         CanvasSingleton = GameObject.Find("CanvasSingleton");
         mapavisible = false;
+
+        // Encontrar la música sonando para poder editarla y soundfx para asignarlos
+        ButtonSound = GameObject.Find("Button_SoundFX").GetComponent<AudioSource>();
     }
 
     public void VolverAlMapa()
@@ -42,5 +52,10 @@ public class ShopButton : MonoBehaviour
         }
       
     }
-   
+
+    public void PlayButtonSound()
+    {
+        ButtonSound.Play();
+    }
+
 }
