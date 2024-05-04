@@ -1754,6 +1754,7 @@ public class CombatController : MonoBehaviour
         //}
         if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista <= 0)
         {
+            StartCoroutine(WaitForSeconds(0.85f));
 
             VictoriaDerrotaPanel.SetActive(true);
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
@@ -1781,6 +1782,7 @@ public class CombatController : MonoBehaviour
         {
             RecompensaVictoria = true;
 
+            StartCoroutine(WaitForSeconds(0.85f));
             VictoriaDerrotaPanel.SetActive(true);
 
             if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
@@ -1840,6 +1842,8 @@ public class CombatController : MonoBehaviour
 
             RecompensaVictoria = true;
 
+            StartCoroutine(WaitForSeconds(0.85f));
+
             VictoriaDerrotaPanel.SetActive(true);
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
@@ -1871,7 +1875,7 @@ public class CombatController : MonoBehaviour
         else
         {
 
-            VictoriaDerrotaPanel.SetActive(false);
+           // VictoriaDerrotaPanel.SetActive(false);
             if (VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa == false)
             {
                 Time.timeScale = 1f;
@@ -1879,6 +1883,10 @@ public class CombatController : MonoBehaviour
         }
     }
 
+    public IEnumerator WaitForSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
     public int CardManaCost(int cardType)
     {
 
