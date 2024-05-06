@@ -6,11 +6,20 @@ public class FinalizarTurnoButton : MonoBehaviour
 {
     [SerializeField] GameObject VariablesGlobales;
     [SerializeField] GameObject CombatScene;
+
+    // Sound FX Management
+    public AudioSource ButtonHoverSound;
+
+
+
     
     // Start is called before the first frame update
     void Start()
     {
         VariablesGlobales = GameObject.Find("VariablesGlobales");
+
+        // Encontrar la música sonando para poder editarla y soundfx para asignarlos
+        ButtonHoverSound = GameObject.Find("ButtonHover_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -225,5 +234,10 @@ public class FinalizarTurnoButton : MonoBehaviour
 
         }
 
+    }
+
+    public void PlayButtonHoverSound()
+    {
+        ButtonHoverSound.Play();
     }
 }

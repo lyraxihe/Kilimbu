@@ -47,6 +47,12 @@ public class CardManaText : MonoBehaviour
     List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stunned</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
                                                                 "<b>Hope</b>: Each turn restores health (+3) to the player", "<b>Poisoned</b>: Each turn deals damage (-3) to the enemy", "<b>Transformed</b>: Enemy's attacks heal instead of dealing damage" };
 
+    // SoundFX Management
+    public AudioSource MejoraCofreSound;
+
+
+
+
     private void Awake()
     {
 
@@ -59,7 +65,8 @@ public class CardManaText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Get SounFx's
+        MejoraCofreSound = GameObject.Find("MejoraCofre_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

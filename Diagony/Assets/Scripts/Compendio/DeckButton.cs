@@ -32,6 +32,7 @@ public class DeckButton : MonoBehaviour
     public AudioMixerGroup pausedGroup;
     // SoundFX management
     public AudioSource ButtonSound;
+    public AudioSource ButtonHoverSound;
 
 
 
@@ -46,6 +47,7 @@ public class DeckButton : MonoBehaviour
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
         ButtonSound = GameObject.Find("Button_SoundFX").GetComponent<AudioSource>();
+        ButtonHoverSound = GameObject.Find("ButtonHover_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -131,6 +133,10 @@ public class DeckButton : MonoBehaviour
     public void PlayButtonSound()
     {
         ButtonSound.Play();
+    }
+    public void PlayButtonHoverSound()
+    {
+        ButtonHoverSound.Play();
     }
 
 }

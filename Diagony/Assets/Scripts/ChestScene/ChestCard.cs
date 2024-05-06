@@ -162,6 +162,8 @@ public class ChestCard : MonoBehaviour
             CardMana.GetComponent<ChestCard>().CardAnimator.enabled = true;
             CardMana.GetComponent<ChestCard>().CardAnimator.SetBool("Selected", true);
 
+            MejoraCofreSound.Play();
+
         }
         else
         {

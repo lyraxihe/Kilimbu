@@ -17,6 +17,7 @@ public class BuyButton : MonoBehaviour
 
     // SoundFX management
     public AudioSource AnyadirCartaSound;
+    public AudioSource ButtonHoverSound;
 
 
 
@@ -62,6 +63,7 @@ public class BuyButton : MonoBehaviour
 
         // Encontrar efecto de sonido para asignarlo en el botón cada vez que se hace click
         AnyadirCartaSound = GameObject.Find("AnyadirCarta_SoundFX").GetComponent<AudioSource>();
+        ButtonHoverSound = GameObject.Find("AnyadirCarta_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -148,6 +150,11 @@ public class BuyButton : MonoBehaviour
     public void PlayAnyadirCartaSound()
     {
         AnyadirCartaSound.Play();
+    }
+
+    public void PlayButtonHoverSound()
+    {
+        ButtonHoverSound.Play();
     }
 
 }
