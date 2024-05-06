@@ -142,17 +142,17 @@ public class EnemyController : MonoBehaviour
         if (Id == 0)
         {
             //sumarle a la x 0.4f
-            x_inicial_spell = 0.95f;
+            x_inicial_spell = 1.18f;
             y_inicial_spell = 2.4f;
         }
         else if (Id == 1)
         {
-            x_inicial_spell = 2.95f;
+            x_inicial_spell = 3.18f;
             y_inicial_spell = 1.4f;
         }
         else
         {
-            x_inicial_spell = 4.95f;
+            x_inicial_spell = 4.18f;
             y_inicial_spell = 0.4f;
         }
 
@@ -162,11 +162,11 @@ public class EnemyController : MonoBehaviour
            
             if (Tipo == 3)
             {
-                SpellCoords[i] = new Vector2(x_inicial_spell += 0.5f, y_inicial_spell + 1.5f);
+                SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell + 1.5f);
             }
             else
             {
-                SpellCoords[i] = new Vector2(x_inicial_spell += 0.5f, y_inicial_spell);
+                SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
             }
            
         }

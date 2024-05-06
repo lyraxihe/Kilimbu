@@ -95,14 +95,14 @@ public class PlayerController : MonoBehaviour
 
         ActiveSpell = 0;
 
-        x_inicial_spell = -5.6f;
+        x_inicial_spell = -5.28f;
         y_inicial_spell = 1.1f;
 
 
         for (int i = 0; i < VariablesGlobales.GetComponent<VariablesGlobales>().SpellNumber; i++)
         {
             ActiveSpellGap[i] = false;
-            SpellCoords[i] = new Vector2(x_inicial_spell += 0.5f, y_inicial_spell);
+            SpellCoords[i] = new Vector2(x_inicial_spell += 0.4f, y_inicial_spell);
 
         }
 

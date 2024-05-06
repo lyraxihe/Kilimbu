@@ -76,9 +76,9 @@ public class ShopController : MonoBehaviour
         {
             newText = ListCards[i].GetComponentsInChildren<TMP_Text>();
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                newText[4].text = "Amount: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
+                newText[5].text = "Have: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
             else                                                                   // Spanish
-                newText[4].text = "Cantidad: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
+                newText[5].text = "Tienes: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
         }
       
     }
@@ -114,20 +114,27 @@ public class ShopController : MonoBehaviour
 
             // Actualiza los textos
             newText = ListCards[i].GetComponentsInChildren<TMP_Text>();
-            //newText[0].text = CardTitles[cardType];
-            //newText[1].text = CardDescriptions[cardType];
-            newText[2].text = CardCost[cardType];
-            newText[3].text = CardDuration[cardType];
-            newText[4].text = "Tienes: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[cardType].ToString();
-            newText[5].text = "$" + CardPrecio[cardType].ToString();
+            if (!VariablesGlobales.GetComponent<VariablesGlobales>().PasivaGanarDinero)
+            {
+
+                newText[0].text = CardTitlesEN[cardType];
+                newText[1].text = CardDescriptionPlayerEN[cardType];
+                newText[2].text = CardDescriptionEnemiesEN[cardType];
+            }
+            else
+            {
+
+                newText[0].text = CardTitlesES[cardType];
+                newText[1].text = CardDescriptionPlayerES[cardType];
+                newText[2].text = CardDescriptionEnemiesES[cardType];
+            }
+            newText[3].text = CardCost[cardType];
+            newText[4].text = CardDuration[cardType];
+            newText[6].text = "$" + CardPrecio[cardType].ToString();
 
             ListCards[i].GetComponent<ShopCard>().Tipo = cardType;
             ListButton[i].GetComponent<BuyButton>().ID = cardType;
             ListButton[i].GetComponent<BuyButton>().Precio = CardPrecio[cardType];
-
-
-
-
         }
     }
 
