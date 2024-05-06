@@ -29,18 +29,21 @@ public class ChestCard : MonoBehaviour
                                                    "Nothing happens if it goes wrong", "I talk about what happens to me", "I talk all the time about what happens to me", "I am on it",
                                                    "Nothing is forever", "I don't know what to do", "Everything transforms", "I am aware of how what I do affects me"};
 
-    List<string> CardDescriptionsES = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos los enemigos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
-                                                         "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos los enemigos", "Roba 10 de vida a todos los enemigos", "<b>Bloquear</b> a un enemigo",
-                                                         "<b>Bloquear</b> a un enemigo pero el jugador recibe 8 de daño", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
-                                                         "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero recibe 8 de daño", "<b>Esperanza</b> al jugador",
-                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero el jugador recibe 8 de daño", "<b>Transformar</b> al jugador",
-                                                         "Se eliminan todos los efectos del jugador" };
-    List<string> CardDescriptionsEN = new List<string>() { "Attack 5", "Attack 3x2", "Attack 5 to all enemies", "Attack 10", "Attack 20", "Attack 10x2", "Gain 2 mana", "Heal 5",
-                                                         "Heal 10", "Drain 5 to an enemy", "Drain 10 to an enemy", "Drain 5 to all enemies", "Drain 10 to all enemies", "<b>Stun</b> to an enemy",
-                                                         "<b>Stun</b> to an enemy but deals 8 damage to the player", "<b>Weak</b> to an enemy", "<b>Weak</b> to all enemies",
-                                                         "<b>Strong</b> to the player", "<b>Strong</b> to the player but takes 8 damage", "<b>Hope</b> to the player",
-                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but deals 8 damage to the player", "<b>Transform</b> to the player",
-                                                         "Remove all player's effects" };
+    List<string> CardDescriptionPlayerES = new List<string>() { "", "", "", "", "", "", "+2 Maná", "+5", "+10", "+5", "+10",
+                                                              "xN +5", "xN +10", "", "-8", "", "", "Fuerte", "Fuerte y -8",
+                                                              "Esperanza", "", "-8", "Transformado", "-Efectos" };
+    List<string> CardDescriptionPlayerEN = new List<string>() { "", "", "", "", "", "", "+2 Mana", "+5", "+10", "+5", "+10",
+                                                              "xN +5", "xN +10", "", "-8", "", "", "Strong", "Strong and -8",
+                                                              "Hope", "", "-8", "Transformed", "-Effects" };
+
+    List<string> CardDescriptionEnemiesES = new List<string>() { "-5", "x2 -3", "-5 a todos", "-10", "-20", "x2 -10", "", "",
+                                                               "", "-5", "-10", "-5 a todos", "-10 a todos", "Aturdido",
+                                                               "Aturdido", "Débil", "Débil a todos", "", "", "",
+                                                               "Envenenado", "Débil", "", "" };
+    List<string> CardDescriptionEnemiesEN = new List<string>() { "-5", "x2 -3", "-5 to everyone", "-10", "-20", "x2 -10", "", "",
+                                                               "", "-5", "-10", "-5 to everyone", "-10 to everyone", "Stunned",
+                                                               "Stunned", "Weak", "Weak to everyone", "", "", "",
+                                                               "Poisoned", "Weak", "", "" };
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
 
@@ -202,26 +205,28 @@ public class ChestCard : MonoBehaviour
                         {
 
                             CardsMana[i].GetComponent<ChestCard>().newText[0].text = CardTitlesEN[rand];
-                            CardsMana[i].GetComponent<ChestCard>().newText[1].text = CardDescriptionsEN[rand];
+                            CardsMana[i].GetComponent<ChestCard>().newText[1].text = CardDescriptionPlayerEN[rand];
+                            CardsMana[i].GetComponent<ChestCard>().newText[2].text = CardDescriptionEnemiesEN[rand];
 
                         }
                         else
                         {
 
                             CardsMana[i].GetComponent<ChestCard>().newText[0].text = CardTitlesES[rand];
-                            CardsMana[i].GetComponent<ChestCard>().newText[1].text = CardDescriptionsES[rand];
+                            CardsMana[i].GetComponent<ChestCard>().newText[1].text = CardDescriptionPlayerES[rand];
+                            CardsMana[i].GetComponent<ChestCard>().newText[2].text = CardDescriptionEnemiesES[rand];
 
                         }
                         //CardsMana[i].GetComponent<ChestCard>().newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand];
 
                         if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[rand])
-                            CardsMana[i].GetComponent<ChestCard>().newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand];
+                            CardsMana[i].GetComponent<ChestCard>().newText[3].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand];
                         else if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] < VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[rand])
-                            CardsMana[i].GetComponent<ChestCard>().newText[2].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] + "</color>";
+                            CardsMana[i].GetComponent<ChestCard>().newText[3].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] + "</color>";
                         else
-                            CardsMana[i].GetComponent<ChestCard>().newText[2].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] + "</color>";
+                            CardsMana[i].GetComponent<ChestCard>().newText[3].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[rand] + "</color>";
 
-                        CardsMana[i].GetComponent<ChestCard>().newText[3].text = CardDuration[rand];
+                        CardsMana[i].GetComponent<ChestCard>().newText[4].text = CardDuration[rand];
 
                         CardsMana[i].GetComponent<ChestCard>().ElegibleMana = true;
                         CardsMana[i].GetComponent<ChestCard>().CardMana = gameObject;

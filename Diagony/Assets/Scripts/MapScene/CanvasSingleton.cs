@@ -15,6 +15,7 @@ public class CanvasSingleton : MonoBehaviour
     [SerializeField] GameObject HealthBarPersonaje;
     public bool VerMapa;
     public bool barridoTerminado;
+    public List<GameObject> ListCompendioCards;
 
     // SoundFX Management
     public AudioSource LlegarTopeMapaSound;

@@ -9,7 +9,8 @@ public class CardManaText : MonoBehaviour
     [SerializeField] GameObject VariablesGlobales;
     [SerializeField] Traduction Traduction; // Script del singleton de Traduction
     [SerializeField] TMP_Text TitleCard;
-    [SerializeField] TMP_Text DescriptionCard;
+    [SerializeField] TMP_Text DescriptionPlayerCard;
+    [SerializeField] TMP_Text DescriptionEnemiesCard;
     private int Tipo;
 
     List<string> CardTitlesES = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Acepto que me afecta", "Puedo decir que no", "Reconozco lo que siento",
@@ -23,25 +24,28 @@ public class CardManaText : MonoBehaviour
                                                    "Nothing happens if it goes wrong", "I talk about what happens to me", "I talk all the time about what happens to me", "I am on it",
                                                    "Nothing is forever", "I don't know what to do", "Everything transforms", "I am aware of how what I do affects me"};
 
-    List<string> CardDescriptionsES = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos los enemigos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
-                                                         "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos los enemigos", "Roba 10 de vida a todos los enemigos", "<b>Bloquear</b> a un enemigo",
-                                                         "<b>Bloquear</b> a un enemigo pero el jugador recibe 8 de daño", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
-                                                         "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero recibe 8 de daño", "<b>Esperanza</b> al jugador",
-                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero el jugador recibe 8 de daño", "<b>Transformar</b> al jugador",
-                                                         "Se eliminan todos los efectos del jugador" };
-    List<string> CardDescriptionsEN = new List<string>() { "Attack 5", "Attack 3x2", "Attack 5 to all enemies", "Attack 10", "Attack 20", "Attack 10x2", "Gain 2 mana", "Heal 5",
-                                                         "Heal 10", "Drain 5 to an enemy", "Drain 10 to an enemy", "Drain 5 to all enemies", "Drain 10 to all enemies", "<b>Stun</b> to an enemy",
-                                                         "<b>Stun</b> to an enemy but deals 8 damage to the player", "<b>Weak</b> to an enemy", "<b>Weak</b> to all enemies",
-                                                         "<b>Strong</b> to the player", "<b>Strong</b> to the player but takes 8 damage", "<b>Hope</b> to the player",
-                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but deals 8 damage to the player", "<b>Transform</b> to the player",
-                                                         "Remove all player's effects" };
+    List<string> CardDescriptionPlayerES = new List<string>() { "", "", "", "", "", "", "+2 Maná", "+5", "+10", "+5", "+10",
+                                                              "xN +5", "xN +10", "", "-8", "", "", "Fuerte", "Fuerte y -8",
+                                                              "Esperanza", "", "-8", "Transformado", "-Efectos" };
+    List<string> CardDescriptionPlayerEN = new List<string>() { "", "", "", "", "", "", "+2 Mana", "+5", "+10", "+5", "+10",
+                                                              "xN +5", "xN +10", "", "-8", "", "", "Strong", "Strong and -8",
+                                                              "Hope", "", "-8", "Transformed", "-Effects" };
+
+    List<string> CardDescriptionEnemiesES = new List<string>() { "-5", "x2 -3", "-5 a todos", "-10", "-20", "x2 -10", "", "",
+                                                               "", "-5", "-10", "-5 a todos", "-10 a todos", "Aturdido",
+                                                               "Aturdido", "Débil", "Débil a todos", "", "", "",
+                                                               "Envenenado", "Débil", "", "" };
+    List<string> CardDescriptionEnemiesEN = new List<string>() { "-5", "x2 -3", "-5 to everyone", "-10", "-20", "x2 -10", "", "",
+                                                               "", "-5", "-10", "-5 to everyone", "-10 to everyone", "Stunned",
+                                                               "Stunned", "Weak", "Weak to everyone", "", "", "",
+                                                               "Poisoned", "Weak", "", "" };
     public GameObject EffectContainer;
     public TMP_Text EffectText;
-    List<string> CardEffectDescriptionES = new List<string>() { "<b>Bloquear</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -2 de daño",
-                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Cada turno restaura vida al jugador",
-                                                                "<b>Envenenar</b>: Cada turno inflige daño al enemigo", "<b>Transformar</b>: Los ataques de los enemigos curan en vez de hacer daño" };
-    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stun</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
-                                                                "<b>Hope</b>: Each turn restores health to the player", "<b>Poison</b>: Each turn deals damage to the enemy", "<b>Transform</b>: Enemy's attacks heal instead of dealing damage" };
+    List<string> CardEffectDescriptionES = new List<string>() { "<b>Aturdido</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -2 de daño",
+                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Cada turno restaura vida (+3) al jugador",
+                                                                "<b>Envenenado</b>: Cada turno inflige daño (-3) al enemigo", "<b>Transformado</b>: Los ataques de los enemigos curan en vez de hacer daño" };
+    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stunned</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
+                                                                "<b>Hope</b>: Each turn restores health (+3) to the player", "<b>Poisoned</b>: Each turn deals damage (-3) to the enemy", "<b>Transformed</b>: Enemy's attacks heal instead of dealing damage" };
 
     private void Awake()
     {
@@ -103,7 +107,8 @@ public class CardManaText : MonoBehaviour
         {
 
             TitleCard.text = CardTitlesEN[gameObject.GetComponent<ChestCard>().RandTipo];
-            DescriptionCard.text = CardDescriptionsEN[gameObject.GetComponent<ChestCard>().RandTipo];
+            DescriptionPlayerCard.text = CardDescriptionPlayerEN[gameObject.GetComponent<ChestCard>().RandTipo];
+            DescriptionEnemiesCard.text = CardDescriptionEnemiesEN[gameObject.GetComponent<ChestCard>().RandTipo];
 
             // Traducción inglesa de los textos explicativos de los efectos
             if (Tipo == 13 || Tipo == 14)
@@ -116,7 +121,7 @@ public class CardManaText : MonoBehaviour
                 EffectText.text = CardEffectDescriptionEN[3];
             else if (Tipo == 20)
                 EffectText.text = CardEffectDescriptionEN[4];
-            else if (Tipo == 21)
+            else if (Tipo == 22)
                 EffectText.text = CardEffectDescriptionEN[5];
 
         }
@@ -124,7 +129,8 @@ public class CardManaText : MonoBehaviour
         {
 
             TitleCard.text = CardTitlesES[gameObject.GetComponent<ChestCard>().RandTipo];
-            DescriptionCard.text = CardDescriptionsES[gameObject.GetComponent<ChestCard>().RandTipo];
+            DescriptionPlayerCard.text = CardDescriptionPlayerES[gameObject.GetComponent<ChestCard>().RandTipo];
+            DescriptionEnemiesCard.text = CardDescriptionEnemiesES[gameObject.GetComponent<ChestCard>().RandTipo];
 
             // Traducción española de los textos explicativos de los efectos
             if (Tipo == 13 || Tipo == 14)
@@ -137,7 +143,7 @@ public class CardManaText : MonoBehaviour
                 EffectText.text = CardEffectDescriptionES[3];
             else if (Tipo == 20)
                 EffectText.text = CardEffectDescriptionES[4];
-            else if (Tipo == 21)
+            else if (Tipo == 22)
                 EffectText.text = CardEffectDescriptionES[5];
 
         }

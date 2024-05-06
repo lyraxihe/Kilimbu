@@ -41,6 +41,7 @@ public class CardController : MonoBehaviour
     [SerializeField] int NumCartas; // Número de cartas en el turno actual
     public int Tipo; 
     public int CosteMana;
+    private int numEnemies; // Nº enemies in combat
 
     List<string> CardTitlesES = new List<string>() { "Respiro hondo", "Escribo lo que me pasa", "Acepto que me afecta", "Puedo decir que no", "Reconozco lo que siento",
                                                    "Aprendo de lo que siento", "Me divierto con amigos", "Salgo a tomar el sol", "Un paseo por la naturaleza", "Cantar",
@@ -53,24 +54,27 @@ public class CardController : MonoBehaviour
                                                    "Nothing happens if it goes wrong", "I talk about what happens to me", "I talk all the time about what happens to me", "I am on it",
                                                    "Nothing is forever", "I don't know what to do", "Everything transforms", "I am aware of how what I do affects me"};
 
-    List<string> CardDescriptionsES = new List<string>() { "Ataque 5", "Ataque 3x2", "Ataque 5 a todos los enemigos", "Ataque 10", "Ataque 20", "Ataque 10x2", "Gana 2 de maná", "Cura 5",
-                                                         "Cura 10", "Roba 5 de vida", "Roba 10 de vida", "Roba 5 de vida a todos los enemigos", "Roba 10 de vida a todos los enemigos", "<b>Bloquear</b> a un enemigo",
-                                                         "<b>Bloquear</b> a un enemigo pero el jugador recibe 8 de daño", "<b>Débil</b> a un enemigo", "<b>Débil</b> a todos los enemigos",
-                                                         "<b>Fuerte</b> al jugador", "<b>Fuerte</b> al jugador pero recibe 8 de daño", "<b>Esperanza</b> al jugador",
-                                                         "<b>Envenenar</b> a un enemigo", "<b>Débil</b> a un enemigo pero el jugador recibe 8 de daño", "<b>Transformar</b> al jugador",
-                                                         "Se eliminan todos los efectos del jugador" };
-    List<string> CardDescriptionsEN = new List<string>() { "Attack 5", "Attack 3x2", "Attack 5 to all enemies", "Attack 10", "Attack 20", "Attack 10x2", "Gain 2 mana", "Heal 5",
-                                                         "Heal 10", "Drain 5 to an enemy", "Drain 10 to an enemy", "Drain 5 to all enemies", "Drain 10 to all enemies", "<b>Stun</b> to an enemy",
-                                                         "<b>Stun</b> to an enemy but deals 8 damage to the player", "<b>Weak</b> to an enemy", "<b>Weak</b> to all enemies",
-                                                         "<b>Strong</b> to the player", "<b>Strong</b> to the player but takes 8 damage", "<b>Hope</b> to the player",
-                                                         "<b>Poison</b> to an enemy", "<b>Weak</b> to an enemy but deals 8 damage to the player", "<b>Transform</b> to the player",
-                                                         "Remove all player's effects" };
+    List<string> CardDescriptionPlayerES = new List<string>() { "", "", "", "", "", "", "+2 Maná", "+5", "+10", "+5", "+10",
+                                                              "xN +5", "xN +10", "", "-8", "", "", "Fuerte", "Fuerte y -8",
+                                                              "Esperanza", "", "-8", "Transformado", "-Efectos" };
+    List<string> CardDescriptionPlayerEN = new List<string>() { "", "", "", "", "", "", "+2 Mana", "+5", "+10", "+5", "+10",
+                                                              "xN +5", "xN +10", "", "-8", "", "", "Strong", "Strong and -8",
+                                                              "Hope", "", "-8", "Transformed", "-Effects" };
 
-    List<string> CardEffectDescriptionES = new List<string>() { "<b>Bloquear</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -2 de daño",
-                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Cada turno restaura vida al jugador",
-                                                                "<b>Envenenar</b>: Cada turno inflige daño al enemigo", "<b>Transformar</b>: Los ataques de los enemigos curan en vez de hacer daño" };
-    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stun</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
-                                                                "<b>Hope</b>: Each turn restores health to the player", "<b>Poison</b>: Each turn deals damage to the enemy", "<b>Transform</b>: Enemy's attacks heal instead of dealing damage" };
+    List<string> CardDescriptionEnemiesES = new List<string>() { "-5", "x2 -3", "-5 a todos", "-10", "-20", "x2 -10", "", "",
+                                                               "", "-5", "-10", "-5 a todos", "-10 a todos", "Aturdido",
+                                                               "Aturdido", "Débil", "Débil a todos", "", "", "",
+                                                               "Envenenado", "Débil", "", "" };
+    List<string> CardDescriptionEnemiesEN = new List<string>() { "-5", "x2 -3", "-5 to everyone", "-10", "-20", "x2 -10", "", "",
+                                                               "", "-5", "-10", "-5 to everyone", "-10 to everyone", "Stunned",
+                                                               "Stunned", "Weak", "Weak to everyone", "", "", "",
+                                                               "Poisoned", "Weak", "", "" };
+
+    List<string> CardEffectDescriptionES = new List<string>() { "<b>Aturdido</b>: El enemigo no puede atacar el siguiente turno", "<b>Débil</b>: Los ataques del enemigo hacen -2 de daño",
+                                                                "<b>Fuerte</b>: Los ataques del jugador hacen +3 de daño", "<b>Esperanza</b>: Cada turno restaura vida (+3) al jugador",
+                                                                "<b>Envenenado</b>: Cada turno inflige daño (-3) al enemigo", "<b>Transformado</b>: Los ataques de los enemigos curan en vez de hacer daño" };
+    List<string> CardEffectDescriptionEN = new List<string>() { "<b>Stunned</b>: The enemy cannot attack the next turn", "<b>Weak</b>: Enemy's attacks deal -2 damage", "<b>Strong</b>: Player's attacks deal +3 damage",
+                                                                "<b>Hope</b>: Each turn restores health (+3) to the player", "<b>Poisoned</b>: Each turn deals damage (-3) to the enemy", "<b>Transformed</b>: Enemy's attacks heal instead of dealing damage" };
 
     List<string> CardDuration = new List<string>() { "", "", "", "", "", "", "", "", "", "", "", "", "", "1", "1", "3", "2", "4", "4", "4", "3", "3", "1", "0" };
 
@@ -127,7 +131,8 @@ public class CardController : MonoBehaviour
         CardAnimator.SetInteger("NumCartas", NumCartas);
         CardAnimator.SetInteger("CardID", Id);
 
-       
+        numEnemies = CombatScene.GetComponent<CombatController>().EnemyList.Count;
+
         //AnimacionCarta();
 
         SetText();
@@ -463,22 +468,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Attack <color=red>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Attack <color=green>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Attack " + danyo;
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Ataque <color=red>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Ataque <color=green>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Ataque " + danyo;
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
 
@@ -493,22 +528,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 3)
-                    newText[1].text = "Attack <color=red>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "x2 <color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 3)
-                    newText[1].text = "Attack <color=green>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "x2 <color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Attack " + danyo + "x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "x2 -" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 3)
-                    newText[1].text = "Ataque <color=red>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "x2 <color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 3)
-                    newText[1].text = "Ataque <color=green>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "x2 <color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Ataque " + danyo + "x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "x2 -" + danyo;
+
+                }
 
             }
 
@@ -523,22 +588,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Attack <color=red>" + danyo + "</color> to all enemies";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color> to everyone";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Attack <color=green>" + danyo + "</color> to all enemies";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color> to everyone";
+
+                }
                 else
-                    newText[1].text = "Attack " + danyo + " to all enemies";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "-" + danyo + " to everyone";
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Ataque <color=red>" + danyo + "</color> a todos los enemigos";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color> a todos";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Ataque <color=green>" + danyo + "</color> a todos los enemigos";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color> a todos";
+
+                }
                 else
-                    newText[1].text = "Ataque " + danyo + " a todos los enemigos";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "-" + danyo + " a todos";
+
+                }
 
             }
 
@@ -553,22 +648,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Attack <color=red>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Attack <color=green>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Attack " + danyo;
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Ataque <color=red>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Ataque <color=green>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Ataque " + danyo;
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
 
@@ -583,22 +708,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 20)
-                    newText[1].text = "Attack <color=red>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 20)
-                    newText[1].text = "Attack <color=green>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Attack " + danyo;
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 20)
-                    newText[1].text = "Ataque <color=red>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 20)
-                    newText[1].text = "Ataque <color=green>" + danyo + "</color>";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Ataque " + danyo;
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
 
@@ -613,22 +768,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Attack <color=red>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "x2 <color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Attack <color=green>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "x2 <color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Attack " + danyo + "x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerEN[Tipo];
+                    newText[2].text = "x2 -" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Ataque <color=red>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "x2 <color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Ataque <color=green>" + danyo + "</color>x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "x2 <color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Ataque " + danyo + "x2";
+                {
+
+                    newText[1].text = CardDescriptionPlayerES[Tipo];
+                    newText[2].text = "x2 -" + danyo;
+
+                }
 
             }
 
@@ -643,22 +828,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Drain <color=red>" + danyo + "</color> to an enemy";
+                {
+
+                    newText[1].text = "<color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Drain <color=green>" + danyo + "</color> to an enemy";
+                {
+
+                    newText[1].text = "<color=green>+" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Drain " + danyo + " to an enemy";
+                {
+
+                    newText[1].text = "+" + danyo;
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Roba <color=red>" + danyo + "</color> de vida";
+                {
+
+                    newText[1].text = "<color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>-" + danyo + "</color>";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Roba <color=green>" + danyo + "</color> de vida";
+                {
+
+                    newText[1].text = "<color=green>+" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Roba " + danyo + " de vida";
+                {
+
+                    newText[1].text = "+" + danyo;
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
 
@@ -673,22 +888,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Drain <color=red>" + danyo + "</color> to an enemy";
+                {
+
+                    newText[1].text = "<color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>+" + danyo + "</color>";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Drain <color=green>" + danyo + "</color> to an enemy";
+                {
+
+                    newText[1].text = "<color=green>-" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Drain " + danyo + " to an enemy";
+                {
+
+                    newText[1].text = "+" + danyo;
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Roba <color=red>" + danyo + "</color> de vida";
+                {
+
+                    newText[1].text = "<color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>+" + danyo + "</color>";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Roba <color=green>" + danyo + "</color> de vida";
+                {
+
+                    newText[1].text = "<color=green>-" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color>";
+
+                }
                 else
-                    newText[1].text = "Roba " + danyo + " de vida";
+                {
+
+                    newText[1].text = "+" + danyo;
+                    newText[2].text = "-" + danyo;
+
+                }
 
             }
 
@@ -703,22 +948,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Drain <color=red>" + danyo + "</color> to all enemies";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>-" + danyo + "</color> to everyone";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Drain <color=green>" + danyo + "</color> to all enemies";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=green>+" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color> to everyone";
+
+                }
                 else
-                    newText[1].text = "Drain " + danyo + " to all enemies";
+                {
+
+                    newText[1].text = "x" + numEnemies + " +" + danyo;
+                    newText[2].text = "-" + danyo + " to everyone";
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 5)
-                    newText[1].text = "Roba <color=red>" + danyo + "</color> de vida a todos los enemigos";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>-" + danyo + "</color> a todos";
+
+                }
                 else if (danyo > 5)
-                    newText[1].text = "Roba <color=green>" + danyo + "</color> de vida a todos los enemigos";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=green>+" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color> a todos";
+
+                }
                 else
-                    newText[1].text = "Roba " + danyo + " de vida a todos los enemigos";
+                {
+
+                    newText[1].text = "x" + numEnemies + " +" + danyo;
+                    newText[2].text = "-" + danyo + " a todos";
+
+                }
 
             }
 
@@ -733,22 +1008,52 @@ public class CardController : MonoBehaviour
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Drain <color=red>" + danyo + "</color> to all enemies";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>-" + danyo + "</color> to everyone";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Drain <color=green>" + danyo + "</color> to all enemies";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=green>+" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color> to everyone";
+
+                }
                 else
-                    newText[1].text = "Drain " + danyo + " to all enemies";
+                {
+
+                    newText[1].text = "x" + numEnemies + " +" + danyo;
+                    newText[2].text = "-" + danyo + " to everyone";
+
+                }
 
             }
             else                                                                  // Spanish
             {
 
                 if (danyo < 10)
-                    newText[1].text = "Roba <color=red>" + danyo + "</color> de vida a todos los enemigos";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=red>+" + danyo + "</color>";
+                    newText[2].text = "<color=red>-" + danyo + "</color> a todos";
+
+                }
                 else if (danyo > 10)
-                    newText[1].text = "Roba <color=green>" + danyo + "</color> de vida a todos los enemigos";
+                {
+
+                    newText[1].text = "x" + numEnemies + " <color=green>+" + danyo + "</color>";
+                    newText[2].text = "<color=green>-" + danyo + "</color> a todos";
+
+                }
                 else
-                    newText[1].text = "Roba " + danyo + " de vida a todos los enemigos";
+                {
+
+                    newText[1].text = "x" + numEnemies + " +" + danyo;
+                    newText[2].text = "-" + danyo + " a todos";
+
+                }
 
             }
 
@@ -759,14 +1064,16 @@ public class CardController : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
-                newText[1].text = CardDescriptionsEN[Tipo];
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
                 EffectText.text = CardEffectDescriptionEN[0];
 
             }
             else                                                                  // Spanish
             {
 
-                newText[1].text = CardDescriptionsES[Tipo];
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
                 EffectText.text = CardEffectDescriptionES[0];
 
             }
@@ -778,14 +1085,16 @@ public class CardController : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
-                newText[1].text = CardDescriptionsEN[Tipo];
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
                 EffectText.text = CardEffectDescriptionEN[1];
 
             }
             else                                                                  // Spanish
             {
 
-                newText[1].text = CardDescriptionsES[Tipo];
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
                 EffectText.text = CardEffectDescriptionES[1];
 
             }
@@ -797,14 +1106,16 @@ public class CardController : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
-                newText[1].text = CardDescriptionsEN[Tipo];
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
                 EffectText.text = CardEffectDescriptionEN[2];
 
             }
             else                                                                  // Spanish
             {
 
-                newText[1].text = CardDescriptionsES[Tipo];
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
                 EffectText.text = CardEffectDescriptionES[2];
 
             }
@@ -816,14 +1127,16 @@ public class CardController : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
-                newText[1].text = CardDescriptionsEN[Tipo];
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
                 EffectText.text = CardEffectDescriptionEN[3];
 
             }
             else                                                                  // Spanish
             {
 
-                newText[1].text = CardDescriptionsES[Tipo];
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
                 EffectText.text = CardEffectDescriptionES[3];
 
             }
@@ -835,14 +1148,16 @@ public class CardController : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
-                newText[1].text = CardDescriptionsEN[Tipo];
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
                 EffectText.text = CardEffectDescriptionEN[4];
 
             }
             else                                                                  // Spanish
             {
 
-                newText[1].text = CardDescriptionsES[Tipo];
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
                 EffectText.text = CardEffectDescriptionES[4];
 
             }
@@ -854,14 +1169,16 @@ public class CardController : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
             {
 
-                newText[1].text = CardDescriptionsEN[Tipo];
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
                 EffectText.text = CardEffectDescriptionEN[5];
 
             }
             else                                                                  // Spanish
             {
 
-                newText[1].text = CardDescriptionsES[Tipo];
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
                 EffectText.text = CardEffectDescriptionES[5];
 
             }
@@ -871,19 +1188,30 @@ public class CardController : MonoBehaviour
         {
 
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                newText[1].text = CardDescriptionsEN[Tipo];
+            {
+
+                newText[1].text = CardDescriptionPlayerEN[Tipo];
+                newText[2].text = CardDescriptionEnemiesEN[Tipo];
+
+            }
             else                                                                  // Spanish
-                newText[1].text = CardDescriptionsES[Tipo];
+            {
+
+                newText[1].text = CardDescriptionPlayerES[Tipo];
+                newText[2].text = CardDescriptionEnemiesES[Tipo];
+
+            }
+                
 
         }
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] == VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
-            newText[2].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
+            newText[3].text = "" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo];
         else if (VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] < VariablesGlobales.GetComponent<VariablesGlobales>().CardCostOriginal[Tipo])
-            newText[2].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
+            newText[3].text = "<color=green>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
         else
-            newText[2].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
-        newText[3].text = CardDuration[Tipo];
+            newText[3].text = "<color=red>" + VariablesGlobales.GetComponent<VariablesGlobales>().CardCost[Tipo] + "</color>";
+        newText[4].text = CardDuration[Tipo];
 
     }
 
