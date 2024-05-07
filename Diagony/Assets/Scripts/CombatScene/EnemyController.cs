@@ -106,6 +106,7 @@ public class EnemyController : MonoBehaviour
 
     //SoundFX Management
     public AudioSource AtaqueEmocionSound;
+    public AudioSource AtaqueDobleEmocionSound;
     public AudioSource CurarEmocionSound;
     public AudioSource AplicarEfectoDeEmocionSound;
     public AudioSource AtaqueBossSound;
@@ -224,6 +225,7 @@ public class EnemyController : MonoBehaviour
 
         //Find SoundFxs from scene
         AtaqueEmocionSound = GameObject.Find("AtaqueEmocion_SoundFX").GetComponent<AudioSource>();
+        AtaqueDobleEmocionSound = GameObject.Find("AtaqueDobleEmocion_SoundFX").GetComponent<AudioSource>();
         CurarEmocionSound = GameObject.Find("CurarEmocion_SoundFX").GetComponent<AudioSource>();
         AplicarEfectoDeEmocionSound = GameObject.Find("AplicarEfectoDeEmocion_SoundFX").GetComponent<AudioSource>();
         AtaqueBossSound = GameObject.Find("AtaqueBoss_SoundFX").GetComponent<AudioSource>();
@@ -1290,7 +1292,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
             Player.GetComponent<PlayerController>().DamageParticle.Play();
             EnemyAnimator.SetBool("atacar", true);
-            AtaqueEmocionSound.Play();
+            AtaqueDobleEmocionSound.Play();
 
             yield return new WaitForSeconds(tiempo);
 
@@ -1298,7 +1300,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player, false));
             //Player.GetComponent<PlayerController>().DamageParticle.Play();
             // EnemyAnimator.SetBool("atacar", true);
-            AtaqueEmocionSound.Play();
+            AtaqueDobleEmocionSound.Play();
 
         }
 

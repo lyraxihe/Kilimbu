@@ -2108,7 +2108,7 @@ public class CombatController : MonoBehaviour
 
                 EnemyList[enemigo].GetComponent<EnemyController>().HealthEnemigo -= danyoTotal;
                 StartCoroutine(CreateDmgHealText(false, danyoTotal, EnemyList[enemigo], false));
-                PlayAtaqueProtaSound();
+                PlayAtaqueDobleProtaSound();
 
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Boss)
                     EnemyList[enemigo].GetComponent<EnemyController>().contAcumulacionDanyoBoss += danyoTotal;
