@@ -710,7 +710,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1320623602816348134, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ff003461ac7f3d742baf190bb5fbeef9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1034,7 +1034,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1320623602816348134, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4b53c0384f054e84aa5096cc829cf728, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1155,7 +1155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 786.0499, y: -449.1706}
+  m_AnchoredPosition: {x: 786.0499, y: -449.37}
   m_SizeDelta: {x: 667.11, y: 170.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364080045
@@ -2654,9 +2654,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3952021127896858167, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1194f6094808fd04da2041037e7bd8a2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.488
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3692,9 +3692,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1320623602816348134, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 21ec56b7038a7a34cb193b2893b5d8e9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.488
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4413,7 +4413,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1320623602816348134, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 60152798bd8552341808bf45e528ad35, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5282,7 +5282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 786.0499, y: -225.5806}
+  m_AnchoredPosition: {x: 786.0499, y: -225.78}
   m_SizeDelta: {x: 667.11, y: 170.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1844617331
@@ -5590,7 +5590,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3952021127896858167, guid: f3a8c9936557b7c4b9d0223da6c25731, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 07ecc31a74b7ee4488d366351717bae0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ec47725ecd10f8b4f8cf772ff7086330, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5689,6 +5689,7 @@ GameObject:
   - component: {fileID: 2013133324}
   - component: {fileID: 2013133323}
   - component: {fileID: 2013133322}
+  - component: {fileID: 2013133326}
   m_Layer: 5
   m_Name: Leave
   m_TagString: Untagged
@@ -5714,7 +5715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 786.0499, y: -672.7606}
+  m_AnchoredPosition: {x: 786.0499, y: -672.96}
   m_SizeDelta: {x: 667.11, y: 170.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2013133322
@@ -5733,6 +5734,8 @@ MonoBehaviour:
   VariablesGlobales: {fileID: 0}
   CombatScene: {fileID: 997179869}
   victoria: 0
+  ButtonHoverSound: {fileID: 0}
+  UnpauseSound: {fileID: 0}
 --- !u!114 &2013133323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5789,6 +5792,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2013133322}
+        m_TargetAssemblyTypeName: PausaButton, Assembly-CSharp
+        m_MethodName: PlayUnpauseSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2013133324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5827,6 +5842,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013133320}
   m_CullTransparentMesh: 1
+--- !u!114 &2013133326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013133320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2013133322}
+          m_TargetAssemblyTypeName: PausaButton, Assembly-CSharp
+          m_MethodName: PlayButtonHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2118525311
 GameObject:
   m_ObjectHideFlags: 0

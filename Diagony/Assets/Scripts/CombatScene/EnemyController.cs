@@ -37,6 +37,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool animation_damage;
 
     public bool RecibirDanyo; // Indica que el enemigo debe realizar la animación de recibir danyo
+    public bool IntegrarEmocion = false; // Indica que el enemigo debe realizar la animación de integrarse
 
 
     [SerializeField] public bool Bloqueado; // Indica si el jugador a bloqueado a este enemigo
@@ -357,7 +358,11 @@ public class EnemyController : MonoBehaviour
             //CombatScene.GetComponent<CombatController>().victoriaDerrota();
             //Destroy(gameObject);
 
-            IntegrarEmocionSound.Play();
+            if(!IntegrarEmocion)
+            {
+                IntegrarEmocion = true;
+                IntegrarEmocionSound.Play();
+            }
 
         }
 

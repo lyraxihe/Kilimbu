@@ -963,3 +963,25 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 5679.317658 seconds.
+  path: Assets/Audio/SoundFX/New/IntegrarEmocion_SoundFX.mp3
+  artifactKey: Guid(60152798bd8552341808bf45e528ad35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Audio/SoundFX/New/IntegrarEmocion_SoundFX.mp3 using Guid(60152798bd8552341808bf45e528ad35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7bc67bd8bb23f6674d466c70c24ac90c') in 0.060266 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.159555 seconds.
+  path: Assets/Audio/SoundFX/New/VictoryBoss_SoundFX.mp3
+  artifactKey: Guid(21ec56b7038a7a34cb193b2893b5d8e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Audio/SoundFX/New/VictoryBoss_SoundFX.mp3 using Guid(21ec56b7038a7a34cb193b2893b5d8e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ba7cc119857020873a3c1cdda9fe2dd') in 0.019697 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Audio/SoundFX/New/VictoryMusic_SoundFX.wav
+  artifactKey: Guid(d130c304f7c20a64988350f83a365112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Audio/SoundFX/New/VictoryMusic_SoundFX.wav using Guid(d130c304f7c20a64988350f83a365112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a970cdc1964d70383b019cfade6a15b') in 0.021401 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -12,11 +12,22 @@ public class PausaButton : MonoBehaviour
     [SerializeField] GameObject CombatScene;
     public bool victoria;
     TMP_Text textButton;
+
+    //Sound Fx Management
+    public AudioSource ButtonHoverSound;
+    public AudioSource UnpauseSound;
+
+
+
     void Start()
     {
         victoria = false;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         textButton = gameObject.GetComponentInChildren<TextMeshPro>();
+
+        // Encontrar soundfx para asignarlos
+        ButtonHoverSound = GameObject.Find("ButtonHover_SoundFX").GetComponent<AudioSource>();
+        UnpauseSound = GameObject.Find("Unpause_SoundFX").GetComponent<AudioSource>();
     }
 
 
@@ -83,4 +94,13 @@ public class PausaButton : MonoBehaviour
 
     }
 
+    public void PlayButtonHoverSound()
+    {
+        ButtonHoverSound.Play();
+    }
+
+    public void PlayUnpauseSound()
+    {
+        UnpauseSound.Play();
+    }
 }
