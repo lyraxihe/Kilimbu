@@ -84,7 +84,7 @@ public class BuyButton : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount -= Precio;
                 VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista++;
                 gameObject.GetComponent<Button>().interactable = false;
-                gameObject.GetComponent<TMP_Text>().text = "X";
+                //gameObject.GetComponent<TMP_Text>().text = "X";                                                                REVISAR POR ERROR?
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
                     CreateFeedbackText("+1 mana");
                 else                                                                   // Spanish
