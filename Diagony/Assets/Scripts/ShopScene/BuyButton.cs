@@ -30,13 +30,13 @@ public class BuyButton : MonoBehaviour
             if (VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista == 3)
             {
                 Precio = 40;
-                gameObject.GetComponentInChildren<TMP_Text>().text = "$" + Precio.ToString();
+                gameObject.GetComponentInChildren<TMP_Text>().text = Precio.ToString() + "xp";
             }
            
             else if (VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista == 4)
             {
                 Precio = 70;
-                gameObject.GetComponentInChildren<TMP_Text>().text = "$" + Precio.ToString();
+                gameObject.GetComponentInChildren<TMP_Text>().text = Precio.ToString() + "xp";
             }
             
             else
@@ -63,7 +63,7 @@ public class BuyButton : MonoBehaviour
 
         // Encontrar efecto de sonido para asignarlo en el botón cada vez que se hace click
         AnyadirCartaSound = GameObject.Find("AnyadirCarta_SoundFX").GetComponent<AudioSource>();
-        ButtonHoverSound = GameObject.Find("AnyadirCarta_SoundFX").GetComponent<AudioSource>();
+        ButtonHoverSound = GameObject.Find("ButtonHover_SoundFX").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -84,6 +84,7 @@ public class BuyButton : MonoBehaviour
                 VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount -= Precio;
                 VariablesGlobales.GetComponent<VariablesGlobales>().MaxManaProtagonista++;
                 gameObject.GetComponent<Button>().interactable = false;
+                gameObject.GetComponent<TMP_Text>().text = "X";
                 if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
                     CreateFeedbackText("+1 mana");
                 else                                                                   // Spanish
@@ -123,8 +124,12 @@ public class BuyButton : MonoBehaviour
                     CreateFeedbackText("+1 carta al mazo");
 
                 if (ID==6) //Si es la carta de maná solo te deja comprarla una vez
+                {
                     gameObject.GetComponent<Button>().interactable = false;
+                    gameObject.GetComponent<TMP_Text>().text = "X";
+                }
             }
+                  
         }
        
     }

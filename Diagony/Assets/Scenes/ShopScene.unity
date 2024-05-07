@@ -572,7 +572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $15
+  m_text: 15xp
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b221330dcbd29944b24e7c88a81334e, type: 2}
   m_sharedMaterial: {fileID: 251477616757007863, guid: 2b221330dcbd29944b24e7c88a81334e, type: 2}
@@ -1324,6 +1324,7 @@ MonoBehaviour:
   canvas: {fileID: 1396059418}
   FeedbackText: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
   AnyadirCartaSound: {fileID: 0}
+  ButtonHoverSound: {fileID: 0}
 --- !u!114 &1073157634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,7 +1810,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 02399feff9b06b34b9d208cdb97bc42a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.704
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2177,6 +2178,7 @@ MonoBehaviour:
   canvas: {fileID: 1396059418}
   FeedbackText: {fileID: 8009481284101711576, guid: 684a5bbf957896c4ca67499d6b8de604, type: 3}
   AnyadirCartaSound: {fileID: 0}
+  ButtonHoverSound: {fileID: 0}
 --- !u!114 &1379689987
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -130,7 +130,7 @@ public class ShopController : MonoBehaviour
             }
             newText[3].text = CardCost[cardType];
             newText[4].text = CardDuration[cardType];
-            newText[6].text = "$" + CardPrecio[cardType].ToString();
+            newText[6].text = CardPrecio[cardType].ToString() + "xp";
 
             ListCards[i].GetComponent<ShopCard>().Tipo = cardType;
             ListButton[i].GetComponent<BuyButton>().ID = cardType;
