@@ -233,6 +233,7 @@ MonoBehaviour:
   DescriptionEnemiesCard: {fileID: 6834794118761381018}
   EffectContainer: {fileID: 8233893267440244727}
   EffectText: {fileID: 3345853830147567681}
+  MejoraCofreSound: {fileID: 0}
 --- !u!61 &5281377689009903888
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -509,7 +510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -60.2, y: 104.6}
+  m_AnchoredPosition: {x: -62.2, y: 112.6}
   m_SizeDelta: {x: 40.574, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3477801407982728992
@@ -644,8 +645,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000091594, y: 75.107475}
-  m_SizeDelta: {x: 139.4502, y: 57.1656}
+  m_AnchoredPosition: {x: 0.000060994, y: 63.9099}
+  m_SizeDelta: {x: 141.7219, y: 55.7457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6291364246314621833
 CanvasRenderer:
@@ -779,7 +780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 67.4, y: 115.9}
+  m_AnchoredPosition: {x: 59.7, y: 112.6}
   m_SizeDelta: {x: 40.574, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2366305561773732709

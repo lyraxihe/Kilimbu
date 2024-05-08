@@ -54,18 +54,18 @@ public class EffectIcon : MonoBehaviour
             {
 
                 if (EsPlayer)
-                    DescriptionText.text = " +" + Personaje.GetComponent<PlayerController>().Esperanza + " health when attacking / " + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado + " turns ";
+                    DescriptionText.text = " +" + Personaje.GetComponent<PlayerController>().Esperanza + " health each turn / " + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado + " turns ";
                 else
-                    DescriptionText.text = " +" + Personaje.GetComponent<EnemyController>().Esperanza + " health when attacking / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEsperanzado + " turns ";
+                    DescriptionText.text = " +" + Personaje.GetComponent<EnemyController>().Esperanza + " health each turn / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEsperanzado + " turns ";
 
             }
             else if (Tipo == 4)
             {
 
                 if (EsPlayer)
-                    DescriptionText.text = " -" + Personaje.GetComponent<PlayerController>().Veneno + " health when attacking / " + (Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra) + " turns ";
+                    DescriptionText.text = " -" + Personaje.GetComponent<PlayerController>().Veneno + " health each turn / " + (Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra) + " turns ";
                 else
-                    DescriptionText.text = " -" + Personaje.GetComponent<EnemyController>().Veneno + " health when attacking / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEnvenenado + " turns ";
+                    DescriptionText.text = " -" + Personaje.GetComponent<EnemyController>().Veneno + " health each turn / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEnvenenado + " turns ";
 
             }
             else if (Tipo == 5)
@@ -106,18 +106,18 @@ public class EffectIcon : MonoBehaviour
             {
 
                 if (EsPlayer)
-                    DescriptionText.text = " +" + Personaje.GetComponent<PlayerController>().Esperanza + " de vida al atacar / " + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado + " turnos ";
+                    DescriptionText.text = " +" + Personaje.GetComponent<PlayerController>().Esperanza + " de vida en cada turno / " + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado + " turnos ";
                 else
-                    DescriptionText.text = "+" + Personaje.GetComponent<EnemyController>().Esperanza + " de vida al atacar / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEsperanzado + " turnos ";
+                    DescriptionText.text = "+" + Personaje.GetComponent<EnemyController>().Esperanza + " de vida en cada turno / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEsperanzado + " turnos ";
 
             }
             else if (Tipo == 4)
             {
 
                 if (EsPlayer)
-                    DescriptionText.text = " -" + Personaje.GetComponent<PlayerController>().Veneno + " de vida al atacar / " + (Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra) + " turnos ";
+                    DescriptionText.text = " -" + Personaje.GetComponent<PlayerController>().Veneno + " de vida en cada turno / " + (Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado + Personaje.GetComponent<PlayerController>().ContadorDeTurnosEnvenenadoDevolverIra) + " turnos ";
                 else
-                    DescriptionText.text = " -" + Personaje.GetComponent<EnemyController>().Veneno + " de vida al atacar / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEnvenenado + " turnos ";
+                    DescriptionText.text = " -" + Personaje.GetComponent<EnemyController>().Veneno + " de vida en cada turno / " + Personaje.GetComponent<EnemyController>().ContadorDeTurnosEnvenenado + " turnos ";
 
             }
             else if (Tipo == 5)

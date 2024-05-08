@@ -117,6 +117,7 @@ MonoBehaviour:
   EnemyAnimator: {fileID: 5142229651343907074}
   animation_damage: 0
   RecibirDanyo: 0
+  IntegrarEmocion: 0
   Bloqueado: 0
   Debilitado: 0
   Debilidad: 0
@@ -148,6 +149,15 @@ MonoBehaviour:
   HealParticle: {fileID: 7857651151546336008}
   EffectParticle: {fileID: 6441648989709433493}
   DamageParticle: {fileID: 8620095638117660390}
+  AtaqueEmocionSound: {fileID: 0}
+  AtaqueDobleEmocionSound: {fileID: 0}
+  CurarEmocionSound: {fileID: 0}
+  AplicarEfectoDeEmocionSound: {fileID: 0}
+  AtaqueBossSound: {fileID: 0}
+  CurarBossSound: {fileID: 0}
+  AplicarEfectoDeBossSound: {fileID: 0}
+  IntegrarEmocionSound: {fileID: 0}
+  BloqueadoSound: {fileID: 0}
 --- !u!95 &5142229651343907074
 Animator:
   serializedVersion: 5
@@ -156,9 +166,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565513452180743628}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3041e4863ac76c94ba234ef4faaf4db2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
