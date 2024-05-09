@@ -1,23 +1,23 @@
 Using pre-set license
 Built from '2021.3/staging' branch; Version is '2021.3.22f1 (b6c551784ba3) revision 11978065'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'es' Physical Memory: 16314 MB
+OS: 'Windows 11  (10.0.22631) 64bit Core' Language: 'es' Physical Memory: 32476 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity\Hub\Editor\2021.3.22f1\Editor\Unity.exe
+C:\Program Files\Steam\steamapps\common\Unity\Hub\Editor\2021.3.22f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/Alumno/Documents/GitHub/Kilimbu/Diagony
+C:/Users/xcana/Documents/GitHub/Kilimbu/Diagony
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50829
-Successfully changed project path to: C:/Users/Alumno/Documents/GitHub/Kilimbu/Diagony
-C:/Users/Alumno/Documents/GitHub/Kilimbu/Diagony
+65290
+Successfully changed project path to: C:/Users/xcana/Documents/GitHub/Kilimbu/Diagony
+C:/Users/xcana/Documents/GitHub/Kilimbu/Diagony
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -47,109 +47,135 @@ C:/Users/Alumno/Documents/GitHub/Kilimbu/Diagony
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [8328] Host "[IP] 10.20.2.191 [Port] 0 [Flags] 2 [Guid] 3704083868 [EditorId] 3704083868 [Version] 1048832 [Id] WindowsEditor(7,KOJIMA-35) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [33680] Host "[IP] 192.168.1.83 [Port] 0 [Flags] 2 [Guid] 167587244 [EditorId] 167587244 [Version] 1048832 [Id] WindowsEditor(7,Raime) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [8328] Host "[IP] 10.20.2.191 [Port] 0 [Flags] 2 [Guid] 3704083868 [EditorId] 3704083868 [Version] 1048832 [Id] WindowsEditor(7,KOJIMA-35) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [33680] Host "[IP] 192.168.1.83 [Port] 0 [Flags] 2 [Guid] 167587244 [EditorId] 167587244 [Version] 1048832 [Id] WindowsEditor(7,Raime) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 188.55 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 53.26 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.22f1 (b6c551784ba3)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/Alumno/Documents/GitHub/Kilimbu/Diagony/Assets
+[Subsystems] Discovering subsystems at path C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/xcana/Documents/GitHub/Kilimbu/Diagony/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA Quadro K2200 (ID=0x13ba)
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3090 (ID=0x2204)
     Vendor:   NVIDIA
-    VRAM:     4053 MB
-    Driver:   27.21.14.6109
+    VRAM:     24340 MB
+    Driver:   31.0.15.4629
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56400
+Mono path[0] = 'C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56588
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.011193 seconds.
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/AppleTVSupport/UnityEditor.AppleTV.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Steam/steamapps/common/Unity/Hub/Editor/2021.3.22f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
+Registered in 0.007771 seconds.
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 229.38 ms, found 4 plugins.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for AppleTV target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 192 ms
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 53.90 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.769 seconds
+- Completed reload, in  0.704 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1770ms)
-		BeginReloadAssembly (230ms)
+	ReloadAssembly (705ms)
+		BeginReloadAssembly (74ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (1164ms)
-			LoadAssemblies (226ms)
+			CreateAndSetChildDomain (0ms)
+		EndReloadAssembly (552ms)
+			LoadAssemblies (75ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (464ms)
+			SetupTypeCache (92ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (48ms)
-			SetupLoadedEditorAssemblies (587ms)
+			RebuildScriptCaches (16ms)
+			SetupLoadedEditorAssemblies (407ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
+				InitializePlatformSupportModulesInManaged (263ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (229ms)
-				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (262ms)
-				ProcessInitializeOnLoadMethodAttributes (84ms)
+				RefreshPlugins (54ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (60ms)
+				ProcessInitializeOnLoadMethodAttributes (29ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.007052 seconds.
+Registered in 0.004649 seconds.
 Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\Alumno\Documents\GitHub\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Users\Alumno\Documents\GitHub\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\xcana\Documents\GitHub\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\xcana\Documents\GitHub\Kilimbu\Diagony\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 162.89 ms, found 4 plugins.
+Native extension for AppleTV target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 54.60 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.273 seconds
+- Completed reload, in  0.729 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2274ms)
-		BeginReloadAssembly (218ms)
+	ReloadAssembly (729ms)
+		BeginReloadAssembly (72ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (6ms)
+			DisableScriptedObjects (3ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (37ms)
-		EndReloadAssembly (1823ms)
-			LoadAssemblies (175ms)
+			CreateAndSetChildDomain (13ms)
+		EndReloadAssembly (591ms)
+			LoadAssemblies (58ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (504ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (103ms)
-			SetupLoadedEditorAssemblies (967ms)
+			SetupTypeCache (159ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (300ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (163ms)
-				BeforeProcessingInitializeOnLoad (199ms)
-				ProcessInitializeOnLoadAttributes (506ms)
-				ProcessInitializeOnLoadMethodAttributes (77ms)
-				AfterProcessingInitializeOnLoad (13ms)
+				InitializePlatformSupportModulesInManaged (23ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (55ms)
+				BeforeProcessingInitializeOnLoad (59ms)
+				ProcessInitializeOnLoadAttributes (136ms)
+				ProcessInitializeOnLoadMethodAttributes (22ms)
+				AfterProcessingInitializeOnLoad (5ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
-Refreshing native plugins compatible for Editor in 0.72 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3789 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 35 unused Assets / (56.5 KB). Loaded Objects now: 4250.
-Memory consumption went from 146.7 MB to 146.7 MB.
-Total: 5.519100 ms (FindLiveObjects: 0.723300 ms CreateObjectMapping: 2.145600 ms MarkObjects: 2.563800 ms  DeleteObjects: 0.085500 ms)
+Unloading 35 unused Assets / (56.7 KB). Loaded Objects now: 4254.
+Memory consumption went from 146.9 MB to 146.8 MB.
+Total: 2.082200 ms (FindLiveObjects: 0.190000 ms CreateObjectMapping: 0.090000 ms MarkObjects: 1.736600 ms  DeleteObjects: 0.064600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -163,22 +189,82 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 3324.783458 seconds.
-  path: Assets/Sprites/interface/botones_con_compendio.png
-  artifactKey: Guid(067724748d5e6cf47b8381e24afcca24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/interface/botones_con_compendio.png using Guid(067724748d5e6cf47b8381e24afcca24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb719db61ef0a26508aaf921bbf60121') in 0.643049 seconds 
+  Time since last request: 35339.968580 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss
+  artifactKey: Guid(9aab5397e494f5146801236027725023) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss using Guid(9aab5397e494f5146801236027725023) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82c27bd69f1653aa1421086740f2600a') in 0.012411 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 22.503741 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle
+  artifactKey: Guid(9b0aad045ee4f3e4e867a54ce381e495) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle using Guid(9b0aad045ee4f3e4e867a54ce381e495) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '049631b755044e8a1d8e0f52836ed2c2') in 0.006894 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.799048 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack
+  artifactKey: Guid(7af6a636720e4354e886141c85193917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack using Guid(7af6a636720e4354e886141c85193917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '695ee7a9b1d603ab3c58c97a084afaab') in 0.008657 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.745632 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_danyo
+  artifactKey: Guid(4f99acdeef2b03f47a5591d80b5554ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_danyo using Guid(4f99acdeef2b03f47a5591d80b5554ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50dbdc67f163dd3ec930b63d06795ab8') in 0.009431 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 237.389722 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/1.png
+  artifactKey: Guid(9e71bd1b54462b148a0772f3d5cac048) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/1.png using Guid(9e71bd1b54462b148a0772f3d5cac048) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f0c2eac97c67d7784a3313561ade9c8') in 0.253810 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/7.png
+  artifactKey: Guid(c0a24055de0d7214798b052ab62aaa94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/7.png using Guid(c0a24055de0d7214798b052ab62aaa94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5d12bdab1dd489ff0f1b2379fb02185') in 0.134627 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/8.png
+  artifactKey: Guid(fffb852d2f2ffe04d939e3a43b979a01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/8.png using Guid(fffb852d2f2ffe04d939e3a43b979a01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '900c913c4095b3456bae0d674631775b') in 0.130206 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/6.png
+  artifactKey: Guid(ec06f57d8f0dbbb428e5214ddcad83e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_idle/6.png using Guid(ec06f57d8f0dbbb428e5214ddcad83e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c33a9ffc8d8170270b68daf44cf3753e') in 0.128672 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 26.349753 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_danyo/2.png
+  artifactKey: Guid(d60199d44ca8f514da414a85c2d152f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_danyo/2.png using Guid(d60199d44ca8f514da414a85c2d152f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3a2b26e9dd1ba528e351dbbbdd894eb') in 0.137737 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_danyo/6.png
+  artifactKey: Guid(7c18047fb90793044ac74974b91392a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_danyo/6.png using Guid(7c18047fb90793044ac74974b91392a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7fdc2e49530fe2d443487c3ec5707a25') in 0.129709 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.491200 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack/3.png
+  artifactKey: Guid(b62e8f5a50c35e0459d88435f927b906) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack/3.png using Guid(b62e8f5a50c35e0459d88435f927b906) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd72a81864e66b71cf14f3754e2ca400f') in 0.124845 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000020 seconds.
-  path: Assets/Sprites/Carta_ataque.png
-  artifactKey: Guid(8c330017982009f4cb6606b9e0615a7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites/Carta_ataque.png using Guid(8c330017982009f4cb6606b9e0615a7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '073dff71b5b3dcca42ffcb603fa256bf') in 0.166003 seconds 
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack/11.png
+  artifactKey: Guid(9398ebdf1af39d94783b645924c44d3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack/11.png using Guid(9398ebdf1af39d94783b645924c44d3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25d4d9b1f6bed9ceacb9b37d603e4777') in 0.105908 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Sprites
-  artifactKey: Guid(d9d5a75567a3ff844adec702edf8cca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites using Guid(d9d5a75567a3ff844adec702edf8cca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36c1b03705d11c6c6bc796880e99568e') in 0.174914 seconds 
+  Time since last request: 0.000037 seconds.
+  path: Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack/14.png
+  artifactKey: Guid(56160a7ff99bb1f4cafc5a1e09d80b9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/CombatScene/Enemigos/Boss/Boss_attack/14.png using Guid(56160a7ff99bb1f4cafc5a1e09d80b9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eeec65f9bd11e0997b09dba2da7f779d') in 0.104250 seconds 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
 Process exiting
