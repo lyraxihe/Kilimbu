@@ -30,17 +30,23 @@ public class Line : MonoBehaviour
         if (type == 1) //por visitar
         {
             Debug.Log("por visitar color 1");
-            lineRenderer.material.SetColor("_EmissionColor", new Color(1f, 0, 0));
+           // lineRenderer.material.SetColor("_EmissionColor", new Color(0.8f, 0.07f, 0.4f)); //violeta
+           // lineRenderer.material.SetColor("_EmissionColor", new Color(0.5f, 0.8f, 0.3f)); //verde
+            lineRenderer.material.SetColor("_EmissionColor", new Color(0.96f, 0.9f, 1f)); //blanco-violeta
         }
         else if (type == 2) //visitado
         {
             Debug.Log("visitado color 2");
-            lineRenderer.material.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0.5f));
+           // lineRenderer.material.SetColor("_EmissionColor", new Color(0.4f, 0.4f, 0.5f)); //azul-gris
+           // lineRenderer.material.SetColor("_EmissionColor", new Color(0.11f, 0.12f, 0.14f)); //azul-gris oscuro
+            lineRenderer.material.SetColor("_EmissionColor", new Color(0.96f, 0.9f, 1f)); //blanco-violeta
         }
         else // 0 --> sin visitar
         {
             Debug.Log("sin visitar color 0");
-            lineRenderer.material.SetColor("_EmissionColor", new Color(1, 1, 1));
+           // lineRenderer.material.SetColor("_EmissionColor", new Color(0.96f, 0.9f, 1f)); //blanco-violeta
+            //lineRenderer.material.SetColor("_EmissionColor", new Color(0.4f, 0.4f, 0.5f));
+            lineRenderer.material.SetColor("_EmissionColor", new Color(0.2746774f, 0.1384317f, 0.3324516f)); // violeta oscuro
         }
     }
 }

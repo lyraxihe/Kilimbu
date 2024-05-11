@@ -949,6 +949,22 @@ public class MapController : MonoBehaviour
             
             for (int j = 0; j < x_coord; j++)
             {
+                if (j == 0) //si está en el 0 de la columna
+                {
+                    desactivar = false;
+                    for (int k = 0; k < x_coord; k++) //recorre la columna entera
+                    {
+                        if (Occupied_Rooms[k, i + 1]) //solo en las salas ocupadas de la siguiente columna
+                        {
+                            if ((RoomsGameobjects[k, i + 1].GetComponent<Button>().interactable)) //comprueba si está el botón interactuable 
+                            {
+                                desactivar = true; //pone en true el booleano así luego desactiva las salas de la columna actual
+                                break;
+                            }
+
+                        }
+                    }
+                }
                 if (Occupied_Rooms[j, i] && desactivar) //en caso de que sea positivo y la sala esté ocupada
                 {
 
@@ -957,6 +973,7 @@ public class MapController : MonoBehaviour
                     {
                         RoomsGameobjects[j, i].GetComponent<RoomButton>().desactivarLineasNoVisitadas(); //revisa las conecciones de dicho boton para desactivar las lineas no visitadas
                     }
+                    
                     RoomsGameobjects[j, i].GetComponent<Button>().interactable = false; //pone para que no se pueda interactuar con esos botones
 
                 }

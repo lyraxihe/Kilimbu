@@ -259,7 +259,7 @@ public class EnemyController : MonoBehaviour
         if(EndMuerteTransformacion)
         {
 
-            transform.position = Vector3.Lerp(transform.position, PositionMuerte, 0.01f);
+            transform.position = Vector3.Lerp(transform.position, PositionMuerte, 2.5f * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, PositionMuerte) < 0.05f)
             {
