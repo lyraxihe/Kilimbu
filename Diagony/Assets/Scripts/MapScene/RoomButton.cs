@@ -16,6 +16,8 @@ public class RoomButton : MonoBehaviour
     [SerializeField] public float id; // id
     public GameObject[] conections = new GameObject[4];
     GameObject[] conectionsLines = new GameObject[4];
+    public List<GameObject> conectedLines;
+
     [SerializeField] public int numContections;
     [SerializeField] public GameObject MapController_;
     [SerializeField] GameObject CanvasSingleton;
@@ -31,10 +33,11 @@ public class RoomButton : MonoBehaviour
     public bool Visitado;
 
     [SerializeField] float minTam = 0.6f, maxTam = 1; // Tamaños sala
+    private bool lineasComprobadas;
 
     void Start()
     {
-        
+        lineasComprobadas = false;
         CanvasSingleton = GameObject.Find("CanvasSingleton");
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         Visitado = false;
@@ -45,7 +48,6 @@ public class RoomButton : MonoBehaviour
 
     void Update()
     {
-       // ComprobarConexionesActivas();
 
         if(VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa)
             GetComponent<Button>().enabled = false;
@@ -53,6 +55,19 @@ public class RoomButton : MonoBehaviour
             GetComponent<Button>().enabled = true;
 
         ControlButtonSize();
+
+        if (!lineasComprobadas) //sirve para comprobar que las lineas cambien de color cuando deban
+        {
+            for (int i = 0; i < numContections; i++)
+            {
+                if(conections[i].GetComponent<RoomButton>().Visitado == true)
+                {
+                    desactivarLineasNoVisitadas();
+                    lineasComprobadas = true;
+                    break;
+                }
+            }
+        }
 
     }
 
@@ -66,7 +81,17 @@ public class RoomButton : MonoBehaviour
         for (int i = 0; i < numContections; i++)
         {
             conections[i].GetComponent<Button>().interactable = true;
-           //cambiar el color a las lineas acá
+            conectionsLines[i].GetComponent<Line>().ChangeColor(1); //cambia el color a por visitar
+            conectionsLines[i].GetComponent<Line>().porVisitar = true;
+        }
+        for (int i = 0; i < conectedLines.Count; i++)
+        {
+            if (conectedLines[i].GetComponent<Line>().porVisitar)
+            {
+                conectedLines[i].GetComponent<Line>().porVisitar=false;
+                conectedLines[i].GetComponent<Line>().ChangeColor(2); //cambia el color a visitado
+                conectedLines[i].GetComponent<Line>().visitado = true;
+            }
         }
 
         MapController_.GetComponent<MapController>().ComprobarInactivos(); //llama a la funcion de comprobar inactivos en map controller para desactivar las salas necesarias
@@ -113,6 +138,7 @@ public class RoomButton : MonoBehaviour
                 GameObject LineClon = Instantiate(LinePrefab);
                 LineClon.GetComponent<Line>().AsignPositions(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(conections[i].transform.position.x - 0.5f, conections[i].transform.position.y, conections[i].transform.position.z));
                 LineClon.transform.SetParent(Content.transform, true);
+                conections[i].GetComponent<RoomButton>().conectedLines.Add(LineClon);
                 conectionsLines[i] = LineClon;
             }
         }
@@ -133,5 +159,19 @@ public class RoomButton : MonoBehaviour
         else
             gameObject.transform.localScale = new Vector3(maxTam, maxTam, maxTam);
 
+    }
+
+    public void desactivarLineasNoVisitadas()
+    {
+        for (int i = 0; i < numContections; i++)
+        {
+            if (!conectionsLines[i].GetComponent<Line>().visitado && conectionsLines[i].GetComponent<Line>().porVisitar)
+            {
+                Debug.Log("cambiar color a lineas no visitADAS");
+                conectionsLines[i].GetComponent<Line>().ChangeColor(0); //cambia el color a no visitada
+                conectionsLines[i].GetComponent<Line>().porVisitar = false;
+
+            }
+        }
     }
 }
