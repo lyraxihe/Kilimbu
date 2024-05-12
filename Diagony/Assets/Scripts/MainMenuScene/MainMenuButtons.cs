@@ -36,6 +36,8 @@ public class MainMenuButtons : MonoBehaviour
     {
 
         MainMenu.SetActive(!MainMenu.activeSelf);
+        if (OptionsPanel == null)
+            OptionsPanel = GameObject.Find("CanvasSettings").transform.GetChild(0).gameObject;
         OptionsPanel.gameObject.SetActive(!OptionsPanel.gameObject.activeSelf);
 
     }
@@ -45,7 +47,13 @@ public class MainMenuButtons : MonoBehaviour
 
         OptionsPanel.gameObject.SetActive(!OptionsPanel.gameObject.activeSelf);
         if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+
+            if (MainMenu == null)
+                MainMenu = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
             MainMenu.SetActive(!MainMenu.activeSelf);
+
+        }
         else
         {
 

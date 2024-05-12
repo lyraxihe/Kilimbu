@@ -15,12 +15,16 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] TMP_Text SettingsText;
     [SerializeField] TMP_Text CreditsText;
     [SerializeField] TMP_Text ExitText;
-
+    [SerializeField] GameObject CanvasSettings;
 
 
     private void Awake()
     {
         Traduction = GameObject.Find("Traduction");
+        Time.timeScale = 1f;
+        CanvasSettings = GameObject.Find("CanvasSettings");
+        CanvasSettings.GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Sets the new main camera as the CanvasSettings camera
+
     }
 
     // Start is called before the first frame update

@@ -22,10 +22,13 @@ public class SettingsTextDescription : MonoBehaviour
 
     public void OnMouseOver()
     {
-
+        
         // Traductions
         if (_Traduction.Language == 0) // English
         {
+
+            if (SettingDescriptionText == null)
+                SettingDescriptionText = GameObject.Find("SettingDescriptionText").GetComponent<TMP_Text>();
 
             if (gameObject.name == "LanguageText")
                 SettingDescriptionText.text = "Change the language of the texts.";
@@ -37,6 +40,9 @@ public class SettingsTextDescription : MonoBehaviour
         }
         else                          // Spanish
         {
+
+            if (SettingDescriptionText == null)
+                SettingDescriptionText = GameObject.Find("SettingDescriptionText").GetComponent<TMP_Text>();
 
             if (gameObject.name == "LanguageText")
                 SettingDescriptionText.text = "Cambia el idioma de los textos.";
