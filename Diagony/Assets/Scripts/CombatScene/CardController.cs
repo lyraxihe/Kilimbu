@@ -181,7 +181,6 @@ public class CardController : MonoBehaviour
                 }
                 else
                 {
-                    // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH SIN ENERGIA
                     SinEnergiaSound.Play();
                     Debug.Log("SIN ENERGIA");
                 }
@@ -287,6 +286,11 @@ public class CardController : MonoBehaviour
 
                 }
 
+            }
+            else
+            {
+                SinEnergiaSound.Play();
+                Debug.Log("SIN ENERGIA");
             }
 
         }

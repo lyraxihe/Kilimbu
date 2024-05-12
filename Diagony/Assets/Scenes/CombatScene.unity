@@ -3227,8 +3227,6 @@ MonoBehaviour:
   CanvasSettings: {fileID: 0}
   Tutorial: 0
   useCardSound: {fileID: 712251036}
-  Music: {fileID: 0}
-  MusicSource: {fileID: 0}
   AtaqueProtaSound: {fileID: 1034212203}
   AtaqueDobleProtaSound: {fileID: 1430137806}
   CurarProtaSound: {fileID: 878976711}
@@ -3241,6 +3239,9 @@ MonoBehaviour:
   VictoriaBossSound: {fileID: 1163959189}
   VictoriaBossMusic: {fileID: 2005490652}
   DerrotaSound: {fileID: 352661916}
+  Music: {fileID: 0}
+  MusicSource: {fileID: 0}
+  BossMusic: {fileID: 8300000, guid: ad0cc24f02cdcb946aca6185a662614b, type: 3}
 --- !u!1 &1014771958
 GameObject:
   m_ObjectHideFlags: 0

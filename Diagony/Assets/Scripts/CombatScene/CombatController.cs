@@ -91,10 +91,6 @@ public class CombatController : MonoBehaviour
 
     // SoundFX
     public AudioSource useCardSound;
-
-    // Music management
-    public GameObject Music;
-    public AudioSource MusicSource;
     public AudioSource AtaqueProtaSound;
     public AudioSource AtaqueDobleProtaSound;
     public AudioSource CurarProtaSound;
@@ -107,6 +103,11 @@ public class CombatController : MonoBehaviour
     public AudioSource VictoriaBossSound;
     public AudioSource VictoriaBossMusic;
     public AudioSource DerrotaSound;
+
+    // Music management
+    public GameObject Music;
+    public AudioSource MusicSource;
+    public AudioClip BossMusic;
 
 
 
@@ -165,15 +166,14 @@ public class CombatController : MonoBehaviour
         ManaReducido = false;
         NumEnemiesDefeat = 0;
 
-        CreatePlayer();  // Crea al jugador
-        CreateEnemies(); // Crea los enemigos
-        StartCoroutine(CreateCards());   // Crea las cartas
-                                         //CreateCards();
-
         // Encontrar la música sonando para poder editarla
         Music = GameObject.Find("Music");
         MusicSource = Music.GetComponent<AudioSource>();
 
+        CreatePlayer();  // Crea al jugador
+        CreateEnemies(); // Crea los enemigos
+        StartCoroutine(CreateCards());   // Crea las cartas
+                                         //CreateCards();
     }
 
 
@@ -386,6 +386,8 @@ public class CombatController : MonoBehaviour
         }
         else
         {
+            MusicSource.clip = BossMusic;
+            MusicSource.Play();
 
             tipo = 3; // Boss
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
