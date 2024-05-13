@@ -190,9 +190,9 @@ public class CombatController : MonoBehaviour
             turnosText.gameObject.SetActive(false);
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().Language== 0) // English
-            turnosText.text = "Turn: " + ContadorTurnos.ToString();
+            turnosText.text = "Turn: " + (ContadorTurnos/2).ToString();
         else                                                                  // Spanish
-            turnosText.text = "Turno: " + ContadorTurnos.ToString();
+            turnosText.text = "Turno: " + (ContadorTurnos/2).ToString();
         UpdateLanguageTexts();
         //victoriaDerrota();
 
@@ -1909,9 +1909,9 @@ public class CombatController : MonoBehaviour
             VictoriaMusic.Play();
             VictoriaSound.Play();
 
-            if (ContadorTurnos < 20) //si los turnos fueron menos de 20, gana más dinero
+            if (ContadorTurnos < 30) //si los turnos fueron menos de 30, gana más dinero
             {
-                RecompensaDinero += RecompensaDinero / 5; //le suma al dinero actual su quinta parte
+                RecompensaDinero += RecompensaDinero / 2; //le suma al dinero actual su mitad 
             }
             else
             {

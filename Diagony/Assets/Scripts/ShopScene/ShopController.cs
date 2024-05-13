@@ -76,7 +76,7 @@ public class ShopController : MonoBehaviour
         {
             newText = ListCards[i].GetComponentsInChildren<TMP_Text>();
             if (VariablesGlobales.GetComponent<VariablesGlobales>().Language == 0) // English
-                newText[5].text = "Have: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
+                newText[5].text = "Amount: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
             else                                                                   // Spanish
                 newText[5].text = "Tienes: " + VariablesGlobales.GetComponent<VariablesGlobales>().AmountCards[CardsCreated[i]].ToString();
         }
@@ -202,32 +202,12 @@ public class ShopController : MonoBehaviour
                     {
                         maxCardTypes.Add(cardType);  //agrega las cartas con segundo mayor numero de usos
                     }
-
-                    //else if (buscarMax == 2 && cardUses[cardType] > max3 && cardUses[cardType] != maxCount && cardUses[cardType] != max2)
-                    //{
-                    //    max3 = cardUses[cardType]; // en caso de ser necesario porque la cantidad de cartas con mayor uso
-                    //                               // es menor a 3 busca el segundo número de usos más alto
-                    //}
-                    //else if (buscarMax == 3 && cardUses[cardType] == max3)
-                    //{
-                    //    maxCardTypes.Add(cardType); //agrega las cartas con tercer mayor numero de usos
-                    //}
-
                 }
                 buscarMax++;
-                //if (maxCardTypes.Count >= 3) //en caso que con las cartas del segundo mayor número de usos ya sean 3 o más, entonces sale del bucle
-                //{
-                //    buscarMax = 4;
-                //    break;
-                //}
-                //else //caso contrario suma +1 en "buscarMax" para así entrar en los "else if" cuando vale 2 y cuando vale 3
-                //                                                         //(es decir, busca el tercer mayor número de usos)
-                //{
-
-                //}
+           
 
                 Debug.Log("pasó con " + buscarMax);
-            } while (buscarMax == 1 /*|| buscarMax == 2 || buscarMax == 3*/);
+            } while (buscarMax == 1);
         }
 
     }
