@@ -1306,8 +1306,8 @@ MonoBehaviour:
   - {fileID: 108559140}
   - {fileID: 2112399453}
   Sprites:
-  - {fileID: 21300000, guid: 9fb6e1ac570a5334abfc3c2a1ba761d3, type: 3}
-  - {fileID: 21300000, guid: c7d3839119e071046aa7f7da25a80f84, type: 3}
+  - {fileID: 21300000, guid: a261c2bff1436524a8263cae6a70f60e, type: 3}
+  - {fileID: 21300000, guid: 6e8c3b7e128ae554396b7f17280a7a0b, type: 3}
   prefabCarta: {fileID: 1791528441941151039, guid: 3daf8c9898d59a84ab5273d49b090bd8, type: 3}
   CardSprites:
   - {fileID: 21300000, guid: 0f8fe1120eef49a429ec8a4cfdafd44c, type: 3}
@@ -1373,18 +1373,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.07335961}
+  m_Offset: {x: 0, y: -0.60907507}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.04, y: 7.01}
+    oldSize: {x: 10.9, y: 9.58}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.2330914, y: 4.2486773}
+  m_Size: {x: 8.122814, y: 7.212111}
   m_EdgeRadius: 0
 --- !u!212 &985108185
 SpriteRenderer:
@@ -1427,7 +1427,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9fb6e1ac570a5334abfc3c2a1ba761d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a261c2bff1436524a8263cae6a70f60e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1446,8 +1446,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985108181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 2.5}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 0, y: -2, z: 2.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
