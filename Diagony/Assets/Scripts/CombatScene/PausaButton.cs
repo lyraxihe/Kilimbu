@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PausaButton : MonoBehaviour
 {
+    [SerializeField] GameObject Traduction;
+
     [SerializeField] GameObject PanelPausa;
     [SerializeField] GameObject VariablesGlobales;
     [SerializeField] GameObject CombatScene;
@@ -21,6 +23,7 @@ public class PausaButton : MonoBehaviour
 
     void Start()
     {
+        Traduction = GameObject.Find("Traduction");
         victoria = false;
         VariablesGlobales = GameObject.Find("VariablesGlobales");
         textButton = gameObject.GetComponentInChildren<TextMeshPro>();

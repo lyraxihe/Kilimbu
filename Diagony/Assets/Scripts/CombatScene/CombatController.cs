@@ -1882,20 +1882,19 @@ public class CombatController : MonoBehaviour
             {
 
                 VictoriaDerrotaText.text = "DEFEAT";
-                RecompensaText.text = "¡You have been defeated!";
+                RecompensaText.text = "¡You have been eaten by your emotions!";
 
             }
             else                                                                  // Spanish
             {
 
                 VictoriaDerrotaText.text = "DERROTA";
-                RecompensaText.text = "¡Te han derrotado!";
+                RecompensaText.text = "¡Te han comido tus emociones!";
 
             }
             Time.timeScale = 0f;
             // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
-
 
         }
         //else if (VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista > 0 && enemigosVivos == 0)
@@ -1978,27 +1977,21 @@ public class CombatController : MonoBehaviour
             {
 
                 VictoriaDerrotaText.text = "VICTORY";
-                RecompensaText.text = "Congratulations, you have defeated the boss and completed the dungeon";
+                RecompensaText.text = "Congratulations, you have been able to integrate your emotions";
 
             }
             else                                                                  // Spanish
             {
 
                 VictoriaDerrotaText.text = "VICTORIA";
-                RecompensaText.text = "Enhorabuena, has derrotado al boss y completado la mazmorra";
+                RecompensaText.text = "Enhorabuena, has podido integrar tus emociones";
 
             }
-
-            //if (victoria_etc == 0 && RecompensaVictoria == true)
-            //{
-            //    Debug.Log("ganas $" + RecompensaDinero + " de recompensa");
-            //    VariablesGlobales.GetComponent<VariablesGlobales>().DineroAmount += RecompensaDinero;
-            //    victoria_etc += 1;
-            //}
 
             Time.timeScale = 0f;
             // VariablesGlobales.GetComponent<VariablesGlobales>().EstaEnPausa = true;
             botonTurno.enabled = false;
+            Traduction.GetComponent<Traduction>().ActivateCredits = true;
 
         }
         else

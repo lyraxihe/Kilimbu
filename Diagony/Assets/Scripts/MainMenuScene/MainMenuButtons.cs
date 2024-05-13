@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
+    [SerializeField] GameObject Traduction;
     [SerializeField] GameObject MainMenu;
     [SerializeField] GameObject Levels;
     [SerializeField] GameObject OptionsPanel;
+    [SerializeField] GameObject CreditsPanel;
     [SerializeField] GameObject CanvasPause;
 
 
@@ -64,10 +66,27 @@ public class MainMenuButtons : MonoBehaviour
 
     }
 
-    //public void Level1()
-    //{
+    public void Credits()
+    {
 
-    //    SceneManager.LoadScene("MapScene");
+        MainMenu.SetActive(!MainMenu.activeSelf);
+        if (CreditsPanel == null)
+            CreditsPanel = GameObject.Find("CanvasCredits").transform.GetChild(0).gameObject;
+        CreditsPanel.gameObject.SetActive(!CreditsPanel.gameObject.activeSelf);
 
-    //}
+    }
+
+    public void CreditsReturn()
+    {
+
+        CreditsPanel.gameObject.SetActive(!CreditsPanel.gameObject.activeSelf);
+        if (Traduction == null)
+            Traduction = GameObject.Find("Traduction");
+        Traduction.GetComponent<Traduction>().ActivateCredits = false;
+        if (MainMenu == null)
+            MainMenu = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        MainMenu.SetActive(true);
+
+    }
+
 }

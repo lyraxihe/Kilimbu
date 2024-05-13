@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -76,6 +77,8 @@ public class CanvasSingleton : MonoBehaviour
             ScrollArea.GetComponent<ScrollRect>().enabled = false;
             if (barridoTerminado)
             {
+                if (LlegarTopeMapaSound == null)
+                    LlegarTopeMapaSound = GameObject.Find("LlegarTopeMapa_SoundFX").GetComponent<AudioSource>();
                 LlegarTopeMapaSound.Play();
             }
                
@@ -89,6 +92,8 @@ public class CanvasSingleton : MonoBehaviour
 
             if (barridoTerminado)
             {
+                if (LlegarTopeMapaSound == null)
+                    LlegarTopeMapaSound = GameObject.Find("LlegarTopeMapa_SoundFX").GetComponent<AudioSource>();
                 LlegarTopeMapaSound.Play();
             }
         }

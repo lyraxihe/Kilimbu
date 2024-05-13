@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
 
-    // Variables Globales
+    // Traducción
     public GameObject Traduction;
 
     // Main Interface
+    [SerializeField] GameObject MainMenuPanel;
     [SerializeField] TMP_Text NewGameText;
     [SerializeField] TMP_Text SettingsText;
+    [SerializeField] GameObject CreditsPanel;
     [SerializeField] TMP_Text CreditsText;
     [SerializeField] TMP_Text ExitText;
     [SerializeField] GameObject CanvasSettings;
@@ -25,12 +27,18 @@ public class MainMenuController : MonoBehaviour
         CanvasSettings = GameObject.Find("CanvasSettings");
         CanvasSettings.GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Sets the new main camera as the CanvasSettings camera
 
-    }
+        if(Traduction.GetComponent<Traduction>().ActivateCredits)
+        {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+            if (MainMenuPanel == null)
+                MainMenuPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+            MainMenuPanel.SetActive(false);
+            if (CreditsPanel == null)
+                CreditsPanel = GameObject.Find("CanvasCredits").transform.GetChild(0).gameObject;
+            CreditsPanel.SetActive(true);
+
+        }
+
     }
 
     // Update is called once per frame
