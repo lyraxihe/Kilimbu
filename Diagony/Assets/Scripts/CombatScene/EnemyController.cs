@@ -67,6 +67,7 @@ public class EnemyController : MonoBehaviour
     public int ContadorDeTurnosEsperanzado;
     public int ContadorEsperanza;
 
+
     // Transformacion (Los ataques al Boss le curan en vez de hacerle daño)
     public bool Transformacion;
     public int ContadorDeTurnosTransformacion;
@@ -82,6 +83,8 @@ public class EnemyController : MonoBehaviour
     int veneno_icon;
     int fuerte_icon;
     int bloqueado_icon;
+    int transformacion_icon;
+    int esperanza_icon;
     public bool SoloTristeza;
 
     public bool playerSeBufa;
@@ -139,6 +142,8 @@ public class EnemyController : MonoBehaviour
         debilidad_icon = 0;
         veneno_icon = 0;
         fuerte_icon = 0;
+        esperanza_icon = 0;
+        transformacion_icon = 0;
 
         ActiveSpell = 0;
         if (Id == 0)
@@ -154,7 +159,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            x_inicial_spell = 4.18f;
+            x_inicial_spell = 5.18f;
             y_inicial_spell = 0.4f;
         }
 
@@ -278,45 +283,6 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    //public void OnMouseOver()
-    //{
-    //    Debug.Log("Pasando por encima.");
-    //    if (CombatScene.GetComponent<CombatController>().MovingArrow)
-    //    {
-
-    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
-
-    //    }
-
-    //}
-
-    //public void OnMouseExit()
-    //{
-    //    Debug.Log("Saliendo de encima.");
-    //    if (CombatScene.GetComponent<CombatController>().MovingArrow)
-    //    {
-
-    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = false;
-
-    //    }
-
-    //}
-
-    //public void OnTriggerEnter2D(Collider2D collision)
-    //{
-
-    //    if(collision.tag == "Arrow")
-    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
-
-    //}
-
-    //public void OnTriggerExit2D(Collider2D collision)
-    //{
-
-    //    if(collision.tag == "Arrow")
-    //        ArrowEmitter.GetComponent<ArrowEmitter>().OverEnemy = true;
-
-    //}
 
     public void SetHealthEnemigo()
     {
@@ -371,17 +337,6 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    //public void SetAtackEnenmigo()
-    //{
-
-    //    if (Tipo == 0)         // Ira
-    //        AttackEnemigo = 20;
-    //    else if (Tipo == 1)    // Miedo
-    //        AttackEnemigo = 15;
-    //    else                   // Tristeza
-    //        AttackEnemigo = 10;
-
-    //}
 
     public void Atacar()
     {
@@ -503,22 +458,6 @@ public class EnemyController : MonoBehaviour
                     damageAmount = Random.Range(3, 5) + AttackEnemigo + Debilidad;
                     if (damageAmount < 0)
                         damageAmount = 0;
-                    //if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
-                    //{
-                    //    Debug.Log("ataque que cura al player");
-                    //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                    //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
-
-                    //}
-                    //else
-                    //{
-                    //    Debug.Log("atq normal");
-                    //    StartCoroutine(DoubleAttack(damageAmount, 0.5f));
-
-
-                    //}
-                    Debug.Log("atq normal");
-                    // StartCoroutine(DoubleAttack(damageAmount, 1f));
                     PlayerRecibeDanyo = true; // Indica que el player deberá realizar la animación de recibir daño
                     StartCoroutine(DoubleAttack(damageAmount, 0.5f));
 
@@ -596,25 +535,7 @@ public class EnemyController : MonoBehaviour
                     {
 
                         Debug.Log("Reducir 1 de mana");
-                        //damageAmount = Random.Range(1, 5) + AttackEnemigo + Debilidad;
-
-                        //if (damageAmount < 0)
-                        //    damageAmount = 0;
-
-                        //if (Player.GetComponent<PlayerController>().Transformacion) // Si el Jugador está transformado el ataque le curará
-                        //{
-                        //    Debug.Log("ataque que cura al player");
-                        //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista += damageAmount;
-                        //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(true, damageAmount, Player);
-
-                        //}
-                        //else
-                        //{
-                        //    Debug.Log("atq normal");
-                        //    VariablesGlobales.GetComponent<VariablesGlobales>().HealthProtagonista -= damageAmount;
-                        //    CombatScene.GetComponent<CombatController>().CreateDmgHealText(false, damageAmount, Player);
-
-                        //}
+                     
 
                         CombatScene.GetComponent<CombatController>().ManaReducido = true; // Indica que el maná ya se ha reducido una vez en este turno
 
@@ -676,16 +597,29 @@ public class EnemyController : MonoBehaviour
                             int DebilidadAux = player.GetComponent<PlayerController>().Debilidad;
                             int ContadorDeTurnoDebilitadoAux = player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado;
                             int ContadorDebilitadoAux = player.GetComponent<PlayerController>().ContadorDebilitado;
+                           // int Debilidad_iconAux = player.GetComponent<PlayerController>().debilidad_icon;
 
                             player.GetComponent<PlayerController>().Debilitado = Debilitado;
                             player.GetComponent<PlayerController>().Debilidad = Debilidad;
                             player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado = ContadorDeTurnosDebilitado;
                             player.GetComponent<PlayerController>().ContadorDebilitado = ContadorDebilitado;
+                           // player.GetComponent<PlayerController>().debilidad_icon = debilidad_icon;
 
                             Debilitado = DebilitadoAux;
                             Debilidad = DebilidadAux;
                             ContadorDeTurnosDebilitado = ContadorDeTurnoDebilitadoAux;
                             ContadorDebilitado = ContadorDebilitadoAux;
+
+                            ControlStatus();
+                            player.GetComponent<PlayerController>().ControlStatus();
+
+                            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosDebilitado == 0)
+                            {
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilitado = false;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Debilidad = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().debilidad_icon = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(1);
+                            }
 
                         }
 
@@ -697,73 +631,127 @@ public class EnemyController : MonoBehaviour
                             int VenenoAux = player.GetComponent<PlayerController>().Veneno;
                             int ContadorDeTurnosEnvenenadoAux = player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado;
                             int ContadorEnvenenadoAux = player.GetComponent<PlayerController>().ContadorEnvenenado;
+                            int Veneno_iconAux = player.GetComponent<PlayerController>().veneno_icon;
 
                             player.GetComponent<PlayerController>().Envenenado = Envenenado;
                             player.GetComponent<PlayerController>().Veneno = Veneno;
                             player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado = ContadorDeTurnosEnvenenado;
                             player.GetComponent<PlayerController>().ContadorEnvenenado = ContadorEnvenenado;
+                           //player.GetComponent<PlayerController>().veneno_icon = veneno_icon;
 
                             Envenenado = EnvenenadoAux;
                             Veneno = VenenoAux;
                             ContadorDeTurnosEnvenenado = ContadorDeTurnosEnvenenadoAux;
                             ContadorEnvenenado = ContadorEnvenenadoAux;
+                            // veneno_icon = Veneno_iconAux;
+                            ControlStatus();
+                            player.GetComponent<PlayerController>().ControlStatus();
+
+                            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEnvenenado == 0)
+                            {
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Envenenado = false;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Veneno = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().veneno_icon = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(0);
+                            }
+
 
                         }
 
                         // Fuerte
-                        if(player.GetComponent<PlayerController>().Fuerte || Fuerte)
+                        if (player.GetComponent<PlayerController>().Fuerte || Fuerte)
                         {
 
                             bool FuerteAux = player.GetComponent<PlayerController>().Fuerte;
                             int FuerzaAux = player.GetComponent<PlayerController>().Fuerza;
                             int ContadorDeTurnosFuerteAux = player.GetComponent<PlayerController>().ContadorDeTurnosFuerte;
                             int ContadorFuerteAux = player.GetComponent<PlayerController>().ContadorFuerza;
+                           // int fuerte_iconAux = player.GetComponent<PlayerController>().fuerte_icon;
 
                             player.GetComponent<PlayerController>().Fuerte = Fuerte;
                             player.GetComponent<PlayerController>().Fuerza = Fuerza;
                             player.GetComponent<PlayerController>().ContadorDeTurnosFuerte = ContadorDeTurnosFuerte;
                             player.GetComponent<PlayerController>().ContadorFuerza = ContadorFuerza;
+                           // player.GetComponent<PlayerController>().fuerte_icon = fuerte_icon;
 
                             Fuerte = FuerteAux;
                             Fuerza = FuerzaAux;
                             ContadorDeTurnosFuerte = ContadorDeTurnosFuerteAux;
                             ContadorFuerza = ContadorFuerteAux;
+                            // fuerte_icon = fuerte_iconAux;
+
+                            ControlStatus();
+                            player.GetComponent<PlayerController>().ControlStatus();
+
+                            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosFuerte == 0)
+                            {
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Fuerte = false;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Fuerza = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().fuerte_icon = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(2);
+
+                            }
 
                         }
 
                         // Esperanza
-                        if(player.GetComponent<PlayerController>().Esperanzado || Esperanzado)
+                        if (player.GetComponent<PlayerController>().Esperanzado || Esperanzado)
                         {
 
                             bool EsperanzadoAux = player.GetComponent<PlayerController>().Esperanzado;
                             int EsperanzaAux = player.GetComponent<PlayerController>().Esperanza;
                             int ContadorDeTurnosEsperanzadoAux = player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado;
                             int ContadorEsperanzaAux = player.GetComponent<PlayerController>().ContadorEsperanza;
+                           // int esperanza_iconAux = player.GetComponent<PlayerController>().esperanza_icon;
 
                             player.GetComponent<PlayerController>().Esperanzado = Esperanzado;
                             player.GetComponent<PlayerController>().Esperanza = Esperanza;
                             player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado = ContadorDeTurnosEsperanzado;
                             player.GetComponent<PlayerController>().ContadorEsperanza = ContadorEsperanza;
+                           // player.GetComponent<PlayerController>().esperanza_icon = esperanza_icon;
 
                             Esperanzado = EsperanzadoAux;
                             Esperanza = EsperanzaAux;
                             ContadorDeTurnosEsperanzado = ContadorDeTurnosEsperanzadoAux;
                             ContadorEsperanza = ContadorEsperanzaAux;
+                            // esperanza_icon = esperanza_iconAux;
+                            ControlStatus();
+                            player.GetComponent<PlayerController>().ControlStatus();
+
+                            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosEsperanzado == 0)
+                            {
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Esperanzado = false;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().Esperanza = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().esperanza_icon = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(3);
+                            }
 
                         }
 
                         // Transformacion (Los ataques al Jugador le curan en vez de hacerle daño)
-                        if(player.GetComponent<PlayerController>().Transformacion || Transformacion)
+                        if (player.GetComponent<PlayerController>().Transformacion || Transformacion)
                         {
 
                             bool TransformacionAux = player.GetComponent<PlayerController>().Transformacion;
                             int ContadorDeTurnosTransformacionAux = player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion;
+                            //int transformacion_iconAux = player.GetComponent<PlayerController>().transformacion_icon;
 
                             player.GetComponent<PlayerController>().Transformacion = Transformacion;
                             player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion = ContadorDeTurnosTransformacion;
+                           // player.GetComponent<PlayerController>().transformacion_icon = transformacion_icon;
 
                             Transformacion = TransformacionAux;
                             ContadorDeTurnosTransformacion = ContadorDeTurnosTransformacionAux;
+                            // transformacion_icon = transformacion_iconAux;
+                            ControlStatus();
+                            player.GetComponent<PlayerController>().ControlStatus();
+
+                            if (CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().ContadorDeTurnosTransformacion == 0)
+                            {
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().transformacion_icon = 0;
+                                CombatScene.GetComponent<CombatController>().Player.GetComponent<PlayerController>().EliminarSpell(5);
+                            }
+
 
                         }
 
@@ -992,13 +980,19 @@ public class EnemyController : MonoBehaviour
 
             if (ContadorDeTurnosEsperanzado == 0)
             {
-                
+                for (int i = 0; i < ActiveSpell; i++)
+                {
+                    if (ActiveSpellGameobject[i].GetComponent<EffectIcon>().Tipo == 3)
+                    {
+                        ReestructuraIcons(i);
+                        break;
+                    }
+                }
                 Esperanzado = false;
                 Esperanza = 0;
+                esperanza_icon = 0;
 
             }
-
-
         }
 
         playerSeBufa = false;
@@ -1009,36 +1003,7 @@ public class EnemyController : MonoBehaviour
 
     public void ControlStatus()
     {
-        //if (Envenenado && veneno_icon == 0)
-        //{
-        //    GameObject ClonSpell;
-        //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[0]); // Crea el clon del prefab de veneno ([0])
-        //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
-        //    ActiveSpellGameobject[ActiveSpell] = ClonSpell;
-        //    ActiveSpellGap[ActiveSpell] = true;
-        //    ActiveSpell++;
-        //    veneno_icon++;
-        //}
-        //if (Debilitado && debilidad_icon == 0)
-        //{
-        //    GameObject ClonSpell;
-        //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[1]); // Crea el clon del prefab de debilidad ([1])
-        //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
-        //    ActiveSpellGameobject[ActiveSpell] = ClonSpell;
-        //    ActiveSpellGap[ActiveSpell] = true;
-        //    ActiveSpell++;
-        //    debilidad_icon++;
-        //}
-        //if (Fuerte && fuerte_icon == 0)
-        //{
-        //    GameObject ClonSpell;
-        //    ClonSpell = Instantiate(CombatScene.GetComponent<CombatController>().PrefabSpell[2]); // Crea el clon del prefab de fuerza ([2])
-        //    ClonSpell.transform.position = SpellCoords[ActiveSpell];
-        //    ActiveSpellGameobject[ActiveSpell] = ClonSpell;
-        //    ActiveSpellGap[ActiveSpell] = true;
-        //    ActiveSpell++;
-        //    fuerte_icon++;
-        //}
+      
         if (Debilitado && debilidad_icon == 0)
         {
             GameObject ClonSpell;
