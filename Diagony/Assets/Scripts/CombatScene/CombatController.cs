@@ -190,9 +190,9 @@ public class CombatController : MonoBehaviour
             turnosText.gameObject.SetActive(false);
 
         if (VariablesGlobales.GetComponent<VariablesGlobales>().Language== 0) // English
-            turnosText.text = "Turn: " + (ContadorTurnos/2).ToString();
+            turnosText.text = "Turn: " + ((ContadorTurnos/2)+1).ToString();
         else                                                                  // Spanish
-            turnosText.text = "Turno: " + (ContadorTurnos/2).ToString();
+            turnosText.text = "Turno: " + ((ContadorTurnos/2)+1).ToString();
         UpdateLanguageTexts();
         //victoriaDerrota();
 
